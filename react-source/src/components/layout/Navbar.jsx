@@ -63,7 +63,8 @@ const Navbar = () => {
       dropdown: [
         { path: '/publishing/ebook', label: t('publishing.ebook') },
         { path: '/publishing/periodical', label: t('publishing.periodical') },
-        { path: '/publishing/book', label: t('publishing.book') }
+        { path: '/publishing/book', label: t('publishing.book') },
+        { path: '/publishing/material', label: t('publishing.material') }
       ]
     },
     { path: '/shop', label: t('shop.title'), activePath: '/shop' },

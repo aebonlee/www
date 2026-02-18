@@ -21,6 +21,7 @@ const Publishing = lazy(() => import('./pages/Publishing'));
 const PublishingEbook = lazy(() => import('./pages/PublishingEbook'));
 const PublishingPeriodical = lazy(() => import('./pages/PublishingPeriodical'));
 const PublishingBook = lazy(() => import('./pages/PublishingBook'));
+const PublishingMaterial = lazy(() => import('./pages/PublishingMaterial'));
 const Portfolio = lazy(() => import('./pages/Portfolio'));
 const About = lazy(() => import('./pages/About'));
 const Blog = lazy(() => import('./pages/Blog'));
@@ -64,6 +65,7 @@ function App() {
                     <Route path="/publishing/ebook" element={<PublishingEbook />} />
                     <Route path="/publishing/periodical" element={<PublishingPeriodical />} />
                     <Route path="/publishing/book" element={<PublishingBook />} />
+                    <Route path="/publishing/material" element={<PublishingMaterial />} />
                     <Route path="/portfolio" element={<Portfolio />} />
                     <Route path="/about" element={<About />} />
                     <Route path="/about/ceo" element={<CeoProfile />} />

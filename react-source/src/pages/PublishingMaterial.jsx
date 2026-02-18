@@ -1,0 +1,149 @@
+import { useEffect, useState } from 'react';
+import { useLanguage } from '../contexts/LanguageContext';
+import { useCart } from '../contexts/CartContext';
+import useAOS from '../hooks/useAOS';
+import CTA from '../components/CTA';
+import publishingDetails from '../data/publishingDetails';
+
+const PublishingMaterial = () => {
+  const { language, t } = useLanguage();
+  const { addItem } = useCart();
+  const data = publishingDetails.material;
+  const isEn = language === 'en';
+  const [addedId, setAddedId] = useState(null);
+  useAOS();
+
+  const handleAddToCart = (item) => {
+    addItem({ id: item.id, title: item.title, titleEn: item.titleEn, price: item.price, category: 'material' });
+    setAddedId(item.id);
+    setTimeout(() => setAddedId(null), 1500);
+  };
+
+  const formatPrice = (price) => isEn ? `₩${price.toLocaleString()}` : `${price.toLocaleString()}원`;
+
+  useEffect(() => { window.scrollTo(0, 0); }, []);
+
+  return (
+    <>
+      <section className="page-header">
+        <div className="container">
+          <h1 className="page-title">{isEn ? data.titleEn : data.title}</h1>
+          <p className="page-description">{isEn ? data.subtitleEn : data.subtitle}</p>
+        </div>
+      </section>
+
+      {/* Overview */}
+      <section className="service-detail-overview">
+        <div className="container">
+          <div className="service-overview-grid">
+            <div className="service-overview-text" data-aos="fade-right">
+              <h2>{t('common.overview')}</h2>
+              {(isEn ? data.overviewEn : data.overview).map((text, i) => (
+                <p key={i}>{text}</p>
+              ))}
+            </div>
+            <div className="service-overview-image" data-aos="fade-left">
+              <svg viewBox="0 0 200 200" fill="none">
+                <defs>
+                  <linearGradient id="matGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+                    <stop offset="0%" style={{ stopColor: '#0066CC', stopOpacity: 1 }} />
+                    <stop offset="100%" style={{ stopColor: '#3385D6', stopOpacity: 1 }} />
+                  </linearGradient>
+                </defs>
+                <rect x="50" y="40" width="100" height="120" rx="8" fill="url(#matGrad)" opacity="0.2" />
+                <rect x="65" y="60" width="50" height="5" rx="2" fill="#0066CC" opacity="0.5" />
+                <rect x="65" y="72" width="70" height="3" rx="1" fill="#0066CC" opacity="0.3" />
+                <rect x="65" y="80" width="60" height="3" rx="1" fill="#0066CC" opacity="0.3" />
+                <rect x="65" y="95" width="50" height="5" rx="2" fill="#0066CC" opacity="0.5" />
+                <rect x="65" y="107" width="70" height="3" rx="1" fill="#0066CC" opacity="0.3" />
+                <rect x="65" y="115" width="55" height="3" rx="1" fill="#0066CC" opacity="0.3" />
+                <rect x="65" y="130" width="40" height="5" rx="2" fill="#0066CC" opacity="0.5" />
+              </svg>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* Product List */}
+      <section style={{ padding: '80px 0', background: 'var(--bg-light-gray)' }}>
+        <div className="container">
+          <div className="section-header">
+            <h2 className="section-title">{isEn ? 'Publications' : '출판 교재'}</h2>
+          </div>
+          <div className="book-grid">
+            {data.products.map((item, i) => (
+              <div key={i} className="book-card" data-aos="fade-up" data-aos-delay={i * 100}>
+                <div className="book-cover">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                    <path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z" />
+                    <path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z" />
+                  </svg>
+                </div>
+                <div className="book-info">
+                  <h4>{isEn ? item.titleEn : item.title}</h4>
+                  <p className="book-author">{isEn ? item.authorEn : item.author}</p>
+                  <span className="book-category">{isEn ? item.categoryEn : item.category}</span>
+                  <div className="book-purchase">
+                    <span className="book-price">{formatPrice(item.price)}</span>
+                    <button
+                      className={`add-to-cart-btn small ${addedId === item.id ? 'added' : ''}`}
+                      onClick={() => handleAddToCart(item)}
+                    >
+                      {addedId === item.id ? t('shop.addedToCart') : t('shop.addToCart')}
+                    </button>
+                  </div>
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* Features */}
+      <section style={{ padding: '80px 0', background: 'var(--bg-white)' }}>
+        <div className="container">
+          <div className="section-header">
+            <h2 className="section-title">{t('common.features')}</h2>
+          </div>
+          <div className="feature-grid">
+            {data.features.map((feature, i) => (
+              <div key={i} className="feature-card" data-aos="fade-up" data-aos-delay={i * 100}>
+                <div className="feature-icon">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="white" strokeWidth="2">
+                    <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z" />
+                  </svg>
+                </div>
+                <h3>{isEn ? feature.titleEn : feature.title}</h3>
+                <p>{isEn ? feature.descriptionEn : feature.description}</p>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* Process */}
+      <section style={{ padding: '80px 0', background: 'var(--bg-light-gray)' }}>
+        <div className="container">
+          <div className="section-header">
+            <h2 className="section-title">{t('common.process')}</h2>
+          </div>
+          <div className="process-grid">
+            {data.process.map((step, i) => (
+              <div key={i} className="process-step" data-aos="fade-up" data-aos-delay={i * 100}>
+                <div className="process-number">{step.step}</div>
+                <h4>{isEn ? step.titleEn : step.title}</h4>
+                <p>{(isEn ? step.descriptionEn : step.description).split('\n').map((line, j) => (
+                  <span key={j}>{line}<br /></span>
+                ))}</p>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      <CTA title={isEn ? data.ctaTitleEn : data.ctaTitle} subtitle={isEn ? data.ctaSubtitleEn : data.ctaSubtitle} buttonText={t('common.contactUs')} />
+    </>
+  );
+};
+
+export default PublishingMaterial;

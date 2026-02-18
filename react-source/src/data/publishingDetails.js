@@ -112,6 +112,44 @@ const publishingDetails = {
     ctaTitleEn: 'Consult on Your Publishing Project',
     ctaSubtitle: 'IT 전문 콘텐츠 기획부터 출판까지 함께합니다',
     ctaSubtitleEn: 'From IT content planning to publishing'
+  },
+  material: {
+    title: '강의안 및 실습자료',
+    titleEn: 'Lecture Notes & Practice Materials',
+    subtitle: '전문 교육을 위한 강의안과 실습자료를 제작합니다',
+    subtitleEn: 'Professional lecture notes and practice materials for education',
+    products: [
+      { id: 'mat-001', title: '생성형 AI 활용 실습 교재', titleEn: 'Generative AI Practical Workbook', price: 25000, author: '이애본', authorEn: 'Aebon Lee', category: '생성형 AI', categoryEn: 'Generative AI' },
+      { id: 'mat-002', title: 'Python 데이터 분석 강의안', titleEn: 'Python Data Analysis Lecture Notes', price: 22000, author: '이애본', authorEn: 'Aebon Lee', category: '데이터 분석', categoryEn: 'Data Analysis' },
+      { id: 'mat-003', title: '빅데이터 시각화 실습자료', titleEn: 'Big Data Visualization Practice Materials', price: 20000, author: '이애본', authorEn: 'Aebon Lee', category: '빅데이터', categoryEn: 'Big Data' },
+      { id: 'mat-004', title: '업무자동화 RPA 워크북', titleEn: 'RPA Automation Workbook', price: 18000, author: '이애본', authorEn: 'Aebon Lee', category: '업무자동화', categoryEn: 'Automation' }
+    ],
+    overview: [
+      '드림아이티비즈는 20년 이상의 교육 경험을 바탕으로 실무 중심 강의안과 실습자료를 제작합니다.',
+      '기업, 대학, 교육기관의 교육 목적에 맞춤화된 교재를 기획·집필·편집합니다.',
+      '생성형 AI, 데이터 분석, 빅데이터, 업무자동화 등 최신 IT 분야의 전문 교육 콘텐츠를 제공합니다.'
+    ],
+    overviewEn: [
+      'DreamIT Biz creates practical lecture notes and practice materials based on 20+ years of education experience.',
+      'We plan, write, and edit textbooks customized for businesses, universities, and educational institutions.',
+      'We provide specialized educational content in generative AI, data analysis, big data, and business automation.'
+    ],
+    features: [
+      { title: '실무 중심 설계', titleEn: 'Practice-Oriented Design', description: '현장에서 바로 활용 가능한 실무 중심 커리큘럼으로 설계합니다.', descriptionEn: 'Designed with practice-oriented curriculum applicable in real-world scenarios.' },
+      { title: '맞춤형 교재 제작', titleEn: 'Customized Materials', description: '교육 대상과 목적에 맞는 맞춤형 교재를 제작합니다.', descriptionEn: 'We create customized materials tailored to the target audience and objectives.' },
+      { title: '최신 기술 반영', titleEn: 'Up-to-Date Technology', description: '최신 IT 트렌드와 기술을 반영한 콘텐츠를 제공합니다.', descriptionEn: 'Content reflecting the latest IT trends and technologies.' },
+      { title: '디지털·인쇄 동시 지원', titleEn: 'Digital & Print Support', description: 'PDF, ePub 전자교재와 인쇄 교재를 모두 지원합니다.', descriptionEn: 'Supports both digital (PDF, ePub) and print textbooks.' }
+    ],
+    process: [
+      { step: 1, title: '교육 요구 분석', titleEn: 'Training Needs Analysis', description: '교육 대상, 수준, 목표를 분석하여\n최적의 교재 방향을 설정합니다.', descriptionEn: 'Analyze target audience, level, and goals\nto set the optimal direction.' },
+      { step: 2, title: '커리큘럼 설계', titleEn: 'Curriculum Design', description: '학습 목표에 맞는 체계적인\n커리큘럼을 설계합니다.', descriptionEn: 'Design a systematic curriculum\naligned with learning objectives.' },
+      { step: 3, title: '콘텐츠 집필', titleEn: 'Content Writing', description: '전문가가 직접 집필하고\n실습 예제를 개발합니다.', descriptionEn: 'Experts directly write content\nand develop practice examples.' },
+      { step: 4, title: '편집·검수·납품', titleEn: 'Edit, Review & Delivery', description: '편집, 디자인, 검수를 거쳐\n최종 교재를 납품합니다.', descriptionEn: 'Edit, design, and review\nbefore final delivery.' }
+    ],
+    ctaTitle: '맞춤 강의안이 필요하신가요?',
+    ctaTitleEn: 'Need Customized Lecture Notes?',
+    ctaSubtitle: '교육 목적에 맞는 전문 강의안과 실습자료를 제작해 드립니다.',
+    ctaSubtitleEn: 'We create professional lecture notes and practice materials tailored to your educational needs.'
   }
 };
 

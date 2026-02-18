@@ -62,7 +62,8 @@ export const translations = {
       bookDesc: 'IT 전문 서적 및 교육 도서 출판',
       supportedFormats: '지원 포맷',
       publicationTypes: '간행물 유형',
-      bookList: '출판 도서'
+      bookList: '출판 도서',
+      material: '강의안 및 실습자료'
     },
     community: {
       blog: '블로그',
@@ -255,7 +256,8 @@ export const translations = {
       bookDesc: 'IT and educational book publishing',
       supportedFormats: 'Supported Formats',
       publicationTypes: 'Publication Types',
-      bookList: 'Published Books'
+      bookList: 'Published Books',
+      material: 'Lecture Notes & Materials'
     },
     community: {
       blog: 'Blog',
