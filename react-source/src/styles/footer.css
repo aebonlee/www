@@ -1,9 +1,9 @@
 /* ============================================
-   Footer
+   Footer — Gradient Dark
    ============================================ */
 
 .footer {
-    background: var(--text-primary);
+    background: linear-gradient(180deg, #111827 0%, #0A0F1A 100%);
     color: var(--text-white);
     padding: 60px 0 24px;
     margin-top: 0;
@@ -34,7 +34,7 @@
 .company-info {
     margin-top: 24px;
     padding-top: 24px;
-    border-top: 1px solid rgba(255, 255, 255, 0.1);
+    border-top: 1px solid rgba(255, 255, 255, 0.08);
 }
 
 .company-info p {
@@ -73,7 +73,7 @@
 }
 
 .footer-links a:hover {
-    color: var(--primary-blue-light);
+    color: #93C5FD;
 }
 
 .footer-contact p,
@@ -91,8 +91,8 @@
 .footer-bottom {
     text-align: center;
     padding-top: 24px;
-    border-top: 1px solid rgba(255, 255, 255, 0.1);
-    color: rgba(255, 255, 255, 0.6);
+    border-top: 1px solid rgba(255, 255, 255, 0.06);
+    color: rgba(255, 255, 255, 0.5);
     font-size: 13px;
 }
 

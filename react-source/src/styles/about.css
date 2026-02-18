@@ -38,7 +38,10 @@
 .stat-number {
     font-size: 48px;
     font-weight: 700;
-    color: var(--primary-blue);
+    background: var(--primary-gradient);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
     display: block;
 }
 
@@ -75,14 +78,14 @@
     padding: 40px 32px;
     background: var(--bg-white);
     border: 1px solid var(--border-light);
-    border-radius: 8px;
+    border-radius: var(--radius-lg);
     text-align: center;
-    transition: all 0.3s ease;
+    transition: var(--transition-base);
 }
 
 .value-card:hover {
-    box-shadow: var(--shadow-md);
-    transform: translateY(-2px);
+    box-shadow: var(--shadow-lg);
+    transform: translateY(-4px);
 }
 
 .value-icon {
@@ -114,14 +117,17 @@
     padding: 40px;
     background: var(--bg-white);
     border: 1px solid var(--border-light);
-    border-radius: 8px;
+    border-radius: var(--radius-lg);
 }
 
 .vision-card h3 {
     font-size: 24px;
     font-weight: 700;
     margin-bottom: 16px;
-    color: var(--primary-blue);
+    background: var(--primary-gradient);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
 }
 
 .vision-card p {
@@ -145,7 +151,7 @@
     top: 0;
     bottom: 0;
     width: 2px;
-    background: var(--border-light);
+    background: linear-gradient(180deg, var(--primary-blue) 0%, rgba(0, 70, 200, 0.2) 100%);
 }
 
 .timeline-item {

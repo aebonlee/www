@@ -11,14 +11,14 @@
 .blog-card {
     background: var(--bg-white);
     border: 1px solid var(--border-light);
-    border-radius: 8px;
+    border-radius: var(--radius-lg);
     overflow: hidden;
-    transition: all 0.3s ease;
+    transition: var(--transition-base);
 }
 
 .blog-card:hover {
-    box-shadow: var(--shadow-lg);
-    transform: translateY(-4px);
+    box-shadow: var(--shadow-xl);
+    transform: translateY(-6px);
 }
 
 .blog-image {
@@ -49,10 +49,10 @@
 
 .blog-category {
     display: inline-block;
-    padding: 4px 10px;
-    background: var(--bg-light-gray);
+    padding: 4px 12px;
+    background: rgba(0, 70, 200, 0.06);
     color: var(--primary-blue);
-    border-radius: 4px;
+    border-radius: var(--radius-full);
     font-size: 12px;
     font-weight: 600;
 }

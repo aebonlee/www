@@ -4,7 +4,7 @@
 
 .page-header {
     padding: calc(var(--nav-height) + 60px) 0 60px;
-    background: linear-gradient(135deg, #F7F9FC 0%, #E8F1FC 100%);
+    background: linear-gradient(135deg, #0046C8 0%, #002E8A 50%, #1E3A5F 100%);
     text-align: center;
 }
 
@@ -12,13 +12,13 @@
     font-size: 48px;
     font-weight: 700;
     margin-bottom: 16px;
-    color: var(--text-primary);
+    color: var(--text-white);
     letter-spacing: -0.02em;
 }
 
 .page-description {
     font-size: 18px;
-    color: var(--text-secondary);
+    color: rgba(255, 255, 255, 0.85);
     max-width: 700px;
     margin: 0 auto;
 }
@@ -37,16 +37,16 @@
 .portfolio-card {
     background: var(--bg-white);
     border: 1px solid var(--border-light);
-    border-radius: 8px;
+    border-radius: var(--radius-lg);
     overflow: hidden;
-    transition: all 0.3s ease;
+    transition: var(--transition-base);
     text-decoration: none;
     color: var(--text-primary);
 }
 
 .portfolio-card:hover {
-    box-shadow: var(--shadow-lg);
-    transform: translateY(-4px);
+    box-shadow: var(--shadow-xl);
+    transform: translateY(-6px);
 }
 
 .portfolio-card.featured {
@@ -97,10 +97,10 @@
 
 .portfolio-tag {
     display: inline-block;
-    padding: 6px 12px;
+    padding: 6px 14px;
     background: var(--bg-light-gray);
     color: var(--primary-blue);
-    border-radius: 4px;
+    border-radius: var(--radius-full);
     font-size: 12px;
     font-weight: 600;
     text-transform: uppercase;
@@ -150,10 +150,10 @@
 
 .project-badge {
     display: inline-block;
-    padding: 8px 16px;
-    background: var(--primary-blue);
+    padding: 8px 18px;
+    background: var(--primary-gradient);
     color: var(--text-white);
-    border-radius: 4px;
+    border-radius: var(--radius-full);
     font-size: 12px;
     font-weight: 600;
     text-transform: uppercase;
@@ -183,7 +183,7 @@
     margin-bottom: 32px;
     padding: 32px;
     background: var(--bg-light-gray);
-    border-radius: 8px;
+    border-radius: var(--radius-md);
 }
 
 .detail-item h4 {
@@ -216,7 +216,7 @@
 }
 
 .project-image-main {
-    border-radius: 8px;
+    border-radius: var(--radius-lg);
     overflow: hidden;
     box-shadow: var(--shadow-lg);
     border: 1px solid var(--border-light);
@@ -248,10 +248,10 @@
 }
 
 .project-tech li {
-    padding: 6px 12px;
+    padding: 6px 14px;
     background: var(--bg-light-gray);
     color: var(--text-secondary);
-    border-radius: 4px;
+    border-radius: var(--radius-full);
     font-size: 12px;
     font-weight: 500;
 }

@@ -1,12 +1,12 @@
 /* ============================================
-   Hero Section
+   Hero Section — Rich Blue Gradient
    ============================================ */
 
 .hero {
-    min-height: 600px;
+    min-height: min(85vh, 800px);
     display: flex;
     align-items: center;
-    background: linear-gradient(135deg, #F7F9FC 0%, #E8F1FC 100%);
+    background: linear-gradient(135deg, #0046C8 0%, #002E8A 50%, #1E3A5F 100%);
     padding-top: calc(var(--nav-height) + 40px);
     padding-bottom: 60px;
     position: relative;
@@ -41,18 +41,18 @@
 
 .particle {
     position: absolute;
-    width: 4px;
-    height: 4px;
-    background: rgba(0, 102, 204, 0.3);
+    width: 6px;
+    height: 6px;
+    background: rgba(255, 255, 255, 0.15);
     border-radius: 50%;
     animation: float-particle var(--duration, 20s) infinite ease-in-out;
 }
 
 @keyframes float-particle {
     0%, 100% { transform: translateY(0) translateX(0); opacity: 0; }
-    10% { opacity: 1; }
-    90% { opacity: 1; }
-    50% { transform: translateY(-100px) translateX(50px); opacity: 0.8; }
+    10% { opacity: 0.6; }
+    90% { opacity: 0.6; }
+    50% { transform: translateY(-100px) translateX(50px); opacity: 0.4; }
 }
 
 .hero-content {
@@ -62,12 +62,12 @@
 }
 
 .hero-title {
-    font-size: 56px;
+    font-size: 60px;
     font-weight: 700;
     line-height: 1.15;
-    color: var(--text-primary);
+    color: var(--text-white);
     margin-bottom: 24px;
-    letter-spacing: -0.02em;
+    letter-spacing: -0.03em;
 }
 
 .title-line {
@@ -75,13 +75,16 @@
 }
 
 .highlight {
-    color: var(--primary-blue);
+    background: linear-gradient(135deg, #93C5FD 0%, #BFDBFE 50%, #FFFFFF 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
 }
 
 .hero-description {
     font-size: 20px;
     line-height: 1.6;
-    color: var(--text-secondary);
+    color: rgba(255, 255, 255, 0.85);
     margin-bottom: 36px;
     max-width: 600px;
 }
@@ -104,7 +107,7 @@
 .mouse {
     width: 24px;
     height: 38px;
-    border: 2px solid var(--primary-blue);
+    border: 2px solid rgba(255, 255, 255, 0.4);
     border-radius: 12px;
     position: relative;
 }
@@ -112,7 +115,7 @@
 .wheel {
     width: 3px;
     height: 8px;
-    background: var(--primary-blue);
+    background: rgba(255, 255, 255, 0.5);
     border-radius: 2px;
     position: absolute;
     top: 8px;

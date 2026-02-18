@@ -1,11 +1,40 @@
 /* ============================================
-   CTA Section
+   CTA Section — Gradient + Decorative Elements
    ============================================ */
 
 .cta-section {
     padding: 80px 0;
-    background: var(--primary-blue);
+    background: linear-gradient(135deg, #0046C8 0%, #002E8A 50%, #1E3A5F 100%);
     text-align: center;
+    position: relative;
+    overflow: hidden;
+}
+
+.cta-section::before {
+    content: '';
+    position: absolute;
+    top: -60px;
+    right: -60px;
+    width: 200px;
+    height: 200px;
+    background: rgba(255, 255, 255, 0.05);
+    border-radius: 50%;
+}
+
+.cta-section::after {
+    content: '';
+    position: absolute;
+    bottom: -80px;
+    left: -40px;
+    width: 260px;
+    height: 260px;
+    background: rgba(255, 255, 255, 0.03);
+    border-radius: 50%;
+}
+
+.cta-content {
+    position: relative;
+    z-index: 1;
 }
 
 .cta-content h2 {
@@ -18,7 +47,7 @@
 
 .cta-content p {
     font-size: 18px;
-    color: rgba(255, 255, 255, 0.9);
+    color: rgba(255, 255, 255, 0.85);
     margin-bottom: 32px;
 }
 
@@ -45,14 +74,14 @@
 .review-card {
     background: var(--bg-white);
     border: 1px solid var(--border-light);
-    border-radius: 8px;
+    border-radius: var(--radius-lg);
     padding: 32px;
-    transition: all 0.3s ease;
+    transition: var(--transition-base);
 }
 
 .review-card:hover {
-    box-shadow: var(--shadow-md);
-    transform: translateY(-2px);
+    box-shadow: var(--shadow-lg);
+    transform: translateY(-4px);
 }
 
 .review-rating {
@@ -66,6 +95,9 @@
     line-height: 1.6;
     margin-bottom: 20px;
     font-style: italic;
+    padding-left: 16px;
+    border-left: 3px solid;
+    border-image: var(--primary-gradient) 1;
 }
 
 .review-author {

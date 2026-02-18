@@ -16,11 +16,11 @@
     padding: 48px 32px;
     background: var(--bg-white);
     border: 1px solid var(--border-light);
-    border-radius: 12px;
+    border-radius: var(--radius-lg);
     text-decoration: none;
     color: var(--text-primary);
     text-align: center;
-    transition: all 0.3s ease;
+    transition: var(--transition-base);
 }
 
 .category-card:hover {
@@ -33,11 +33,12 @@
     width: 64px;
     height: 64px;
     margin: 0 auto 20px;
-    background: linear-gradient(135deg, var(--primary-blue), var(--primary-blue-dark));
-    border-radius: 16px;
+    background: var(--primary-gradient);
+    border-radius: var(--radius-lg);
     display: flex;
     align-items: center;
     justify-content: center;
+    box-shadow: 0 4px 12px rgba(0, 70, 200, 0.2);
 }
 
 .category-card .category-icon svg {
@@ -81,9 +82,9 @@
 .course-card {
     background: var(--bg-white);
     border: 1px solid var(--border-light);
-    border-radius: 8px;
+    border-radius: var(--radius-md);
     padding: 28px;
-    transition: all 0.3s ease;
+    transition: var(--transition-base);
 }
 
 .course-card:hover {
@@ -117,13 +118,13 @@
     font-size: 13px;
     color: var(--text-light);
     background: var(--bg-light-gray);
-    padding: 4px 10px;
-    border-radius: 4px;
+    padding: 4px 12px;
+    border-radius: var(--radius-full);
 }
 
 .course-level {
     color: var(--primary-blue) !important;
-    background: rgba(0, 102, 204, 0.08) !important;
+    background: rgba(0, 70, 200, 0.08) !important;
 }
 
 /* Highlight Cards */
@@ -136,10 +137,10 @@
 .highlight-card {
     background: var(--bg-white);
     border: 1px solid var(--border-light);
-    border-radius: 8px;
+    border-radius: var(--radius-md);
     padding: 28px;
     text-align: center;
-    transition: all 0.3s ease;
+    transition: var(--transition-base);
 }
 
 .highlight-card:hover {
@@ -151,11 +152,12 @@
     width: 48px;
     height: 48px;
     margin: 0 auto 16px;
-    background: linear-gradient(135deg, var(--primary-blue), var(--primary-blue-dark));
-    border-radius: 12px;
+    background: var(--primary-gradient);
+    border-radius: var(--radius-md);
     display: flex;
     align-items: center;
     justify-content: center;
+    box-shadow: 0 4px 12px rgba(0, 70, 200, 0.2);
 }
 
 .highlight-card .highlight-icon svg {
@@ -186,10 +188,10 @@
 .format-card {
     background: var(--bg-white);
     border: 1px solid var(--border-light);
-    border-radius: 8px;
+    border-radius: var(--radius-md);
     padding: 24px;
     text-align: center;
-    transition: all 0.3s ease;
+    transition: var(--transition-base);
 }
 
 .format-card:hover {
@@ -221,9 +223,9 @@
 .type-card {
     background: var(--bg-white);
     border: 1px solid var(--border-light);
-    border-radius: 8px;
+    border-radius: var(--radius-md);
     padding: 28px;
-    transition: all 0.3s ease;
+    transition: var(--transition-base);
 }
 
 .type-card:hover {
@@ -255,9 +257,9 @@
     gap: 20px;
     background: var(--bg-white);
     border: 1px solid var(--border-light);
-    border-radius: 8px;
+    border-radius: var(--radius-md);
     padding: 24px;
-    transition: all 0.3s ease;
+    transition: var(--transition-base);
 }
 
 .book-card:hover {
@@ -267,7 +269,7 @@
 .book-cover {
     width: 80px;
     height: 110px;
-    background: linear-gradient(135deg, var(--primary-blue), var(--primary-blue-dark));
+    background: var(--primary-gradient);
     border-radius: 4px;
     display: flex;
     align-items: center;
@@ -297,16 +299,16 @@
     display: inline-block;
     font-size: 12px;
     color: var(--primary-blue);
-    background: rgba(0, 102, 204, 0.08);
-    padding: 2px 8px;
-    border-radius: 4px;
+    background: rgba(0, 70, 200, 0.08);
+    padding: 2px 10px;
+    border-radius: var(--radius-full);
 }
 
 /* Board Table */
 .board-container {
     background: var(--bg-white);
     border: 1px solid var(--border-light);
-    border-radius: 8px;
+    border-radius: var(--radius-md);
     overflow: hidden;
 }
 
@@ -321,7 +323,7 @@
 .board-filter-btn {
     padding: 8px 18px;
     border: 1px solid var(--border-light);
-    border-radius: 20px;
+    border-radius: var(--radius-full);
     background: transparent;
     color: var(--text-secondary);
     font-size: 14px;
@@ -394,8 +396,8 @@
 .board-category-badge {
     display: inline-block;
     font-size: 11px;
-    padding: 2px 6px;
-    border-radius: 3px;
+    padding: 2px 8px;
+    border-radius: var(--radius-full);
     margin-right: 6px;
     font-weight: 600;
 }
@@ -427,7 +429,7 @@
     background: var(--primary-blue);
     color: white;
     border: none;
-    border-radius: 6px;
+    border-radius: var(--radius-sm);
     font-size: 14px;
     font-weight: 500;
     cursor: pointer;
@@ -453,6 +455,6 @@
     font-size: 12px;
     font-weight: 600;
     padding: 4px 12px;
-    border-radius: 12px;
+    border-radius: var(--radius-full);
     margin-left: 8px;
 }

@@ -18,7 +18,7 @@
     text-align: center;
     background: var(--bg-light-gray);
     border: 1px solid var(--border-light);
-    border-radius: 12px;
+    border-radius: var(--radius-lg);
     padding: 40px 24px;
 }
 
@@ -26,11 +26,12 @@
     width: 100px;
     height: 100px;
     margin: 0 auto 16px;
-    background: var(--primary-blue);
+    background: var(--primary-gradient);
     border-radius: 50%;
     display: flex;
     align-items: center;
     justify-content: center;
+    box-shadow: 0 4px 12px rgba(0, 70, 200, 0.2);
 }
 
 .ceo-avatar svg {
@@ -129,9 +130,9 @@
 .ceo-expertise-card {
     background: var(--bg-white);
     border: 1px solid var(--border-light);
-    border-radius: 8px;
+    border-radius: var(--radius-md);
     padding: 28px 24px;
-    transition: all 0.3s ease;
+    transition: var(--transition-base);
 }
 
 .ceo-expertise-card:hover {
@@ -142,12 +143,13 @@
 .ceo-expertise-icon {
     width: 48px;
     height: 48px;
-    border-radius: 8px;
-    background: var(--primary-blue);
+    border-radius: var(--radius-sm);
+    background: var(--primary-gradient);
     display: flex;
     align-items: center;
     justify-content: center;
     margin-bottom: 16px;
+    box-shadow: 0 4px 12px rgba(0, 70, 200, 0.2);
 }
 
 .ceo-expertise-icon svg {
@@ -177,7 +179,7 @@
 }
 
 .ceo-expertise-card ul li::before {
-    content: '·';
+    content: '\00B7';
     position: absolute;
     left: 0;
     color: var(--primary-blue);
@@ -199,7 +201,7 @@
     top: 0;
     bottom: 0;
     width: 2px;
-    background: var(--border-medium);
+    background: linear-gradient(180deg, var(--primary-blue) 0%, rgba(0, 70, 200, 0.2) 100%);
 }
 
 .ceo-timeline-item {
@@ -249,7 +251,7 @@
     padding: 20px;
     background: var(--bg-white);
     border: 1px solid var(--border-light);
-    border-radius: 8px;
+    border-radius: var(--radius-md);
 }
 
 .ceo-cert-icon {
@@ -314,7 +316,7 @@
     margin: 0 auto;
     background: var(--bg-light-gray);
     border: 1px solid var(--border-light);
-    border-radius: 12px;
+    border-radius: var(--radius-lg);
     padding: 32px;
     text-align: center;
 }

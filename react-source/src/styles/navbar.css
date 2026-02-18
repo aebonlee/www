@@ -1,5 +1,5 @@
 /* ============================================
-   Navbar Styles
+   Navbar Styles — Glassmorphism
    ============================================ */
 
 .navbar {
@@ -8,12 +8,16 @@
     left: 0;
     right: 0;
     z-index: 1000;
-    background: var(--bg-white);
+    background: var(--glass-bg);
+    backdrop-filter: blur(var(--glass-blur));
+    -webkit-backdrop-filter: blur(var(--glass-blur));
     border-bottom: 1px solid var(--border-light);
-    transition: box-shadow 0.3s ease;
+    transition: var(--transition-base);
 }
 
 .navbar.scrolled {
+    background: rgba(255, 255, 255, 0.95);
+    border-bottom-color: transparent;
     box-shadow: var(--shadow-md);
 }
 
@@ -75,6 +79,7 @@
     right: 14px;
     height: 3px;
     background: var(--primary-blue);
+    border-radius: 2px;
     transform: scaleX(0);
     transition: transform 0.3s ease;
 }
@@ -89,9 +94,11 @@
     top: 100%;
     left: 0;
     min-width: 220px;
-    background: var(--bg-white);
+    background: rgba(255, 255, 255, 0.95);
+    backdrop-filter: blur(16px);
+    -webkit-backdrop-filter: blur(16px);
     border: 1px solid var(--border-light);
-    border-radius: 4px;
+    border-radius: var(--radius-md);
     box-shadow: var(--shadow-lg);
     list-style: none;
     padding: 8px 0;
@@ -120,10 +127,12 @@
     text-decoration: none;
     font-size: 14px;
     transition: all 0.2s ease;
+    border-radius: 4px;
+    margin: 0 4px;
 }
 
 .dropdown-menu li a:hover {
-    background: var(--bg-light-gray);
+    background: rgba(0, 70, 200, 0.06);
     color: var(--primary-blue);
 }
 
@@ -145,7 +154,7 @@
     font-size: 11px;
     font-weight: 700;
     text-decoration: none;
-    transition: all 0.3s ease;
+    transition: var(--transition-base);
     border: 2px solid var(--primary-blue);
     cursor: pointer;
 }
@@ -154,20 +163,20 @@
     background: white;
     color: var(--primary-blue);
     transform: scale(1.05);
-    box-shadow: 0 4px 12px rgba(0, 102, 204, 0.2);
+    box-shadow: 0 4px 12px rgba(0, 70, 200, 0.2);
 }
 
 .theme-toggle {
     background: transparent;
     border: 1px solid var(--border-medium);
-    border-radius: 4px;
+    border-radius: var(--radius-sm);
     width: 40px;
     height: 40px;
     display: flex;
     align-items: center;
     justify-content: center;
     cursor: pointer;
-    transition: all 0.2s ease;
+    transition: var(--transition-base);
 }
 
 .theme-toggle:hover {

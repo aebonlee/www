@@ -45,9 +45,11 @@
         box-shadow: none;
         border: none;
         background: var(--bg-light-gray);
+        backdrop-filter: none;
+        -webkit-backdrop-filter: none;
         margin: 8px 0 8px 16px;
         display: none;
-        border-radius: 4px;
+        border-radius: var(--radius-sm);
     }
 
     .nav-item-dropdown.active .dropdown-menu,
@@ -66,7 +68,7 @@
     }
 
     .hero-title {
-        font-size: 42px;
+        font-size: 46px;
     }
 
     .section-title {
@@ -204,7 +206,7 @@
 
     /* Hero */
     .hero-title {
-        font-size: 32px;
+        font-size: 34px;
     }
 
     .hero-description {
@@ -218,6 +220,7 @@
     .btn {
         width: 100%;
         justify-content: center;
+        border-radius: var(--radius-md);
     }
 
     /* Sections */
