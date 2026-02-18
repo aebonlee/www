@@ -10,6 +10,7 @@ export const translations = {
       consulting: '컨설팅',
       about: '회사소개',
       contact: '연락처',
+      rnd: '연구개발',
       // legacy
       services: 'IT서비스',
       blog: '블로그'
@@ -206,6 +207,7 @@ export const translations = {
       consulting: 'Consulting',
       about: 'About',
       contact: 'Contact',
+      rnd: 'R&D',
       // legacy
       services: 'IT Services',
       blog: 'Blog'

@@ -463,3 +463,105 @@
     border-radius: var(--radius-full);
     margin-left: 8px;
 }
+
+/* R&D Project Cards */
+.rnd-projects {
+    display: flex;
+    flex-direction: column;
+    gap: 32px;
+}
+
+.rnd-project-card {
+    background: var(--bg-white);
+    border: 1px solid var(--border-color);
+    border-radius: var(--radius-lg);
+    padding: 32px;
+    transition: var(--transition);
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04);
+}
+
+.rnd-project-card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.08);
+    border-color: var(--primary);
+}
+
+.rnd-project-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 16px;
+}
+
+.rnd-project-icon {
+    width: 48px;
+    height: 48px;
+    background: linear-gradient(135deg, var(--primary), var(--primary-light));
+    border-radius: var(--radius-md);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.rnd-project-icon svg {
+    width: 24px;
+    height: 24px;
+    stroke: white;
+}
+
+.rnd-project-meta {
+    display: flex;
+    gap: 12px;
+    align-items: center;
+}
+
+.rnd-period {
+    font-weight: 700;
+    font-size: 15px;
+    color: var(--primary);
+}
+
+.rnd-duration {
+    font-size: 13px;
+    color: var(--text-secondary);
+    background: var(--bg-light-gray);
+    padding: 4px 10px;
+    border-radius: var(--radius-full);
+}
+
+.rnd-project-title {
+    font-size: 20px;
+    font-weight: 700;
+    margin-bottom: 8px;
+    color: var(--text-primary);
+}
+
+.rnd-project-type {
+    font-size: 14px;
+    color: var(--primary);
+    font-weight: 600;
+    margin-bottom: 12px;
+}
+
+.rnd-project-desc {
+    font-size: 15px;
+    line-height: 1.7;
+    color: var(--text-secondary);
+    margin-bottom: 16px;
+}
+
+.rnd-tech-tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+}
+
+.rnd-tech-tag {
+    font-size: 12px;
+    font-weight: 600;
+    padding: 4px 12px;
+    border-radius: var(--radius-full);
+    background: rgba(0, 102, 204, 0.08);
+    color: var(--primary);
+    border: 1px solid rgba(0, 102, 204, 0.15);
+}

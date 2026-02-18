@@ -37,6 +37,7 @@ const Navbar = () => {
         { path: '/portfolio', label: t('services.portfolio') }
       ]
     },
+    { path: '/rnd', label: t('nav.rnd'), activePath: '/rnd' },
     {
       label: t('nav.consulting'),
       path: '/consulting',
