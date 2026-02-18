@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Simple Test</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { 
+            font-family: 'Noto Sans KR', sans-serif;
+            padding: 20px;
+            background: #f5f5f5;
+        }
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            background: white;
+            padding: 40px;
+            border-radius: 10px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+        h1 { color: #0066CC; margin-bottom: 20px; }
+        .test-section {
+            margin: 20px 0;
+            padding: 20px;
+            border-left: 4px solid #0066CC;
+            background: #f9f9f9;
+        }
+        .success { color: green; font-weight: bold; }
+        .error { color: red; font-weight: bold; }
+        #root { min-height: 100px; padding: 20px; background: #e8f4f8; border-radius: 5px; margin: 20px 0; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>🔍 React 앱 진단 테스트</h1>
+        
+        <div class="test-section">
+            <h3>1. HTML 로딩</h3>
+            <p class="success">✅ HTML이 정상적으로 로드되었습니다.</p>
+        </div>
+        
+        <div class="test-section">
+            <h3>2. CSS 스타일</h3>
+            <p class="success">✅ CSS 스타일이 정상적으로 적용되었습니다.</p>
+        </div>
+        
+        <div class="test-section">
+            <h3>3. JavaScript 실행</h3>
+            <p id="js-test" class="error">❌ JavaScript 로드 대기 중...</p>
+        </div>
+        
+        <div class="test-section">
+            <h3>4. React 앱 마운트</h3>
+            <p id="react-test" class="error">❌ React 앱 마운트 대기 중...</p>
+            <div id="root"></div>
+        </div>
+        
+        <div class="test-section">
+            <h3>5. 콘솔 메시지</h3>
+            <p>F12 키를 눌러 개발자 도구를 열고 Console 탭을 확인하세요.</p>
+            <div id="console-output" style="background: #1e1e1e; color: #d4d4d4; padding: 15px; border-radius: 5px; font-family: monospace; margin-top: 10px; max-height: 200px; overflow-y: auto;"></div>
+        </div>
+    </div>
+    
+    <script>
+        // JavaScript 테스트
+        document.getElementById('js-test').textContent = '✅ JavaScript가 정상적으로 실행되었습니다.';
+        document.getElementById('js-test').className = 'success';
+        
+        // 콘솔 캡처
+        const consoleDiv = document.getElementById('console-output');
+        const originalLog = console.log;
+        const originalError = console.error;
+        const originalWarn = console.warn;
+        
+        function addToConsole(type, ...args) {
+            const msg = args.map(a => typeof a === 'object' ? JSON.stringify(a) : String(a)).join(' ');
+            const div = document.createElement('div');
+            div.style.marginBottom = '5px';
+            if (type === 'error') div.style.color = '#ff6b6b';
+            if (type === 'warn') div.style.color = '#ffd93d';
+            div.textContent = `[${type.toUpperCase()}] ${msg}`;
+            consoleDiv.appendChild(div);
+            consoleDiv.scrollTop = consoleDiv.scrollHeight;
+        }
+        
+        console.log = function(...args) {
+            originalLog.apply(console, args);
+            addToConsole('log', ...args);
+        };
+        
+        console.error = function(...args) {
+            originalError.apply(console, args);
+            addToConsole('error', ...args);
+        };
+        
+        console.warn = function(...args) {
+            originalWarn.apply(console, args);
+            addToConsole('warn', ...args);
+        };
+        
+        console.log('진단 테스트 시작');
+        
+        // React 마운트 체크
+        setTimeout(() => {
+            const root = document.getElementById('root');
+            const hasReact = root && root.children.length > 0;
+            
+            const reactTest = document.getElementById('react-test');
+            if (hasReact) {
+                reactTest.textContent = '✅ React 앱이 성공적으로 마운트되었습니다!';
+                reactTest.className = 'success';
+                console.log('React 앱 마운트 성공');
+            } else {
+                reactTest.textContent = '❌ React 앱이 마운트되지 않았습니다. JavaScript 파일을 확인하세요.';
+                reactTest.className = 'error';
+                console.error('React 앱 마운트 실패');
+            }
+        }, 3000);
+        
+        // 에러 리스너
+        window.addEventListener('error', (e) => {
+            console.error('Global Error:', e.message, e.filename, e.lineno);
+        });
+        
+        console.log('JavaScript 모듈 로드 시도...');
+    </script>
+    
+    <!-- React 앱 로드 -->
+    <script type="module" crossorigin src="/assets/index-DYKtkkyM.js"></script>
+    <link rel="stylesheet" crossorigin href="/assets/index-BnnaVUos.css">
+</body>
+</html>
