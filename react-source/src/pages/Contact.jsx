@@ -140,30 +140,6 @@ const Contact = () => {
           </div>
         </div>
       </section>
-
-      {/* Company Details */}
-      <section className="company-detail-section">
-        <div className="container">
-          <div className="section-header">
-            <h2 className="section-title">회사 정보</h2>
-          </div>
-          <div className="company-detail-grid">
-            <div className="company-detail-card" data-aos="fade-up">
-              <h3>사업자 정보</h3>
-              <p><strong>상호:</strong> 드림아이티비즈(DreamIT Biz)</p>
-              <p><strong>대표:</strong> 이애본</p>
-              <p><strong>사업자등록번호:</strong> 601-45-20154</p>
-              <p><strong>통신판매신고:</strong> 제2024-수원팔달-0584호</p>
-            </div>
-            <div className="company-detail-card" data-aos="fade-up" data-aos-delay="100">
-              <h3>오시는 길</h3>
-              <p><strong>주소:</strong> 경기도 수원시 팔달구 매산로 45, 419호</p>
-              <p><strong>최근역:</strong> 수원역 도보 10분</p>
-              <p><strong>주차:</strong> 건물 내 주차장 이용 가능</p>
-            </div>
-          </div>
-        </div>
-      </section>
     </>
   );
 };
