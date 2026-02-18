@@ -1,0 +1,259 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="드림아이티비즈의 전문 IT 서비스 - 웹개발, 웹호스팅, 디자인, 기업컨설팅, 기업 맞춤 강의, 출판사업">
+    <title>서비스 | DreamIT Biz</title>
+    <link rel="stylesheet" href="../../assets/css/style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;500;600;700;900&display=swap" rel="stylesheet">
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar" id="navbar">
+        <div class="container">
+            <div class="nav-wrapper">
+                <div class="logo">
+                    <a href="../../index.html">
+                        <h1><span class="brand-dream">Dream</span><span class="brand-it">IT</span> <span class="brand-biz">Biz</span></h1>
+                    </a>
+                </div>
+                
+                <ul class="nav-menu" id="navMenu">
+                    <li><a href="../../index.html" class="nav-link">홈</a></li>
+                    <li class="nav-item-dropdown">
+                        <a href="index.html" class="nav-link active">서비스</a>
+                        <ul class="dropdown-menu">
+                            <li><a href="web-development.html">웹개발</a></li>
+                            <li><a href="web-hosting.html">웹호스팅</a></li>
+                            <li><a href="design.html">디자인</a></li>
+                            <li><a href="consulting.html">기업컨설팅</a></li>
+                            <li><a href="education.html">기업 맞춤 강의</a></li>
+                            <li><a href="publishing.html">출판사업</a></li>
+                        </ul>
+                    </li>
+                    <li class="nav-item-dropdown">
+                        <a href="../portfolio/index.html" class="nav-link">포트폴리오</a>
+                        <ul class="dropdown-menu">
+                            <li><a href="../portfolio/index.html#sejong">세종대 미래교육원</a></li>
+                            <li><a href="../portfolio/index.html#projects">기타 프로젝트</a></li>
+                        </ul>
+                    </li>
+                    <li class="nav-item-dropdown">
+                        <a href="../about/index.html" class="nav-link">회사소개</a>
+                        <ul class="dropdown-menu">
+                            <li><a href="../about/index.html#company">회사 개요</a></li>
+                            <li><a href="../about/index.html#vision">비전</a></li>
+                            <li><a href="../about/index.html#history">연혁</a></li>
+                        </ul>
+                    </li>
+                    <li><a href="../contact/index.html" class="nav-link">연락처</a></li>
+                </ul>
+
+                <div style="display: flex; align-items: center; gap: 16px;">
+                    <button class="theme-toggle" id="themeToggle" aria-label="테마 전환">
+                        <svg class="sun-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <circle cx="12" cy="12" r="5"/>
+                            <line x1="12" y1="1" x2="12" y2="3"/>
+                            <line x1="12" y1="21" x2="12" y2="23"/>
+                            <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/>
+                            <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/>
+                            <line x1="1" y1="12" x2="3" y2="12"/>
+                            <line x1="21" y1="12" x2="23" y2="12"/>
+                            <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/>
+                            <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/>
+                        </svg>
+                        <svg class="moon-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/>
+                        </svg>
+                    </button>
+                    <button class="mobile-toggle" id="mobileToggle" aria-label="메뉴 토글">
+                        <span></span>
+                        <span></span>
+                        <span></span>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Page Header -->
+    <section class="page-header">
+        <div class="container">
+            <h1 class="page-title">Our Services</h1>
+            <p class="page-description">고객의 성공을 위한 종합 IT 솔루션을 제공합니다</p>
+        </div>
+    </section>
+
+    <!-- Services Grid -->
+    <section style="padding: 80px 0; background: var(--bg-white);">
+        <div class="container">
+            <div class="services-grid">
+                <a href="web-development.html" class="service-card" data-aos="fade-up">
+                    <div class="service-icon">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M4 5a1 1 0 011-1h14a1 1 0 011 1v14a1 1 0 01-1 1H5a1 1 0 01-1-1V5z"/>
+                            <path d="M4 9h16"/>
+                            <circle cx="8" cy="6.5" r=".5" fill="currentColor"/>
+                            <circle cx="10" cy="6.5" r=".5" fill="currentColor"/>
+                            <circle cx="12" cy="6.5" r=".5" fill="currentColor"/>
+                        </svg>
+                    </div>
+                    <h3>웹개발</h3>
+                    <p>반응형 웹사이트부터 복잡한 웹 애플리케이션까지, 최신 기술로 구현합니다</p>
+                    <ul class="service-features">
+                        <li>반응형 웹사이트</li>
+                        <li>웹 애플리케이션</li>
+                        <li>E-커머스 솔루션</li>
+                        <li>CMS 구축</li>
+                    </ul>
+                </a>
+
+                <a href="web-hosting.html" class="service-card" data-aos="fade-up" data-aos-delay="100">
+                    <div class="service-icon">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <rect x="2" y="2" width="20" height="8" rx="2"/>
+                            <rect x="2" y="14" width="20" height="8" rx="2"/>
+                            <line x1="6" y1="6" x2="6.01" y2="6"/>
+                            <line x1="6" y1="18" x2="6.01" y2="18"/>
+                        </svg>
+                    </div>
+                    <h3>웹호스팅</h3>
+                    <p>안정적이고 빠른 웹호스팅 서비스로 비즈니스의 온라인 기반을 구축합니다</p>
+                    <ul class="service-features">
+                        <li>고성능 서버</li>
+                        <li>24/7 모니터링</li>
+                        <li>SSL 인증서 제공</li>
+                        <li>자동 백업</li>
+                    </ul>
+                </a>
+
+                <a href="design.html" class="service-card" data-aos="fade-up" data-aos-delay="200">
+                    <div class="service-icon">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/>
+                        </svg>
+                    </div>
+                    <h3>디자인</h3>
+                    <p>사용자 경험을 최우선으로 하는 창의적이고 전문적인 디자인을 제공합니다</p>
+                    <ul class="service-features">
+                        <li>UI/UX 디자인</li>
+                        <li>브랜드 아이덴티티</li>
+                        <li>그래픽 디자인</li>
+                        <li>인쇄물 디자인</li>
+                    </ul>
+                </a>
+
+                <a href="consulting.html" class="service-card" data-aos="fade-up" data-aos-delay="300">
+                    <div class="service-icon">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2"/>
+                            <circle cx="9" cy="7" r="4"/>
+                            <path d="M23 21v-2a4 4 0 00-3-3.87"/>
+                            <path d="M16 3.13a4 4 0 010 7.75"/>
+                        </svg>
+                    </div>
+                    <h3>기업컨설팅</h3>
+                    <p>기업의 IT 인프라 구축과 디지털 전환을 위한 전문 컨설팅을 제공합니다</p>
+                    <ul class="service-features">
+                        <li>IT 인프라 구축</li>
+                        <li>디지털 전환 컨설팅</li>
+                        <li>프로세스 최적화</li>
+                        <li>시스템 통합</li>
+                    </ul>
+                </a>
+
+                <a href="education.html" class="service-card" data-aos="fade-up" data-aos-delay="400">
+                    <div class="service-icon">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M2 3h6a4 4 0 014 4v14a3 3 0 00-3-3H2z"/>
+                            <path d="M22 3h-6a4 4 0 00-4 4v14a3 3 0 013-3h7z"/>
+                        </svg>
+                    </div>
+                    <h3>기업 맞춤 강의</h3>
+                    <p>기업의 요구에 맞춘 IT 교육 프로그램으로 인재를 양성합니다</p>
+                    <ul class="service-features">
+                        <li>웹개발 교육</li>
+                        <li>데이터 분석 강의</li>
+                        <li>맞춤형 커리큘럼</li>
+                        <li>온·오프라인 교육</li>
+                    </ul>
+                </a>
+
+                <a href="publishing.html" class="service-card" data-aos="fade-up" data-aos-delay="500">
+                    <div class="service-icon">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M4 19.5A2.5 2.5 0 016.5 17H20"/>
+                            <path d="M6.5 2H20v20H6.5A2.5 2.5 0 014 19.5v-15A2.5 2.5 0 016.5 2z"/>
+                        </svg>
+                    </div>
+                    <h3>출판사업</h3>
+                    <p>IT 관련 전문 서적 출판 및 교육 콘텐츠 제작을 지원합니다</p>
+                    <ul class="service-features">
+                        <li>IT 전문 서적</li>
+                        <li>교육 콘텐츠 제작</li>
+                        <li>전자책 제작</li>
+                        <li>출판 컨설팅</li>
+                    </ul>
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- CTA Section -->
+    <section style="padding: 80px 0; background: var(--primary-blue); text-align: center;">
+        <div class="container">
+            <h2 style="font-size: 42px; font-weight: 700; color: white; margin-bottom: 16px; letter-spacing: -0.02em;">
+                프로젝트를 시작하실 준비가 되셨나요?
+            </h2>
+            <p style="font-size: 18px; color: rgba(255, 255, 255, 0.9); margin-bottom: 32px;">
+                드림아이티비즈와 함께 성공적인 프로젝트를 만들어보세요
+            </p>
+            <a href="../contact/index.html" class="btn btn-primary" style="background: white; color: var(--primary-blue); border-color: white;">문의하기</a>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-brand">
+                    <h3><span class="brand-dream">Dream</span><span class="brand-it">IT</span> <span class="brand-biz">Biz</span></h3>
+                    <p>혁신적인 IT 솔루션으로 비즈니스의 미래를 만듭니다</p>
+                    <div class="company-info">
+                        <p><strong>드림아이티비즈(DreamIT Biz)</strong></p>
+                        <p>대표이사: 이애본</p>
+                        <p>사업자등록번호: 601-45-20154</p>
+                        <p>통신판매신고: 제2024-수원팔달-0584호</p>
+                    </div>
+                </div>
+                <div class="footer-links">
+                    <h4>Quick Links</h4>
+                    <ul>
+                        <li><a href="../../index.html">홈</a></li>
+                        <li><a href="index.html">서비스</a></li>
+                        <li><a href="../portfolio/index.html">포트폴리오</a></li>
+                        <li><a href="../about/index.html">회사소개</a></li>
+                        <li><a href="../contact/index.html">연락처</a></li>
+                    </ul>
+                </div>
+                <div class="footer-contact">
+                    <h4>Contact</h4>
+                    <p>📍 경기도 수원시 팔달구 매산로 45, 419호</p>
+                    <p>📧 aebon@dreamitbiz.com</p>
+                    <p>📞 010-3700-0629</p>
+                    <p>💬 카카오톡: aebon</p>
+                    <p class="business-hours">평일: 09:00 ~ 18:00</p>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2020 DreamIT Biz. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="../../assets/js/script.js"></script>
+</body>
+</html>
