@@ -18,7 +18,7 @@
     --bg-medium-gray: #E8EDF2;
     --text-primary: #111827;
     --text-secondary: #4B5563;
-    --text-light: #6B7280;
+    --text-light: #5B6370;
     --text-white: #FFFFFF;
     --border-light: #E5E7EB;
     --border-medium: #CBD5E0;
@@ -57,7 +57,7 @@ html {
 
 body {
     font-family: 'Noto Sans KR', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
-    line-height: 1.6;
+    line-height: 1.7;
     color: var(--text-primary);
     background: var(--bg-white);
     overflow-x: hidden;
@@ -158,9 +158,10 @@ body {
 
 .section-subtitle {
     font-size: 18px;
-    color: var(--text-light);
+    color: var(--text-secondary);
     max-width: 700px;
     margin: 0 auto;
+    line-height: 1.7;
 }
 
 /* Utility Classes */

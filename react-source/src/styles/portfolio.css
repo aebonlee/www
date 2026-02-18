@@ -17,10 +17,11 @@
 }
 
 .page-description {
-    font-size: 18px;
-    color: rgba(255, 255, 255, 0.85);
+    font-size: 19px;
+    color: rgba(255, 255, 255, 0.9);
     max-width: 700px;
     margin: 0 auto;
+    line-height: 1.7;
 }
 
 /* Portfolio Preview */
@@ -116,9 +117,9 @@
 }
 
 .portfolio-content p {
-    font-size: 15px;
+    font-size: 16px;
     color: var(--text-secondary);
-    line-height: 1.6;
+    line-height: 1.7;
     margin-bottom: 16px;
 }
 

@@ -33,8 +33,17 @@ const Navbar = () => {
       dropdown: [
         { path: '/services/web-development', label: t('services.webDev') },
         { path: '/services/web-hosting', label: t('services.webHosting') },
-        { path: '/services/design', label: t('services.design') },
-        { path: '/services/consulting', label: t('services.consulting') }
+        { path: '/services/design', label: t('services.design') }
+      ]
+    },
+    {
+      label: t('nav.consulting'),
+      path: '/consulting',
+      activePath: '/consulting',
+      dropdown: [
+        { path: '/consulting/business', label: t('consulting.business') },
+        { path: '/consulting/university', label: t('consulting.university') },
+        { path: '/consulting/institution', label: t('consulting.institution') }
       ]
     },
     {

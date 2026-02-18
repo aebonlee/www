@@ -46,8 +46,8 @@
 }
 
 .stat-label {
-    font-size: 14px;
-    color: var(--text-light);
+    font-size: 15px;
+    color: var(--text-secondary);
     margin-top: 8px;
 }
 
@@ -101,9 +101,9 @@
 }
 
 .value-card p {
-    font-size: 15px;
+    font-size: 16px;
     color: var(--text-secondary);
-    line-height: 1.6;
+    line-height: 1.7;
 }
 
 /* Vision / Mission */
@@ -131,7 +131,7 @@
 }
 
 .vision-card p {
-    font-size: 16px;
+    font-size: 17px;
     color: var(--text-secondary);
     line-height: 1.8;
 }
@@ -191,5 +191,5 @@
 .timeline-content p {
     font-size: 15px;
     color: var(--text-secondary);
-    line-height: 1.6;
+    line-height: 1.7;
 }

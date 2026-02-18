@@ -55,9 +55,9 @@
 }
 
 .service-card p {
-    font-size: 15px;
+    font-size: 16px;
     color: var(--text-secondary);
-    line-height: 1.6;
+    line-height: 1.7;
     margin-bottom: 20px;
 }
 
@@ -66,11 +66,12 @@
 }
 
 .service-features li {
-    font-size: 14px;
-    color: var(--text-light);
+    font-size: 15px;
+    color: var(--text-secondary);
     padding: 8px 0;
     padding-left: 24px;
     position: relative;
+    line-height: 1.6;
 }
 
 .service-features li::before {
@@ -102,7 +103,7 @@
 }
 
 .service-overview-text p {
-    font-size: 16px;
+    font-size: 17px;
     color: var(--text-secondary);
     line-height: 1.8;
     margin-bottom: 20px;
@@ -167,9 +168,9 @@
 }
 
 .feature-card p {
-    font-size: 15px;
+    font-size: 16px;
     color: var(--text-secondary);
-    line-height: 1.6;
+    line-height: 1.7;
 }
 
 /* Tech Stack */
@@ -195,9 +196,9 @@
 }
 
 .tech-card p {
-    font-size: 14px;
+    font-size: 15px;
     color: var(--text-secondary);
-    line-height: 1.6;
+    line-height: 1.7;
 }
 
 /* Process Steps */
@@ -236,8 +237,9 @@
 }
 
 .process-step p {
-    font-size: 14px;
+    font-size: 15px;
     color: var(--text-secondary);
+    line-height: 1.6;
 }
 
 /* Pricing Cards */
@@ -293,8 +295,9 @@
     padding: 8px 0;
     padding-left: 24px;
     position: relative;
-    font-size: 14px;
+    font-size: 15px;
     color: var(--text-secondary);
+    line-height: 1.6;
 }
 
 .pricing-features li::before {
@@ -334,7 +337,7 @@
 }
 
 .design-card p {
-    font-size: 15px;
+    font-size: 16px;
     color: var(--text-secondary);
-    line-height: 1.6;
+    line-height: 1.7;
 }

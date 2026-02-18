@@ -46,9 +46,10 @@
 }
 
 .cta-content p {
-    font-size: 18px;
-    color: rgba(255, 255, 255, 0.85);
+    font-size: 19px;
+    color: rgba(255, 255, 255, 0.9);
     margin-bottom: 32px;
+    line-height: 1.7;
 }
 
 .cta-content .btn-primary,
@@ -90,9 +91,9 @@
 }
 
 .review-text {
-    font-size: 15px;
+    font-size: 16px;
     color: var(--text-secondary);
-    line-height: 1.6;
+    line-height: 1.7;
     margin-bottom: 20px;
     font-style: italic;
     padding-left: 16px;
@@ -112,6 +113,6 @@
 }
 
 .author-company {
-    font-size: 13px;
+    font-size: 14px;
     color: var(--text-light);
 }

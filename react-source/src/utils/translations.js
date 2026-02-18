@@ -7,6 +7,7 @@ export const translations = {
       publishing: '출판',
       portfolio: '포트폴리오',
       community: '커뮤니티',
+      consulting: '컨설팅',
       about: '회사소개',
       contact: '연락처',
       // legacy
@@ -20,6 +21,16 @@ export const translations = {
       consulting: '기업컨설팅',
       education: '기업 맞춤 강의',
       publishing: '출판사업'
+    },
+    consulting: {
+      title: '컨설팅',
+      subtitle: '기업, 대학, 교육기관을 위한 맞춤 IT 컨설팅 서비스',
+      business: '기업 컨설팅',
+      businessDesc: '디지털 전환과 IT 전략 수립을 위한 기업 맞춤 컨설팅',
+      university: '대학 컨설팅',
+      universityDesc: '대학 교육 혁신과 디지털 인프라 구축 컨설팅',
+      institution: '교육기관 컨설팅',
+      institutionDesc: '교육기관의 스마트 교육 환경 구축 및 운영 컨설팅'
     },
     education: {
       custom: '맞춤 강의',
@@ -181,6 +192,7 @@ export const translations = {
       publishing: 'Publishing',
       portfolio: 'Portfolio',
       community: 'Community',
+      consulting: 'Consulting',
       about: 'About',
       contact: 'Contact',
       // legacy
@@ -194,6 +206,16 @@ export const translations = {
       consulting: 'Consulting',
       education: 'Education',
       publishing: 'Publishing'
+    },
+    consulting: {
+      title: 'Consulting',
+      subtitle: 'Tailored IT consulting for businesses, universities, and educational institutions',
+      business: 'Business Consulting',
+      businessDesc: 'Custom consulting for digital transformation and IT strategy',
+      university: 'University Consulting',
+      universityDesc: 'Education innovation and digital infrastructure consulting for universities',
+      institution: 'Institution Consulting',
+      institutionDesc: 'Smart education environment and operations consulting for educational institutions'
     },
     education: {
       custom: 'Custom Training',

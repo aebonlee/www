@@ -13,6 +13,10 @@ const ServiceDetail = lazy(() => import('./pages/ServiceDetail'));
 const Education = lazy(() => import('./pages/Education'));
 const EducationCustom = lazy(() => import('./pages/EducationCustom'));
 const Classroom = lazy(() => import('./pages/Classroom'));
+const Consulting = lazy(() => import('./pages/Consulting'));
+const ConsultingBusiness = lazy(() => import('./pages/ConsultingBusiness'));
+const ConsultingUniversity = lazy(() => import('./pages/ConsultingUniversity'));
+const ConsultingInstitution = lazy(() => import('./pages/ConsultingInstitution'));
 const Publishing = lazy(() => import('./pages/Publishing'));
 const PublishingEbook = lazy(() => import('./pages/PublishingEbook'));
 const PublishingPeriodical = lazy(() => import('./pages/PublishingPeriodical'));
@@ -48,6 +52,10 @@ function App() {
                     <Route path="/" element={<Home />} />
                     <Route path="/services" element={<Services />} />
                     <Route path="/services/:serviceType" element={<ServiceDetail />} />
+                    <Route path="/consulting" element={<Consulting />} />
+                    <Route path="/consulting/business" element={<ConsultingBusiness />} />
+                    <Route path="/consulting/university" element={<ConsultingUniversity />} />
+                    <Route path="/consulting/institution" element={<ConsultingInstitution />} />
                     <Route path="/education" element={<Education />} />
                     <Route path="/education/custom" element={<EducationCustom />} />
                     <Route path="/education/classroom" element={<Classroom />} />

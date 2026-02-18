@@ -289,6 +289,11 @@
         gap: 40px;
     }
 
+    .footer-links ul {
+        columns: 2;
+        column-gap: 24px;
+    }
+
     .footer-info {
         grid-template-columns: 1fr;
         gap: 24px;

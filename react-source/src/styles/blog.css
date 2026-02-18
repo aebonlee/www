@@ -53,12 +53,12 @@
     background: rgba(0, 70, 200, 0.06);
     color: var(--primary-blue);
     border-radius: var(--radius-full);
-    font-size: 12px;
+    font-size: 13px;
     font-weight: 600;
 }
 
 .blog-date {
-    font-size: 12px;
+    font-size: 13px;
     color: var(--text-light);
 }
 
@@ -71,9 +71,9 @@
 }
 
 .blog-content p {
-    font-size: 14px;
+    font-size: 15px;
     color: var(--text-secondary);
-    line-height: 1.6;
+    line-height: 1.7;
     margin-bottom: 16px;
 }
 

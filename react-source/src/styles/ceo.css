@@ -64,7 +64,7 @@
 }
 
 .ceo-intro-text p {
-    font-size: 16px;
+    font-size: 17px;
     line-height: 1.8;
     color: var(--text-secondary);
 }
@@ -105,7 +105,7 @@
     font-size: 15px;
     color: var(--text-secondary);
     border-bottom: 1px solid var(--border-light);
-    line-height: 1.6;
+    line-height: 1.7;
 }
 
 .ceo-list li::before {
@@ -171,11 +171,11 @@
 }
 
 .ceo-expertise-card ul li {
-    font-size: 13px;
+    font-size: 14px;
     color: var(--text-secondary);
     padding: 4px 0 4px 14px;
     position: relative;
-    line-height: 1.6;
+    line-height: 1.7;
 }
 
 .ceo-expertise-card ul li::before {
@@ -265,9 +265,9 @@
 }
 
 .ceo-cert-card p {
-    font-size: 14px;
+    font-size: 15px;
     color: var(--text-secondary);
-    line-height: 1.5;
+    line-height: 1.6;
 }
 
 /* Awards */

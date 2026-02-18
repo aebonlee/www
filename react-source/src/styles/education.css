@@ -54,9 +54,9 @@
 }
 
 .category-card p {
-    font-size: 15px;
+    font-size: 16px;
     color: var(--text-secondary);
-    line-height: 1.6;
+    line-height: 1.7;
 }
 
 .category-card .card-arrow {
@@ -99,10 +99,10 @@
 }
 
 .course-card p {
-    font-size: 14px;
+    font-size: 15px;
     color: var(--text-secondary);
     margin-bottom: 16px;
-    line-height: 1.5;
+    line-height: 1.6;
 }
 
 .course-meta {
@@ -173,9 +173,9 @@
 }
 
 .highlight-card p {
-    font-size: 14px;
+    font-size: 15px;
     color: var(--text-secondary);
-    line-height: 1.5;
+    line-height: 1.6;
 }
 
 /* Format Grid - E-Publishing */
@@ -208,9 +208,9 @@
 }
 
 .format-card p {
-    font-size: 14px;
+    font-size: 15px;
     color: var(--text-secondary);
-    line-height: 1.5;
+    line-height: 1.6;
 }
 
 /* Publication Type Cards */
@@ -239,9 +239,9 @@
 }
 
 .type-card p {
-    font-size: 14px;
+    font-size: 15px;
     color: var(--text-secondary);
-    line-height: 1.5;
+    line-height: 1.6;
 }
 
 /* Book List */
