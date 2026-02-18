@@ -59,39 +59,6 @@ const CeoProfile = () => {
         </div>
       </section>
 
-      {/* 주요 활동 */}
-      <section className="ceo-section" style={{ background: 'var(--bg-light-gray)' }}>
-        <div className="container">
-          <div className="section-header" data-aos="fade-up">
-            <h2 className="section-title">{isEn ? 'Key Activities' : '주요 활동'}</h2>
-          </div>
-          <div className="ceo-activities" data-aos="fade-up">
-            <div className="ceo-activity-group">
-              <h4>{isEn ? 'Current Positions' : '현직'}</h4>
-              <ul className="ceo-list">
-                <li>{isEn ? 'Director, Korea Vocational Competency Development Center' : '(현) (구) 한국직업능력개발센터 센터장'}</li>
-                <li>{isEn ? 'Adjunct Professor, AI·SW College, Hanshin University' : '(현) 한신대학교 AI·SW대학 겸임교수'}</li>
-                <li>{isEn ? 'AI Innovation Technology Instructor, KOSA' : '(현) 한국소프트웨어산업협회(KOSA) AI 혁신기술 분야 강사'}</li>
-                <li>{isEn ? 'Operating Professor, Credit Bank System (Data Structures, Algorithms, ICT)' : '(현) 학점은행제 컴퓨터전공 운영교수(자료구조, 알고리즘, 정보통신 등)'}</li>
-                <li>
-                  {isEn
-                    ? 'National Judge, Korea Skills Competition (HRD Korea) — Web Design & Development: Seoul/Gyeonggi Judge, Incheon Chief Judge'
-                    : '(현) 한국산업인력공단 기능경기대회 전국 심사위원 — 웹디자인 및 개발 직종: 서울·경기 심사위원, 인천지역 심사장'
-                  }
-                </li>
-              </ul>
-            </div>
-            <div className="ceo-activity-group">
-              <h4>{isEn ? 'Former Positions' : '전직'}</h4>
-              <ul className="ceo-list">
-                <li>{isEn ? 'Instructor, KOREATECH Competency Development Institute' : '(전) 한국기술교육대학교 능력개발원 교직/전공과정 강사'}</li>
-                <li>{isEn ? 'Adjunct Professor & SW WarmUp Manager, Kyonggi University (SW-Centered University)' : '(전) 경기대학교(SW중심대학) 겸임교수 및 SW WarmUp 운영'}</li>
-              </ul>
-            </div>
-          </div>
-        </div>
-      </section>
-
       {/* 강의·컨설팅 분야 */}
       <section className="ceo-section">
         <div className="container">
