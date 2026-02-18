@@ -107,6 +107,9 @@ const HeroCarousel = () => {
                   <span className="highlight">{slides[current].highlight}</span>
                   {slides[current].line3}
                 </span>
+                {slides[current].line4 && (
+                  <span className="title-line">{slides[current].line4}</span>
+                )}
               </h2>
               <p className="hero-description">
                 {slides[current].description.split('\n').map((line, i) => (

@@ -160,7 +160,8 @@ export const translations = {
         line1: '연구개발 & 컨설팅',
         line2: '데이터 기반',
         highlight: '혁신 컨설팅',
-        line3: '으로 성장합니다',
+        line3: '으로',
+        line4: '성장합니다',
         description: 'AI·빅데이터 연구개발과 맞춤형 IT 컨설팅으로\n기업·대학·교육기관의 디지털 전환을 선도합니다',
         cta1: '연구개발',
         cta2: '컨설팅'
