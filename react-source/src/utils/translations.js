@@ -87,8 +87,7 @@ export const translations = {
       projects: '기타 프로젝트'
     },
     about: {
-      company: '회사 개요',
-      vision: '비전',
+      companyVision: '회사소개',
       history: '연혁',
       ceoProfile: '대표 소개',
       contact: '연락처'
@@ -273,8 +272,7 @@ export const translations = {
       projects: 'Other Projects'
     },
     about: {
-      company: 'Company',
-      vision: 'Vision',
+      companyVision: 'About Us',
       history: 'History',
       ceoProfile: 'CEO Profile',
       contact: 'Contact'

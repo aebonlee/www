@@ -27,6 +27,7 @@ const Blog = lazy(() => import('./pages/Blog'));
 const Board = lazy(() => import('./pages/Board'));
 const Contact = lazy(() => import('./pages/Contact'));
 const CeoProfile = lazy(() => import('./pages/CeoProfile'));
+const History = lazy(() => import('./pages/History'));
 const Shop = lazy(() => import('./pages/Shop'));
 const Cart = lazy(() => import('./pages/Cart'));
 const Checkout = lazy(() => import('./pages/Checkout'));
@@ -66,6 +67,7 @@ function App() {
                     <Route path="/portfolio" element={<Portfolio />} />
                     <Route path="/about" element={<About />} />
                     <Route path="/about/ceo" element={<CeoProfile />} />
+                    <Route path="/about/history" element={<History />} />
                     <Route path="/community/blog" element={<Blog />} />
                     <Route path="/community/board" element={<Board />} />
                     <Route path="/blog" element={<Navigate to="/community/blog" replace />} />

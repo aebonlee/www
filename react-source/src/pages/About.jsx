@@ -131,40 +131,6 @@ const About = () => {
         </div>
       </section>
 
-      {/* Timeline */}
-      <section id="history" style={{ padding: '80px 0', background: 'var(--bg-light-gray)' }}>
-        <div className="container">
-          <div className="section-header">
-            <h2 className="section-title">연혁</h2>
-            <p className="section-subtitle">드림아이티비즈의 발자취</p>
-          </div>
-          <div className="timeline">
-            {[
-              { year: '2003.09', title: '드림아이티(DreamIT) 창업', desc: '1차 창업, IT 정보통신 전문 기업으로 출발' },
-              { year: '2004~2005', title: 'Web기반 PDA용 e-Learning 콘텐츠 개발', desc: '산·학·연 공동기술개발 컨소시엄사업 수행 (10개월)' },
-              { year: '2005~2006', title: 'PDA 온라인 학습 시스템 LMS 개발', desc: 'PDA전용 Learning Management Solution 개발 (산·학·연 컨소시엄, 10개월)' },
-              { year: '2006~2007', title: '모바일 방송 학습 관리 솔루션 개발', desc: 'Any Study Pro — 모바일 방송 시스템용 e-Learning 솔루션 (산·학·연 컨소시엄, 6개월)' },
-              { year: '2007', title: 'RFID·HSDPA 시각장애인 위치정보 시스템 개발', desc: '무선 주파수 인식 기술과 고속하향패킷전송을 이용한 내비게이션 개발 (산·학·연 컨소시엄, 6개월)' },
-              { year: '2008~2009', title: '학습 능률 향상 통합 솔루션 TMS 개발', desc: 'Education Synergy Tools: Training Management System (산·학·연 컨소시엄, 12개월)' },
-              { year: '2009.06', title: '드림아이티 폐업', desc: '경영난으로 사업 종료' },
-              { year: '2020.03', title: '한국직업능력개발센터 재창업', desc: '경기도 수원시에서 2차 창업, 직업능력개발 및 IT 서비스 사업 재개' },
-              { year: '2023', title: '교육 기관 프로젝트 수행', desc: '세종대학교 미래교육원, 진주교육대학교 100주년 기념 사이트 구축' },
-              { year: '2024', title: '교육 및 출판 사업 진출', desc: '기업 맞춤 강의 프로그램 운영 및 IT 전문 서적 출판 시작' },
-              { year: '2025', title: '플랫폼 서비스 확대', desc: '온라인 교육 플랫폼 및 전자출판 서비스 확장' },
-              { year: '2026.02', title: '드림아이티비즈(DreamIT Biz)로 상호 변경', desc: '한국직업능력개발센터에서 드림아이티비즈로 사명 변경, 종합 IT 서비스 기업으로 도약' }
-            ].map((item, i) => (
-              <div key={i} className="timeline-item" data-aos="fade-up" data-aos-delay={i * 100}>
-                <div className="timeline-date">{item.year}</div>
-                <div className="timeline-content">
-                  <h4>{item.title}</h4>
-                  <p>{item.desc}</p>
-                </div>
-              </div>
-            ))}
-          </div>
-        </div>
-      </section>
-
       <CTA />
     </>
   );

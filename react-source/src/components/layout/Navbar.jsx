@@ -81,9 +81,8 @@ const Navbar = () => {
       path: '/about',
       activePath: '/about',
       dropdown: [
-        { path: '/about#company', label: t('about.company') },
-        { path: '/about#vision', label: t('about.vision') },
-        { path: '/about#history', label: t('about.history') },
+        { path: '/about', label: t('about.companyVision') },
+        { path: '/about/history', label: t('about.history') },
         { path: '/about/ceo', label: t('about.ceoProfile') },
         { path: '/contact', label: t('about.contact') }
       ]
