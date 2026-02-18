@@ -63,7 +63,7 @@ const Home = () => {
               { path: '/services/web-development', icon: <><polyline points="16 18 22 12 16 6" /><polyline points="8 6 2 12 8 18" /></>, title: '웹개발', desc: '반응형 웹사이트부터 복잡한 웹 애플리케이션까지', features: ['맞춤형 웹사이트', '반응형 디자인', 'E-커머스 플랫폼'] },
               { path: '/services/web-hosting', icon: <><rect x="2" y="2" width="20" height="8" rx="2" ry="2" /><rect x="2" y="14" width="20" height="8" rx="2" ry="2" /></>, title: '웹호스팅', desc: '안정적이고 빠른 웹호스팅 서비스', features: ['고성능 서버', '24/7 모니터링', '데이터 백업'] },
               { path: '/services/design', icon: <><path d="M12 19l7-7 3 3-7 7-3-3z" /><path d="M18 13l-1.5-7.5L2 2l3.5 14.5L13 18l5-5z" /></>, title: '디자인', desc: '브랜드 아이덴티티부터 UI/UX까지', features: ['브랜드 디자인', 'UI/UX 디자인', '편집 디자인'] },
-              { path: '/services/consulting', icon: <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z" />, title: '기업컨설팅', desc: '디지털 전환을 위한 맞춤 컨설팅', features: ['IT 전략 수립', '프로세스 개선', '기술 도입 지원'] },
+              { path: '/consulting', icon: <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z" />, title: '컨설팅', desc: '기업·대학·교육기관 맞춤 컨설팅', features: ['기업 컨설팅', '대학 컨설팅', '교육기관 컨설팅'] },
               { path: '/education', icon: <><path d="M22 10v6M2 10l10-5 10 5-10 5z" /><path d="M6 12v5c3 3 9 3 12 0v-5" /></>, title: '교육', desc: '맞춤 강의와 온라인 강의실', features: ['맞춤형 커리큘럼', '실습 중심 교육', '온라인 강의실'] },
               { path: '/publishing', icon: <><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20" /><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z" /></>, title: '출판', desc: '전자출판, 간행물, 도서 출판', features: ['전자출판', '간행물', '도서 출판'] }
             ].map((service, i) => (
