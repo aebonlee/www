@@ -115,6 +115,14 @@ export const translations = {
       reviews: '고객 후기',
       reviewsSubtitle: '드림아이티비즈와 함께한 고객들의 생생한 후기'
     },
+    homeServices: {
+      webDev: { title: '웹개발', desc: '반응형 웹사이트부터 복잡한 웹 애플리케이션까지', f1: '맞춤형 웹사이트', f2: '반응형 디자인', f3: 'E-커머스 플랫폼' },
+      webHosting: { title: '웹호스팅', desc: '안정적이고 빠른 웹호스팅 서비스', f1: '고성능 서버', f2: '24/7 모니터링', f3: '데이터 백업' },
+      design: { title: '디자인', desc: '브랜드 아이덴티티부터 UI/UX까지', f1: '브랜드 디자인', f2: 'UI/UX 디자인', f3: '편집 디자인' },
+      consulting: { title: '컨설팅', desc: '기업·대학·교육기관 맞춤 컨설팅', f1: '기업 컨설팅', f2: '대학 컨설팅', f3: '교육기관 컨설팅' },
+      education: { title: '교육', desc: '맞춤 강의와 온라인 강의실', f1: '맞춤형 커리큘럼', f2: '실습 중심 교육', f3: '온라인 강의실' },
+      publishing: { title: '출판', desc: '전자출판, 간행물, 도서 출판', f1: '전자출판', f2: '간행물', f3: '도서 출판' }
+    },
     common: {
       learnMore: '자세히 보기',
       contactUs: '문의하기',
@@ -299,6 +307,14 @@ export const translations = {
       portfolioSubtitle: 'Our successfully completed projects',
       reviews: 'Client Reviews',
       reviewsSubtitle: 'Testimonials from our valued clients'
+    },
+    homeServices: {
+      webDev: { title: 'Web Development', desc: 'From responsive websites to complex web applications', f1: 'Custom Websites', f2: 'Responsive Design', f3: 'E-Commerce Platforms' },
+      webHosting: { title: 'Web Hosting', desc: 'Reliable and fast web hosting services', f1: 'High-Performance Servers', f2: '24/7 Monitoring', f3: 'Data Backup' },
+      design: { title: 'Design', desc: 'From brand identity to UI/UX', f1: 'Brand Design', f2: 'UI/UX Design', f3: 'Editorial Design' },
+      consulting: { title: 'Consulting', desc: 'Tailored consulting for businesses, universities & institutions', f1: 'Business Consulting', f2: 'University Consulting', f3: 'Institution Consulting' },
+      education: { title: 'Education', desc: 'Custom training and online classroom', f1: 'Tailored Curriculum', f2: 'Hands-on Training', f3: 'Online Classroom' },
+      publishing: { title: 'Publishing', desc: 'E-publishing, periodicals, and book publishing', f1: 'E-Publishing', f2: 'Periodicals', f3: 'Book Publishing' }
     },
     common: {
       learnMore: 'Learn More',
