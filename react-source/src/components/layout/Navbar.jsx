@@ -9,7 +9,7 @@ const Navbar = () => {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const [activeDropdown, setActiveDropdown] = useState(null);
   const location = useLocation();
-  const { toggleTheme } = useTheme();
+  const { mode, toggleTheme } = useTheme();
   const { language, toggleLanguage, t } = useLanguage();
   const { cartCount } = useCart();
 
@@ -162,7 +162,8 @@ const Navbar = () => {
             <button className="lang-switcher" onClick={toggleLanguage} aria-label={language === 'ko' ? 'Switch to English' : '한국어로 전환'}>
               {language === 'ko' ? 'EN' : 'KR'}
             </button>
-            <button className="theme-toggle" onClick={toggleTheme} aria-label="테마 전환">
+            <button className="theme-toggle" onClick={toggleTheme} aria-label="테마 전환" data-mode={mode}>
+              {/* Light mode icon (sun) */}
               <svg className="sun-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
                 <circle cx="12" cy="12" r="5" />
                 <line x1="12" y1="1" x2="12" y2="3" />
@@ -174,8 +175,20 @@ const Navbar = () => {
                 <line x1="4.22" y1="19.78" x2="5.64" y2="18.36" />
                 <line x1="18.36" y1="5.64" x2="19.78" y2="4.22" />
               </svg>
+              {/* Dark mode icon (moon) */}
               <svg className="moon-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
                 <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z" />
+              </svg>
+              {/* Auto mode icon (sun+moon half) */}
+              <svg className="auto-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                <circle cx="12" cy="12" r="9" />
+                <path d="M12 3a9 9 0 0 1 0 18" fill="currentColor" opacity="0.3" />
+                <circle cx="12" cy="12" r="4" />
+                <line x1="12" y1="1" x2="12" y2="3" />
+                <line x1="12" y1="21" x2="12" y2="23" />
+                <line x1="4.22" y1="4.22" x2="5.64" y2="5.64" />
+                <line x1="1" y1="12" x2="3" y2="12" />
+                <line x1="4.22" y1="19.78" x2="5.64" y2="18.36" />
               </svg>
             </button>
             <button

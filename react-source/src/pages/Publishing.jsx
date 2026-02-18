@@ -17,7 +17,7 @@ const Publishing = () => {
 
       <section style={{ padding: '80px 0', background: 'var(--bg-white)' }}>
         <div className="container">
-          <div className="category-grid four-col">
+          <div className="category-grid">
             <Link to="/publishing/ebook" className="category-card" data-aos="fade-up">
               <div className="category-icon">
                 <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">

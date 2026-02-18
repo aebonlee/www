@@ -14,14 +14,41 @@
     --border-medium: #4B5563;
     --glass-bg: rgba(17, 24, 39, 0.85);
     --glass-border: rgba(255, 255, 255, 0.08);
+    /* Brighter primary for dark backgrounds */
+    --primary-blue: #4A8FE7;
+    --primary-blue-dark: #2B6CC4;
+    --primary-blue-light: #93C5FD;
+    --primary-gradient: linear-gradient(135deg, #1A5AC8 0%, #4A8FE7 100%);
 }
 
 [data-theme="dark"] .hero {
-    background: linear-gradient(135deg, #0F172A 0%, #1E1B4B 50%, #1E3A5F 100%);
+    background: linear-gradient(135deg, #0A2D6E 0%, #122870 50%, #172D58 100%);
 }
+
+/* ── Dark mode slide gradients — higher saturation for readability ── */
+/* Blue dark: visible cobalt tones */
+[data-theme="dark"] .gradient-slide-0 { background: linear-gradient(135deg, #0A2D6E 0%, #122870 50%, #172D58 100%); }
+/* Red dark: visible crimson tones */
+[data-theme="dark"] .gradient-slide-1 { background: linear-gradient(135deg, #6E1422 0%, #701020 50%, #581828 100%); }
+/* Green dark: visible emerald tones */
+[data-theme="dark"] .gradient-slide-2 { background: linear-gradient(135deg, #0A5438 0%, #104830 50%, #163D2A 100%); }
+/* Purple dark: visible violet tones */
+[data-theme="dark"] .gradient-slide-3 { background: linear-gradient(135deg, #4A126E 0%, #3C0A60 50%, #2C1850 100%); }
+/* Orange dark: visible amber tones */
+[data-theme="dark"] .gradient-slide-4 { background: linear-gradient(135deg, #6E3E10 0%, #603510 50%, #4E2C18 100%); }
 
 [data-theme="dark"] .particle {
     background: rgba(74, 143, 231, 0.25);
+}
+
+[data-theme="dark"] .carousel-arrow {
+    background: rgba(0, 0, 0, 0.3);
+    border-color: rgba(255, 255, 255, 0.15);
+}
+
+[data-theme="dark"] .carousel-arrow:hover {
+    background: rgba(0, 0, 0, 0.5);
+    border-color: rgba(255, 255, 255, 0.3);
 }
 
 [data-theme="dark"] .page-header {

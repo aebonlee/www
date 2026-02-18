@@ -2,24 +2,60 @@ import { createContext, useContext, useState, useEffect } from 'react';
 
 const ThemeContext = createContext();
 
+const getTimeBasedTheme = () => {
+  const hour = new Date().getHours();
+  return (hour >= 6 && hour < 18) ? 'light' : 'dark';
+};
+
 export const ThemeProvider = ({ children }) => {
-  const [theme, setTheme] = useState(() => {
-    const savedTheme = localStorage.getItem('theme');
-    if (savedTheme) return savedTheme;
-    return window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
+  const [mode, setMode] = useState(() => {
+    const saved = localStorage.getItem('themeMode');
+    if (saved === 'light' || saved === 'dark' || saved === 'auto') return saved;
+    // Migrate from old 'theme' key
+    const legacy = localStorage.getItem('theme');
+    if (legacy === 'light' || legacy === 'dark') return legacy;
+    return 'auto';
   });
 
+  const [theme, setTheme] = useState(() => {
+    return mode === 'auto' ? getTimeBasedTheme() : mode;
+  });
+
+  // Resolve theme from mode (+ time tick for auto)
+  useEffect(() => {
+    if (mode !== 'auto') {
+      setTheme(mode);
+      return;
+    }
+    setTheme(getTimeBasedTheme());
+    const interval = setInterval(() => {
+      setTheme(getTimeBasedTheme());
+    }, 60000);
+    return () => clearInterval(interval);
+  }, [mode]);
+
+  // Apply to DOM
   useEffect(() => {
     document.documentElement.setAttribute('data-theme', theme);
-    localStorage.setItem('theme', theme);
   }, [theme]);
 
+  // Persist
+  useEffect(() => {
+    localStorage.setItem('themeMode', mode);
+    localStorage.removeItem('theme'); // clean legacy
+  }, [mode]);
+
+  // Cycle: auto → light → dark → auto
   const toggleTheme = () => {
-    setTheme(prev => prev === 'light' ? 'dark' : 'light');
+    setMode(prev => {
+      if (prev === 'auto') return 'light';
+      if (prev === 'light') return 'dark';
+      return 'auto';
+    });
   };
 
   return (
-    <ThemeContext.Provider value={{ theme, toggleTheme }}>
+    <ThemeContext.Provider value={{ theme, mode, toggleTheme }}>
       {children}
     </ThemeContext.Provider>
   );

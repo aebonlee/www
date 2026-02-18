@@ -1,5 +1,5 @@
 /* ============================================
-   Hero Section — Rich Blue Gradient
+   Hero Section — Carousel + Rich Gradients
    ============================================ */
 
 .hero {
@@ -11,6 +11,47 @@
     padding-bottom: 60px;
     position: relative;
     overflow: hidden;
+}
+
+/* ── Carousel wrapper ── */
+.carousel-viewport {
+    position: absolute;
+    inset: 0;
+    overflow: hidden;
+}
+
+.carousel-track {
+    display: flex;
+    height: 100%;
+    transition: transform 0.7s cubic-bezier(0.65, 0, 0.35, 1);
+    will-change: transform;
+}
+
+.carousel-slide {
+    position: relative;
+    flex: 0 0 100%;
+    width: 100%;
+    height: 100%;
+}
+
+/* ── Per-slide gradient overlays (5 Color Sets) ── */
+/* Blue  — HSL ~215°, brand primary */
+.gradient-slide-0 { background: linear-gradient(135deg, #0046C8 0%, #002E8A 50%, #1E3A5F 100%); }
+/* Red   — HSL ~350°, same saturation family */
+.gradient-slide-1 { background: linear-gradient(135deg, #C8102E 0%, #8A001A 50%, #5F1E28 100%); }
+/* Green — HSL ~155°, same saturation family */
+.gradient-slide-2 { background: linear-gradient(135deg, #00855A 0%, #005C3E 50%, #1E4A35 100%); }
+/* Purple — HSL ~280°, same saturation family */
+.gradient-slide-3 { background: linear-gradient(135deg, #8B1AC8 0%, #5E008A 50%, #3C1E5F 100%); }
+/* Orange — HSL ~30°, same saturation family */
+.gradient-slide-4 { background: linear-gradient(135deg, #C87200 0%, #8A4E00 50%, #5F401E 100%); }
+
+/* ── Background effects shared ── */
+.hero-bg-effect {
+    position: absolute;
+    inset: 0;
+    overflow: hidden;
+    pointer-events: none;
 }
 
 .hero-background {
@@ -31,21 +72,23 @@
     opacity: 0.6;
 }
 
-.particles {
-    position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-}
-
-.particle {
+/* ── Particles (slide 0) ── */
+.particles-bg .particle,
+.particles .particle {
     position: absolute;
     width: 6px;
     height: 6px;
     background: rgba(255, 255, 255, 0.15);
     border-radius: 50%;
     animation: float-particle var(--duration, 20s) infinite ease-in-out;
+}
+
+.particles {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
 }
 
 @keyframes float-particle {
@@ -55,6 +98,85 @@
     50% { transform: translateY(-100px) translateX(50px); opacity: 0.4; }
 }
 
+/* ── Matrix rain (slide 1 — Red) ── */
+.matrix-col {
+    position: absolute;
+    top: -20%;
+    font-family: 'Courier New', monospace;
+    font-size: 14px;
+    color: rgba(255, 120, 120, 0.35);
+    white-space: pre;
+    line-height: 1.4;
+    animation: matrix-fall 5s linear infinite;
+    text-shadow: 0 0 8px rgba(255, 100, 100, 0.2);
+}
+
+@keyframes matrix-fall {
+    0% { transform: translateY(-20%); opacity: 0; }
+    10% { opacity: 1; }
+    90% { opacity: 1; }
+    100% { transform: translateY(120%); opacity: 0; }
+}
+
+/* ── Network nodes (slide 2) ── */
+.network-node {
+    animation: node-drift 10s ease-in-out infinite alternate;
+}
+
+@keyframes node-drift {
+    0% { opacity: 0.3; r: 2; }
+    50% { opacity: 0.7; r: 4; }
+    100% { opacity: 0.3; r: 2; }
+}
+
+/* ── Rising orbs (slide 3) ── */
+.orb {
+    position: absolute;
+    bottom: -20px;
+    border-radius: 50%;
+    animation: rise-orb 8s ease-in infinite;
+    filter: blur(1px);
+}
+
+@keyframes rise-orb {
+    0% { transform: translateY(0) scale(0.5); opacity: 0; }
+    15% { opacity: 0.8; }
+    85% { opacity: 0.4; }
+    100% { transform: translateY(-110vh) scale(1.2); opacity: 0; }
+}
+
+/* ── Geometric shapes (slide 4) ── */
+.geo-shape {
+    position: absolute;
+    border: 1.5px solid rgba(255, 255, 255, 0.15);
+    animation: float-rotate 12s ease-in-out infinite;
+    transform: rotate(var(--start-rotation, 0deg));
+}
+
+.geo-triangle {
+    clip-path: polygon(50% 0%, 0% 100%, 100% 100%);
+    background: rgba(255, 180, 60, 0.1);
+    border: none;
+}
+
+.geo-square {
+    border-radius: 4px;
+    background: rgba(255, 200, 100, 0.06);
+    border-color: rgba(255, 180, 60, 0.2);
+}
+
+.geo-hexagon {
+    clip-path: polygon(25% 0%, 75% 0%, 100% 50%, 75% 100%, 25% 100%, 0% 50%);
+    background: rgba(255, 160, 40, 0.1);
+    border: none;
+}
+
+@keyframes float-rotate {
+    0%, 100% { transform: rotate(var(--start-rotation, 0deg)) translateY(0); opacity: 0.3; }
+    50% { transform: rotate(calc(var(--start-rotation, 0deg) + 180deg)) translateY(-30px); opacity: 0.7; }
+}
+
+/* ── Hero content ── */
 .hero-content {
     position: relative;
     z-index: 1;
@@ -124,13 +246,81 @@
     box-shadow: 0 8px 24px rgba(0, 0, 0, 0.15);
 }
 
-/* Scroll Indicator */
-.scroll-indicator {
+/* ── Carousel Arrows ── */
+.carousel-arrow {
     position: absolute;
-    bottom: 30px;
+    top: 50%;
+    transform: translateY(-50%);
+    z-index: 3;
+    width: 48px;
+    height: 48px;
+    border-radius: 50%;
+    border: 1px solid rgba(255, 255, 255, 0.25);
+    background: rgba(255, 255, 255, 0.1);
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
+    color: #fff;
+    font-size: 20px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: background 0.3s, border-color 0.3s, transform 0.3s;
+    line-height: 1;
+}
+
+.carousel-arrow:hover {
+    background: rgba(255, 255, 255, 0.25);
+    border-color: rgba(255, 255, 255, 0.5);
+}
+
+.carousel-arrow--prev {
+    left: 24px;
+}
+
+.carousel-arrow--next {
+    right: 24px;
+}
+
+/* ── Dot Indicators ── */
+.carousel-dots {
+    position: absolute;
+    bottom: 56px;
     left: 50%;
     transform: translateX(-50%);
-    z-index: 1;
+    z-index: 3;
+    display: flex;
+    gap: 10px;
+}
+
+.carousel-dot {
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    border: 2px solid rgba(255, 255, 255, 0.5);
+    background: transparent;
+    cursor: pointer;
+    transition: background 0.3s, border-color 0.3s, transform 0.3s;
+    padding: 0;
+}
+
+.carousel-dot:hover {
+    border-color: rgba(255, 255, 255, 0.8);
+}
+
+.carousel-dot.active {
+    background: #FFFFFF;
+    border-color: #FFFFFF;
+    transform: scale(1.25);
+}
+
+/* ── Scroll Indicator ── */
+.scroll-indicator {
+    position: absolute;
+    bottom: 16px;
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 3;
 }
 
 .mouse {

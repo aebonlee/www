@@ -2,8 +2,7 @@ import { Link } from 'react-router-dom';
 import { useLanguage } from '../contexts/LanguageContext';
 import useAOS from '../hooks/useAOS';
 import useCountUp from '../hooks/useCountUp';
-import Particles from '../components/Particles';
-import ScrollIndicator from '../components/ScrollIndicator';
+import HeroCarousel from '../components/HeroCarousel';
 import CTA from '../components/CTA';
 
 const Home = () => {
@@ -16,40 +15,8 @@ const Home = () => {
 
   return (
     <>
-      {/* Hero Section */}
-      <section className="hero" id="home">
-        <div className="hero-background">
-          <div className="gradient-overlay"></div>
-          <Particles count={30} />
-        </div>
-        <div className="container">
-          <div className="hero-content">
-            <h2 className="hero-title">
-              <span className="title-line">{t('hero.title1')}</span>
-              <span className="title-line">
-                {t('hero.title2')} <span className="highlight">{t('hero.titleHighlight')}</span>{t('hero.title3')}
-              </span>
-            </h2>
-            <p className="hero-description">
-              {t('hero.description').split('\n').map((line, i) => (
-                <span key={i}>
-                  {line}
-                  {i === 0 && <br />}
-                </span>
-              ))}
-            </p>
-            <div className="hero-buttons">
-              <Link to="/services" className="btn btn-primary">
-                {t('hero.viewServices')}
-              </Link>
-              <Link to="/contact" className="btn btn-secondary">
-                {t('hero.contact')}
-              </Link>
-            </div>
-          </div>
-        </div>
-        <ScrollIndicator />
-      </section>
+      {/* Hero Carousel */}
+      <HeroCarousel />
 
       {/* Services Section */}
       <section id="services" style={{ padding: '80px 0', background: 'var(--bg-white)' }}>

@@ -111,6 +111,53 @@ export const translations = {
       viewServices: '서비스 보기',
       contact: '문의하기'
     },
+    heroSlides: [
+      {
+        line1: '혁신적인 IT 솔루션으로',
+        line2: '비즈니스의',
+        highlight: '미래',
+        line3: '를 만듭니다',
+        description: '웹개발부터 기업컨설팅, 맞춤 강의, 출판사업까지\n드림아이티비즈가 함께합니다',
+        cta1: '서비스 보기',
+        cta2: '문의하기'
+      },
+      {
+        line1: '웹개발 · 호스팅 · 디자인',
+        line2: '강력한',
+        highlight: '디지털 존재감',
+        line3: '을 구축합니다',
+        description: '반응형 웹사이트, 안정적 호스팅, 브랜드 디자인으로\n비즈니스의 온라인 경쟁력을 높입니다',
+        cta1: 'IT서비스 보기',
+        cta2: ''
+      },
+      {
+        line1: '연구개발 & 컨설팅',
+        line2: '데이터 기반',
+        highlight: '혁신 컨설팅',
+        line3: '으로 성장합니다',
+        description: 'AI·빅데이터 연구개발과 맞춤형 IT 컨설팅으로\n기업·대학·교육기관의 디지털 전환을 선도합니다',
+        cta1: '연구개발',
+        cta2: '컨설팅'
+      },
+      {
+        line1: '실무 중심 맞춤 교육',
+        line2: '미래를 여는',
+        highlight: 'IT 교육',
+        line3: '을 제공합니다',
+        description: '기업 맞춤 커리큘럼과 온라인 강의실로\n실무 역량을 강화하는 교육 파트너',
+        cta1: '교육 프로그램',
+        cta2: ''
+      },
+      {
+        line1: '전자출판 · 간행물 · 도서',
+        line2: '지식을 담는',
+        highlight: '출판',
+        line3: '의 새로운 지평',
+        description: 'IT 전문 서적부터 전자출판, 간행물까지\n지식 콘텐츠의 기획·제작·유통을 함께합니다',
+        cta1: '출판 서비스',
+        cta2: '스토어'
+      }
+    ],
     sections: {
       ourServices: 'Our Services',
       servicesSubtitle: '드림아이티비즈가 제공하는 전문 IT 서비스',
@@ -308,6 +355,53 @@ export const translations = {
       viewServices: 'Our Services',
       contact: 'Contact Us'
     },
+    heroSlides: [
+      {
+        line1: 'Innovative IT Solutions',
+        line2: 'for Your',
+        highlight: 'Future',
+        line3: '',
+        description: 'Comprehensive IT services from web development to consulting,\neducation, and publishing by DreamIT Biz',
+        cta1: 'Our Services',
+        cta2: 'Contact Us'
+      },
+      {
+        line1: 'Web Dev · Hosting · Design',
+        line2: 'Build a Powerful',
+        highlight: 'Digital Presence',
+        line3: '',
+        description: 'Responsive websites, reliable hosting, and brand design\nto boost your online competitiveness',
+        cta1: 'IT Services',
+        cta2: ''
+      },
+      {
+        line1: 'R&D & Consulting',
+        line2: 'Data-Driven',
+        highlight: 'Innovation Consulting',
+        line3: '',
+        description: 'Leading digital transformation for businesses and institutions\nwith AI, big data R&D and tailored IT consulting',
+        cta1: 'R&D',
+        cta2: 'Consulting'
+      },
+      {
+        line1: 'Hands-on IT Training',
+        line2: 'Unlock the Future with',
+        highlight: 'IT Education',
+        line3: '',
+        description: 'Custom curricula and online classrooms\nto strengthen practical skills as your education partner',
+        cta1: 'Education',
+        cta2: ''
+      },
+      {
+        line1: 'E-Publishing · Periodicals · Books',
+        line2: 'A New Horizon in',
+        highlight: 'Publishing',
+        line3: '',
+        description: 'From IT books to e-publishing and periodicals —\nplanning, producing, and distributing knowledge content',
+        cta1: 'Publishing',
+        cta2: 'Store'
+      }
+    ],
     sections: {
       ourServices: 'Our Services',
       servicesSubtitle: 'Professional IT services by DreamIT Biz',

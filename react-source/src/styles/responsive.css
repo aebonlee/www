@@ -71,6 +71,15 @@
         font-size: 46px;
     }
 
+    .carousel-arrow {
+        width: 42px;
+        height: 42px;
+        font-size: 18px;
+    }
+
+    .carousel-arrow--prev { left: 16px; }
+    .carousel-arrow--next { right: 16px; }
+
     .section-title {
         font-size: 36px;
     }
@@ -225,6 +234,25 @@
         width: 100%;
         justify-content: center;
         border-radius: var(--radius-md);
+    }
+
+    .carousel-arrow {
+        width: 36px;
+        height: 36px;
+        font-size: 16px;
+    }
+
+    .carousel-arrow--prev { left: 10px; }
+    .carousel-arrow--next { right: 10px; }
+
+    .carousel-dots {
+        bottom: 48px;
+        gap: 8px;
+    }
+
+    .carousel-dot {
+        width: 8px;
+        height: 8px;
     }
 
     /* Sections */
@@ -452,6 +480,15 @@
     .container {
         padding: 0 16px;
     }
+
+    .carousel-arrow {
+        width: 32px;
+        height: 32px;
+        font-size: 14px;
+    }
+
+    .carousel-arrow--prev { left: 8px; }
+    .carousel-arrow--next { right: 8px; }
 
     .about-stats {
         grid-template-columns: 1fr;

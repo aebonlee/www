@@ -190,11 +190,19 @@
     color: var(--text-secondary);
 }
 
+/* Theme toggle: 3 states via data-mode attribute */
 .sun-icon { display: none; }
-.moon-icon { display: block; }
+.moon-icon { display: none; }
+.auto-icon { display: none; }
 
-[data-theme="dark"] .sun-icon { display: block; }
-[data-theme="dark"] .moon-icon { display: none; }
+/* auto mode → show auto icon */
+.theme-toggle[data-mode="auto"] .auto-icon { display: block; }
+
+/* light mode → show moon icon (click to go dark) */
+.theme-toggle[data-mode="light"] .moon-icon { display: block; }
+
+/* dark mode → show sun icon (click to go auto) */
+.theme-toggle[data-mode="dark"] .sun-icon { display: block; }
 
 .mobile-toggle {
     display: none;
