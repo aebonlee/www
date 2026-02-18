@@ -4,10 +4,19 @@ import { useTheme } from '../../contexts/ThemeContext';
 import { useLanguage } from '../../contexts/LanguageContext';
 import { useCart } from '../../contexts/CartContext';
 
+const COLOR_OPTIONS = [
+  { name: 'blue', color: '#0046C8' },
+  { name: 'red', color: '#C8102E' },
+  { name: 'green', color: '#00855A' },
+  { name: 'purple', color: '#8B1AC8' },
+  { name: 'orange', color: '#C87200' },
+];
+
 const Navbar = () => {
   const [isScrolled, setIsScrolled] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const [activeDropdown, setActiveDropdown] = useState(null);
+  const [showColorPicker, setShowColorPicker] = useState(false);
   const location = useLocation();
   const { mode, toggleTheme, colorTheme, setColorTheme } = useTheme();
   const { language, toggleLanguage, t } = useLanguage();
@@ -151,22 +160,37 @@ const Navbar = () => {
           </ul>
 
           <div className="nav-actions">
-            <div className="color-palette">
-              {[
-                { name: 'blue', color: '#0046C8' },
-                { name: 'red', color: '#C8102E' },
-                { name: 'green', color: '#00855A' },
-                { name: 'purple', color: '#8B1AC8' },
-                { name: 'orange', color: '#C87200' },
-              ].map((t) => (
-                <button
-                  key={t.name}
-                  className={`color-dot${colorTheme === t.name ? ' active' : ''}`}
-                  style={{ background: t.color }}
-                  onClick={() => setColorTheme(t.name)}
-                  aria-label={`${t.name} theme`}
-                />
-              ))}
+            <div className="color-picker-wrapper">
+              <button
+                className="color-picker-btn"
+                onClick={() => setShowColorPicker(!showColorPicker)}
+                aria-label="Color theme"
+              >
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                  <circle cx="13.5" cy="6.5" r="2.5" style={{ fill: '#C8102E', stroke: 'none' }} />
+                  <circle cx="17.5" cy="10.5" r="2.5" style={{ fill: '#C87200', stroke: 'none' }} />
+                  <circle cx="8.5" cy="7.5" r="2.5" style={{ fill: '#00855A', stroke: 'none' }} />
+                  <circle cx="6.5" cy="12" r="2.5" style={{ fill: '#0046C8', stroke: 'none' }} />
+                  <path d="M12 2C6.5 2 2 6.5 2 12s4.5 10 10 10c.93 0 1.5-.67 1.5-1.5 0-.39-.15-.74-.39-1.04-.24-.3-.39-.65-.39-1.04 0-.83.67-1.5 1.5-1.5H16c3.31 0 6-2.69 6-6 0-5.17-4.5-9-10-9z" />
+                </svg>
+              </button>
+              {showColorPicker && (
+                <>
+                  <div className="color-picker-overlay" onClick={() => setShowColorPicker(false)} />
+                  <div className="color-picker-tooltip">
+                    <div className="color-picker-arrow" />
+                    {COLOR_OPTIONS.map((c) => (
+                      <button
+                        key={c.name}
+                        className={`color-dot${colorTheme === c.name ? ' active' : ''}`}
+                        style={{ background: c.color }}
+                        onClick={() => { setColorTheme(c.name); setShowColorPicker(false); }}
+                        aria-label={`${c.name} theme`}
+                      />
+                    ))}
+                  </div>
+                </>
+              )}
             </div>
             <Link to="/cart" className="cart-icon-link" aria-label="Cart">
               <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" className="cart-icon-svg">

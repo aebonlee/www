@@ -211,13 +211,38 @@
         gap: 8px;
     }
 
-    .color-palette {
-        gap: 4px;
+    .color-picker-btn {
+        width: 34px;
+        height: 34px;
+    }
+
+    .color-picker-btn svg {
+        width: 17px;
+        height: 17px;
+    }
+
+    .color-picker-tooltip {
+        gap: 6px;
+        padding: 8px 10px;
+        right: 0;
+        left: auto;
+        transform: none;
+    }
+
+    .color-picker-arrow {
+        left: auto;
+        right: 12px;
+        transform: rotate(45deg);
+    }
+
+    @keyframes tooltip-fade-in {
+        from { opacity: 0; transform: translateY(4px); }
+        to   { opacity: 1; transform: translateY(0); }
     }
 
     .color-dot {
-        width: 16px;
-        height: 16px;
+        width: 20px;
+        height: 20px;
     }
 
     .lang-switcher {

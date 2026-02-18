@@ -204,16 +204,77 @@
 /* dark mode → show sun icon (click to go auto) */
 .theme-toggle[data-mode="dark"] .sun-icon { display: block; }
 
-/* ── Color Palette Picker ── */
-.color-palette {
+/* ── Color Picker (Palette Icon + Tooltip) ── */
+.color-picker-wrapper {
+    position: relative;
+}
+
+.color-picker-btn {
+    background: transparent;
+    border: 1px solid var(--border-medium);
+    border-radius: var(--radius-sm);
+    width: 40px;
+    height: 40px;
     display: flex;
     align-items: center;
-    gap: 6px;
+    justify-content: center;
+    cursor: pointer;
+    transition: var(--transition-base);
+}
+
+.color-picker-btn:hover {
+    background: var(--bg-light-gray);
+    border-color: var(--primary-blue);
+}
+
+.color-picker-btn svg {
+    width: 20px;
+    height: 20px;
+    color: var(--text-secondary);
+}
+
+.color-picker-overlay {
+    position: fixed;
+    inset: 0;
+    z-index: 998;
+}
+
+.color-picker-tooltip {
+    position: absolute;
+    top: calc(100% + 12px);
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 999;
+    display: flex;
+    gap: 8px;
+    padding: 10px 14px;
+    background: var(--bg-white);
+    border: 1px solid var(--border-light);
+    border-radius: var(--radius-md);
+    box-shadow: var(--shadow-lg);
+    animation: tooltip-fade-in 0.2s ease;
+}
+
+.color-picker-arrow {
+    position: absolute;
+    top: -6px;
+    left: 50%;
+    transform: translateX(-50%) rotate(45deg);
+    width: 12px;
+    height: 12px;
+    background: var(--bg-white);
+    border-left: 1px solid var(--border-light);
+    border-top: 1px solid var(--border-light);
+}
+
+@keyframes tooltip-fade-in {
+    from { opacity: 0; transform: translateX(-50%) translateY(4px); }
+    to   { opacity: 1; transform: translateX(-50%) translateY(0); }
 }
 
 .color-dot {
-    width: 20px;
-    height: 20px;
+    width: 24px;
+    height: 24px;
     border-radius: 50%;
     border: 2px solid transparent;
     cursor: pointer;
@@ -223,7 +284,7 @@
 }
 
 .color-dot:hover {
-    transform: scale(1.15);
+    transform: scale(1.2);
 }
 
 .color-dot.active {

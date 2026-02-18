@@ -191,7 +191,7 @@ const GeometricBg = ({ isActive }) => {
   );
 };
 
-const backgrounds = [ParticlesBg, MatrixBg, NetworkBg, OrbsBg, GeometricBg];
+const backgrounds = [MatrixBg, NetworkBg, GeometricBg, MatrixBg, NetworkBg];
 
 const HeroBackground = ({ slideIndex, isActive }) => {
   const Bg = backgrounds[slideIndex];
