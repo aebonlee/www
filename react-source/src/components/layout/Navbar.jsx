@@ -25,15 +25,33 @@ const Navbar = () => {
   const menuItems = [
     { path: '/', label: t('nav.home') },
     {
-      label: t('nav.services'),
+      label: t('nav.itServices'),
       path: '/services',
+      activePath: '/services',
       dropdown: [
         { path: '/services/web-development', label: t('services.webDev') },
         { path: '/services/web-hosting', label: t('services.webHosting') },
         { path: '/services/design', label: t('services.design') },
-        { path: '/services/consulting', label: t('services.consulting') },
-        { path: '/services/education', label: t('services.education') },
-        { path: '/services/publishing', label: t('services.publishing') }
+        { path: '/services/consulting', label: t('services.consulting') }
+      ]
+    },
+    {
+      label: t('nav.education'),
+      path: '/education',
+      activePath: '/education',
+      dropdown: [
+        { path: '/education/custom', label: t('education.custom') },
+        { path: '/education/classroom', label: t('education.classroom') }
+      ]
+    },
+    {
+      label: t('nav.publishing'),
+      path: '/publishing',
+      activePath: '/publishing',
+      dropdown: [
+        { path: '/publishing/ebook', label: t('publishing.ebook') },
+        { path: '/publishing/periodical', label: t('publishing.periodical') },
+        { path: '/publishing/book', label: t('publishing.book') }
       ]
     },
     {
@@ -46,6 +64,15 @@ const Navbar = () => {
       ]
     },
     {
+      label: t('nav.community'),
+      path: '/community/blog',
+      activePath: '/community',
+      dropdown: [
+        { path: '/community/blog', label: t('community.blog') },
+        { path: '/community/board', label: t('community.board') }
+      ]
+    },
+    {
       label: t('nav.about'),
       path: '/about',
       dropdown: [
@@ -54,13 +81,13 @@ const Navbar = () => {
         { path: '/about#history', label: t('about.history') }
       ]
     },
-    { path: '/blog', label: t('nav.blog') },
     { path: '/contact', label: t('nav.contact') }
   ];
 
-  const isActive = (path) => {
-    if (path === '/') return location.pathname === '/';
-    return location.pathname.startsWith(path);
+  const isActive = (item) => {
+    const checkPath = item.activePath || item.path;
+    if (checkPath === '/') return location.pathname === '/';
+    return location.pathname.startsWith(checkPath);
   };
 
   return (
@@ -89,9 +116,9 @@ const Navbar = () => {
                   <>
                     <Link
                       to={item.path}
-                      className={`nav-link ${isActive(item.path) ? 'active' : ''}`}
+                      className={`nav-link ${isActive(item) ? 'active' : ''}`}
                       onClick={(e) => {
-                        if (window.innerWidth <= 768) {
+                        if (window.innerWidth <= 1100) {
                           e.preventDefault();
                           setActiveDropdown(activeDropdown === index ? null : index);
                         }
@@ -108,7 +135,7 @@ const Navbar = () => {
                     </ul>
                   </>
                 ) : (
-                  <Link to={item.path} className={`nav-link ${isActive(item.path) ? 'active' : ''}`}>
+                  <Link to={item.path} className={`nav-link ${isActive(item) ? 'active' : ''}`}>
                     {item.label}
                   </Link>
                 )}

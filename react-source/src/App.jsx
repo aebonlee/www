@@ -1,5 +1,5 @@
 import { lazy, Suspense } from 'react';
-import { HashRouter as Router, Routes, Route } from 'react-router-dom';
+import { HashRouter as Router, Routes, Route, Navigate } from 'react-router-dom';
 import { ThemeProvider } from './contexts/ThemeContext';
 import { LanguageProvider } from './contexts/LanguageContext';
 import Navbar from './components/layout/Navbar';
@@ -9,9 +9,17 @@ import './index.css';
 const Home = lazy(() => import('./pages/Home'));
 const Services = lazy(() => import('./pages/Services'));
 const ServiceDetail = lazy(() => import('./pages/ServiceDetail'));
+const Education = lazy(() => import('./pages/Education'));
+const EducationCustom = lazy(() => import('./pages/EducationCustom'));
+const Classroom = lazy(() => import('./pages/Classroom'));
+const Publishing = lazy(() => import('./pages/Publishing'));
+const PublishingEbook = lazy(() => import('./pages/PublishingEbook'));
+const PublishingPeriodical = lazy(() => import('./pages/PublishingPeriodical'));
+const PublishingBook = lazy(() => import('./pages/PublishingBook'));
 const Portfolio = lazy(() => import('./pages/Portfolio'));
 const About = lazy(() => import('./pages/About'));
 const Blog = lazy(() => import('./pages/Blog'));
+const Board = lazy(() => import('./pages/Board'));
 const Contact = lazy(() => import('./pages/Contact'));
 
 const Loading = () => (
@@ -33,9 +41,18 @@ function App() {
                   <Route path="/" element={<Home />} />
                   <Route path="/services" element={<Services />} />
                   <Route path="/services/:serviceType" element={<ServiceDetail />} />
+                  <Route path="/education" element={<Education />} />
+                  <Route path="/education/custom" element={<EducationCustom />} />
+                  <Route path="/education/classroom" element={<Classroom />} />
+                  <Route path="/publishing" element={<Publishing />} />
+                  <Route path="/publishing/ebook" element={<PublishingEbook />} />
+                  <Route path="/publishing/periodical" element={<PublishingPeriodical />} />
+                  <Route path="/publishing/book" element={<PublishingBook />} />
                   <Route path="/portfolio" element={<Portfolio />} />
                   <Route path="/about" element={<About />} />
-                  <Route path="/blog" element={<Blog />} />
+                  <Route path="/community/blog" element={<Blog />} />
+                  <Route path="/community/board" element={<Board />} />
+                  <Route path="/blog" element={<Navigate to="/community/blog" replace />} />
                   <Route path="/contact" element={<Contact />} />
                 </Routes>
               </Suspense>

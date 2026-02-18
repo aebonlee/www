@@ -14,6 +14,14 @@ const ServiceDetail = () => {
     window.scrollTo(0, 0);
   }, [serviceType]);
 
+  // Redirect legacy education/publishing URLs to new routes
+  if (serviceType === 'education') {
+    return <Navigate to="/education" replace />;
+  }
+  if (serviceType === 'publishing') {
+    return <Navigate to="/publishing" replace />;
+  }
+
   if (!service) {
     return <Navigate to="/services" replace />;
   }

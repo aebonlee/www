@@ -119,56 +119,6 @@ const serviceDetails = {
     ],
     ctaTitle: 'IT 컨설팅으로 비즈니스를 혁신하세요',
     ctaSubtitle: '전문 컨설턴트와 무료 상담을 시작하세요'
-  },
-  'education': {
-    title: '기업 맞춤 강의',
-    subtitle: '실무 중심의 IT 교육 프로그램으로 역량을 강화합니다',
-    overview: [
-      '드림아이티비즈의 교육 서비스는 기업의 실무 환경에 맞춘 맞춤형 커리큘럼을 제공합니다.',
-      '현업 전문가가 직접 강의하여 이론과 실무를 연결하는 효과적인 학습 경험을 제공합니다.',
-      '온라인과 오프라인 모두 지원하며, 수강생 수준에 맞는 단계별 교육을 진행합니다.'
-    ],
-    features: [
-      { title: '맞춤형 커리큘럼', description: '기업의 업무 환경과 목표에 맞는 맞춤형 교육 과정을 설계합니다.' },
-      { title: '실습 중심 교육', description: '실제 프로젝트를 통한 실습 중심의 교육으로 실무 역량을 강화합니다.' },
-      { title: '온/오프라인 강의', description: '방문 교육, 화상 교육, 녹화 강의 등 다양한 형태를 지원합니다.' },
-      { title: '수료증 발급', description: '교육 이수 후 수료증을 발급하여 역량을 인증합니다.' },
-      { title: '사후 지원', description: '교육 종료 후에도 질의응답과 추가 자료를 제공합니다.' },
-      { title: '성과 측정', description: '교육 효과를 측정하고 개선점을 피드백합니다.' }
-    ],
-    process: [
-      { step: 1, title: '니즈 파악', description: '기업 교육 니즈\n분석 및 상담' },
-      { step: 2, title: '설계', description: '커리큘럼 설계 및\n교재 제작' },
-      { step: 3, title: '교육', description: '강의 진행 및\n실습 지도' },
-      { step: 4, title: '평가', description: '학습 성과 평가 및\n수료증 발급' }
-    ],
-    ctaTitle: '기업 맞춤 교육을 시작하세요',
-    ctaSubtitle: '직원들의 IT 역량을 효과적으로 강화하세요'
-  },
-  'publishing': {
-    title: '출판사업',
-    subtitle: 'IT 전문 서적 및 교육 콘텐츠를 제작합니다',
-    overview: [
-      '드림아이티비즈의 출판사업은 IT 분야의 전문 지식을 체계적으로 전달합니다.',
-      '전문 저자 네트워크와 함께 양질의 IT 교육 콘텐츠를 기획하고 제작합니다.',
-      '종이책, 전자책, 온라인 콘텐츠 등 다양한 형태의 출판물을 제공합니다.'
-    ],
-    features: [
-      { title: 'IT 전문 서적', description: '프로그래밍, 데이터 분석, AI 등 IT 분야 전문 도서를 출판합니다.' },
-      { title: '교육 콘텐츠 제작', description: '교육 기관을 위한 맞춤형 교재와 학습 자료를 제작합니다.' },
-      { title: '전자책 제작', description: 'ePub, PDF 등 다양한 전자책 포맷으로 출판을 지원합니다.' },
-      { title: '기업 출판', description: '기업 소개서, 백서, 기술 문서 등 기업 출판물을 제작합니다.' },
-      { title: '번역 서비스', description: '해외 IT 도서의 한국어 번역 출판을 지원합니다.' },
-      { title: '유통 지원', description: '온/오프라인 서점과 디지털 플랫폼을 통한 유통을 지원합니다.' }
-    ],
-    process: [
-      { step: 1, title: '기획', description: '콘텐츠 기획 및\n저자 섭외' },
-      { step: 2, title: '집필', description: '원고 작성 및\n감수' },
-      { step: 3, title: '편집', description: '교정, 교열,\n레이아웃 디자인' },
-      { step: 4, title: '출판', description: '인쇄/제작 및\n유통' }
-    ],
-    ctaTitle: '출판 프로젝트를 상담하세요',
-    ctaSubtitle: 'IT 전문 콘텐츠 기획부터 출판까지 함께합니다'
   }
 };
 

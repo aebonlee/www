@@ -26,10 +26,12 @@ const Footer = () => {
             <h4>{t('footer.quickLinks')}</h4>
             <ul>
               <li><Link to="/">{t('nav.home')}</Link></li>
-              <li><Link to="/services">{t('nav.services')}</Link></li>
+              <li><Link to="/services">{t('nav.itServices')}</Link></li>
+              <li><Link to="/education">{t('nav.education')}</Link></li>
+              <li><Link to="/publishing">{t('nav.publishing')}</Link></li>
               <li><Link to="/portfolio">{t('nav.portfolio')}</Link></li>
+              <li><Link to="/community/blog">{t('nav.community')}</Link></li>
               <li><Link to="/about">{t('nav.about')}</Link></li>
-              <li><Link to="/blog">{t('nav.blog')}</Link></li>
               <li><Link to="/contact">{t('nav.contact')}</Link></li>
             </ul>
           </div>

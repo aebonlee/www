@@ -2,6 +2,64 @@
    Responsive Design - 3 Breakpoints
    ============================================ */
 
+/* 8-menu items: switch to mobile nav at 1100px */
+@media (max-width: 1100px) {
+    .nav-menu {
+        position: fixed;
+        top: var(--nav-height);
+        left: -100%;
+        width: 100%;
+        height: calc(100vh - var(--nav-height));
+        flex-direction: column;
+        background: var(--bg-white);
+        padding: 24px;
+        gap: 0;
+        transition: left 0.3s ease;
+        border-top: 1px solid var(--border-light);
+        overflow-y: auto;
+        align-items: flex-start;
+    }
+
+    .nav-menu.active {
+        left: 0;
+    }
+
+    .nav-item-dropdown {
+        width: 100%;
+    }
+
+    .nav-link {
+        width: 100%;
+        padding: 12px 0;
+    }
+
+    .nav-link::after {
+        display: none;
+    }
+
+    .dropdown-menu {
+        position: static;
+        opacity: 1;
+        visibility: visible;
+        transform: translateY(0);
+        box-shadow: none;
+        border: none;
+        background: var(--bg-light-gray);
+        margin: 8px 0 8px 16px;
+        display: none;
+        border-radius: 4px;
+    }
+
+    .nav-item-dropdown.active .dropdown-menu,
+    .nav-item-dropdown:hover .dropdown-menu {
+        display: block;
+    }
+
+    .mobile-toggle {
+        display: flex;
+    }
+}
+
 @media (max-width: 1024px) {
     .container {
         padding: 0 24px;
@@ -89,60 +147,26 @@
     .company-detail-grid {
         grid-template-columns: 1fr;
     }
+
+    /* Education/Publishing */
+    .course-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    .highlight-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    .format-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    .category-grid.three-col {
+        grid-template-columns: repeat(2, 1fr);
+    }
 }
 
 @media (max-width: 768px) {
-    .nav-menu {
-        position: fixed;
-        top: var(--nav-height);
-        left: -100%;
-        width: 100%;
-        height: calc(100vh - var(--nav-height));
-        flex-direction: column;
-        background: var(--bg-white);
-        padding: 24px;
-        gap: 0;
-        transition: left 0.3s ease;
-        border-top: 1px solid var(--border-light);
-        overflow-y: auto;
-        align-items: flex-start;
-    }
-
-    .nav-menu.active {
-        left: 0;
-    }
-
-    .nav-item-dropdown {
-        width: 100%;
-    }
-
-    .nav-link {
-        width: 100%;
-        padding: 12px 0;
-    }
-
-    .nav-link::after {
-        display: none;
-    }
-
-    .dropdown-menu {
-        position: static;
-        opacity: 1;
-        visibility: visible;
-        transform: translateY(0);
-        box-shadow: none;
-        border: none;
-        background: var(--bg-light-gray);
-        margin: 8px 0 8px 16px;
-        display: none;
-        border-radius: 4px;
-    }
-
-    .nav-item-dropdown.active .dropdown-menu,
-    .nav-item-dropdown:hover .dropdown-menu {
-        display: block;
-    }
-
     .nav-actions {
         gap: 8px;
     }
@@ -151,10 +175,6 @@
         width: 32px;
         height: 32px;
         font-size: 10px;
-    }
-
-    .mobile-toggle {
-        display: flex;
     }
 
     /* Hero */
@@ -281,6 +301,41 @@
     /* Values */
     .values-grid {
         grid-template-columns: 1fr;
+    }
+
+    /* Education/Publishing/Board */
+    .category-grid,
+    .category-grid.three-col {
+        grid-template-columns: 1fr;
+    }
+
+    .course-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .highlight-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .format-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    .type-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .book-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .board-table .col-author,
+    .board-table .col-views {
+        display: none;
+    }
+
+    .board-table .col-date {
+        width: 80px;
     }
 }
 

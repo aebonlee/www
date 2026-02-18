@@ -1,0 +1,106 @@
+const publishingDetails = {
+  ebook: {
+    title: '전자출판',
+    titleEn: 'E-Publishing',
+    subtitle: '디지털 시대에 맞는 전자책 제작 및 유통 서비스',
+    subtitleEn: 'E-book production and distribution for the digital age',
+    overview: [
+      '드림아이티비즈의 전자출판 서비스는 다양한 포맷의 전자책을 기획하고 제작합니다.',
+      'ePub, PDF, 인터랙티브 전자책 등 다양한 형태로 콘텐츠를 배포할 수 있습니다.',
+      '국내외 주요 전자책 플랫폼 유통을 지원하여 더 넓은 독자층에 도달합니다.'
+    ],
+    overviewEn: [
+      'DreamIT Biz e-publishing service plans and produces e-books in various formats.',
+      'Content can be distributed in ePub, PDF, interactive e-book formats and more.',
+      'We support distribution on major domestic and international e-book platforms to reach a wider audience.'
+    ],
+    formats: [
+      { title: 'ePub', description: '범용 전자책 포맷으로 대부분의 리더 앱에서 지원됩니다.', descriptionEn: 'Universal e-book format supported by most reader apps.' },
+      { title: 'PDF', description: '레이아웃이 고정된 문서에 적합한 포맷입니다.', descriptionEn: 'Format suitable for fixed-layout documents.' },
+      { title: 'Interactive', description: '동영상, 애니메이션 등을 포함한 인터랙티브 전자책입니다.', descriptionEn: 'Interactive e-books with video, animation, and more.' },
+      { title: 'Audiobook', description: '텍스트 기반 콘텐츠를 오디오북으로 전환합니다.', descriptionEn: 'Convert text-based content into audiobooks.' }
+    ],
+    features: [
+      { title: '전문 편집', titleEn: 'Professional Editing', description: '교정, 교열, 레이아웃 디자인까지 전문 편집 서비스를 제공합니다.', descriptionEn: 'Professional editing including proofreading, copy-editing, and layout design.' },
+      { title: '다양한 포맷', titleEn: 'Multiple Formats', description: 'ePub, PDF, 인터랙티브 등 다양한 전자책 포맷을 지원합니다.', descriptionEn: 'Support for ePub, PDF, interactive, and other e-book formats.' },
+      { title: '플랫폼 유통', titleEn: 'Platform Distribution', description: '국내외 주요 전자책 플랫폼을 통한 유통을 지원합니다.', descriptionEn: 'Distribution through major domestic and international e-book platforms.' },
+      { title: 'DRM 보호', titleEn: 'DRM Protection', description: '디지털 저작권 관리로 콘텐츠를 보호합니다.', descriptionEn: 'Protect content with digital rights management.' }
+    ],
+    ctaTitle: '전자출판 프로젝트를 시작하세요',
+    ctaTitleEn: 'Start Your E-Publishing Project',
+    ctaSubtitle: '디지털 콘텐츠 기획부터 유통까지 함께합니다',
+    ctaSubtitleEn: 'From digital content planning to distribution'
+  },
+  periodical: {
+    title: '간행물',
+    titleEn: 'Periodicals',
+    subtitle: '정기 간행물 기획, 편집, 제작 서비스',
+    subtitleEn: 'Periodical planning, editing, and production services',
+    overview: [
+      '드림아이티비즈의 간행물 서비스는 기업 뉴스레터, 학술지, 사보 등 다양한 정기 간행물을 제작합니다.',
+      '기획부터 디자인, 인쇄, 디지털 배포까지 원스톱 서비스를 제공합니다.',
+      '전문 에디터와 디자이너가 고품질의 간행물을 제작합니다.'
+    ],
+    overviewEn: [
+      'DreamIT Biz periodical service produces various publications including newsletters, journals, and company magazines.',
+      'We provide one-stop service from planning to design, printing, and digital distribution.',
+      'Professional editors and designers create high-quality publications.'
+    ],
+    types: [
+      { title: '기업 뉴스레터', titleEn: 'Corporate Newsletter', description: '사내외 소통을 위한 정기 뉴스레터 제작', descriptionEn: 'Regular newsletters for internal and external communication' },
+      { title: '학술지', titleEn: 'Academic Journal', description: '연구 결과를 발표하는 학술 저널 편집 및 제작', descriptionEn: 'Editing and production of academic journals for research publications' },
+      { title: '사보/홍보지', titleEn: 'Company Magazine', description: '기업 홍보를 위한 사보 및 홍보 자료 제작', descriptionEn: 'Company magazines and promotional materials' },
+      { title: '보고서', titleEn: 'Reports', description: '연간 보고서, 백서 등 전문 보고서 편집 및 디자인', descriptionEn: 'Editing and design of annual reports, white papers, etc.' }
+    ],
+    features: [
+      { title: '기획 컨설팅', titleEn: 'Planning Consulting', description: '콘텐츠 전략 및 기획 컨설팅을 제공합니다.', descriptionEn: 'We provide content strategy and planning consulting.' },
+      { title: '전문 편집', titleEn: 'Professional Editing', description: '전문 에디터의 교정, 교열 서비스를 제공합니다.', descriptionEn: 'Professional proofreading and copy-editing services.' },
+      { title: '디자인 제작', titleEn: 'Design Production', description: '전문 디자이너의 레이아웃 및 그래픽 디자인을 제공합니다.', descriptionEn: 'Professional layout and graphic design by our designers.' },
+      { title: '인쇄/배포', titleEn: 'Print/Distribution', description: '고품질 인쇄 및 디지털 배포를 지원합니다.', descriptionEn: 'High-quality printing and digital distribution support.' }
+    ],
+    ctaTitle: '간행물 제작을 문의하세요',
+    ctaTitleEn: 'Inquire About Periodical Production',
+    ctaSubtitle: '전문가와 함께 고품질 간행물을 제작합니다',
+    ctaSubtitleEn: 'Create high-quality publications with our experts'
+  },
+  book: {
+    title: '책',
+    titleEn: 'Books',
+    subtitle: 'IT 전문 서적 및 교육 도서 기획, 집필, 출판',
+    subtitleEn: 'Planning, writing, and publishing IT and educational books',
+    overview: [
+      '드림아이티비즈의 도서 출판 서비스는 IT 분야의 전문 지식을 체계적으로 전달합니다.',
+      '전문 저자 네트워크와 함께 양질의 IT 교육 콘텐츠를 기획하고 제작합니다.',
+      '종이책과 전자책 동시 출판을 지원하며, 온/오프라인 유통을 함께 진행합니다.'
+    ],
+    overviewEn: [
+      'DreamIT Biz book publishing service systematically conveys expertise in the IT field.',
+      'We plan and produce quality IT educational content with our network of expert authors.',
+      'We support simultaneous paper and e-book publishing with online/offline distribution.'
+    ],
+    sampleBooks: [
+      { title: '실전 React 개발', titleEn: 'Practical React Development', author: '드림아이티비즈 교육팀', authorEn: 'DreamIT Biz Education Team', category: '프로그래밍', categoryEn: 'Programming' },
+      { title: 'Python 데이터 분석 입문', titleEn: 'Introduction to Python Data Analysis', author: '드림아이티비즈 교육팀', authorEn: 'DreamIT Biz Education Team', category: '데이터 분석', categoryEn: 'Data Analysis' },
+      { title: '클라우드 아키텍처 가이드', titleEn: 'Cloud Architecture Guide', author: '드림아이티비즈 교육팀', authorEn: 'DreamIT Biz Education Team', category: '클라우드', categoryEn: 'Cloud' },
+      { title: 'AI 시대의 비즈니스 전략', titleEn: 'Business Strategy in the AI Era', author: '드림아이티비즈 컨설팅팀', authorEn: 'DreamIT Biz Consulting Team', category: '비즈니스', categoryEn: 'Business' }
+    ],
+    features: [
+      { title: '기획 출판', titleEn: 'Planned Publishing', description: '시장 조사부터 기획, 집필, 편집, 출판까지 전 과정을 지원합니다.', descriptionEn: 'Full support from market research to planning, writing, editing, and publishing.' },
+      { title: '저자 지원', titleEn: 'Author Support', description: '전문 저자 발굴 및 집필 지원 프로그램을 운영합니다.', descriptionEn: 'We operate programs to discover expert authors and support their writing.' },
+      { title: '번역 출판', titleEn: 'Translation Publishing', description: '해외 IT 도서의 한국어 번역 출판을 지원합니다.', descriptionEn: 'Support for Korean translation and publishing of international IT books.' },
+      { title: '유통 관리', titleEn: 'Distribution Management', description: '온/오프라인 서점 및 디지털 플랫폼 유통을 관리합니다.', descriptionEn: 'Manage distribution through bookstores and digital platforms.' }
+    ],
+    process: [
+      { step: 1, title: '기획', titleEn: 'Planning', description: '시장 조사 및\n콘텐츠 기획', descriptionEn: 'Market research\nand content planning' },
+      { step: 2, title: '집필', titleEn: 'Writing', description: '원고 작성 및\n전문 감수', descriptionEn: 'Manuscript writing\nand expert review' },
+      { step: 3, title: '편집', titleEn: 'Editing', description: '교정, 교열,\n레이아웃 디자인', descriptionEn: 'Proofreading, editing,\nlayout design' },
+      { step: 4, title: '출판', titleEn: 'Publishing', description: '인쇄 제작 및\n유통 관리', descriptionEn: 'Print production\nand distribution' }
+    ],
+    ctaTitle: '출판 프로젝트를 상담하세요',
+    ctaTitleEn: 'Consult on Your Publishing Project',
+    ctaSubtitle: 'IT 전문 콘텐츠 기획부터 출판까지 함께합니다',
+    ctaSubtitleEn: 'From IT content planning to publishing'
+  }
+};
+
+export default publishingDetails;
