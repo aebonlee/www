@@ -521,8 +521,19 @@ body {
     backdrop-filter: blur(10px);
 }
 
+.form-row {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1rem;
+    margin-bottom: 1.5rem;
+}
+
 .form-group {
     margin-bottom: 1.5rem;
+}
+
+.form-row .form-group {
+    margin-bottom: 0;
 }
 
 .form-group input,
@@ -536,6 +547,11 @@ body {
     font-family: inherit;
     font-size: 1rem;
     transition: all 0.3s ease;
+}
+
+.form-group input::placeholder,
+.form-group textarea::placeholder {
+    color: var(--text-secondary);
 }
 
 .form-group input:focus,
@@ -605,6 +621,28 @@ body {
 .footer-contact p {
     color: var(--text-secondary);
     margin-bottom: 0.5rem;
+}
+
+.company-info {
+    margin-top: 1.5rem;
+    padding-top: 1.5rem;
+    border-top: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.company-info p {
+    color: var(--text-secondary);
+    margin-bottom: 0.5rem;
+    font-size: 0.9rem;
+    line-height: 1.6;
+}
+
+.company-info p strong {
+    color: var(--text-primary);
+}
+
+.business-hours {
+    margin-top: 0.5rem;
+    font-style: italic;
 }
 
 .footer-bottom {
@@ -719,6 +757,15 @@ body {
 
     .stat-number {
         font-size: 2rem;
+    }
+
+    .form-row {
+        grid-template-columns: 1fr;
+        gap: 1.5rem;
+    }
+
+    .form-row .form-group {
+        margin-bottom: 0;
     }
 }
 

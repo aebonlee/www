@@ -252,13 +252,24 @@
                     <div class="info-item">
                         <div class="info-icon">
                             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07 19.5 19.5 0 01-6-6 19.79 19.79 0 01-3.07-8.67A2 2 0 014.11 2h3a2 2 0 012 1.72 12.84 12.84 0 00.7 2.81 2 2 0 01-.45 2.11L8.09 9.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45 12.84 12.84 0 002.81.7A2 2 0 0122 16.92z"/>
+                            </svg>
+                        </div>
+                        <div class="info-content">
+                            <h3>전화</h3>
+                            <a href="tel:010-3700-0629">010-3700-0629</a>
+                        </div>
+                    </div>
+                    <div class="info-item">
+                        <div class="info-icon">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
                                 <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z"/>
                                 <circle cx="12" cy="10" r="3"/>
                             </svg>
                         </div>
                         <div class="info-content">
-                            <h3>Location</h3>
-                            <p>대한민국 서울</p>
+                            <h3>주소</h3>
+                            <p>경기도 수원시 팔달구 매산로 45, 419호</p>
                         </div>
                     </div>
                     <div class="info-item">
@@ -269,24 +280,40 @@
                             </svg>
                         </div>
                         <div class="info-content">
-                            <h3>Business Hours</h3>
-                            <p>월-금: 09:00 - 18:00</p>
+                            <h3>영업시간</h3>
+                            <p>평일: 09:00 - 18:00</p>
+                        </div>
+                    </div>
+                    <div class="info-item">
+                        <div class="info-icon">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <path d="M21 15a2 2 0 01-2 2H7l-4 4V5a2 2 0 012-2h14a2 2 0 012 2z"/>
+                            </svg>
+                        </div>
+                        <div class="info-content">
+                            <h3>카카오톡 상담</h3>
+                            <p>ID: aebon</p>
                         </div>
                     </div>
                 </div>
                 <div class="contact-form" data-aos="fade-left">
                     <form id="contactForm">
-                        <div class="form-group">
-                            <input type="text" id="name" name="name" placeholder="이름" required>
+                        <div class="form-row">
+                            <div class="form-group">
+                                <input type="text" id="name" name="name" placeholder="이름 *" required>
+                            </div>
+                            <div class="form-group">
+                                <input type="tel" id="phone" name="phone" placeholder="전화번호 *" required>
+                            </div>
                         </div>
                         <div class="form-group">
-                            <input type="email" id="email" name="email" placeholder="이메일" required>
+                            <input type="email" id="email" name="email" placeholder="이메일 *" required>
                         </div>
                         <div class="form-group">
-                            <input type="text" id="subject" name="subject" placeholder="제목" required>
+                            <input type="text" id="subject" name="subject" placeholder="제목 *" required>
                         </div>
                         <div class="form-group">
-                            <textarea id="message" name="message" rows="5" placeholder="메시지를 입력하세요" required></textarea>
+                            <textarea id="message" name="message" rows="5" placeholder="메시지를 입력하세요 *" required></textarea>
                         </div>
                         <button type="submit" class="btn btn-primary btn-block">문의하기</button>
                     </form>
@@ -302,6 +329,12 @@
                 <div class="footer-brand">
                     <h3><span class="brand-dream">Dream</span><span class="brand-it">IT</span> <span class="brand-biz">Biz</span></h3>
                     <p>혁신적인 IT 솔루션으로 비즈니스의 미래를 만듭니다</p>
+                    <div class="company-info">
+                        <p><strong>드림아이티비즈(DreamIT Biz)</strong></p>
+                        <p>대표이사: 이애본</p>
+                        <p>사업자등록번호: 601-45-20154</p>
+                        <p>통신판매신고: 제2024-수원팔달-0584호</p>
+                    </div>
                 </div>
                 <div class="footer-links">
                     <h4>Quick Links</h4>
@@ -314,12 +347,15 @@
                 </div>
                 <div class="footer-contact">
                     <h4>Contact</h4>
-                    <p>Email: aebon@dreamitbiz.com</p>
-                    <p>CEO: 이애본</p>
+                    <p>📍 경기도 수원시 팔달구 매산로 45, 419호</p>
+                    <p>📧 aebon@dreamitbiz.com</p>
+                    <p>📞 010-3700-0629</p>
+                    <p>💬 카카오톡: aebon</p>
+                    <p class="business-hours">평일: 09:00 ~ 18:00</p>
                 </div>
             </div>
             <div class="footer-bottom">
-                <p>&copy; 2026 DreamIT Biz. All rights reserved.</p>
+                <p>&copy; 2020 DreamIT Biz. All rights reserved.</p>
             </div>
         </div>
     </footer>
