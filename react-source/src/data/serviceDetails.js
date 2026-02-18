@@ -1,0 +1,175 @@
+const serviceDetails = {
+  'web-development': {
+    title: '웹개발',
+    subtitle: '반응형 웹사이트부터 복잡한 웹 애플리케이션까지, 최신 기술로 구현합니다',
+    overview: [
+      '드림아이티비즈의 웹개발 서비스는 고객의 비즈니스 목표를 달성하기 위한 맞춤형 웹 솔루션을 제공합니다.',
+      '반응형 웹사이트, 웹 애플리케이션, E-커머스 플랫폼 등 다양한 프로젝트 경험을 바탕으로 최적의 솔루션을 제안합니다.',
+      'HTML5, CSS3, JavaScript는 물론 React, Vue.js, Node.js 등 최신 기술 스택을 활용하여 빠르고 안정적인 웹 서비스를 구축합니다.'
+    ],
+    features: [
+      { title: '반응형 디자인', description: '모든 디바이스에서 최적의 사용자 경험을 제공하는 반응형 웹사이트를 구축합니다.' },
+      { title: '최신 기술', description: 'React, Vue.js, Node.js 등 최신 웹 기술을 활용한 개발을 진행합니다.' },
+      { title: '보안', description: '최신 보안 기술을 적용하여 안전한 웹 서비스를 제공합니다.' },
+      { title: '빠른 성능', description: '최적화된 코드로 빠른 로딩 속도와 우수한 성능을 보장합니다.' },
+      { title: 'SEO 최적화', description: '검색 엔진 최적화를 통해 더 많은 고객에게 도달할 수 있도록 지원합니다.' },
+      { title: '유지보수', description: '개발 완료 후에도 지속적인 유지보수와 기술 지원을 제공합니다.' }
+    ],
+    techStack: [
+      { category: 'Frontend', items: 'HTML5, CSS3\nJavaScript (ES6+)\nReact, Vue.js\nTypeScript' },
+      { category: 'Backend', items: 'Node.js\nExpress.js\nPython/Django\nPHP/Laravel' },
+      { category: 'Database', items: 'MySQL\nPostgreSQL\nMongoDB\nRedis' },
+      { category: 'DevOps', items: 'Git\nDocker\nAWS/Azure\nCI/CD' }
+    ],
+    process: [
+      { step: 1, title: '기획', description: '요구사항 분석 및\n프로젝트 기획' },
+      { step: 2, title: '디자인', description: 'UI/UX 디자인 및\n프로토타입 제작' },
+      { step: 3, title: '개발', description: '프론트엔드 및\n백엔드 개발' },
+      { step: 4, title: '배포', description: '테스트 및\n서비스 배포' }
+    ],
+    ctaTitle: '웹개발 프로젝트를 시작하세요',
+    ctaSubtitle: '전문가와 상담하고 맞춤형 솔루션을 제안받으세요'
+  },
+  'web-hosting': {
+    title: '웹호스팅',
+    subtitle: '안정적이고 빠른 웹호스팅 서비스로 비즈니스를 지원합니다',
+    overview: [
+      '드림아이티비즈의 웹호스팅 서비스는 안정성과 성능을 최우선으로 합니다.',
+      '24시간 365일 모니터링과 자동 백업으로 고객의 데이터를 안전하게 보호합니다.',
+      '초보자도 쉽게 관리할 수 있는 직관적인 관리 패널을 제공합니다.'
+    ],
+    features: [
+      { title: '고성능 서버', description: 'SSD 기반 고성능 서버로 빠른 웹사이트 로딩 속도를 보장합니다.' },
+      { title: '24/7 모니터링', description: '24시간 365일 서버 상태를 모니터링하여 안정적인 서비스를 제공합니다.' },
+      { title: '자동 백업', description: '매일 자동 백업으로 데이터 손실 걱정 없이 안전하게 운영할 수 있습니다.' },
+      { title: 'SSL 인증서', description: '무료 SSL 인증서 제공으로 안전한 HTTPS 통신을 지원합니다.' },
+      { title: 'DDoS 방어', description: '고급 보안 시스템으로 DDoS 공격으로부터 웹사이트를 보호합니다.' },
+      { title: '기술 지원', description: '전문 엔지니어의 신속한 기술 지원으로 문제를 빠르게 해결합니다.' }
+    ],
+    pricing: [
+      {
+        plan: 'Basic',
+        price: '₩9,900',
+        period: '월',
+        features: ['SSD 10GB 저장공간', '월 트래픽 100GB', 'SSL 인증서 무료', '이메일 계정 5개', '1일 1회 백업', '기본 기술 지원']
+      },
+      {
+        plan: 'Pro',
+        price: '₩29,900',
+        period: '월',
+        featured: true,
+        features: ['SSD 50GB 저장공간', '월 트래픽 무제한', 'SSL 인증서 무료', '이메일 계정 20개', '매일 자동 백업', '24/7 프리미엄 지원', 'CDN 서비스', '스테이징 서버']
+      },
+      {
+        plan: 'Enterprise',
+        price: '₩99,900',
+        period: '월',
+        features: ['SSD 200GB 저장공간', '월 트래픽 무제한', 'SSL 인증서 무료', '이메일 계정 무제한', '실시간 백업', '전담 매니저 배정', 'CDN + DDoS 방어', '커스텀 서버 설정']
+      }
+    ],
+    ctaTitle: '최적의 호스팅 플랜을 선택하세요',
+    ctaSubtitle: '비즈니스에 맞는 호스팅 서비스를 추천받으세요'
+  },
+  'design': {
+    title: '디자인',
+    subtitle: '브랜드 아이덴티티부터 UI/UX까지, 비주얼 솔루션을 제공합니다',
+    overview: [
+      '드림아이티비즈의 디자인 서비스는 브랜드의 가치를 시각적으로 전달합니다.',
+      '사용자 중심의 UI/UX 디자인으로 최적의 사용자 경험을 제공합니다.',
+      'Figma, Adobe Creative Suite 등 전문 도구를 활용한 고품질 디자인을 보장합니다.'
+    ],
+    designServices: [
+      { title: '브랜드 디자인', description: '로고, CI/BI, 브랜드 가이드라인 제작으로 일관된 브랜드 이미지를 구축합니다.' },
+      { title: 'UI/UX 디자인', description: '사용자 리서치 기반의 인터페이스 설계와 프로토타입을 제작합니다.' },
+      { title: '편집 디자인', description: '브로슈어, 카탈로그, 보고서 등 인쇄물 디자인을 제공합니다.' },
+      { title: '웹/앱 디자인', description: '반응형 웹 디자인과 모바일 앱 UI 디자인을 제공합니다.' }
+    ],
+    process: [
+      { step: 1, title: '리서치', description: '요구사항 파악 및\n시장 조사' },
+      { step: 2, title: '컨셉', description: '디자인 컨셉 수립 및\n무드보드 제작' },
+      { step: 3, title: '디자인', description: '시안 제작 및\n피드백 반영' },
+      { step: 4, title: '가이드', description: '디자인 가이드라인\n제작 및 전달' },
+      { step: 5, title: '지원', description: '추가 수정 및\n지속적 지원' }
+    ],
+    tools: ['Figma', 'Adobe Photoshop', 'Adobe Illustrator', 'Adobe XD', 'Sketch', 'InDesign'],
+    ctaTitle: '디자인 프로젝트를 시작하세요',
+    ctaSubtitle: '전문 디자이너와 함께 브랜드 가치를 높이세요'
+  },
+  'consulting': {
+    title: '기업컨설팅',
+    subtitle: '디지털 전환을 위한 맞춤 IT 컨설팅을 제공합니다',
+    overview: [
+      '드림아이티비즈의 기업 컨설팅은 디지털 전환의 모든 과정을 지원합니다.',
+      '현재 비즈니스의 IT 환경을 분석하고, 최적의 디지털 전략을 수립합니다.',
+      '실행 가능한 로드맵과 함께 기술 도입부터 조직 변화 관리까지 종합적으로 지원합니다.'
+    ],
+    features: [
+      { title: 'IT 전략 수립', description: '비즈니스 목표에 맞는 IT 전략과 로드맵을 수립합니다.' },
+      { title: '프로세스 개선', description: '업무 프로세스를 분석하고 자동화 솔루션을 제안합니다.' },
+      { title: '기술 도입 지원', description: '새로운 기술 도입 시 리스크를 최소화하고 효과를 극대화합니다.' },
+      { title: '보안 컨설팅', description: '정보보안 체계를 점검하고 강화 방안을 제시합니다.' },
+      { title: '데이터 분석', description: '데이터 기반 의사결정을 위한 분석 환경을 구축합니다.' },
+      { title: '변화 관리', description: '조직의 디지털 전환에 따른 변화 관리를 지원합니다.' }
+    ],
+    process: [
+      { step: 1, title: '진단', description: '현황 분석 및\n문제 도출' },
+      { step: 2, title: '전략', description: '솔루션 설계 및\n로드맵 수립' },
+      { step: 3, title: '실행', description: '솔루션 도입 및\n실행 지원' },
+      { step: 4, title: '평가', description: '성과 측정 및\n지속적 개선' }
+    ],
+    ctaTitle: 'IT 컨설팅으로 비즈니스를 혁신하세요',
+    ctaSubtitle: '전문 컨설턴트와 무료 상담을 시작하세요'
+  },
+  'education': {
+    title: '기업 맞춤 강의',
+    subtitle: '실무 중심의 IT 교육 프로그램으로 역량을 강화합니다',
+    overview: [
+      '드림아이티비즈의 교육 서비스는 기업의 실무 환경에 맞춘 맞춤형 커리큘럼을 제공합니다.',
+      '현업 전문가가 직접 강의하여 이론과 실무를 연결하는 효과적인 학습 경험을 제공합니다.',
+      '온라인과 오프라인 모두 지원하며, 수강생 수준에 맞는 단계별 교육을 진행합니다.'
+    ],
+    features: [
+      { title: '맞춤형 커리큘럼', description: '기업의 업무 환경과 목표에 맞는 맞춤형 교육 과정을 설계합니다.' },
+      { title: '실습 중심 교육', description: '실제 프로젝트를 통한 실습 중심의 교육으로 실무 역량을 강화합니다.' },
+      { title: '온/오프라인 강의', description: '방문 교육, 화상 교육, 녹화 강의 등 다양한 형태를 지원합니다.' },
+      { title: '수료증 발급', description: '교육 이수 후 수료증을 발급하여 역량을 인증합니다.' },
+      { title: '사후 지원', description: '교육 종료 후에도 질의응답과 추가 자료를 제공합니다.' },
+      { title: '성과 측정', description: '교육 효과를 측정하고 개선점을 피드백합니다.' }
+    ],
+    process: [
+      { step: 1, title: '니즈 파악', description: '기업 교육 니즈\n분석 및 상담' },
+      { step: 2, title: '설계', description: '커리큘럼 설계 및\n교재 제작' },
+      { step: 3, title: '교육', description: '강의 진행 및\n실습 지도' },
+      { step: 4, title: '평가', description: '학습 성과 평가 및\n수료증 발급' }
+    ],
+    ctaTitle: '기업 맞춤 교육을 시작하세요',
+    ctaSubtitle: '직원들의 IT 역량을 효과적으로 강화하세요'
+  },
+  'publishing': {
+    title: '출판사업',
+    subtitle: 'IT 전문 서적 및 교육 콘텐츠를 제작합니다',
+    overview: [
+      '드림아이티비즈의 출판사업은 IT 분야의 전문 지식을 체계적으로 전달합니다.',
+      '전문 저자 네트워크와 함께 양질의 IT 교육 콘텐츠를 기획하고 제작합니다.',
+      '종이책, 전자책, 온라인 콘텐츠 등 다양한 형태의 출판물을 제공합니다.'
+    ],
+    features: [
+      { title: 'IT 전문 서적', description: '프로그래밍, 데이터 분석, AI 등 IT 분야 전문 도서를 출판합니다.' },
+      { title: '교육 콘텐츠 제작', description: '교육 기관을 위한 맞춤형 교재와 학습 자료를 제작합니다.' },
+      { title: '전자책 제작', description: 'ePub, PDF 등 다양한 전자책 포맷으로 출판을 지원합니다.' },
+      { title: '기업 출판', description: '기업 소개서, 백서, 기술 문서 등 기업 출판물을 제작합니다.' },
+      { title: '번역 서비스', description: '해외 IT 도서의 한국어 번역 출판을 지원합니다.' },
+      { title: '유통 지원', description: '온/오프라인 서점과 디지털 플랫폼을 통한 유통을 지원합니다.' }
+    ],
+    process: [
+      { step: 1, title: '기획', description: '콘텐츠 기획 및\n저자 섭외' },
+      { step: 2, title: '집필', description: '원고 작성 및\n감수' },
+      { step: 3, title: '편집', description: '교정, 교열,\n레이아웃 디자인' },
+      { step: 4, title: '출판', description: '인쇄/제작 및\n유통' }
+    ],
+    ctaTitle: '출판 프로젝트를 상담하세요',
+    ctaSubtitle: 'IT 전문 콘텐츠 기획부터 출판까지 함께합니다'
+  }
+};
+
+export default serviceDetails;

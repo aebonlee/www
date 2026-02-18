@@ -40,6 +40,14 @@ export const translations = {
       description: '웹개발부터 기업컨설팅, 맞춤 강의, 출판사업까지\n드림아이티비즈가 함께합니다',
       viewServices: '서비스 보기',
       contact: '문의하기'
+    },
+    sections: {
+      ourServices: 'Our Services',
+      servicesSubtitle: '드림아이티비즈가 제공하는 전문 IT 서비스',
+      portfolio: 'Portfolio',
+      portfolioSubtitle: '성공적으로 완수한 프로젝트를 소개합니다',
+      reviews: '고객 후기',
+      reviewsSubtitle: '드림아이티비즈와 함께한 고객들의 생생한 후기'
     }
   },
   en: {
@@ -83,6 +91,14 @@ export const translations = {
       description: 'Comprehensive IT services from web development to consulting,\neducation, and publishing by DreamIT Biz',
       viewServices: 'Our Services',
       contact: 'Contact Us'
+    },
+    sections: {
+      ourServices: 'Our Services',
+      servicesSubtitle: 'Professional IT services by DreamIT Biz',
+      portfolio: 'Portfolio',
+      portfolioSubtitle: 'Our successfully completed projects',
+      reviews: 'Client Reviews',
+      reviewsSubtitle: 'Testimonials from our valued clients'
     }
   }
 };

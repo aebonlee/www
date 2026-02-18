@@ -1,0 +1,117 @@
+/* ============================================
+   Footer
+   ============================================ */
+
+.footer {
+    background: var(--text-primary);
+    color: var(--text-white);
+    padding: 60px 0 24px;
+    margin-top: 0;
+}
+
+.footer-content {
+    display: grid;
+    grid-template-columns: 2fr 1fr 1fr;
+    gap: 60px;
+    margin-bottom: 40px;
+}
+
+.footer-brand h3 {
+    font-size: 24px;
+    margin-bottom: 16px;
+}
+
+.footer-brand .brand-dream {
+    color: var(--primary-blue-light);
+}
+
+.footer-brand p {
+    color: rgba(255, 255, 255, 0.7);
+    line-height: 1.6;
+    margin-bottom: 24px;
+}
+
+.company-info {
+    margin-top: 24px;
+    padding-top: 24px;
+    border-top: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.company-info p {
+    color: rgba(255, 255, 255, 0.6);
+    font-size: 13px;
+    margin-bottom: 6px;
+    line-height: 1.6;
+}
+
+.company-info p strong {
+    color: rgba(255, 255, 255, 0.9);
+}
+
+.footer-links h4,
+.footer-contact h4,
+.footer-section h3,
+.footer-info h4 {
+    font-size: 16px;
+    margin-bottom: 16px;
+    color: var(--text-white);
+}
+
+.footer-links ul {
+    list-style: none;
+}
+
+.footer-links li {
+    margin-bottom: 8px;
+}
+
+.footer-links a {
+    color: rgba(255, 255, 255, 0.7);
+    text-decoration: none;
+    font-size: 14px;
+    transition: color 0.2s ease;
+}
+
+.footer-links a:hover {
+    color: var(--primary-blue-light);
+}
+
+.footer-contact p,
+.footer-info p {
+    color: rgba(255, 255, 255, 0.7);
+    font-size: 14px;
+    margin-bottom: 8px;
+}
+
+.business-hours {
+    margin-top: 12px;
+    font-style: italic;
+}
+
+.footer-bottom {
+    text-align: center;
+    padding-top: 24px;
+    border-top: 1px solid rgba(255, 255, 255, 0.1);
+    color: rgba(255, 255, 255, 0.6);
+    font-size: 13px;
+}
+
+.footer-info {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    gap: 40px;
+}
+
+.info-section h4 {
+    font-size: 16px;
+    margin-bottom: 16px;
+    color: var(--text-white);
+    font-weight: 600;
+}
+
+.info-section p {
+    color: rgba(255, 255, 255, 0.7);
+    font-size: 14px;
+    margin-bottom: 6px;
+    line-height: 1.6;
+}

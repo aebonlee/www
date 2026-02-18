@@ -1,16 +1,21 @@
 import { useEffect } from 'react';
 import { useLocation } from 'react-router-dom';
+import useAOS from '../hooks/useAOS';
+import CTA from '../components/CTA';
 
 const Portfolio = () => {
   const location = useLocation();
+  useAOS();
 
   useEffect(() => {
     if (location.hash) {
-      const id = location.hash.substring(1);
-      const element = document.getElementById(id);
-      if (element) {
-        element.scrollIntoView({ behavior: 'smooth' });
-      }
+      setTimeout(() => {
+        const id = location.hash.substring(1);
+        const element = document.getElementById(id);
+        if (element) {
+          element.scrollIntoView({ behavior: 'smooth' });
+        }
+      }, 100);
     }
   }, [location]);
 
@@ -23,6 +28,7 @@ const Portfolio = () => {
         </div>
       </section>
 
+      {/* Sejong University */}
       <section id="sejong" className="project-section featured-project">
         <div className="container">
           <div className="project-content">
@@ -60,7 +66,7 @@ const Portfolio = () => {
             <div className="project-visual" data-aos="fade-left">
               <div className="project-image-main">
                 <a href="https://cec.sejong.ac.kr" target="_blank" rel="noopener noreferrer">
-                  <img src="/assets/images/portfolio/sejong-cec.png" alt="세종대학교 미래교육원" />
+                  <img src="./assets/images/portfolio/sejong-cec.png" alt="세종대학교 미래교육원" />
                 </a>
               </div>
             </div>
@@ -68,6 +74,7 @@ const Portfolio = () => {
         </div>
       </section>
 
+      {/* Chinju University */}
       <section id="chinju" className="project-section featured-project" style={{ background: 'var(--bg-light-gray)' }}>
         <div className="container">
           <div className="project-content">
@@ -76,7 +83,8 @@ const Portfolio = () => {
               <h2 className="project-title">진주교육대학교 100주년 기념 사이트</h2>
               <p className="project-description">
                 진주교육대학교 개교 100주년을 기념하는 특별한 웹사이트입니다.
-                1923년부터 현재까지의 역사를 타임라인 형태로 구현했습니다.
+                1923년부터 현재까지의 역사를 타임라인 형태로 구현하고,
+                100주년 기념 행사와 관련 콘텐츠를 제공합니다.
               </p>
               <div className="project-details">
                 <div className="detail-item">
@@ -104,7 +112,7 @@ const Portfolio = () => {
             <div className="project-visual" data-aos="fade-left">
               <div className="project-image-main">
                 <a href="http://cue100th.com/" target="_blank" rel="noopener noreferrer">
-                  <img src="/assets/images/portfolio/chinju-100th.png" alt="진주교육대학교 100주년" />
+                  <img src="./assets/images/portfolio/chinju-100th.png" alt="진주교육대학교 100주년" />
                 </a>
               </div>
             </div>
@@ -112,6 +120,7 @@ const Portfolio = () => {
         </div>
       </section>
 
+      {/* Other Projects */}
       <section id="projects" style={{ padding: '80px 0' }}>
         <div className="container">
           <div className="section-header">
@@ -119,21 +128,32 @@ const Portfolio = () => {
             <p className="section-subtitle">다양한 분야의 성공적인 프로젝트들</p>
           </div>
           <div className="portfolio-grid">
-            {[1, 2, 3, 4, 5, 6].map((item) => (
-              <div key={item} className="portfolio-card" data-aos="fade-up">
+            {[
+              { title: '중소기업 웹사이트 리뉴얼', tag: '웹개발', desc: '기존 웹사이트의 디자인과 기능을 전면 개편한 리뉴얼 프로젝트' },
+              { title: 'E-커머스 쇼핑몰 구축', tag: '웹개발 · 호스팅', desc: '상품 관리, 결제 시스템이 포함된 온라인 쇼핑몰 구축' },
+              { title: '기업 브랜딩 프로젝트', tag: '디자인', desc: 'CI/BI 디자인부터 브랜드 가이드라인까지 통합 브랜딩' },
+              { title: 'IT 교육 프로그램 운영', tag: '교육', desc: '기업 직원 대상 웹 개발 및 데이터 분석 교육 프로그램 운영' },
+              { title: 'IT 전략 컨설팅', tag: '컨설팅', desc: '디지털 전환을 위한 IT 인프라 분석 및 전략 수립' },
+              { title: 'IT 전문 서적 출판', tag: '출판', desc: '프로그래밍 및 IT 활용 교육 서적 기획 및 출판' }
+            ].map((project, i) => (
+              <div key={i} className="portfolio-card" data-aos="fade-up" data-aos-delay={i * 50}>
                 <div className="portfolio-image">
-                  <div className="image-placeholder"></div>
+                  <div className="image-placeholder">
+                    <span className="placeholder-text">{project.tag.split(' ')[0]}</span>
+                  </div>
                 </div>
                 <div className="portfolio-content">
-                  <div className="portfolio-tag">웹개발</div>
-                  <h3>프로젝트 {item}</h3>
-                  <p>프로젝트 설명이 들어갑니다</p>
+                  <div className="portfolio-tag">{project.tag}</div>
+                  <h3>{project.title}</h3>
+                  <p>{project.desc}</p>
                 </div>
               </div>
             ))}
           </div>
         </div>
       </section>
+
+      <CTA />
     </>
   );
 };

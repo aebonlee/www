@@ -8,16 +8,19 @@ const Navbar = () => {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const [activeDropdown, setActiveDropdown] = useState(null);
   const location = useLocation();
-  const { theme, toggleTheme } = useTheme();
+  const { toggleTheme } = useTheme();
   const { language, toggleLanguage, t } = useLanguage();
 
   useEffect(() => {
-    const handleScroll = () => {
-      setIsScrolled(window.scrollY > 50);
-    };
+    const handleScroll = () => setIsScrolled(window.scrollY > 50);
     window.addEventListener('scroll', handleScroll);
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
+
+  useEffect(() => {
+    setIsMobileMenuOpen(false);
+    setActiveDropdown(null);
+  }, [location]);
 
   const menuItems = [
     { path: '/', label: t('nav.home') },
@@ -61,7 +64,7 @@ const Navbar = () => {
   };
 
   return (
-    <nav className={`navbar ${isScrolled ? 'scrolled' : ''}`} id="navbar">
+    <nav className={`navbar ${isScrolled ? 'scrolled' : ''}`}>
       <div className="container">
         <div className="nav-wrapper">
           <div className="logo">
@@ -74,47 +77,38 @@ const Navbar = () => {
             </Link>
           </div>
 
-          <ul className={`nav-menu ${isMobileMenuOpen ? 'active' : ''}`} id="navMenu">
+          <ul className={`nav-menu ${isMobileMenuOpen ? 'active' : ''}`}>
             {menuItems.map((item, index) => (
               <li
                 key={index}
-                className={item.dropdown ? 'nav-item-dropdown' : ''}
+                className={`${item.dropdown ? 'nav-item-dropdown' : ''} ${activeDropdown === index ? 'active' : ''}`}
                 onMouseEnter={() => item.dropdown && setActiveDropdown(index)}
                 onMouseLeave={() => item.dropdown && setActiveDropdown(null)}
-                onClick={() => {
-                  if (item.dropdown) {
-                    setActiveDropdown(activeDropdown === index ? null : index);
-                  } else {
-                    setIsMobileMenuOpen(false);
-                  }
-                }}
               >
                 {item.dropdown ? (
                   <>
                     <Link
                       to={item.path}
                       className={`nav-link ${isActive(item.path) ? 'active' : ''}`}
+                      onClick={(e) => {
+                        if (window.innerWidth <= 768) {
+                          e.preventDefault();
+                          setActiveDropdown(activeDropdown === index ? null : index);
+                        }
+                      }}
                     >
                       {item.label}
                     </Link>
                     <ul className={`dropdown-menu ${activeDropdown === index ? 'active' : ''}`}>
                       {item.dropdown.map((subItem, subIndex) => (
                         <li key={subIndex}>
-                          <Link
-                            to={subItem.path}
-                            onClick={() => setIsMobileMenuOpen(false)}
-                          >
-                            {subItem.label}
-                          </Link>
+                          <Link to={subItem.path}>{subItem.label}</Link>
                         </li>
                       ))}
                     </ul>
                   </>
                 ) : (
-                  <Link
-                    to={item.path}
-                    className={`nav-link ${isActive(item.path) ? 'active' : ''}`}
-                  >
+                  <Link to={item.path} className={`nav-link ${isActive(item.path) ? 'active' : ''}`}>
                     {item.label}
                   </Link>
                 )}
@@ -123,25 +117,11 @@ const Navbar = () => {
           </ul>
 
           <div className="nav-actions">
-            <button
-              className="lang-switcher"
-              onClick={toggleLanguage}
-              aria-label={language === 'ko' ? 'Switch to English' : '한국어로 전환'}
-            >
+            <button className="lang-switcher" onClick={toggleLanguage} aria-label={language === 'ko' ? 'Switch to English' : '한국어로 전환'}>
               {language === 'ko' ? 'EN' : 'KR'}
             </button>
-            <button
-              className="theme-toggle"
-              onClick={toggleTheme}
-              aria-label="테마 전환"
-            >
-              <svg
-                className="sun-icon"
-                viewBox="0 0 24 24"
-                fill="none"
-                stroke="currentColor"
-                strokeWidth="2"
-              >
+            <button className="theme-toggle" onClick={toggleTheme} aria-label="테마 전환">
+              <svg className="sun-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
                 <circle cx="12" cy="12" r="5" />
                 <line x1="12" y1="1" x2="12" y2="3" />
                 <line x1="12" y1="21" x2="12" y2="23" />
@@ -152,18 +132,12 @@ const Navbar = () => {
                 <line x1="4.22" y1="19.78" x2="5.64" y2="18.36" />
                 <line x1="18.36" y1="5.64" x2="19.78" y2="4.22" />
               </svg>
-              <svg
-                className="moon-icon"
-                viewBox="0 0 24 24"
-                fill="none"
-                stroke="currentColor"
-                strokeWidth="2"
-              >
+              <svg className="moon-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
                 <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z" />
               </svg>
             </button>
             <button
-              className="mobile-toggle"
+              className={`mobile-toggle ${isMobileMenuOpen ? 'active' : ''}`}
               onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
               aria-label="메뉴 토글"
             >

@@ -1,40 +1,50 @@
+import useAOS from '../hooks/useAOS';
+
 const Blog = () => {
+  useAOS();
+
   const posts = [
     {
-      title: '2024 웹 개발 트렌드',
-      date: '2024.01.15',
+      title: '2026 웹 개발 트렌드: AI와 함께하는 개발',
+      date: '2026.02.10',
       category: 'IT 트렌드',
-      excerpt: '2024년 주목해야 할 웹 개발 기술과 트렌드를 소개합니다.'
+      excerpt: '2026년 웹 개발의 핵심 트렌드는 AI 기반 코드 생성, 서버리스 아키텍처, 그리고 WebAssembly의 확산입니다.',
+      icon: '🌐'
     },
     {
-      title: 'React 성능 최적화 기법',
-      date: '2024.01.10',
+      title: 'React 19의 새로운 기능과 마이그레이션 가이드',
+      date: '2026.01.25',
       category: '기술',
-      excerpt: 'React 애플리케이션의 성능을 향상시키는 다양한 방법들을 알아봅니다.'
+      excerpt: 'React 19의 주요 변경사항과 기존 프로젝트를 안전하게 마이그레이션하는 방법을 알아봅니다.',
+      icon: '⚛️'
     },
     {
-      title: 'UI/UX 디자인의 중요성',
-      date: '2024.01.05',
+      title: 'UI/UX 디자인 트렌드 2026',
+      date: '2026.01.15',
       category: '디자인',
-      excerpt: '사용자 경험을 개선하는 UI/UX 디자인 원칙을 소개합니다.'
+      excerpt: '미니멀리즘에서 뉴모피즘까지, 2026년 주목해야 할 UI/UX 디자인 트렌드를 소개합니다.',
+      icon: '🎨'
     },
     {
-      title: '클라우드 서비스 비교',
-      date: '2023.12.28',
+      title: '클라우드 네이티브 호스팅의 장점',
+      date: '2026.01.05',
       category: '호스팅',
-      excerpt: 'AWS, Azure, GCP 등 주요 클라우드 서비스를 비교 분석합니다.'
+      excerpt: '클라우드 네이티브 호스팅이 기존 호스팅 대비 어떤 이점을 제공하는지 비교 분석합니다.',
+      icon: '☁️'
     },
     {
-      title: 'IT 컨설팅 성공 사례',
-      date: '2023.12.20',
+      title: '중소기업 디지털 전환 성공 사례',
+      date: '2025.12.20',
       category: '컨설팅',
-      excerpt: '드림아이티비즈의 IT 컨설팅 성공 사례를 공유합니다.'
+      excerpt: '드림아이티비즈가 함께한 중소기업 디지털 전환 성공 사례를 공유합니다.',
+      icon: '💼'
     },
     {
-      title: '효과적인 IT 교육 방법',
-      date: '2023.12.15',
+      title: '효과적인 기업 IT 교육 설계 방법론',
+      date: '2025.12.10',
       category: '교육',
-      excerpt: '기업 맞춤 IT 교육의 효과적인 방법론을 소개합니다.'
+      excerpt: '기업 맞춤 IT 교육의 효과를 극대화하는 커리큘럼 설계 방법론을 소개합니다.',
+      icon: '📚'
     }
   ];
 
@@ -49,20 +59,20 @@ const Blog = () => {
 
       <section style={{ padding: '80px 0', background: 'var(--bg-white)' }}>
         <div className="container">
-          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: '32px' }}>
-            {posts.map((post, index) => (
-              <article key={index} className="portfolio-card" data-aos="fade-up" data-aos-delay={index * 50}>
-                <div className="portfolio-image">
-                  <div className="image-placeholder"></div>
+          <div className="blog-grid">
+            {posts.map((post, i) => (
+              <article key={i} className="blog-card" data-aos="fade-up" data-aos-delay={i * 50}>
+                <div className="blog-image">
+                  <span className="blog-image-icon">{post.icon}</span>
                 </div>
-                <div className="portfolio-content">
-                  <div className="portfolio-tag">{post.category}</div>
+                <div className="blog-content">
+                  <div className="blog-meta">
+                    <span className="blog-category">{post.category}</span>
+                    <span className="blog-date">{post.date}</span>
+                  </div>
                   <h3>{post.title}</h3>
-                  <p style={{ fontSize: '12px', color: 'var(--text-secondary)', marginBottom: '8px' }}>
-                    {post.date}
-                  </p>
                   <p>{post.excerpt}</p>
-                  <a href="#" className="detail-link">자세히 보기 →</a>
+                  <span className="blog-link">자세히 보기 →</span>
                 </div>
               </article>
             ))}
