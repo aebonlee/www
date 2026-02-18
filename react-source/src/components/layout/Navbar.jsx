@@ -33,7 +33,8 @@ const Navbar = () => {
       dropdown: [
         { path: '/services/web-development', label: t('services.webDev') },
         { path: '/services/web-hosting', label: t('services.webHosting') },
-        { path: '/services/design', label: t('services.design') }
+        { path: '/services/design', label: t('services.design') },
+        { path: '/portfolio', label: t('services.portfolio') }
       ]
     },
     {
@@ -66,15 +67,6 @@ const Navbar = () => {
       ]
     },
     { path: '/shop', label: t('shop.title'), activePath: '/shop' },
-    {
-      label: t('nav.portfolio'),
-      path: '/portfolio',
-      dropdown: [
-        { path: '/portfolio#sejong', label: t('portfolio.sejong') },
-        { path: '/portfolio#chinju', label: t('portfolio.chinju') },
-        { path: '/portfolio#projects', label: t('portfolio.projects') }
-      ]
-    },
     {
       label: t('nav.community'),
       path: '/community/blog',

@@ -18,6 +18,7 @@ export const translations = {
       webDev: '웹개발',
       webHosting: '웹호스팅',
       design: '디자인',
+      portfolio: '웹개발 포트폴리오',
       consulting: '기업컨설팅',
       education: '기업 맞춤 강의',
       publishing: '출판사업'
@@ -203,6 +204,7 @@ export const translations = {
       webDev: 'Web Development',
       webHosting: 'Web Hosting',
       design: 'Design',
+      portfolio: 'Web Dev Portfolio',
       consulting: 'Consulting',
       education: 'Education',
       publishing: 'Publishing'
