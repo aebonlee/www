@@ -58,19 +58,19 @@ const About = () => {
                 <svg viewBox="0 0 400 300" fill="none">
                   <defs>
                     <linearGradient id="aboutGrad" x1="0%" y1="0%" x2="100%" y2="100%">
-                      <stop offset="0%" style={{ stopColor: '#0066CC', stopOpacity: 1 }} />
-                      <stop offset="100%" style={{ stopColor: '#3385D6', stopOpacity: 1 }} />
+                      <stop offset="0%" style={{ stopColor: 'var(--primary-blue)', stopOpacity: 1 }} />
+                      <stop offset="100%" style={{ stopColor: 'var(--primary-blue-light)', stopOpacity: 1 }} />
                     </linearGradient>
                   </defs>
                   <rect width="400" height="300" rx="16" fill="url(#aboutGrad)" opacity="0.1" />
                   <rect x="60" y="80" width="120" height="140" rx="8" fill="url(#aboutGrad)" opacity="0.3" />
                   <rect x="220" y="60" width="120" height="140" rx="8" fill="url(#aboutGrad)" opacity="0.2" />
-                  <circle cx="120" cy="120" r="30" fill="#0066CC" opacity="0.3" />
-                  <circle cx="280" cy="100" r="25" fill="#0066CC" opacity="0.2" />
-                  <rect x="80" y="170" width="80" height="6" rx="3" fill="#0066CC" opacity="0.4" />
-                  <rect x="80" y="185" width="60" height="6" rx="3" fill="#0066CC" opacity="0.3" />
-                  <rect x="240" y="155" width="80" height="6" rx="3" fill="#0066CC" opacity="0.4" />
-                  <rect x="240" y="170" width="60" height="6" rx="3" fill="#0066CC" opacity="0.3" />
+                  <circle cx="120" cy="120" r="30" style={{ fill: 'var(--primary-blue)' }} opacity="0.3" />
+                  <circle cx="280" cy="100" r="25" style={{ fill: 'var(--primary-blue)' }} opacity="0.2" />
+                  <rect x="80" y="170" width="80" height="6" rx="3" style={{ fill: 'var(--primary-blue)' }} opacity="0.4" />
+                  <rect x="80" y="185" width="60" height="6" rx="3" style={{ fill: 'var(--primary-blue)' }} opacity="0.3" />
+                  <rect x="240" y="155" width="80" height="6" rx="3" style={{ fill: 'var(--primary-blue)' }} opacity="0.4" />
+                  <rect x="240" y="170" width="60" height="6" rx="3" style={{ fill: 'var(--primary-blue)' }} opacity="0.3" />
                 </svg>
               </div>
             </div>

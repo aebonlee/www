@@ -4,7 +4,7 @@
 
 .page-header {
     padding: calc(var(--nav-height) + 60px) 0 60px;
-    background: linear-gradient(135deg, #0046C8 0%, #002E8A 50%, #1E3A5F 100%);
+    background: var(--hero-bg);
     text-align: center;
 }
 

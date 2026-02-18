@@ -211,6 +211,15 @@
         gap: 8px;
     }
 
+    .color-palette {
+        gap: 4px;
+    }
+
+    .color-dot {
+        width: 16px;
+        height: 16px;
+    }
+
     .lang-switcher {
         width: 32px;
         height: 32px;

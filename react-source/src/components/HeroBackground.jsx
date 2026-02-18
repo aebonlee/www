@@ -33,7 +33,7 @@ const ParticlesBg = ({ isActive }) => {
   );
 };
 
-/* ── Slide 1 (Red): Matrix Code Rain — red/pink tones ── */
+/* ── Slide 1: Matrix Code Rain — neutral white tones ── */
 const MatrixBg = ({ isActive }) => {
   const cols = useMemo(() =>
     Array.from({ length: 24 }, (_, i) => ({
@@ -66,7 +66,7 @@ const MatrixBg = ({ isActive }) => {
   );
 };
 
-/* ── Slide 2 (Green): Network Nodes — emerald/teal tones ── */
+/* ── Slide 2: Network Nodes — neutral white tones ── */
 const NetworkBg = ({ isActive }) => {
   const nodes = useMemo(() =>
     Array.from({ length: 18 }, (_, i) => ({
@@ -100,7 +100,7 @@ const NetworkBg = ({ isActive }) => {
             key={ln.id}
             x1={`${ln.x1}%`} y1={`${ln.y1}%`}
             x2={`${ln.x2}%`} y2={`${ln.y2}%`}
-            stroke="rgba(100,230,170,0.15)"
+            stroke="rgba(255,255,255,0.12)"
             strokeWidth="0.15"
           />
         ))}
@@ -108,7 +108,7 @@ const NetworkBg = ({ isActive }) => {
           <circle
             key={n.id}
             cx={`${n.cx}%`} cy={`${n.cy}%`} r={n.r}
-            fill="rgba(100,230,170,0.3)"
+            fill="rgba(255,255,255,0.25)"
             className="network-node"
             style={{
               animationDelay: n.delay,
@@ -122,7 +122,7 @@ const NetworkBg = ({ isActive }) => {
   );
 };
 
-/* ── Slide 3 (Purple): Rising Orbs — violet/magenta tones ── */
+/* ── Slide 3: Rising Orbs — neutral white tones ── */
 const OrbsBg = ({ isActive }) => {
   const orbs = useMemo(() =>
     Array.from({ length: 16 }, (_, i) => ({
@@ -131,7 +131,7 @@ const OrbsBg = ({ isActive }) => {
       size: `${6 + Math.random() * 14}px`,
       delay: `${Math.random() * 8}s`,
       duration: `${6 + Math.random() * 6}s`,
-      hue: 270 + Math.floor(Math.random() * 40),
+      opacity: 0.3 + Math.random() * 0.3,
     })), []);
 
   return (
@@ -146,7 +146,7 @@ const OrbsBg = ({ isActive }) => {
             height: o.size,
             animationDelay: o.delay,
             animationDuration: o.duration,
-            background: `radial-gradient(circle, hsla(${o.hue},80%,70%,0.6), hsla(${o.hue},80%,70%,0))`,
+            background: `radial-gradient(circle, rgba(255,255,255,${o.opacity}), rgba(255,255,255,0))`,
             animationPlayState: isActive ? 'running' : 'paused',
           }}
         />
@@ -155,7 +155,7 @@ const OrbsBg = ({ isActive }) => {
   );
 };
 
-/* ── Slide 4 (Orange): Geometric Shapes — amber/gold tones ── */
+/* ── Slide 4: Geometric Shapes — neutral white tones ── */
 const GeometricBg = ({ isActive }) => {
   const shapes = useMemo(() =>
     Array.from({ length: 12 }, (_, i) => ({

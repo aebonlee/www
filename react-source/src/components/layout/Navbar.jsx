@@ -9,7 +9,7 @@ const Navbar = () => {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const [activeDropdown, setActiveDropdown] = useState(null);
   const location = useLocation();
-  const { mode, toggleTheme } = useTheme();
+  const { mode, toggleTheme, colorTheme, setColorTheme } = useTheme();
   const { language, toggleLanguage, t } = useLanguage();
   const { cartCount } = useCart();
 
@@ -151,6 +151,23 @@ const Navbar = () => {
           </ul>
 
           <div className="nav-actions">
+            <div className="color-palette">
+              {[
+                { name: 'blue', color: '#0046C8' },
+                { name: 'red', color: '#C8102E' },
+                { name: 'green', color: '#00855A' },
+                { name: 'purple', color: '#8B1AC8' },
+                { name: 'orange', color: '#C87200' },
+              ].map((t) => (
+                <button
+                  key={t.name}
+                  className={`color-dot${colorTheme === t.name ? ' active' : ''}`}
+                  style={{ background: t.color }}
+                  onClick={() => setColorTheme(t.name)}
+                  aria-label={`${t.name} theme`}
+                />
+              ))}
+            </div>
             <Link to="/cart" className="cart-icon-link" aria-label="Cart">
               <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" className="cart-icon-svg">
                 <circle cx="9" cy="21" r="1" />

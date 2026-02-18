@@ -7,6 +7,8 @@ const getTimeBasedTheme = () => {
   return (hour >= 6 && hour < 18) ? 'light' : 'dark';
 };
 
+const COLOR_THEMES = ['blue', 'red', 'green', 'purple', 'orange'];
+
 export const ThemeProvider = ({ children }) => {
   const [mode, setMode] = useState(() => {
     const saved = localStorage.getItem('themeMode');
@@ -19,6 +21,11 @@ export const ThemeProvider = ({ children }) => {
 
   const [theme, setTheme] = useState(() => {
     return mode === 'auto' ? getTimeBasedTheme() : mode;
+  });
+
+  const [colorTheme, setColorTheme] = useState(() => {
+    const saved = localStorage.getItem('colorTheme');
+    return COLOR_THEMES.includes(saved) ? saved : 'blue';
   });
 
   // Resolve theme from mode (+ time tick for auto)
@@ -34,12 +41,18 @@ export const ThemeProvider = ({ children }) => {
     return () => clearInterval(interval);
   }, [mode]);
 
-  // Apply to DOM
+  // Apply dark/light to DOM
   useEffect(() => {
     document.documentElement.setAttribute('data-theme', theme);
   }, [theme]);
 
-  // Persist
+  // Apply color theme to DOM
+  useEffect(() => {
+    document.documentElement.setAttribute('data-color', colorTheme);
+    localStorage.setItem('colorTheme', colorTheme);
+  }, [colorTheme]);
+
+  // Persist mode
   useEffect(() => {
     localStorage.setItem('themeMode', mode);
     localStorage.removeItem('theme'); // clean legacy
@@ -55,7 +68,7 @@ export const ThemeProvider = ({ children }) => {
   };
 
   return (
-    <ThemeContext.Provider value={{ theme, mode, toggleTheme }}>
+    <ThemeContext.Provider value={{ theme, mode, toggleTheme, colorTheme, setColorTheme }}>
       {children}
     </ThemeContext.Provider>
   );

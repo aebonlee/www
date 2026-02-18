@@ -21,21 +21,39 @@
     --primary-gradient: linear-gradient(135deg, #1A5AC8 0%, #4A8FE7 100%);
 }
 
-[data-theme="dark"] .hero {
-    background: linear-gradient(135deg, #0A2D6E 0%, #122870 50%, #172D58 100%);
+[data-theme="dark"] .hero,
+[data-theme="dark"] .carousel-slide {
+    background: var(--hero-bg-dark);
 }
 
-/* ── Dark mode slide gradients — higher saturation for readability ── */
-/* Blue dark: visible cobalt tones */
-[data-theme="dark"] .gradient-slide-0 { background: linear-gradient(135deg, #0A2D6E 0%, #122870 50%, #172D58 100%); }
-/* Red dark: visible crimson tones */
-[data-theme="dark"] .gradient-slide-1 { background: linear-gradient(135deg, #6E1422 0%, #701020 50%, #581828 100%); }
-/* Green dark: visible emerald tones */
-[data-theme="dark"] .gradient-slide-2 { background: linear-gradient(135deg, #0A5438 0%, #104830 50%, #163D2A 100%); }
-/* Purple dark: visible violet tones */
-[data-theme="dark"] .gradient-slide-3 { background: linear-gradient(135deg, #4A126E 0%, #3C0A60 50%, #2C1850 100%); }
-/* Orange dark: visible amber tones */
-[data-theme="dark"] .gradient-slide-4 { background: linear-gradient(135deg, #6E3E10 0%, #603510 50%, #4E2C18 100%); }
+/* ── Dark mode color theme overrides ── */
+[data-theme="dark"][data-color="red"] {
+    --primary-blue: #E74A5A;
+    --primary-blue-dark: #C42B3B;
+    --primary-blue-light: #FD9393;
+    --primary-gradient: linear-gradient(135deg, #C42B3B 0%, #E74A5A 100%);
+}
+
+[data-theme="dark"][data-color="green"] {
+    --primary-blue: #4AE79A;
+    --primary-blue-dark: #2BC46A;
+    --primary-blue-light: #93FDC5;
+    --primary-gradient: linear-gradient(135deg, #2BC46A 0%, #4AE79A 100%);
+}
+
+[data-theme="dark"][data-color="purple"] {
+    --primary-blue: #B04AE7;
+    --primary-blue-dark: #8B2BC4;
+    --primary-blue-light: #D493FD;
+    --primary-gradient: linear-gradient(135deg, #8B2BC4 0%, #B04AE7 100%);
+}
+
+[data-theme="dark"][data-color="orange"] {
+    --primary-blue: #E7A04A;
+    --primary-blue-dark: #C4832B;
+    --primary-blue-light: #FDCF93;
+    --primary-gradient: linear-gradient(135deg, #C4832B 0%, #E7A04A 100%);
+}
 
 [data-theme="dark"] .particle {
     background: rgba(74, 143, 231, 0.25);
@@ -52,7 +70,7 @@
 }
 
 [data-theme="dark"] .page-header {
-    background: linear-gradient(135deg, #0F172A 0%, #1E1B4B 50%, #1E3A5F 100%);
+    background: var(--hero-bg-dark);
 }
 
 [data-theme="dark"] .footer {
@@ -83,7 +101,7 @@
 }
 
 [data-theme="dark"] .cta-section {
-    background: linear-gradient(135deg, #002E8A 0%, #1E1B4B 100%);
+    background: var(--hero-bg-dark);
 }
 
 [data-theme="dark"] .service-card {

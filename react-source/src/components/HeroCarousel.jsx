@@ -78,7 +78,7 @@ const HeroCarousel = () => {
           style={{ transform: `translateX(-${current * 100}%)` }}
         >
           {Array.from({ length: SLIDE_COUNT }, (_, i) => (
-            <div key={i} className={`carousel-slide gradient-slide-${i}`}>
+            <div key={i} className="carousel-slide">
               <HeroBackground slideIndex={i} isActive={i === current} />
             </div>
           ))}

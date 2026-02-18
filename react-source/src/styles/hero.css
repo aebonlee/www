@@ -6,7 +6,7 @@
     min-height: min(85vh, 800px);
     display: flex;
     align-items: center;
-    background: linear-gradient(135deg, #0046C8 0%, #002E8A 50%, #1E3A5F 100%);
+    background: var(--hero-bg);
     padding-top: calc(var(--nav-height) + 40px);
     padding-bottom: 60px;
     position: relative;
@@ -34,17 +34,10 @@
     height: 100%;
 }
 
-/* ── Per-slide gradient overlays (5 Color Sets) ── */
-/* Blue  — HSL ~215°, brand primary */
-.gradient-slide-0 { background: linear-gradient(135deg, #0046C8 0%, #002E8A 50%, #1E3A5F 100%); }
-/* Red   — HSL ~350°, same saturation family */
-.gradient-slide-1 { background: linear-gradient(135deg, #C8102E 0%, #8A001A 50%, #5F1E28 100%); }
-/* Green — HSL ~155°, same saturation family */
-.gradient-slide-2 { background: linear-gradient(135deg, #00855A 0%, #005C3E 50%, #1E4A35 100%); }
-/* Purple — HSL ~280°, same saturation family */
-.gradient-slide-3 { background: linear-gradient(135deg, #8B1AC8 0%, #5E008A 50%, #3C1E5F 100%); }
-/* Orange — HSL ~30°, same saturation family */
-.gradient-slide-4 { background: linear-gradient(135deg, #C87200 0%, #8A4E00 50%, #5F401E 100%); }
+/* ── All slides share the same theme gradient ── */
+.carousel-slide {
+    background: var(--hero-bg);
+}
 
 /* ── Background effects shared ── */
 .hero-bg-effect {
@@ -104,11 +97,11 @@
     top: -20%;
     font-family: 'Courier New', monospace;
     font-size: 14px;
-    color: rgba(255, 120, 120, 0.35);
+    color: rgba(255, 255, 255, 0.25);
     white-space: pre;
     line-height: 1.4;
     animation: matrix-fall 5s linear infinite;
-    text-shadow: 0 0 8px rgba(255, 100, 100, 0.2);
+    text-shadow: 0 0 8px rgba(255, 255, 255, 0.15);
 }
 
 @keyframes matrix-fall {
@@ -155,19 +148,19 @@
 
 .geo-triangle {
     clip-path: polygon(50% 0%, 0% 100%, 100% 100%);
-    background: rgba(255, 180, 60, 0.1);
+    background: rgba(255, 255, 255, 0.08);
     border: none;
 }
 
 .geo-square {
     border-radius: 4px;
-    background: rgba(255, 200, 100, 0.06);
-    border-color: rgba(255, 180, 60, 0.2);
+    background: rgba(255, 255, 255, 0.05);
+    border-color: rgba(255, 255, 255, 0.15);
 }
 
 .geo-hexagon {
     clip-path: polygon(25% 0%, 75% 0%, 100% 50%, 75% 100%, 25% 100%, 0% 50%);
-    background: rgba(255, 160, 40, 0.1);
+    background: rgba(255, 255, 255, 0.08);
     border: none;
 }
 
@@ -197,7 +190,7 @@
 }
 
 .highlight {
-    background: linear-gradient(135deg, #93C5FD 0%, #BFDBFE 50%, #FFFFFF 100%);
+    background: var(--highlight-gradient);
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
     background-clip: text;
@@ -220,7 +213,7 @@
 /* Hero buttons on dark gradient background */
 .hero-buttons .btn-primary {
     background: #FFFFFF;
-    color: #0046C8;
+    color: var(--primary-blue);
     border-color: #FFFFFF;
     box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
 }

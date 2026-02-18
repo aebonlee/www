@@ -204,6 +204,34 @@
 /* dark mode → show sun icon (click to go auto) */
 .theme-toggle[data-mode="dark"] .sun-icon { display: block; }
 
+/* ── Color Palette Picker ── */
+.color-palette {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+}
+
+.color-dot {
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    border: 2px solid transparent;
+    cursor: pointer;
+    transition: transform 0.2s ease, border-color 0.2s ease, box-shadow 0.2s ease;
+    padding: 0;
+    outline: none;
+}
+
+.color-dot:hover {
+    transform: scale(1.15);
+}
+
+.color-dot.active {
+    border-color: var(--text-primary);
+    box-shadow: 0 0 0 2px var(--bg-white), 0 0 0 4px var(--text-primary);
+    transform: scale(1.1);
+}
+
 .mobile-toggle {
     display: none;
     flex-direction: column;

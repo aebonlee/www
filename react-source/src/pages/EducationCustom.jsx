@@ -36,13 +36,13 @@ const EducationCustom = () => {
               <svg viewBox="0 0 200 200" fill="none">
                 <defs>
                   <linearGradient id="eduGrad" x1="0%" y1="0%" x2="100%" y2="100%">
-                    <stop offset="0%" style={{ stopColor: '#0066CC', stopOpacity: 1 }} />
-                    <stop offset="100%" style={{ stopColor: '#3385D6', stopOpacity: 1 }} />
+                    <stop offset="0%" style={{ stopColor: 'var(--primary-blue)', stopOpacity: 1 }} />
+                    <stop offset="100%" style={{ stopColor: 'var(--primary-blue-light)', stopOpacity: 1 }} />
                   </linearGradient>
                 </defs>
                 <rect x="40" y="50" width="120" height="90" rx="8" fill="url(#eduGrad)" opacity="0.3" />
                 <path d="M100 70 L140 90 L100 110 L60 90 Z" fill="url(#eduGrad)" opacity="0.6" />
-                <path d="M70 95 L70 120 C80 130 120 130 130 120 L130 95" stroke="#0066CC" strokeWidth="2" fill="none" opacity="0.5" />
+                <path d="M70 95 L70 120 C80 130 120 130 130 120 L130 95" style={{ stroke: 'var(--primary-blue)' }} strokeWidth="2" fill="none" opacity="0.5" />
               </svg>
             </div>
           </div>

@@ -35,18 +35,18 @@ const ConsultingBusiness = () => {
               <svg viewBox="0 0 200 200" fill="none">
                 <defs>
                   <linearGradient id="bizGrad" x1="0%" y1="0%" x2="100%" y2="100%">
-                    <stop offset="0%" style={{ stopColor: '#0046C8', stopOpacity: 1 }} />
-                    <stop offset="100%" style={{ stopColor: '#4A8FE7', stopOpacity: 1 }} />
+                    <stop offset="0%" style={{ stopColor: 'var(--primary-blue)', stopOpacity: 1 }} />
+                    <stop offset="100%" style={{ stopColor: 'var(--primary-blue-light)', stopOpacity: 1 }} />
                   </linearGradient>
                 </defs>
                 <rect x="30" y="50" width="140" height="100" rx="8" fill="url(#bizGrad)" opacity="0.2" />
                 <rect x="50" y="40" width="40" height="60" rx="4" fill="url(#bizGrad)" opacity="0.4" />
                 <rect x="100" y="55" width="40" height="45" rx="4" fill="url(#bizGrad)" opacity="0.6" />
-                <path d="M60 100 L90 80 L120 95 L150 70" stroke="#0046C8" strokeWidth="3" fill="none" opacity="0.8" />
-                <circle cx="60" cy="100" r="4" fill="#0046C8" />
-                <circle cx="90" cy="80" r="4" fill="#0046C8" />
-                <circle cx="120" cy="95" r="4" fill="#0046C8" />
-                <circle cx="150" cy="70" r="4" fill="#0046C8" />
+                <path d="M60 100 L90 80 L120 95 L150 70" strokeWidth="3" fill="none" opacity="0.8" style={{ stroke: 'var(--primary-blue)' }} />
+                <circle cx="60" cy="100" r="4" style={{ fill: 'var(--primary-blue)' }} />
+                <circle cx="90" cy="80" r="4" style={{ fill: 'var(--primary-blue)' }} />
+                <circle cx="120" cy="95" r="4" style={{ fill: 'var(--primary-blue)' }} />
+                <circle cx="150" cy="70" r="4" style={{ fill: 'var(--primary-blue)' }} />
               </svg>
             </div>
           </div>

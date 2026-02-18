@@ -4,7 +4,7 @@
 
 .cta-section {
     padding: 80px 0;
-    background: linear-gradient(135deg, #0046C8 0%, #002E8A 50%, #1E3A5F 100%);
+    background: var(--hero-bg);
     text-align: center;
     position: relative;
     overflow: hidden;
@@ -55,7 +55,7 @@
 .cta-content .btn-primary,
 .cta-content .btn-primary-large {
     background: #FFFFFF;
-    color: #0046C8;
+    color: var(--primary-blue);
     border-color: #FFFFFF;
     box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
 }

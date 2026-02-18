@@ -49,18 +49,18 @@ const ServiceDetail = () => {
               <svg viewBox="0 0 200 200" fill="none">
                 <defs>
                   <linearGradient id="grad1" x1="0%" y1="0%" x2="100%" y2="100%">
-                    <stop offset="0%" style={{ stopColor: '#0066CC', stopOpacity: 1 }} />
-                    <stop offset="100%" style={{ stopColor: '#3385D6', stopOpacity: 1 }} />
+                    <stop offset="0%" style={{ stopColor: 'var(--primary-blue)', stopOpacity: 1 }} />
+                    <stop offset="100%" style={{ stopColor: 'var(--primary-blue-light)', stopOpacity: 1 }} />
                   </linearGradient>
                 </defs>
                 <rect x="40" y="50" width="120" height="90" rx="8" fill="url(#grad1)" opacity="0.3" />
                 <rect x="50" y="60" width="100" height="70" rx="4" fill="url(#grad1)" opacity="0.5" />
-                <circle cx="60" cy="70" r="3" fill="#0066CC" />
-                <circle cx="70" cy="70" r="3" fill="#0066CC" />
-                <circle cx="80" cy="70" r="3" fill="#0066CC" />
-                <rect x="60" y="85" width="80" height="4" rx="2" fill="#0066CC" opacity="0.6" />
-                <rect x="60" y="95" width="60" height="4" rx="2" fill="#0066CC" opacity="0.4" />
-                <rect x="60" y="105" width="70" height="4" rx="2" fill="#0066CC" opacity="0.4" />
+                <circle cx="60" cy="70" r="3" style={{ fill: 'var(--primary-blue)' }} />
+                <circle cx="70" cy="70" r="3" style={{ fill: 'var(--primary-blue)' }} />
+                <circle cx="80" cy="70" r="3" style={{ fill: 'var(--primary-blue)' }} />
+                <rect x="60" y="85" width="80" height="4" rx="2" style={{ fill: 'var(--primary-blue)' }} opacity="0.6" />
+                <rect x="60" y="95" width="60" height="4" rx="2" style={{ fill: 'var(--primary-blue)' }} opacity="0.4" />
+                <rect x="60" y="105" width="70" height="4" rx="2" style={{ fill: 'var(--primary-blue)' }} opacity="0.4" />
               </svg>
             </div>
           </div>

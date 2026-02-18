@@ -35,8 +35,8 @@ const ConsultingInstitution = () => {
               <svg viewBox="0 0 200 200" fill="none">
                 <defs>
                   <linearGradient id="instGrad" x1="0%" y1="0%" x2="100%" y2="100%">
-                    <stop offset="0%" style={{ stopColor: '#0046C8', stopOpacity: 1 }} />
-                    <stop offset="100%" style={{ stopColor: '#4A8FE7', stopOpacity: 1 }} />
+                    <stop offset="0%" style={{ stopColor: 'var(--primary-blue)', stopOpacity: 1 }} />
+                    <stop offset="100%" style={{ stopColor: 'var(--primary-blue-light)', stopOpacity: 1 }} />
                   </linearGradient>
                 </defs>
                 <path d="M40 80 L100 50 L160 80 L160 150 L40 150 Z" fill="url(#instGrad)" opacity="0.15" />

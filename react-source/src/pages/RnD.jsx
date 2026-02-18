@@ -109,16 +109,16 @@ const RnD = () => {
               <svg viewBox="0 0 200 200" fill="none">
                 <defs>
                   <linearGradient id="rndGrad" x1="0%" y1="0%" x2="100%" y2="100%">
-                    <stop offset="0%" style={{ stopColor: '#0066CC', stopOpacity: 1 }} />
-                    <stop offset="100%" style={{ stopColor: '#3385D6', stopOpacity: 1 }} />
+                    <stop offset="0%" style={{ stopColor: 'var(--primary-blue)', stopOpacity: 1 }} />
+                    <stop offset="100%" style={{ stopColor: 'var(--primary-blue-light)', stopOpacity: 1 }} />
                   </linearGradient>
                 </defs>
                 <circle cx="100" cy="80" r="40" fill="url(#rndGrad)" opacity="0.15" />
                 <circle cx="100" cy="80" r="25" fill="url(#rndGrad)" opacity="0.25" />
-                <circle cx="100" cy="80" r="10" fill="#0066CC" opacity="0.5" />
-                <rect x="60" y="130" width="80" height="6" rx="3" fill="#0066CC" opacity="0.3" />
-                <rect x="70" y="142" width="60" height="4" rx="2" fill="#0066CC" opacity="0.2" />
-                <rect x="80" y="152" width="40" height="4" rx="2" fill="#0066CC" opacity="0.15" />
+                <circle cx="100" cy="80" r="10" style={{ fill: 'var(--primary-blue)' }} opacity="0.5" />
+                <rect x="60" y="130" width="80" height="6" rx="3" style={{ fill: 'var(--primary-blue)' }} opacity="0.3" />
+                <rect x="70" y="142" width="60" height="4" rx="2" style={{ fill: 'var(--primary-blue)' }} opacity="0.2" />
+                <rect x="80" y="152" width="40" height="4" rx="2" style={{ fill: 'var(--primary-blue)' }} opacity="0.15" />
               </svg>
             </div>
           </div>

@@ -35,14 +35,14 @@ const ConsultingUniversity = () => {
               <svg viewBox="0 0 200 200" fill="none">
                 <defs>
                   <linearGradient id="uniGrad" x1="0%" y1="0%" x2="100%" y2="100%">
-                    <stop offset="0%" style={{ stopColor: '#0046C8', stopOpacity: 1 }} />
-                    <stop offset="100%" style={{ stopColor: '#4A8FE7', stopOpacity: 1 }} />
+                    <stop offset="0%" style={{ stopColor: 'var(--primary-blue)', stopOpacity: 1 }} />
+                    <stop offset="100%" style={{ stopColor: 'var(--primary-blue-light)', stopOpacity: 1 }} />
                   </linearGradient>
                 </defs>
                 <path d="M100 30 L170 65 L100 100 L30 65 Z" fill="url(#uniGrad)" opacity="0.4" />
-                <path d="M50 75 L50 120 C65 140 135 140 150 120 L150 75" stroke="#0046C8" strokeWidth="2" fill="none" opacity="0.5" />
+                <path d="M50 75 L50 120 C65 140 135 140 150 120 L150 75" strokeWidth="2" fill="none" opacity="0.5" style={{ stroke: 'var(--primary-blue)' }} />
                 <rect x="60" y="110" width="80" height="50" rx="4" fill="url(#uniGrad)" opacity="0.2" />
-                <line x1="170" y1="65" x2="170" y2="130" stroke="#0046C8" strokeWidth="2" opacity="0.5" />
+                <line x1="170" y1="65" x2="170" y2="130" strokeWidth="2" opacity="0.5" style={{ stroke: 'var(--primary-blue)' }} />
                 <circle cx="170" cy="135" r="6" fill="url(#uniGrad)" opacity="0.6" />
               </svg>
             </div>

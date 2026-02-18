@@ -46,15 +46,15 @@ const PublishingEbook = () => {
               <svg viewBox="0 0 200 200" fill="none">
                 <defs>
                   <linearGradient id="ebookGrad" x1="0%" y1="0%" x2="100%" y2="100%">
-                    <stop offset="0%" style={{ stopColor: '#0066CC', stopOpacity: 1 }} />
-                    <stop offset="100%" style={{ stopColor: '#3385D6', stopOpacity: 1 }} />
+                    <stop offset="0%" style={{ stopColor: 'var(--primary-blue)', stopOpacity: 1 }} />
+                    <stop offset="100%" style={{ stopColor: 'var(--primary-blue-light)', stopOpacity: 1 }} />
                   </linearGradient>
                 </defs>
                 <rect x="60" y="40" width="80" height="120" rx="4" fill="url(#ebookGrad)" opacity="0.3" />
                 <rect x="70" y="50" width="60" height="100" rx="2" fill="url(#ebookGrad)" opacity="0.5" />
-                <rect x="80" y="65" width="40" height="4" rx="2" fill="#0066CC" opacity="0.6" />
-                <rect x="80" y="75" width="30" height="4" rx="2" fill="#0066CC" opacity="0.4" />
-                <rect x="80" y="85" width="35" height="4" rx="2" fill="#0066CC" opacity="0.4" />
+                <rect x="80" y="65" width="40" height="4" rx="2" style={{ fill: 'var(--primary-blue)' }} opacity="0.6" />
+                <rect x="80" y="75" width="30" height="4" rx="2" style={{ fill: 'var(--primary-blue)' }} opacity="0.4" />
+                <rect x="80" y="85" width="35" height="4" rx="2" style={{ fill: 'var(--primary-blue)' }} opacity="0.4" />
               </svg>
             </div>
           </div>
