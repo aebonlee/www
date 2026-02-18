@@ -160,6 +160,17 @@ const Navbar = () => {
           </ul>
 
           <div className="nav-actions">
+            <Link to="/cart" className="cart-icon-link" aria-label="Cart">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" className="cart-icon-svg">
+                <circle cx="9" cy="21" r="1" />
+                <circle cx="20" cy="21" r="1" />
+                <path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6" />
+              </svg>
+              {cartCount > 0 && <span className="cart-badge">{cartCount}</span>}
+            </Link>
+            <button className="lang-switcher" onClick={toggleLanguage} aria-label={language === 'ko' ? 'Switch to English' : '한국어로 전환'}>
+              {language === 'ko' ? 'EN' : 'KR'}
+            </button>
             <div className="color-picker-wrapper">
               <button
                 className="color-picker-btn"
@@ -192,17 +203,6 @@ const Navbar = () => {
                 </>
               )}
             </div>
-            <Link to="/cart" className="cart-icon-link" aria-label="Cart">
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" className="cart-icon-svg">
-                <circle cx="9" cy="21" r="1" />
-                <circle cx="20" cy="21" r="1" />
-                <path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6" />
-              </svg>
-              {cartCount > 0 && <span className="cart-badge">{cartCount}</span>}
-            </Link>
-            <button className="lang-switcher" onClick={toggleLanguage} aria-label={language === 'ko' ? 'Switch to English' : '한국어로 전환'}>
-              {language === 'ko' ? 'EN' : 'KR'}
-            </button>
             <button className="theme-toggle" onClick={toggleTheme} aria-label="테마 전환" data-mode={mode}>
               {/* Light mode icon (sun) */}
               <svg className="sun-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
