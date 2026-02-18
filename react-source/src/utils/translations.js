@@ -77,7 +77,9 @@ export const translations = {
     about: {
       company: '회사 개요',
       vision: '비전',
-      history: '연혁'
+      history: '연혁',
+      ceoProfile: '대표 소개',
+      contact: '연락처'
     },
     footer: {
       tagline: '혁신적인 IT 솔루션으로 비즈니스의 미래를 만듭니다',
@@ -108,6 +110,67 @@ export const translations = {
       overview: '서비스 개요',
       features: '주요 기능',
       process: '진행 프로세스'
+    },
+    shop: {
+      title: '스토어',
+      subtitle: 'DreamIT Biz의 도서, 전자출판, 간행물, 온라인 강좌를 만나보세요',
+      all: '전체',
+      book: '책',
+      ebook: '전자출판',
+      periodical: '간행물',
+      course: '강좌',
+      addToCart: '장바구니 담기',
+      addedToCart: '담기 완료',
+      price: '가격',
+      noProducts: '해당 카테고리에 상품이 없습니다.',
+      currency: '원'
+    },
+    cart: {
+      title: '장바구니',
+      empty: '장바구니가 비어있습니다.',
+      total: '합계',
+      subtotal: '소계',
+      checkout: '결제하기',
+      remove: '삭제',
+      quantity: '수량',
+      continueShopping: '쇼핑 계속하기',
+      orderSummary: '주문 요약',
+      items: '개 상품'
+    },
+    checkout: {
+      title: '결제',
+      orderSummary: '주문 요약',
+      paymentMethod: '결제 수단',
+      card: '카드 결제',
+      bankTransfer: '계좌이체',
+      customerInfo: '주문자 정보',
+      name: '이름',
+      email: '이메일',
+      phone: '전화번호',
+      namePlaceholder: '홍길동',
+      emailPlaceholder: 'email@example.com',
+      phonePlaceholder: '010-0000-0000',
+      pay: '결제하기',
+      processing: '처리 중...',
+      totalAmount: '결제 금액',
+      agree: '주문 내용을 확인하였으며, 결제에 동의합니다.'
+    },
+    order: {
+      title: '주문 완료',
+      success: '결제가 완료되었습니다!',
+      orderNumber: '주문번호',
+      paymentStatus: '결제 상태',
+      paid: '결제 완료',
+      pending: '대기 중',
+      failed: '실패',
+      orderDetails: '주문 내역',
+      productName: '상품명',
+      unitPrice: '단가',
+      quantity: '수량',
+      subtotal: '소계',
+      totalAmount: '총 결제금액',
+      backToShop: '스토어로 돌아가기',
+      backToHome: '홈으로'
     }
   },
   en: {
@@ -188,7 +251,9 @@ export const translations = {
     about: {
       company: 'Company',
       vision: 'Vision',
-      history: 'History'
+      history: 'History',
+      ceoProfile: 'CEO Profile',
+      contact: 'Contact'
     },
     footer: {
       tagline: 'Creating the future of business with innovative IT solutions',
@@ -219,6 +284,67 @@ export const translations = {
       overview: 'Service Overview',
       features: 'Key Features',
       process: 'Process'
+    },
+    shop: {
+      title: 'Store',
+      subtitle: 'Explore books, e-publications, periodicals, and online courses by DreamIT Biz',
+      all: 'All',
+      book: 'Books',
+      ebook: 'E-Publishing',
+      periodical: 'Periodicals',
+      course: 'Courses',
+      addToCart: 'Add to Cart',
+      addedToCart: 'Added',
+      price: 'Price',
+      noProducts: 'No products in this category.',
+      currency: 'KRW'
+    },
+    cart: {
+      title: 'Cart',
+      empty: 'Your cart is empty.',
+      total: 'Total',
+      subtotal: 'Subtotal',
+      checkout: 'Checkout',
+      remove: 'Remove',
+      quantity: 'Qty',
+      continueShopping: 'Continue Shopping',
+      orderSummary: 'Order Summary',
+      items: 'items'
+    },
+    checkout: {
+      title: 'Checkout',
+      orderSummary: 'Order Summary',
+      paymentMethod: 'Payment Method',
+      card: 'Credit Card',
+      bankTransfer: 'Bank Transfer',
+      customerInfo: 'Customer Information',
+      name: 'Name',
+      email: 'Email',
+      phone: 'Phone',
+      namePlaceholder: 'John Doe',
+      emailPlaceholder: 'email@example.com',
+      phonePlaceholder: '010-0000-0000',
+      pay: 'Pay Now',
+      processing: 'Processing...',
+      totalAmount: 'Total Amount',
+      agree: 'I have reviewed my order and agree to proceed with payment.'
+    },
+    order: {
+      title: 'Order Complete',
+      success: 'Payment completed successfully!',
+      orderNumber: 'Order Number',
+      paymentStatus: 'Payment Status',
+      paid: 'Paid',
+      pending: 'Pending',
+      failed: 'Failed',
+      orderDetails: 'Order Details',
+      productName: 'Product',
+      unitPrice: 'Unit Price',
+      quantity: 'Qty',
+      subtotal: 'Subtotal',
+      totalAmount: 'Total Amount',
+      backToShop: 'Back to Store',
+      backToHome: 'Home'
     }
   }
 };

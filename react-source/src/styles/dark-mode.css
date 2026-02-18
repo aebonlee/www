@@ -187,3 +187,130 @@
     background: #78350f;
     color: #fcd34d;
 }
+
+/* Shop/Cart/Checkout Dark Mode */
+[data-theme="dark"] .product-card {
+    background: var(--bg-light-gray);
+    border-color: var(--border-medium);
+}
+
+[data-theme="dark"] .product-thumbnail {
+    background: var(--bg-medium-gray);
+}
+
+[data-theme="dark"] .cart-summary,
+[data-theme="dark"] .checkout-summary {
+    background: var(--bg-medium-gray);
+    border-color: var(--border-medium);
+}
+
+[data-theme="dark"] .cart-item {
+    border-color: var(--border-medium);
+}
+
+[data-theme="dark"] .quantity-control {
+    border-color: var(--border-medium);
+}
+
+[data-theme="dark"] .qty-value {
+    border-color: var(--border-medium);
+}
+
+[data-theme="dark"] .qty-btn:hover:not(:disabled) {
+    background: var(--bg-light-gray);
+}
+
+[data-theme="dark"] .payment-option {
+    border-color: var(--border-medium);
+}
+
+[data-theme="dark"] .payment-option.active {
+    border-color: var(--primary-blue);
+    background: rgba(0, 102, 204, 0.1);
+}
+
+[data-theme="dark"] .checkout-error {
+    background: #7f1d1d;
+    border-color: #991b1b;
+    color: #fca5a5;
+}
+
+[data-theme="dark"] .order-info-box {
+    background: var(--bg-medium-gray);
+    border-color: var(--border-medium);
+}
+
+[data-theme="dark"] .order-status-badge.paid {
+    background: #14532d;
+    color: #86efac;
+}
+
+[data-theme="dark"] .order-status-badge.pending {
+    background: #78350f;
+    color: #fcd34d;
+}
+
+[data-theme="dark"] .order-status-badge.failed {
+    background: #7f1d1d;
+    color: #fca5a5;
+}
+
+[data-theme="dark"] .order-table th {
+    background: var(--bg-medium-gray);
+    border-color: var(--border-medium);
+}
+
+[data-theme="dark"] .order-table td {
+    border-color: var(--border-medium);
+}
+
+[data-theme="dark"] .shop-filter-btn {
+    border-color: var(--border-medium);
+    color: var(--text-secondary);
+}
+
+[data-theme="dark"] .book-purchase,
+[data-theme="dark"] .course-purchase {
+    border-color: var(--border-medium);
+}
+
+/* CEO Profile Dark Mode */
+[data-theme="dark"] .ceo-profile-card {
+    background: var(--bg-medium-gray);
+    border-color: var(--border-medium);
+}
+
+[data-theme="dark"] .ceo-expertise-card {
+    background: var(--bg-light-gray);
+    border-color: var(--border-medium);
+}
+
+[data-theme="dark"] .ceo-cert-card {
+    background: var(--bg-light-gray);
+    border-color: var(--border-medium);
+}
+
+[data-theme="dark"] .ceo-award-item {
+    border-color: var(--border-medium);
+}
+
+[data-theme="dark"] .ceo-contact-box {
+    background: var(--bg-medium-gray);
+    border-color: var(--border-medium);
+}
+
+[data-theme="dark"] .ceo-timeline::before {
+    background: var(--border-medium);
+}
+
+[data-theme="dark"] .ceo-timeline-dot {
+    border-color: var(--bg-light-gray);
+}
+
+[data-theme="dark"] .ceo-list li {
+    border-color: var(--border-medium);
+}
+
+[data-theme="dark"] .ceo-activity-group h4 {
+    border-color: var(--primary-blue);
+}

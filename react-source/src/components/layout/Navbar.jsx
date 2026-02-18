@@ -2,6 +2,7 @@ import { useState, useEffect } from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import { useTheme } from '../../contexts/ThemeContext';
 import { useLanguage } from '../../contexts/LanguageContext';
+import { useCart } from '../../contexts/CartContext';
 
 const Navbar = () => {
   const [isScrolled, setIsScrolled] = useState(false);
@@ -10,6 +11,7 @@ const Navbar = () => {
   const location = useLocation();
   const { toggleTheme } = useTheme();
   const { language, toggleLanguage, t } = useLanguage();
+  const { cartCount } = useCart();
 
   useEffect(() => {
     const handleScroll = () => setIsScrolled(window.scrollY > 50);
@@ -54,6 +56,7 @@ const Navbar = () => {
         { path: '/publishing/book', label: t('publishing.book') }
       ]
     },
+    { path: '/shop', label: t('shop.title'), activePath: '/shop' },
     {
       label: t('nav.portfolio'),
       path: '/portfolio',
@@ -75,13 +78,15 @@ const Navbar = () => {
     {
       label: t('nav.about'),
       path: '/about',
+      activePath: '/about',
       dropdown: [
         { path: '/about#company', label: t('about.company') },
         { path: '/about#vision', label: t('about.vision') },
-        { path: '/about#history', label: t('about.history') }
+        { path: '/about#history', label: t('about.history') },
+        { path: '/about/ceo', label: t('about.ceoProfile') },
+        { path: '/contact', label: t('about.contact') }
       ]
-    },
-    { path: '/contact', label: t('nav.contact') }
+    }
   ];
 
   const isActive = (item) => {
@@ -144,6 +149,14 @@ const Navbar = () => {
           </ul>
 
           <div className="nav-actions">
+            <Link to="/cart" className="cart-icon-link" aria-label="Cart">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" className="cart-icon-svg">
+                <circle cx="9" cy="21" r="1" />
+                <circle cx="20" cy="21" r="1" />
+                <path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6" />
+              </svg>
+              {cartCount > 0 && <span className="cart-badge">{cartCount}</span>}
+            </Link>
             <button className="lang-switcher" onClick={toggleLanguage} aria-label={language === 'ko' ? 'Switch to English' : '한국어로 전환'}>
               {language === 'ko' ? 'EN' : 'KR'}
             </button>

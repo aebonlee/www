@@ -1,14 +1,25 @@
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import { useLanguage } from '../contexts/LanguageContext';
+import { useCart } from '../contexts/CartContext';
 import useAOS from '../hooks/useAOS';
 import CTA from '../components/CTA';
 import publishingDetails from '../data/publishingDetails';
 
 const PublishingBook = () => {
   const { language, t } = useLanguage();
+  const { addItem } = useCart();
   const data = publishingDetails.book;
   const isEn = language === 'en';
+  const [addedId, setAddedId] = useState(null);
   useAOS();
+
+  const handleAddToCart = (book) => {
+    addItem({ id: book.id, title: book.title, titleEn: book.titleEn, price: book.price, category: 'book' });
+    setAddedId(book.id);
+    setTimeout(() => setAddedId(null), 1500);
+  };
+
+  const formatPrice = (price) => isEn ? `₩${price.toLocaleString()}` : `${price.toLocaleString()}원`;
 
   useEffect(() => { window.scrollTo(0, 0); }, []);
 
@@ -58,7 +69,7 @@ const PublishingBook = () => {
             <h2 className="section-title">{t('publishing.bookList')}</h2>
           </div>
           <div className="book-grid">
-            {data.sampleBooks.map((book, i) => (
+            {data.products.map((book, i) => (
               <div key={i} className="book-card" data-aos="fade-up" data-aos-delay={i * 100}>
                 <div className="book-cover">
                   <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
@@ -70,6 +81,15 @@ const PublishingBook = () => {
                   <h4>{isEn ? book.titleEn : book.title}</h4>
                   <p className="book-author">{isEn ? book.authorEn : book.author}</p>
                   <span className="book-category">{isEn ? book.categoryEn : book.category}</span>
+                  <div className="book-purchase">
+                    <span className="book-price">{formatPrice(book.price)}</span>
+                    <button
+                      className={`add-to-cart-btn small ${addedId === book.id ? 'added' : ''}`}
+                      onClick={() => handleAddToCart(book)}
+                    >
+                      {addedId === book.id ? (t('shop.addedToCart')) : (t('shop.addToCart'))}
+                    </button>
+                  </div>
                 </div>
               </div>
             ))}

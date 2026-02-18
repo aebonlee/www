@@ -4,6 +4,12 @@ const publishingDetails = {
     titleEn: 'E-Publishing',
     subtitle: '디지털 시대에 맞는 전자책 제작 및 유통 서비스',
     subtitleEn: 'E-book production and distribution for the digital age',
+    products: [
+      { id: 'ebook-001', title: 'ePub 전자책 제작 가이드', titleEn: 'ePub E-book Production Guide', price: 15000, format: 'ePub', description: 'ePub 포맷 전자책 제작 완벽 가이드', descriptionEn: 'Complete guide to ePub e-book production' },
+      { id: 'ebook-002', title: '인터랙티브 전자책 실무', titleEn: 'Interactive E-book Practical', price: 22000, format: 'Interactive', description: '동영상/애니메이션 포함 인터랙티브 전자책', descriptionEn: 'Interactive e-book with video and animation' },
+      { id: 'ebook-003', title: 'PDF 전자출판 마스터', titleEn: 'PDF E-Publishing Master', price: 18000, format: 'PDF', description: '고품질 PDF 전자출판 제작 노하우', descriptionEn: 'Know-how for high-quality PDF e-publishing' },
+      { id: 'ebook-004', title: '오디오북 제작 입문', titleEn: 'Audiobook Production Basics', price: 20000, format: 'Audiobook', description: '텍스트 기반 콘텐츠를 오디오북으로 전환하는 방법', descriptionEn: 'How to convert text-based content to audiobooks' }
+    ],
     overview: [
       '드림아이티비즈의 전자출판 서비스는 다양한 포맷의 전자책을 기획하고 제작합니다.',
       'ePub, PDF, 인터랙티브 전자책 등 다양한 형태로 콘텐츠를 배포할 수 있습니다.',
@@ -36,6 +42,12 @@ const publishingDetails = {
     titleEn: 'Periodicals',
     subtitle: '정기 간행물 기획, 편집, 제작 서비스',
     subtitleEn: 'Periodical planning, editing, and production services',
+    products: [
+      { id: 'period-001', title: '기업 뉴스레터 템플릿 모음', titleEn: 'Corporate Newsletter Template Collection', price: 18000, type: 'newsletter', description: '사내외 소통을 위한 뉴스레터 템플릿', descriptionEn: 'Newsletter templates for communication' },
+      { id: 'period-002', title: '학술지 편집 매뉴얼', titleEn: 'Academic Journal Editing Manual', price: 25000, type: 'journal', description: '학술 저널 편집 및 제작 매뉴얼', descriptionEn: 'Manual for academic journal editing' },
+      { id: 'period-003', title: '사보 디자인 가이드', titleEn: 'Company Magazine Design Guide', price: 22000, type: 'magazine', description: '기업 홍보를 위한 사보 디자인 가이드', descriptionEn: 'Design guide for company magazines' },
+      { id: 'period-004', title: '연간 보고서 템플릿', titleEn: 'Annual Report Template', price: 30000, type: 'report', description: '전문 연간 보고서 편집 템플릿', descriptionEn: 'Professional annual report editing template' }
+    ],
     overview: [
       '드림아이티비즈의 간행물 서비스는 기업 뉴스레터, 학술지, 사보 등 다양한 정기 간행물을 제작합니다.',
       '기획부터 디자인, 인쇄, 디지털 배포까지 원스톱 서비스를 제공합니다.',
@@ -78,11 +90,11 @@ const publishingDetails = {
       'We plan and produce quality IT educational content with our network of expert authors.',
       'We support simultaneous paper and e-book publishing with online/offline distribution.'
     ],
-    sampleBooks: [
-      { title: '실전 React 개발', titleEn: 'Practical React Development', author: '드림아이티비즈 교육팀', authorEn: 'DreamIT Biz Education Team', category: '프로그래밍', categoryEn: 'Programming' },
-      { title: 'Python 데이터 분석 입문', titleEn: 'Introduction to Python Data Analysis', author: '드림아이티비즈 교육팀', authorEn: 'DreamIT Biz Education Team', category: '데이터 분석', categoryEn: 'Data Analysis' },
-      { title: '클라우드 아키텍처 가이드', titleEn: 'Cloud Architecture Guide', author: '드림아이티비즈 교육팀', authorEn: 'DreamIT Biz Education Team', category: '클라우드', categoryEn: 'Cloud' },
-      { title: 'AI 시대의 비즈니스 전략', titleEn: 'Business Strategy in the AI Era', author: '드림아이티비즈 컨설팅팀', authorEn: 'DreamIT Biz Consulting Team', category: '비즈니스', categoryEn: 'Business' }
+    products: [
+      { id: 'book-001', title: '실전 React 개발', titleEn: 'Practical React Development', author: '드림아이티비즈 교육팀', authorEn: 'DreamIT Biz Education Team', category: '프로그래밍', categoryEn: 'Programming', price: 35000, isbn: '979-11-0000-001-0' },
+      { id: 'book-002', title: 'Python 데이터 분석 입문', titleEn: 'Introduction to Python Data Analysis', author: '드림아이티비즈 교육팀', authorEn: 'DreamIT Biz Education Team', category: '데이터 분석', categoryEn: 'Data Analysis', price: 32000, isbn: '979-11-0000-002-7' },
+      { id: 'book-003', title: '클라우드 아키텍처 가이드', titleEn: 'Cloud Architecture Guide', author: '드림아이티비즈 교육팀', authorEn: 'DreamIT Biz Education Team', category: '클라우드', categoryEn: 'Cloud', price: 38000, isbn: '979-11-0000-003-4' },
+      { id: 'book-004', title: 'AI 시대의 비즈니스 전략', titleEn: 'Business Strategy in the AI Era', author: '드림아이티비즈 컨설팅팀', authorEn: 'DreamIT Biz Consulting Team', category: '비즈니스', categoryEn: 'Business', price: 28000, isbn: '979-11-0000-004-1' }
     ],
     features: [
       { title: '기획 출판', titleEn: 'Planned Publishing', description: '시장 조사부터 기획, 집필, 편집, 출판까지 전 과정을 지원합니다.', descriptionEn: 'Full support from market research to planning, writing, editing, and publishing.' },

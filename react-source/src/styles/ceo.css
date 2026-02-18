@@ -1,0 +1,349 @@
+/* ============================================
+   CEO Profile Page Styles
+   ============================================ */
+
+.ceo-intro-section {
+    padding: 80px 0;
+    background: var(--bg-white);
+}
+
+.ceo-intro {
+    display: grid;
+    grid-template-columns: 320px 1fr;
+    gap: 48px;
+    align-items: start;
+}
+
+.ceo-profile-card {
+    text-align: center;
+    background: var(--bg-light-gray);
+    border: 1px solid var(--border-light);
+    border-radius: 12px;
+    padding: 40px 24px;
+}
+
+.ceo-avatar {
+    width: 100px;
+    height: 100px;
+    margin: 0 auto 16px;
+    background: var(--primary-blue);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.ceo-avatar svg {
+    width: 48px;
+    height: 48px;
+    color: white;
+}
+
+.ceo-name-card h2 {
+    font-size: 24px;
+    font-weight: 700;
+    color: var(--text-primary);
+    margin-bottom: 4px;
+}
+
+.ceo-role {
+    font-size: 14px;
+    color: var(--primary-blue);
+    font-weight: 600;
+    margin-bottom: 2px;
+}
+
+.ceo-company {
+    font-size: 13px;
+    color: var(--text-light);
+}
+
+.ceo-intro-text {
+    padding-top: 12px;
+}
+
+.ceo-intro-text p {
+    font-size: 16px;
+    line-height: 1.8;
+    color: var(--text-secondary);
+}
+
+.ceo-intro-text strong {
+    color: var(--text-primary);
+}
+
+/* Section */
+.ceo-section {
+    padding: 80px 0;
+}
+
+/* Activities */
+.ceo-activities {
+    display: grid;
+    gap: 32px;
+}
+
+.ceo-activity-group h4 {
+    font-size: 16px;
+    font-weight: 700;
+    color: var(--primary-blue);
+    margin-bottom: 12px;
+    padding-bottom: 8px;
+    border-bottom: 2px solid var(--primary-blue);
+    display: inline-block;
+}
+
+.ceo-list {
+    list-style: none;
+    padding: 0;
+}
+
+.ceo-list li {
+    padding: 10px 0 10px 24px;
+    position: relative;
+    font-size: 15px;
+    color: var(--text-secondary);
+    border-bottom: 1px solid var(--border-light);
+    line-height: 1.6;
+}
+
+.ceo-list li::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 18px;
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background: var(--primary-blue);
+    opacity: 0.5;
+}
+
+/* Expertise Grid */
+.ceo-expertise-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 24px;
+}
+
+.ceo-expertise-card {
+    background: var(--bg-white);
+    border: 1px solid var(--border-light);
+    border-radius: 8px;
+    padding: 28px 24px;
+    transition: all 0.3s ease;
+}
+
+.ceo-expertise-card:hover {
+    transform: translateY(-4px);
+    box-shadow: var(--shadow-lg);
+}
+
+.ceo-expertise-icon {
+    width: 48px;
+    height: 48px;
+    border-radius: 8px;
+    background: var(--primary-blue);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 16px;
+}
+
+.ceo-expertise-icon svg {
+    width: 24px;
+    height: 24px;
+}
+
+.ceo-expertise-card h3 {
+    font-size: 16px;
+    font-weight: 700;
+    color: var(--text-primary);
+    margin-bottom: 12px;
+    line-height: 1.4;
+}
+
+.ceo-expertise-card ul {
+    list-style: none;
+    padding: 0;
+}
+
+.ceo-expertise-card ul li {
+    font-size: 13px;
+    color: var(--text-secondary);
+    padding: 4px 0 4px 14px;
+    position: relative;
+    line-height: 1.6;
+}
+
+.ceo-expertise-card ul li::before {
+    content: '·';
+    position: absolute;
+    left: 0;
+    color: var(--primary-blue);
+    font-weight: 700;
+}
+
+/* Timeline (Education) */
+.ceo-timeline {
+    max-width: 700px;
+    margin: 0 auto;
+    position: relative;
+    padding-left: 32px;
+}
+
+.ceo-timeline::before {
+    content: '';
+    position: absolute;
+    left: 7px;
+    top: 0;
+    bottom: 0;
+    width: 2px;
+    background: var(--border-medium);
+}
+
+.ceo-timeline-item {
+    position: relative;
+    padding-bottom: 28px;
+}
+
+.ceo-timeline-item:last-child {
+    padding-bottom: 0;
+}
+
+.ceo-timeline-dot {
+    position: absolute;
+    left: -28px;
+    top: 4px;
+    width: 14px;
+    height: 14px;
+    border-radius: 50%;
+    background: var(--primary-blue);
+    border: 3px solid var(--bg-light-gray);
+}
+
+.ceo-timeline-content h4 {
+    font-size: 16px;
+    font-weight: 700;
+    color: var(--text-primary);
+    margin-bottom: 4px;
+}
+
+.ceo-timeline-content p {
+    font-size: 14px;
+    color: var(--text-secondary);
+    line-height: 1.5;
+}
+
+/* Certifications Grid */
+.ceo-cert-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 16px;
+}
+
+.ceo-cert-card {
+    display: flex;
+    align-items: flex-start;
+    gap: 12px;
+    padding: 20px;
+    background: var(--bg-white);
+    border: 1px solid var(--border-light);
+    border-radius: 8px;
+}
+
+.ceo-cert-icon {
+    flex-shrink: 0;
+}
+
+.ceo-cert-icon svg {
+    width: 24px;
+    height: 24px;
+    color: #16a34a;
+}
+
+.ceo-cert-card p {
+    font-size: 14px;
+    color: var(--text-secondary);
+    line-height: 1.5;
+}
+
+/* Awards */
+.ceo-awards {
+    max-width: 760px;
+    margin: 0 auto;
+}
+
+.ceo-award-item {
+    display: flex;
+    align-items: flex-start;
+    gap: 16px;
+    padding: 20px 0;
+    border-bottom: 1px solid var(--border-light);
+}
+
+.ceo-award-item:last-child {
+    border-bottom: none;
+}
+
+.ceo-award-icon {
+    flex-shrink: 0;
+}
+
+.ceo-award-icon svg {
+    width: 32px;
+    height: 32px;
+    color: #eab308;
+}
+
+.ceo-award-item h4 {
+    font-size: 15px;
+    font-weight: 700;
+    color: var(--text-primary);
+    margin-bottom: 2px;
+}
+
+.ceo-award-item p {
+    font-size: 13px;
+    color: var(--text-light);
+}
+
+/* Contact Box */
+.ceo-contact-box {
+    max-width: 500px;
+    margin: 0 auto;
+    background: var(--bg-light-gray);
+    border: 1px solid var(--border-light);
+    border-radius: 12px;
+    padding: 32px;
+    text-align: center;
+}
+
+.ceo-contact-box h3 {
+    font-size: 18px;
+    font-weight: 700;
+    color: var(--text-primary);
+    margin-bottom: 20px;
+}
+
+.ceo-contact-grid {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+.ceo-contact-item {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    font-size: 15px;
+    color: var(--text-secondary);
+}
+
+.ceo-contact-item svg {
+    width: 20px;
+    height: 20px;
+    color: var(--primary-blue);
+    flex-shrink: 0;
+}

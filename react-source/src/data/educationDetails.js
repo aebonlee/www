@@ -44,13 +44,13 @@ const educationDetails = {
       { title: '실습 환경 제공', titleEn: 'Practice Environment', description: '클라우드 기반 실습 환경에서 직접 코딩하며 배울 수 있습니다.', descriptionEn: 'Learn by coding directly in a cloud-based practice environment.' },
       { title: '학습 진도 관리', titleEn: 'Progress Tracking', description: '개인별 학습 진도와 성과를 실시간으로 확인할 수 있습니다.', descriptionEn: 'Track individual learning progress and performance in real-time.' }
     ],
-    sampleCourses: [
-      { title: 'React 실무 과정', titleEn: 'React Practical Course', level: '중급', levelEn: 'Intermediate', duration: '40시간', durationEn: '40 hours', description: 'React 기반 웹 프론트엔드 개발 실무', descriptionEn: 'Practical React web frontend development' },
-      { title: 'Python 데이터 분석', titleEn: 'Python Data Analysis', level: '초급', levelEn: 'Beginner', duration: '32시간', durationEn: '32 hours', description: 'Python을 활용한 데이터 분석 기초', descriptionEn: 'Foundations of data analysis with Python' },
-      { title: 'AWS 클라우드 아키텍처', titleEn: 'AWS Cloud Architecture', level: '고급', levelEn: 'Advanced', duration: '48시간', durationEn: '48 hours', description: 'AWS 기반 클라우드 인프라 설계', descriptionEn: 'Cloud infrastructure design on AWS' },
-      { title: 'UI/UX 디자인 실무', titleEn: 'UI/UX Design Practical', level: '중급', levelEn: 'Intermediate', duration: '36시간', durationEn: '36 hours', description: 'Figma를 활용한 UI/UX 디자인', descriptionEn: 'UI/UX design with Figma' },
-      { title: 'Node.js 백엔드 개발', titleEn: 'Node.js Backend Development', level: '중급', levelEn: 'Intermediate', duration: '44시간', durationEn: '44 hours', description: 'Node.js와 Express 기반 서버 개발', descriptionEn: 'Server development with Node.js and Express' },
-      { title: 'AI/머신러닝 입문', titleEn: 'AI/ML Introduction', level: '초급', levelEn: 'Beginner', duration: '36시간', durationEn: '36 hours', description: '인공지능과 머신러닝의 기초 개념', descriptionEn: 'Foundational concepts of AI and machine learning' }
+    courses: [
+      { id: 'course-001', title: 'React 실무 과정', titleEn: 'React Practical Course', level: '중급', levelEn: 'Intermediate', duration: '40시간', durationEn: '40 hours', description: 'React 기반 웹 프론트엔드 개발 실무', descriptionEn: 'Practical React web frontend development', price: 450000 },
+      { id: 'course-002', title: 'Python 데이터 분석', titleEn: 'Python Data Analysis', level: '초급', levelEn: 'Beginner', duration: '32시간', durationEn: '32 hours', description: 'Python을 활용한 데이터 분석 기초', descriptionEn: 'Foundations of data analysis with Python', price: 380000 },
+      { id: 'course-003', title: 'AWS 클라우드 아키텍처', titleEn: 'AWS Cloud Architecture', level: '고급', levelEn: 'Advanced', duration: '48시간', durationEn: '48 hours', description: 'AWS 기반 클라우드 인프라 설계', descriptionEn: 'Cloud infrastructure design on AWS', price: 550000 },
+      { id: 'course-004', title: 'UI/UX 디자인 실무', titleEn: 'UI/UX Design Practical', level: '중급', levelEn: 'Intermediate', duration: '36시간', durationEn: '36 hours', description: 'Figma를 활용한 UI/UX 디자인', descriptionEn: 'UI/UX design with Figma', price: 420000 },
+      { id: 'course-005', title: 'Node.js 백엔드 개발', titleEn: 'Node.js Backend Development', level: '중급', levelEn: 'Intermediate', duration: '44시간', durationEn: '44 hours', description: 'Node.js와 Express 기반 서버 개발', descriptionEn: 'Server development with Node.js and Express', price: 480000 },
+      { id: 'course-006', title: 'AI/머신러닝 입문', titleEn: 'AI/ML Introduction', level: '초급', levelEn: 'Beginner', duration: '36시간', durationEn: '36 hours', description: '인공지능과 머신러닝의 기초 개념', descriptionEn: 'Foundational concepts of AI and machine learning', price: 400000 }
     ],
     ctaTitle: '온라인 강의실이 곧 오픈합니다',
     ctaTitleEn: 'Online Classroom Opening Soon',

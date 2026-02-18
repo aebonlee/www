@@ -29,10 +29,12 @@ const Footer = () => {
               <li><Link to="/services">{t('nav.itServices')}</Link></li>
               <li><Link to="/education">{t('nav.education')}</Link></li>
               <li><Link to="/publishing">{t('nav.publishing')}</Link></li>
+              <li><Link to="/shop">{t('shop.title')}</Link></li>
               <li><Link to="/portfolio">{t('nav.portfolio')}</Link></li>
               <li><Link to="/community/blog">{t('nav.community')}</Link></li>
               <li><Link to="/about">{t('nav.about')}</Link></li>
-              <li><Link to="/contact">{t('nav.contact')}</Link></li>
+              <li><Link to="/about/ceo">{t('about.ceoProfile')}</Link></li>
+              <li><Link to="/contact">{t('about.contact')}</Link></li>
             </ul>
           </div>
           <div className="footer-contact">

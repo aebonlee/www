@@ -164,6 +164,31 @@
     .category-grid.three-col {
         grid-template-columns: repeat(2, 1fr);
     }
+
+    /* Shop/Cart/Checkout */
+    .shop-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    .cart-layout {
+        grid-template-columns: 1fr 300px;
+        gap: 32px;
+    }
+
+    .checkout-layout {
+        grid-template-columns: 1fr 320px;
+        gap: 32px;
+    }
+
+    /* CEO Profile */
+    .ceo-intro {
+        grid-template-columns: 280px 1fr;
+        gap: 36px;
+    }
+
+    .ceo-expertise-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
 }
 
 @media (max-width: 768px) {
@@ -327,6 +352,77 @@
 
     .book-grid {
         grid-template-columns: 1fr;
+    }
+
+    /* Shop/Cart/Checkout */
+    .shop-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .cart-layout {
+        grid-template-columns: 1fr;
+    }
+
+    .cart-summary {
+        position: static;
+    }
+
+    .cart-item {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 12px;
+    }
+
+    .cart-item-actions {
+        width: 100%;
+        justify-content: space-between;
+    }
+
+    .checkout-layout {
+        grid-template-columns: 1fr;
+    }
+
+    .checkout-summary {
+        position: static;
+    }
+
+    .payment-methods {
+        flex-direction: column;
+    }
+
+    .order-actions {
+        flex-direction: column;
+    }
+
+    .order-actions .btn {
+        width: 100%;
+    }
+
+    /* CEO Profile */
+    .ceo-intro {
+        grid-template-columns: 1fr;
+        gap: 32px;
+    }
+
+    .ceo-profile-card {
+        max-width: 320px;
+        margin: 0 auto;
+    }
+
+    .ceo-expertise-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .ceo-cert-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .ceo-section {
+        padding: 60px 0;
+    }
+
+    .ceo-intro-section {
+        padding: 60px 0;
     }
 
     .board-table .col-author,

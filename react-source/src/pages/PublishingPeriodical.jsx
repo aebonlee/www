@@ -1,14 +1,25 @@
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import { useLanguage } from '../contexts/LanguageContext';
+import { useCart } from '../contexts/CartContext';
 import useAOS from '../hooks/useAOS';
 import CTA from '../components/CTA';
 import publishingDetails from '../data/publishingDetails';
 
 const PublishingPeriodical = () => {
   const { language, t } = useLanguage();
+  const { addItem } = useCart();
   const data = publishingDetails.periodical;
   const isEn = language === 'en';
+  const [addedId, setAddedId] = useState(null);
   useAOS();
+
+  const handleAddToCart = (product) => {
+    addItem({ id: product.id, title: product.title, titleEn: product.titleEn, price: product.price, category: 'periodical' });
+    setAddedId(product.id);
+    setTimeout(() => setAddedId(null), 1500);
+  };
+
+  const formatPrice = (price) => isEn ? `₩${price.toLocaleString()}` : `${price.toLocaleString()}원`;
 
   useEffect(() => { window.scrollTo(0, 0); }, []);
 
@@ -68,8 +79,44 @@ const PublishingPeriodical = () => {
         </div>
       </section>
 
-      {/* Features */}
+      {/* Products */}
       <section style={{ padding: '80px 0', background: 'var(--bg-white)' }}>
+        <div className="container">
+          <div className="section-header">
+            <h2 className="section-title">{t('shop.title')}</h2>
+          </div>
+          <div className="book-grid">
+            {data.products.map((product, i) => (
+              <div key={i} className="book-card" data-aos="fade-up" data-aos-delay={i * 100}>
+                <div className="book-cover">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                    <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z" />
+                    <polyline points="14 2 14 8 20 8" />
+                    <line x1="16" y1="13" x2="8" y2="13" />
+                    <line x1="16" y1="17" x2="8" y2="17" />
+                  </svg>
+                </div>
+                <div className="book-info">
+                  <h4>{isEn ? product.titleEn : product.title}</h4>
+                  <p className="book-author">{isEn ? product.descriptionEn : product.description}</p>
+                  <div className="book-purchase">
+                    <span className="book-price">{formatPrice(product.price)}</span>
+                    <button
+                      className={`add-to-cart-btn small ${addedId === product.id ? 'added' : ''}`}
+                      onClick={() => handleAddToCart(product)}
+                    >
+                      {addedId === product.id ? t('shop.addedToCart') : t('shop.addToCart')}
+                    </button>
+                  </div>
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* Features */}
+      <section style={{ padding: '80px 0', background: 'var(--bg-light-gray)' }}>
         <div className="container">
           <div className="section-header">
             <h2 className="section-title">{t('common.features')}</h2>

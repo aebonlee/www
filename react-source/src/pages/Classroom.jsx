@@ -1,14 +1,25 @@
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import { useLanguage } from '../contexts/LanguageContext';
+import { useCart } from '../contexts/CartContext';
 import useAOS from '../hooks/useAOS';
 import CTA from '../components/CTA';
 import educationDetails from '../data/educationDetails';
 
 const Classroom = () => {
   const { language, t } = useLanguage();
+  const { addItem } = useCart();
   const data = educationDetails.classroom;
   const isEn = language === 'en';
+  const [addedId, setAddedId] = useState(null);
   useAOS();
+
+  const handleAddToCart = (course) => {
+    addItem({ id: course.id, title: course.title, titleEn: course.titleEn, price: course.price, category: 'course' });
+    setAddedId(course.id);
+    setTimeout(() => setAddedId(null), 1500);
+  };
+
+  const formatPrice = (price) => isEn ? `₩${price.toLocaleString()}` : `${price.toLocaleString()}원`;
 
   useEffect(() => { window.scrollTo(0, 0); }, []);
 
@@ -51,13 +62,22 @@ const Classroom = () => {
             <h2 className="section-title">{t('education.sampleCourses')}</h2>
           </div>
           <div className="course-grid">
-            {data.sampleCourses.map((course, i) => (
+            {data.courses.map((course, i) => (
               <div key={i} className="course-card" data-aos="fade-up" data-aos-delay={i * 80}>
                 <h4>{isEn ? course.titleEn : course.title}</h4>
                 <p>{isEn ? course.descriptionEn : course.description}</p>
                 <div className="course-meta">
                   <span className="course-level">{t('education.level')}: {isEn ? course.levelEn : course.level}</span>
                   <span>{t('education.duration')}: {isEn ? course.durationEn : course.duration}</span>
+                </div>
+                <div className="course-purchase">
+                  <span className="course-price">{formatPrice(course.price)}</span>
+                  <button
+                    className={`add-to-cart-btn small ${addedId === course.id ? 'added' : ''}`}
+                    onClick={() => handleAddToCart(course)}
+                  >
+                    {addedId === course.id ? t('shop.addedToCart') : t('shop.addToCart')}
+                  </button>
                 </div>
               </div>
             ))}
