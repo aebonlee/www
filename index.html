@@ -18,7 +18,9 @@
         <div class="container">
             <div class="nav-wrapper">
                 <div class="logo">
-                    <h1><span class="brand-dream">Dream</span><span class="brand-it">IT</span> <span class="brand-biz">Biz</span></h1>
+                    <a href="index.html">
+                        <h1><span class="brand-dream">Dream</span><span class="brand-it">IT</span> <span class="brand-biz">Biz</span></h1>
+                    </a>
                 </div>
                 <button class="mobile-toggle" id="mobileToggle" aria-label="메뉴 토글">
                     <span></span>
@@ -26,11 +28,51 @@
                     <span></span>
                 </button>
                 <ul class="nav-menu" id="navMenu">
-                    <li><a href="#home" class="nav-link active">홈</a></li>
-                    <li><a href="#services" class="nav-link">서비스</a></li>
-                    <li><a href="#about" class="nav-link">회사소개</a></li>
-                    <li><a href="#contact" class="nav-link">연락처</a></li>
+                    <li><a href="index.html" class="nav-link active">홈</a></li>
+                    <li class="nav-item-dropdown">
+                        <a href="pages/services/index.html" class="nav-link">서비스</a>
+                        <ul class="dropdown-menu">
+                            <li><a href="pages/services/web-development.html">웹개발</a></li>
+                            <li><a href="pages/services/web-hosting.html">웹호스팅</a></li>
+                            <li><a href="pages/services/design.html">디자인</a></li>
+                            <li><a href="pages/services/consulting.html">기업컨설팅</a></li>
+                            <li><a href="pages/services/education.html">기업 맞춤 강의</a></li>
+                            <li><a href="pages/services/publishing.html">출판사업</a></li>
+                        </ul>
+                    </li>
+                    <li class="nav-item-dropdown">
+                        <a href="pages/portfolio/index.html" class="nav-link">포트폴리오</a>
+                        <ul class="dropdown-menu">
+                            <li><a href="pages/portfolio/index.html#sejong">세종대 미래교육원</a></li>
+                            <li><a href="pages/portfolio/index.html#projects">기타 프로젝트</a></li>
+                        </ul>
+                    </li>
+                    <li class="nav-item-dropdown">
+                        <a href="pages/about/index.html" class="nav-link">회사소개</a>
+                        <ul class="dropdown-menu">
+                            <li><a href="pages/about/index.html#company">회사 개요</a></li>
+                            <li><a href="pages/about/index.html#vision">비전</a></li>
+                            <li><a href="pages/about/index.html#history">연혁</a></li>
+                        </ul>
+                    </li>
+                    <li><a href="pages/contact/index.html" class="nav-link">연락처</a></li>
                 </ul>
+                <button class="theme-toggle" id="themeToggle" aria-label="테마 전환">
+                    <svg class="sun-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <circle cx="12" cy="12" r="5"/>
+                        <line x1="12" y1="1" x2="12" y2="3"/>
+                        <line x1="12" y1="21" x2="12" y2="23"/>
+                        <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/>
+                        <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/>
+                        <line x1="1" y1="12" x2="3" y2="12"/>
+                        <line x1="21" y1="12" x2="23" y2="12"/>
+                        <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/>
+                        <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/>
+                    </svg>
+                    <svg class="moon-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/>
+                    </svg>
+                </button>
             </div>
         </div>
     </nav>
@@ -53,8 +95,8 @@
                         종합 IT 서비스를 제공하는 드림아이티비즈입니다
                     </p>
                     <div class="hero-buttons">
-                        <a href="#services" class="btn btn-primary">서비스 알아보기</a>
-                        <a href="#contact" class="btn btn-secondary">문의하기</a>
+                        <a href="pages/services/index.html" class="btn btn-primary">서비스 알아보기</a>
+                        <a href="pages/contact/index.html" class="btn btn-secondary">문의하기</a>
                     </div>
                 </div>
             </div>
@@ -74,7 +116,7 @@
                 <p class="section-subtitle">고객의 성공을 위한 다양한 IT 서비스를 제공합니다</p>
             </div>
             <div class="services-grid">
-                <div class="service-card" data-aos="fade-up">
+                <a href="pages/services/web-development.html" class="service-card" data-aos="fade-up">
                     <div class="service-icon">
                         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
                             <path d="M4 5a1 1 0 011-1h14a1 1 0 011 1v14a1 1 0 01-1 1H5a1 1 0 01-1-1V5z"/>
@@ -91,9 +133,9 @@
                         <li>웹 애플리케이션</li>
                         <li>E-커머스 솔루션</li>
                     </ul>
-                </div>
+                </a>
 
-                <div class="service-card" data-aos="fade-up" data-aos-delay="100">
+                <a href="pages/services/web-hosting.html" class="service-card" data-aos="fade-up" data-aos-delay="100">
                     <div class="service-icon">
                         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
                             <path d="M3 9l9-7 9 7v11a2 2 0 01-2 2H5a2 2 0 01-2-2z"/>
@@ -107,9 +149,9 @@
                         <li>24/7 모니터링</li>
                         <li>SSL 인증서 제공</li>
                     </ul>
-                </div>
+                </a>
 
-                <div class="service-card" data-aos="fade-up" data-aos-delay="200">
+                <a href="pages/services/design.html" class="service-card" data-aos="fade-up" data-aos-delay="200">
                     <div class="service-icon">
                         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
                             <rect x="2" y="3" width="20" height="14" rx="2"/>
@@ -124,9 +166,9 @@
                         <li>브랜드 아이덴티티</li>
                         <li>그래픽 디자인</li>
                     </ul>
-                </div>
+                </a>
 
-                <div class="service-card" data-aos="fade-up" data-aos-delay="300">
+                <a href="pages/services/consulting.html" class="service-card" data-aos="fade-up" data-aos-delay="300">
                     <div class="service-icon">
                         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
                             <path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2"/>
@@ -142,9 +184,9 @@
                         <li>디지털 전환 컨설팅</li>
                         <li>프로세스 최적화</li>
                     </ul>
-                </div>
+                </a>
 
-                <div class="service-card" data-aos="fade-up" data-aos-delay="400">
+                <a href="pages/services/education.html" class="service-card" data-aos="fade-up" data-aos-delay="400">
                     <div class="service-icon">
                         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
                             <path d="M2 3h6a4 4 0 014 4v14a3 3 0 00-3-3H2z"/>
@@ -158,9 +200,9 @@
                         <li>데이터 분석 강의</li>
                         <li>맞춤형 커리큘럼</li>
                     </ul>
-                </div>
+                </a>
 
-                <div class="service-card" data-aos="fade-up" data-aos-delay="500">
+                <a href="pages/services/publishing.html" class="service-card" data-aos="fade-up" data-aos-delay="500">
                     <div class="service-icon">
                         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
                             <path d="M4 19.5A2.5 2.5 0 016.5 17H20"/>
@@ -174,7 +216,61 @@
                         <li>교육 콘텐츠 제작</li>
                         <li>전자책 제작</li>
                     </ul>
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- 포트폴리오 미리보기 -->
+    <section id="portfolio-preview" class="portfolio-preview">
+        <div class="container">
+            <div class="section-header">
+                <h2 class="section-title">Portfolio</h2>
+                <p class="section-subtitle">성공적으로 완수한 프로젝트를 확인해보세요</p>
+            </div>
+            <div class="portfolio-grid">
+                <div class="portfolio-card featured" data-aos="fade-up">
+                    <div class="portfolio-image">
+                        <div class="image-placeholder">
+                            <span class="placeholder-text">세종대학교 미래교육원</span>
+                        </div>
+                    </div>
+                    <div class="portfolio-content">
+                        <span class="portfolio-tag">웹개발 · 디자인</span>
+                        <h3>세종대학교 미래교육원</h3>
+                        <p>cec.sejong.ac.kr - 미래교육원 공식 웹사이트 구축</p>
+                        <a href="pages/portfolio/index.html#sejong" class="btn-link">자세히 보기 →</a>
+                    </div>
                 </div>
+                <div class="portfolio-card" data-aos="fade-up" data-aos-delay="100">
+                    <div class="portfolio-image">
+                        <div class="image-placeholder">
+                            <span class="placeholder-text">기업 웹사이트</span>
+                        </div>
+                    </div>
+                    <div class="portfolio-content">
+                        <span class="portfolio-tag">웹개발</span>
+                        <h3>기업 웹사이트 구축</h3>
+                        <p>다양한 산업의 기업 웹사이트 제작</p>
+                        <a href="pages/portfolio/index.html" class="btn-link">자세히 보기 →</a>
+                    </div>
+                </div>
+                <div class="portfolio-card" data-aos="fade-up" data-aos-delay="200">
+                    <div class="portfolio-image">
+                        <div class="image-placeholder">
+                            <span class="placeholder-text">E-커머스</span>
+                        </div>
+                    </div>
+                    <div class="portfolio-content">
+                        <span class="portfolio-tag">웹개발 · 호스팅</span>
+                        <h3>E-커머스 플랫폼</h3>
+                        <p>온라인 쇼핑몰 구축 및 운영</p>
+                        <a href="pages/portfolio/index.html" class="btn-link">자세히 보기 →</a>
+                    </div>
+                </div>
+            </div>
+            <div class="text-center" style="margin-top: 3rem;">
+                <a href="pages/portfolio/index.html" class="btn btn-primary">전체 포트폴리오 보기</a>
             </div>
         </div>
     </section>
@@ -203,120 +299,27 @@
                             <div class="stat-label">클라이언트+</div>
                         </div>
                         <div class="stat-item">
-                            <div class="stat-number" data-count="10">0</div>
+                            <div class="stat-number" data-count="6">0</div>
                             <div class="stat-label">서비스 분야</div>
                         </div>
                     </div>
+                    <a href="pages/about/index.html" class="btn btn-primary" style="margin-top: 2rem;">회사 더 알아보기</a>
                 </div>
                 <div class="about-image" data-aos="fade-left">
                     <div class="image-placeholder">
                         <svg viewBox="0 0 200 200" fill="none">
                             <defs>
                                 <linearGradient id="grad1" x1="0%" y1="0%" x2="100%" y2="100%">
-                                    <stop offset="0%" style="stop-color:#667eea;stop-opacity:1" />
-                                    <stop offset="100%" style="stop-color:#764ba2;stop-opacity:1" />
+                                    <stop offset="0%" style="stop-color:#1e40af;stop-opacity:1" />
+                                    <stop offset="100%" style="stop-color:#3b82f6;stop-opacity:1" />
                                 </linearGradient>
                             </defs>
                             <circle cx="100" cy="100" r="80" fill="url(#grad1)" opacity="0.2"/>
                             <circle cx="100" cy="100" r="60" fill="url(#grad1)" opacity="0.3"/>
                             <circle cx="100" cy="100" r="40" fill="url(#grad1)" opacity="0.4"/>
-                            <path d="M100 60 L120 100 L100 140 L80 100 Z" fill="#667eea" opacity="0.6"/>
+                            <path d="M100 60 L120 100 L100 140 L80 100 Z" fill="#1e40af" opacity="0.6"/>
                         </svg>
                     </div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- 연락처 섹션 -->
-    <section id="contact" class="contact">
-        <div class="container">
-            <div class="section-header">
-                <h2 class="section-title">Contact Us</h2>
-                <p class="section-subtitle">문의사항이 있으시면 언제든지 연락 주세요</p>
-            </div>
-            <div class="contact-wrapper">
-                <div class="contact-info" data-aos="fade-right">
-                    <div class="info-item">
-                        <div class="info-icon">
-                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                                <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/>
-                                <polyline points="22,6 12,13 2,6"/>
-                            </svg>
-                        </div>
-                        <div class="info-content">
-                            <h3>Email</h3>
-                            <a href="mailto:aebon@dreamitbiz.com">aebon@dreamitbiz.com</a>
-                        </div>
-                    </div>
-                    <div class="info-item">
-                        <div class="info-icon">
-                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                                <path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07 19.5 19.5 0 01-6-6 19.79 19.79 0 01-3.07-8.67A2 2 0 014.11 2h3a2 2 0 012 1.72 12.84 12.84 0 00.7 2.81 2 2 0 01-.45 2.11L8.09 9.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45 12.84 12.84 0 002.81.7A2 2 0 0122 16.92z"/>
-                            </svg>
-                        </div>
-                        <div class="info-content">
-                            <h3>전화</h3>
-                            <a href="tel:010-3700-0629">010-3700-0629</a>
-                        </div>
-                    </div>
-                    <div class="info-item">
-                        <div class="info-icon">
-                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                                <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z"/>
-                                <circle cx="12" cy="10" r="3"/>
-                            </svg>
-                        </div>
-                        <div class="info-content">
-                            <h3>주소</h3>
-                            <p>경기도 수원시 팔달구 매산로 45, 419호</p>
-                        </div>
-                    </div>
-                    <div class="info-item">
-                        <div class="info-icon">
-                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                                <circle cx="12" cy="12" r="10"/>
-                                <polyline points="12 6 12 12 16 14"/>
-                            </svg>
-                        </div>
-                        <div class="info-content">
-                            <h3>영업시간</h3>
-                            <p>평일: 09:00 - 18:00</p>
-                        </div>
-                    </div>
-                    <div class="info-item">
-                        <div class="info-icon">
-                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                                <path d="M21 15a2 2 0 01-2 2H7l-4 4V5a2 2 0 012-2h14a2 2 0 012 2z"/>
-                            </svg>
-                        </div>
-                        <div class="info-content">
-                            <h3>카카오톡 상담</h3>
-                            <p>ID: aebon</p>
-                        </div>
-                    </div>
-                </div>
-                <div class="contact-form" data-aos="fade-left">
-                    <form id="contactForm">
-                        <div class="form-row">
-                            <div class="form-group">
-                                <input type="text" id="name" name="name" placeholder="이름 *" required>
-                            </div>
-                            <div class="form-group">
-                                <input type="tel" id="phone" name="phone" placeholder="전화번호 *" required>
-                            </div>
-                        </div>
-                        <div class="form-group">
-                            <input type="email" id="email" name="email" placeholder="이메일 *" required>
-                        </div>
-                        <div class="form-group">
-                            <input type="text" id="subject" name="subject" placeholder="제목 *" required>
-                        </div>
-                        <div class="form-group">
-                            <textarea id="message" name="message" rows="5" placeholder="메시지를 입력하세요 *" required></textarea>
-                        </div>
-                        <button type="submit" class="btn btn-primary btn-block">문의하기</button>
-                    </form>
                 </div>
             </div>
         </div>
@@ -339,10 +342,11 @@
                 <div class="footer-links">
                     <h4>Quick Links</h4>
                     <ul>
-                        <li><a href="#home">홈</a></li>
-                        <li><a href="#services">서비스</a></li>
-                        <li><a href="#about">회사소개</a></li>
-                        <li><a href="#contact">연락처</a></li>
+                        <li><a href="index.html">홈</a></li>
+                        <li><a href="pages/services/index.html">서비스</a></li>
+                        <li><a href="pages/portfolio/index.html">포트폴리오</a></li>
+                        <li><a href="pages/about/index.html">회사소개</a></li>
+                        <li><a href="pages/contact/index.html">연락처</a></li>
                     </ul>
                 </div>
                 <div class="footer-contact">
