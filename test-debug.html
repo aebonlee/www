@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Debug Test</title>
+    <style>
+        body { font-family: Arial, sans-serif; padding: 20px; }
+        .test { color: red; font-size: 24px; margin: 20px 0; }
+        #root { border: 2px solid blue; padding: 20px; min-height: 200px; }
+    </style>
+</head>
+<body>
+    <h1>디버그 테스트 페이지</h1>
+    <div class="test">이 텍스트가 빨간색이면 CSS가 작동합니다.</div>
+    
+    <h2>React Root Element:</h2>
+    <div id="root">여기에 React 앱이 마운트되어야 합니다.</div>
+    
+    <h2>스크립트 테스트:</h2>
+    <div id="js-test">JavaScript 로드 전</div>
+    
+    <script>
+        document.getElementById('js-test').textContent = 'JavaScript가 작동합니다!';
+        document.getElementById('js-test').style.color = 'green';
+        
+        // React 앱 마운트 확인
+        setTimeout(() => {
+            const root = document.getElementById('root');
+            const hasChildren = root.children.length > 0;
+            const msg = hasChildren ? 
+                '✅ React 앱이 성공적으로 마운트되었습니다!' : 
+                '❌ React 앱이 마운트되지 않았습니다!';
+            console.log(msg);
+            
+            const status = document.createElement('div');
+            status.textContent = msg;
+            status.style.color = hasChildren ? 'green' : 'red';
+            status.style.fontSize = '20px';
+            status.style.fontWeight = 'bold';
+            status.style.marginTop = '20px';
+            document.body.appendChild(status);
+        }, 2000);
+    </script>
+    
+    <!-- React 앱 로드 -->
+    <script type="module" crossorigin src="/assets/index-DYKtkkyM.js"></script>
+    <link rel="stylesheet" crossorigin href="/assets/index-BnnaVUos.css">
+</body>
+</html>
