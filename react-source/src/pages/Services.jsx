@@ -28,13 +28,6 @@ const Services = () => {
       description: '브랜드 아이덴티티부터 UI/UX까지',
       features: ['브랜드 디자인', 'UI/UX 디자인', '편집 디자인']
     },
-    {
-      path: '/services/consulting',
-      icon: <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z" />,
-      title: t('services.consulting'),
-      description: '디지털 전환을 위한 맞춤 컨설팅',
-      features: ['IT 전략 수립', '프로세스 개선', '기술 도입 지원']
-    }
   ];
 
   return (
