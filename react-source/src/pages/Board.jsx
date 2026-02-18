@@ -1,11 +1,22 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
+import { Link } from 'react-router-dom';
 import { useLanguage } from '../contexts/LanguageContext';
+import { getBoardPosts } from '../utils/boardStorage';
+import Pagination from '../components/Pagination';
 import useAOS from '../hooks/useAOS';
+
+const POSTS_PER_PAGE = 10;
 
 const Board = () => {
   const { t } = useLanguage();
   const [activeFilter, setActiveFilter] = useState('all');
+  const [posts, setPosts] = useState([]);
+  const [currentPage, setCurrentPage] = useState(1);
   useAOS();
+
+  useEffect(() => {
+    setPosts(getBoardPosts().sort((a, b) => b.id - a.id));
+  }, []);
 
   const filters = [
     { key: 'all', label: t('community.all') },
@@ -14,17 +25,20 @@ const Board = () => {
     { key: 'qna', label: t('community.qna') }
   ];
 
-  const samplePosts = [
-    { id: 5, category: 'notice', title: '드림아이티비즈 커뮤니티 게시판 오픈 안내', author: '관리자', date: '2026-02-18', views: 42 },
-    { id: 4, category: 'notice', title: '2026년 상반기 교육 일정 안내', author: '관리자', date: '2026-02-15', views: 38 },
-    { id: 3, category: 'free', title: 'React 19 새로운 기능 정리', author: '김개발', date: '2026-02-14', views: 25 },
-    { id: 2, category: 'qna', title: '웹호스팅 SSL 인증서 설정 관련 질문', author: '이호스팅', date: '2026-02-12', views: 18 },
-    { id: 1, category: 'free', title: '맞춤 강의 후기 - Python 데이터 분석 과정', author: '박수강', date: '2026-02-10', views: 31 }
-  ];
-
   const filteredPosts = activeFilter === 'all'
-    ? samplePosts
-    : samplePosts.filter(p => p.category === activeFilter);
+    ? posts
+    : posts.filter(p => p.category === activeFilter);
+
+  const totalPages = Math.ceil(filteredPosts.length / POSTS_PER_PAGE);
+  const paginatedPosts = filteredPosts.slice(
+    (currentPage - 1) * POSTS_PER_PAGE,
+    currentPage * POSTS_PER_PAGE
+  );
+
+  const handleFilterChange = (key) => {
+    setActiveFilter(key);
+    setCurrentPage(1);
+  };
 
   const categoryLabel = (cat) => {
     switch (cat) {
@@ -52,14 +66,14 @@ const Board = () => {
                 <button
                   key={f.key}
                   className={`board-filter-btn ${activeFilter === f.key ? 'active' : ''}`}
-                  onClick={() => setActiveFilter(f.key)}
+                  onClick={() => handleFilterChange(f.key)}
                 >
                   {f.label}
                 </button>
               ))}
             </div>
 
-            {filteredPosts.length > 0 ? (
+            {paginatedPosts.length > 0 ? (
               <table className="board-table">
                 <thead>
                   <tr>
@@ -71,14 +85,14 @@ const Board = () => {
                   </tr>
                 </thead>
                 <tbody>
-                  {filteredPosts.map((post) => (
+                  {paginatedPosts.map((post) => (
                     <tr key={post.id}>
                       <td className="col-num">{post.id}</td>
                       <td className="col-title">
-                        <span className="board-post-link" style={{ cursor: 'default' }}>
+                        <Link to={`/community/board/${post.id}`} className="board-post-link">
                           <span className={`board-category-badge ${post.category}`}>{categoryLabel(post.category)}</span>
                           {post.title}
-                        </span>
+                        </Link>
                       </td>
                       <td className="col-author">{post.author}</td>
                       <td className="col-date">{post.date}</td>
@@ -92,8 +106,14 @@ const Board = () => {
             )}
 
             <div className="board-actions">
-              <button className="board-write-btn">{t('community.writePost')}</button>
+              <Link to="/community/board/write" className="board-write-btn">{t('community.writePost')}</Link>
             </div>
+
+            <Pagination
+              currentPage={currentPage}
+              totalPages={totalPages}
+              onPageChange={setCurrentPage}
+            />
           </div>
         </div>
       </section>

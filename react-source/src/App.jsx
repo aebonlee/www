@@ -27,6 +27,10 @@ const Portfolio = lazy(() => import('./pages/Portfolio'));
 const About = lazy(() => import('./pages/About'));
 const Blog = lazy(() => import('./pages/Blog'));
 const Board = lazy(() => import('./pages/Board'));
+const BoardDetail = lazy(() => import('./pages/BoardDetail'));
+const BoardWrite = lazy(() => import('./pages/BoardWrite'));
+const BlogDetail = lazy(() => import('./pages/BlogDetail'));
+const Gallery = lazy(() => import('./pages/Gallery'));
 const Contact = lazy(() => import('./pages/Contact'));
 const CeoProfile = lazy(() => import('./pages/CeoProfile'));
 const History = lazy(() => import('./pages/History'));
@@ -73,7 +77,12 @@ function App() {
                     <Route path="/about/ceo" element={<CeoProfile />} />
                     <Route path="/about/history" element={<History />} />
                     <Route path="/community/blog" element={<Blog />} />
+                    <Route path="/community/blog/:postId" element={<BlogDetail />} />
                     <Route path="/community/board" element={<Board />} />
+                    <Route path="/community/board/write" element={<BoardWrite />} />
+                    <Route path="/community/board/edit/:id" element={<BoardWrite />} />
+                    <Route path="/community/board/:postId" element={<BoardDetail />} />
+                    <Route path="/community/gallery" element={<Gallery />} />
                     <Route path="/blog" element={<Navigate to="/community/blog" replace />} />
                     <Route path="/contact" element={<Contact />} />
                     <Route path="/shop" element={<Shop />} />

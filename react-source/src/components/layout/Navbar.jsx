@@ -84,7 +84,8 @@ const Navbar = () => {
       activePath: '/community',
       dropdown: [
         { path: '/community/blog', label: t('community.blog') },
-        { path: '/community/board', label: t('community.board') }
+        { path: '/community/board', label: t('community.board') },
+        { path: '/community/gallery', label: t('community.gallery') }
       ]
     },
     {

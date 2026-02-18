@@ -385,3 +385,104 @@
 [data-theme="dark"] .ceo-activity-group h4 {
     border-color: var(--primary-blue);
 }
+
+/* Community Detail / Write / Gallery Dark Mode */
+[data-theme="dark"] .board-detail {
+    background: var(--bg-light-gray);
+    border-color: var(--border-medium);
+}
+
+[data-theme="dark"] .board-detail-header {
+    border-color: var(--border-medium);
+}
+
+[data-theme="dark"] .board-detail-body {
+    color: var(--text-secondary);
+}
+
+[data-theme="dark"] .board-detail-footer {
+    border-color: var(--border-medium);
+}
+
+[data-theme="dark"] .board-btn {
+    background: var(--bg-medium-gray);
+    border-color: var(--border-medium);
+    color: var(--text-secondary);
+}
+
+[data-theme="dark"] .board-btn:hover {
+    border-color: var(--primary-blue);
+    color: var(--primary-blue);
+}
+
+[data-theme="dark"] .board-btn.danger {
+    color: #fca5a5;
+    border-color: #7f1d1d;
+}
+
+[data-theme="dark"] .board-btn.danger:hover {
+    background: #7f1d1d;
+    border-color: #991b1b;
+}
+
+[data-theme="dark"] .board-write {
+    background: var(--bg-light-gray);
+    border-color: var(--border-medium);
+}
+
+[data-theme="dark"] .board-form-group input,
+[data-theme="dark"] .board-form-group select,
+[data-theme="dark"] .board-form-group textarea {
+    background: var(--bg-medium-gray);
+    border-color: var(--border-medium);
+    color: var(--text-primary);
+}
+
+[data-theme="dark"] .board-form-actions {
+    border-color: var(--border-medium);
+}
+
+[data-theme="dark"] .pagination-btn {
+    background: var(--bg-light-gray);
+    border-color: var(--border-medium);
+    color: var(--text-secondary);
+}
+
+[data-theme="dark"] .pagination-btn.active {
+    background: var(--primary-blue);
+    border-color: var(--primary-blue);
+    color: #fff;
+}
+
+[data-theme="dark"] .gallery-card {
+    background: var(--bg-light-gray);
+    border-color: var(--border-medium);
+}
+
+[data-theme="dark"] .gallery-filter-btn {
+    background: var(--bg-light-gray);
+    border-color: var(--border-medium);
+    color: var(--text-secondary);
+}
+
+[data-theme="dark"] .gallery-filter-btn.active {
+    background: var(--primary-blue);
+    border-color: var(--primary-blue);
+    color: #fff;
+}
+
+[data-theme="dark"] .lightbox-content {
+    background: var(--bg-light-gray);
+}
+
+[data-theme="dark"] .blog-detail-category {
+    background: rgba(74, 143, 231, 0.15);
+}
+
+[data-theme="dark"] .blog-detail-excerpt {
+    border-color: var(--border-medium);
+}
+
+[data-theme="dark"] .blog-detail-footer {
+    border-color: var(--border-medium);
+}

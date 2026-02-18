@@ -1,82 +1,71 @@
+import { useState, useEffect } from 'react';
+import { Link } from 'react-router-dom';
+import { useLanguage } from '../contexts/LanguageContext';
+import { getBlogPosts } from '../utils/boardStorage';
+import Pagination from '../components/Pagination';
 import useAOS from '../hooks/useAOS';
 
+const POSTS_PER_PAGE = 6;
+
 const Blog = () => {
+  const { t, language } = useLanguage();
+  const [posts, setPosts] = useState([]);
+  const [currentPage, setCurrentPage] = useState(1);
   useAOS();
 
-  const posts = [
-    {
-      title: '2026 웹 개발 트렌드: AI와 함께하는 개발',
-      date: '2026.02.10',
-      category: 'IT 트렌드',
-      excerpt: '2026년 웹 개발의 핵심 트렌드는 AI 기반 코드 생성, 서버리스 아키텍처, 그리고 WebAssembly의 확산입니다.',
-      icon: '🌐'
-    },
-    {
-      title: 'React 19의 새로운 기능과 마이그레이션 가이드',
-      date: '2026.01.25',
-      category: '기술',
-      excerpt: 'React 19의 주요 변경사항과 기존 프로젝트를 안전하게 마이그레이션하는 방법을 알아봅니다.',
-      icon: '⚛️'
-    },
-    {
-      title: 'UI/UX 디자인 트렌드 2026',
-      date: '2026.01.15',
-      category: '디자인',
-      excerpt: '미니멀리즘에서 뉴모피즘까지, 2026년 주목해야 할 UI/UX 디자인 트렌드를 소개합니다.',
-      icon: '🎨'
-    },
-    {
-      title: '클라우드 네이티브 호스팅의 장점',
-      date: '2026.01.05',
-      category: '호스팅',
-      excerpt: '클라우드 네이티브 호스팅이 기존 호스팅 대비 어떤 이점을 제공하는지 비교 분석합니다.',
-      icon: '☁️'
-    },
-    {
-      title: '중소기업 디지털 전환 성공 사례',
-      date: '2025.12.20',
-      category: '컨설팅',
-      excerpt: '드림아이티비즈가 함께한 중소기업 디지털 전환 성공 사례를 공유합니다.',
-      icon: '💼'
-    },
-    {
-      title: '효과적인 기업 IT 교육 설계 방법론',
-      date: '2025.12.10',
-      category: '교육',
-      excerpt: '기업 맞춤 IT 교육의 효과를 극대화하는 커리큘럼 설계 방법론을 소개합니다.',
-      icon: '📚'
-    }
-  ];
+  useEffect(() => {
+    setPosts(getBlogPosts().sort((a, b) => b.id - a.id));
+  }, []);
+
+  const totalPages = Math.ceil(posts.length / POSTS_PER_PAGE);
+  const paginatedPosts = posts.slice(
+    (currentPage - 1) * POSTS_PER_PAGE,
+    currentPage * POSTS_PER_PAGE
+  );
 
   return (
     <>
       <section className="page-header">
         <div className="container">
-          <h1 className="page-title">블로그</h1>
-          <p className="page-description">IT 트렌드, 기술 소식, 그리고 드림아이티비즈의 이야기를 공유합니다</p>
+          <h1 className="page-title">{t('community.blogTitle')}</h1>
+          <p className="page-description">{t('community.blogSubtitle')}</p>
         </div>
       </section>
 
       <section style={{ padding: '80px 0', background: 'var(--bg-white)' }}>
         <div className="container">
           <div className="blog-grid">
-            {posts.map((post, i) => (
-              <article key={i} className="blog-card" data-aos="fade-up" data-aos-delay={i * 50}>
+            {paginatedPosts.map((post, i) => (
+              <Link
+                to={`/community/blog/${post.id}`}
+                key={post.id}
+                className="blog-card"
+                data-aos="fade-up"
+                data-aos-delay={i * 50}
+                style={{ textDecoration: 'none', color: 'inherit' }}
+              >
                 <div className="blog-image">
                   <span className="blog-image-icon">{post.icon}</span>
                 </div>
                 <div className="blog-content">
                   <div className="blog-meta">
-                    <span className="blog-category">{post.category}</span>
+                    <span className="blog-category">
+                      {language === 'en' ? post.categoryEn : post.category}
+                    </span>
                     <span className="blog-date">{post.date}</span>
                   </div>
-                  <h3>{post.title}</h3>
-                  <p>{post.excerpt}</p>
-                  <span className="blog-link">자세히 보기 →</span>
+                  <h3>{language === 'en' ? post.titleEn : post.title}</h3>
+                  <p>{language === 'en' ? post.excerptEn : post.excerpt}</p>
+                  <span className="blog-link">{t('community.readMore')} →</span>
                 </div>
-              </article>
+              </Link>
             ))}
           </div>
+          <Pagination
+            currentPage={currentPage}
+            totalPages={totalPages}
+            onPageChange={setCurrentPage}
+          />
         </div>
       </section>
     </>
