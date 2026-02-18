@@ -1,0 +1,235 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="DreamIT Biz - IT Solutions Provider: Web Development, Hosting, Design, Consulting, Education, Publishing">
+    <title>DreamIT Biz | IT Solutions & Services</title>
+    <link rel="stylesheet" href="../assets/css/style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;900&display=swap" rel="stylesheet">
+</head>
+<body style="font-family: 'Inter', sans-serif;">
+    <nav class="navbar" id="navbar">
+        <div class="container">
+            <div class="nav-wrapper">
+                <div class="logo">
+                    <a href="index.html">
+                        <h1><span class="brand-dream">Dream</span><span class="brand-it">IT</span> <span class="brand-biz">Biz</span></h1>
+                    </a>
+                </div>
+                <ul class="nav-menu" id="navMenu">
+                    <li><a href="index.html" class="nav-link active">Home</a></li>
+                    <li><a href="#services" class="nav-link">Services</a></li>
+                    <li><a href="#about" class="nav-link">About</a></li>
+                    <li><a href="#contact" class="nav-link">Contact</a></li>
+                    <li><a href="../index.html" class="nav-link" style="color: var(--primary-blue);">한국어</a></li>
+                </ul>
+                <div style="display: flex; align-items: center; gap: 16px;">
+                    <button class="theme-toggle" id="themeToggle" aria-label="Toggle theme">
+                        <svg class="sun-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/>
+                            <line x1="12" y1="21" x2="12" y2="23"/><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/>
+                            <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/><line x1="1" y1="12" x2="3" y2="12"/>
+                            <line x1="21" y1="12" x2="23" y2="12"/><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/>
+                            <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/>
+                        </svg>
+                        <svg class="moon-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/>
+                        </svg>
+                    </button>
+                    <button class="mobile-toggle" id="mobileToggle" aria-label="Toggle menu">
+                        <span></span><span></span><span></span>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <section class="hero" id="home">
+        <div class="hero-background">
+            <div class="gradient-overlay"></div>
+            <div class="particles" id="particles"></div>
+        </div>
+        <div class="container">
+            <div class="hero-content">
+                <h2 class="hero-title">
+                    <span class="title-line">Innovative IT Solutions</span>
+                    <span class="title-line">for Your <span class="highlight">Future</span></span>
+                </h2>
+                <p class="hero-description">
+                    Comprehensive IT services from web development to consulting,<br>
+                    education, and publishing by DreamIT Biz
+                </p>
+                <div class="hero-buttons">
+                    <a href="#services" class="btn btn-primary">Our Services</a>
+                    <a href="#contact" class="btn btn-secondary">Contact Us</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="services" style="padding: 80px 0; background: var(--bg-white);">
+        <div class="container">
+            <div class="section-header">
+                <h2 class="section-title">Our Services</h2>
+                <p class="section-subtitle">Comprehensive IT solutions tailored to your needs</p>
+            </div>
+            <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 32px; margin-top: 60px;">
+                <div style="background: var(--bg-light-gray); padding: 40px 32px; border-radius: 8px;" data-aos="fade-up">
+                    <h3 style="font-size: 22px; font-weight: 700; margin-bottom: 12px;">Web Development</h3>
+                    <p style="font-size: 15px; color: var(--text-secondary); line-height: 1.6;">
+                        Custom web solutions from responsive websites to complex web applications
+                    </p>
+                </div>
+                <div style="background: var(--bg-light-gray); padding: 40px 32px; border-radius: 8px;" data-aos="fade-up" data-aos-delay="100">
+                    <h3 style="font-size: 22px; font-weight: 700; margin-bottom: 12px;">Web Hosting</h3>
+                    <p style="font-size: 15px; color: var(--text-secondary); line-height: 1.6;">
+                        Reliable and fast hosting services with 99.9% uptime guarantee
+                    </p>
+                </div>
+                <div style="background: var(--bg-light-gray); padding: 40px 32px; border-radius: 8px;" data-aos="fade-up" data-aos-delay="200">
+                    <h3 style="font-size: 22px; font-weight: 700; margin-bottom: 12px;">Design</h3>
+                    <p style="font-size: 15px; color: var(--text-secondary); line-height: 1.6;">
+                        Creative UI/UX design and brand identity solutions
+                    </p>
+                </div>
+                <div style="background: var(--bg-light-gray); padding: 40px 32px; border-radius: 8px;" data-aos="fade-up">
+                    <h3 style="font-size: 22px; font-weight: 700; margin-bottom: 12px;">IT Consulting</h3>
+                    <p style="font-size: 15px; color: var(--text-secondary); line-height: 1.6;">
+                        Strategic IT consulting for digital transformation
+                    </p>
+                </div>
+                <div style="background: var(--bg-light-gray); padding: 40px 32px; border-radius: 8px;" data-aos="fade-up" data-aos-delay="100">
+                    <h3 style="font-size: 22px; font-weight: 700; margin-bottom: 12px;">Corporate Education</h3>
+                    <p style="font-size: 15px; color: var(--text-secondary); line-height: 1.6;">
+                        Customized IT training programs for your organization
+                    </p>
+                </div>
+                <div style="background: var(--bg-light-gray); padding: 40px 32px; border-radius: 8px;" data-aos="fade-up" data-aos-delay="200">
+                    <h3 style="font-size: 22px; font-weight: 700; margin-bottom: 12px;">Publishing</h3>
+                    <p style="font-size: 15px; color: var(--text-secondary); line-height: 1.6;">
+                        IT-specialized books and educational content publishing
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="about" style="padding: 80px 0; background: var(--bg-light-gray);">
+        <div class="container">
+            <div class="about-wrapper">
+                <div class="about-content" data-aos="fade-right">
+                    <h2 class="section-title" style="text-align: left;">About DreamIT Biz</h2>
+                    <p class="about-description">
+                        DreamIT Biz is a comprehensive IT solutions provider specializing in 
+                        web development, hosting, design, consulting, education, and publishing.
+                    </p>
+                    <p class="about-description">
+                        Since 2020, we have been helping businesses succeed in the digital age 
+                        with innovative solutions and expert services.
+                    </p>
+                    <div style="display: flex; gap: 32px; margin-top: 32px;">
+                        <div>
+                            <div style="font-size: 36px; font-weight: 700; color: var(--primary-blue);">100+</div>
+                            <div style="font-size: 14px; color: var(--text-secondary);">Projects</div>
+                        </div>
+                        <div>
+                            <div style="font-size: 36px; font-weight: 700; color: var(--primary-blue);">50+</div>
+                            <div style="font-size: 14px; color: var(--text-secondary);">Clients</div>
+                        </div>
+                        <div>
+                            <div style="font-size: 36px; font-weight: 700; color: var(--primary-blue);">6</div>
+                            <div style="font-size: 14px; color: var(--text-secondary);">Services</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="about-image" data-aos="fade-left">
+                    <div class="image-placeholder">
+                        <svg viewBox="0 0 200 200" fill="none">
+                            <defs>
+                                <linearGradient id="grad1" x1="0%" y1="0%" x2="100%" y2="100%">
+                                    <stop offset="0%" style="stop-color:#0066CC;stop-opacity:1" />
+                                    <stop offset="100%" style="stop-color:#3385D6;stop-opacity:1" />
+                                </linearGradient>
+                            </defs>
+                            <circle cx="100" cy="100" r="80" fill="url(#grad1)" opacity="0.2"/>
+                            <circle cx="100" cy="100" r="60" fill="url(#grad1)" opacity="0.3"/>
+                            <circle cx="100" cy="100" r="40" fill="url(#grad1)" opacity="0.5"/>
+                        </svg>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="contact" style="padding: 80px 0; background: var(--bg-white);">
+        <div class="container">
+            <div class="section-header">
+                <h2 class="section-title">Contact Us</h2>
+                <p class="section-subtitle">Get in touch with us for any inquiries</p>
+            </div>
+            <div style="max-width: 800px; margin: 60px auto 0; text-align: center;">
+                <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 32px;">
+                    <div>
+                        <div style="font-size: 32px; margin-bottom: 8px;">📧</div>
+                        <h4 style="font-size: 14px; font-weight: 600; margin-bottom: 8px;">Email</h4>
+                        <p style="font-size: 14px; color: var(--text-secondary);">aebon@dreamitbiz.com</p>
+                    </div>
+                    <div>
+                        <div style="font-size: 32px; margin-bottom: 8px;">📞</div>
+                        <h4 style="font-size: 14px; font-weight: 600; margin-bottom: 8px;">Phone</h4>
+                        <p style="font-size: 14px; color: var(--text-secondary);">+82-10-3700-0629</p>
+                    </div>
+                    <div>
+                        <div style="font-size: 32px; margin-bottom: 8px;">📍</div>
+                        <h4 style="font-size: 14px; font-weight: 600; margin-bottom: 8px;">Address</h4>
+                        <p style="font-size: 14px; color: var(--text-secondary);">Suwon, Gyeonggi-do, Korea</p>
+                    </div>
+                </div>
+                <div style="margin-top: 40px;">
+                    <a href="../pages/contact/index.html" class="btn btn-primary">Contact Form</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-brand">
+                    <h3><span class="brand-dream">Dream</span><span class="brand-it">IT</span> <span class="brand-biz">Biz</span></h3>
+                    <p>Innovative IT solutions for your business future</p>
+                    <div class="company-info">
+                        <p><strong>DreamIT Biz</strong></p>
+                        <p>CEO: Aebon Lee</p>
+                        <p>Business Registration: 601-45-20154</p>
+                    </div>
+                </div>
+                <div class="footer-links">
+                    <h4>Quick Links</h4>
+                    <ul>
+                        <li><a href="index.html">Home</a></li>
+                        <li><a href="#services">Services</a></li>
+                        <li><a href="#about">About</a></li>
+                        <li><a href="#contact">Contact</a></li>
+                    </ul>
+                </div>
+                <div class="footer-contact">
+                    <h4>Contact</h4>
+                    <p>📍 419, 45 Maesan-ro, Paldal-gu, Suwon-si, Gyeonggi-do</p>
+                    <p>📧 aebon@dreamitbiz.com</p>
+                    <p>📞 +82-10-3700-0629</p>
+                    <p>💬 KakaoTalk: aebon</p>
+                    <p class="business-hours">Weekdays: 09:00 ~ 18:00</p>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2020 DreamIT Biz. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+    <script src="../assets/js/script.js"></script>
+</body>
+</html>
