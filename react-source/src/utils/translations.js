@@ -63,7 +63,9 @@ export const translations = {
       supportedFormats: '지원 포맷',
       publicationTypes: '간행물 유형',
       bookList: '출판 도서',
-      material: '강의안 및 실습자료'
+      material: '강의안 및 실습자료',
+      materialTitle: '강의안 및 실습자료',
+      materialDesc: '전문 교육을 위한 강의안과 실습자료 제작'
     },
     community: {
       blog: '블로그',
@@ -257,7 +259,9 @@ export const translations = {
       supportedFormats: 'Supported Formats',
       publicationTypes: 'Publication Types',
       bookList: 'Published Books',
-      material: 'Lecture Notes & Materials'
+      material: 'Lecture Notes & Materials',
+      materialTitle: 'Lecture Notes & Materials',
+      materialDesc: 'Professional lecture notes and practice materials for education'
     },
     community: {
       blog: 'Blog',

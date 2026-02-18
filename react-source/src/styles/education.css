@@ -72,6 +72,11 @@
     grid-template-columns: repeat(3, 1fr);
 }
 
+/* 4-column category grid */
+.category-grid.four-col {
+    grid-template-columns: repeat(4, 1fr);
+}
+
 /* Course Grid - Online Classroom */
 .course-grid {
     display: grid;

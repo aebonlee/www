@@ -17,7 +17,7 @@ const Publishing = () => {
 
       <section style={{ padding: '80px 0', background: 'var(--bg-white)' }}>
         <div className="container">
-          <div className="category-grid three-col">
+          <div className="category-grid four-col">
             <Link to="/publishing/ebook" className="category-card" data-aos="fade-up">
               <div className="category-icon">
                 <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
@@ -54,6 +54,18 @@ const Publishing = () => {
               </div>
               <h3>{t('publishing.bookTitle')}</h3>
               <p>{t('publishing.bookDesc')}</p>
+              <span className="card-arrow">{t('common.learnMore')} →</span>
+            </Link>
+
+            <Link to="/publishing/material" className="category-card" data-aos="fade-up" data-aos-delay="300">
+              <div className="category-icon">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                  <path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z" />
+                  <path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z" />
+                </svg>
+              </div>
+              <h3>{t('publishing.materialTitle')}</h3>
+              <p>{t('publishing.materialDesc')}</p>
               <span className="card-arrow">{t('common.learnMore')} →</span>
             </Link>
           </div>

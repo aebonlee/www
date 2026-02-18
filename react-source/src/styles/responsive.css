@@ -167,6 +167,10 @@
         grid-template-columns: repeat(2, 1fr);
     }
 
+    .category-grid.four-col {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
     /* Shop/Cart/Checkout */
     .shop-grid {
         grid-template-columns: repeat(2, 1fr);
@@ -338,7 +342,8 @@
 
     /* Education/Publishing/Board */
     .category-grid,
-    .category-grid.three-col {
+    .category-grid.three-col,
+    .category-grid.four-col {
         grid-template-columns: 1fr;
     }
 
