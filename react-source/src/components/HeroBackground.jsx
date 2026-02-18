@@ -1,6 +1,6 @@
 import { useMemo } from 'react';
 
-/* ── Slide 0 (Blue): Floating Particles ── */
+/* ── Floating Particles ── */
 const ParticlesBg = ({ isActive }) => {
   const items = useMemo(() =>
     Array.from({ length: 30 }, (_, i) => ({
@@ -33,129 +33,7 @@ const ParticlesBg = ({ isActive }) => {
   );
 };
 
-/* ── Slide 1: Matrix Code Rain — neutral white tones ── */
-const MatrixBg = ({ isActive }) => {
-  const cols = useMemo(() =>
-    Array.from({ length: 24 }, (_, i) => ({
-      id: i,
-      left: `${(i / 24) * 100 + Math.random() * 2}%`,
-      delay: `${Math.random() * 5}s`,
-      duration: `${3 + Math.random() * 4}s`,
-      chars: Array.from({ length: 8 + Math.floor(Math.random() * 8) }, () =>
-        String.fromCharCode(0x30A0 + Math.floor(Math.random() * 96))
-      ).join('\n'),
-    })), []);
-
-  return (
-    <div className="hero-bg-effect matrix-bg">
-      {cols.map((c) => (
-        <span
-          key={c.id}
-          className="matrix-col"
-          style={{
-            left: c.left,
-            animationDelay: c.delay,
-            animationDuration: c.duration,
-            animationPlayState: isActive ? 'running' : 'paused',
-          }}
-        >
-          {c.chars}
-        </span>
-      ))}
-    </div>
-  );
-};
-
-/* ── Slide 2: Network Nodes — neutral white tones ── */
-const NetworkBg = ({ isActive }) => {
-  const nodes = useMemo(() =>
-    Array.from({ length: 18 }, (_, i) => ({
-      id: i,
-      cx: Math.random() * 100,
-      cy: Math.random() * 100,
-      r: 2 + Math.random() * 3,
-      delay: `${Math.random() * 6}s`,
-      duration: `${8 + Math.random() * 8}s`,
-    })), []);
-
-  const lines = useMemo(() => {
-    const l = [];
-    for (let i = 0; i < nodes.length; i++) {
-      for (let j = i + 1; j < nodes.length; j++) {
-        const dx = nodes[i].cx - nodes[j].cx;
-        const dy = nodes[i].cy - nodes[j].cy;
-        if (Math.sqrt(dx * dx + dy * dy) < 35) {
-          l.push({ id: `${i}-${j}`, x1: nodes[i].cx, y1: nodes[i].cy, x2: nodes[j].cx, y2: nodes[j].cy });
-        }
-      }
-    }
-    return l;
-  }, [nodes]);
-
-  return (
-    <div className="hero-bg-effect network-bg">
-      <svg viewBox="0 0 100 100" preserveAspectRatio="none" style={{ width: '100%', height: '100%' }}>
-        {lines.map((ln) => (
-          <line
-            key={ln.id}
-            x1={`${ln.x1}%`} y1={`${ln.y1}%`}
-            x2={`${ln.x2}%`} y2={`${ln.y2}%`}
-            stroke="rgba(255,255,255,0.12)"
-            strokeWidth="0.15"
-          />
-        ))}
-        {nodes.map((n) => (
-          <circle
-            key={n.id}
-            cx={`${n.cx}%`} cy={`${n.cy}%`} r={n.r}
-            fill="rgba(255,255,255,0.25)"
-            className="network-node"
-            style={{
-              animationDelay: n.delay,
-              animationDuration: n.duration,
-              animationPlayState: isActive ? 'running' : 'paused',
-            }}
-          />
-        ))}
-      </svg>
-    </div>
-  );
-};
-
-/* ── Slide 3: Rising Orbs — neutral white tones ── */
-const OrbsBg = ({ isActive }) => {
-  const orbs = useMemo(() =>
-    Array.from({ length: 16 }, (_, i) => ({
-      id: i,
-      left: `${Math.random() * 100}%`,
-      size: `${6 + Math.random() * 14}px`,
-      delay: `${Math.random() * 8}s`,
-      duration: `${6 + Math.random() * 6}s`,
-      opacity: 0.3 + Math.random() * 0.3,
-    })), []);
-
-  return (
-    <div className="hero-bg-effect orbs-bg">
-      {orbs.map((o) => (
-        <span
-          key={o.id}
-          className="orb"
-          style={{
-            left: o.left,
-            width: o.size,
-            height: o.size,
-            animationDelay: o.delay,
-            animationDuration: o.duration,
-            background: `radial-gradient(circle, rgba(255,255,255,${o.opacity}), rgba(255,255,255,0))`,
-            animationPlayState: isActive ? 'running' : 'paused',
-          }}
-        />
-      ))}
-    </div>
-  );
-};
-
-/* ── Slide 4: Geometric Shapes — neutral white tones ── */
+/* ── Geometric Shapes ── */
 const GeometricBg = ({ isActive }) => {
   const shapes = useMemo(() =>
     Array.from({ length: 12 }, (_, i) => ({
@@ -191,7 +69,8 @@ const GeometricBg = ({ isActive }) => {
   );
 };
 
-const backgrounds = [ParticlesBg, MatrixBg, GeometricBg, ParticlesBg, MatrixBg];
+/* Geometric + Particles 두 가지만 슬라이드별 교차 적용 */
+const backgrounds = [GeometricBg, ParticlesBg, GeometricBg, ParticlesBg, GeometricBg];
 
 const HeroBackground = ({ slideIndex, isActive }) => {
   const Bg = backgrounds[slideIndex];

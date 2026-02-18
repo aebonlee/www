@@ -20,6 +20,7 @@ const HeroCarousel = () => {
   const { t } = useLanguage();
   const [current, setCurrent] = useState(0);
   const [isPaused, setIsPaused] = useState(false);
+  const directionRef = useRef(1); // 1 = forward, -1 = backward (ping-pong)
   const touchStartX = useRef(0);
   const heroRef = useRef(null);
 
@@ -29,15 +30,24 @@ const HeroCarousel = () => {
     setCurrent(((idx % SLIDE_COUNT) + SLIDE_COUNT) % SLIDE_COUNT);
   }, []);
 
+  // Ping-pong auto-advance: 0→1→2→3→4→3→2→1→0→1→...
+  const autoNext = useCallback(() => {
+    setCurrent((prev) => {
+      if (prev >= SLIDE_COUNT - 1) directionRef.current = -1;
+      if (prev <= 0) directionRef.current = 1;
+      return prev + directionRef.current;
+    });
+  }, []);
+
   const next = useCallback(() => goTo(current + 1), [current, goTo]);
   const prev = useCallback(() => goTo(current - 1), [current, goTo]);
 
-  // Auto-play
+  // Auto-play (ping-pong)
   useEffect(() => {
     if (isPaused) return;
-    const id = setInterval(next, AUTO_PLAY_MS);
+    const id = setInterval(autoNext, AUTO_PLAY_MS);
     return () => clearInterval(id);
-  }, [isPaused, next]);
+  }, [isPaused, autoNext]);
 
   // Keyboard navigation
   useEffect(() => {
