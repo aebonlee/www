@@ -54,15 +54,18 @@
 
 .cta-content .btn-primary,
 .cta-content .btn-primary-large {
-    background: var(--bg-white);
-    color: var(--primary-blue);
-    border-color: var(--bg-white);
+    background: #FFFFFF;
+    color: #0046C8;
+    border-color: #FFFFFF;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
 }
 
 .cta-content .btn-primary:hover,
 .cta-content .btn-primary-large:hover {
-    background: var(--bg-light-gray);
-    border-color: var(--bg-light-gray);
+    background: #F0F4FF;
+    border-color: #F0F4FF;
+    transform: translateY(-2px);
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.2);
 }
 
 /* Reviews Section */

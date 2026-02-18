@@ -118,6 +118,12 @@
     background: var(--bg-white);
     border: 1px solid var(--border-light);
     border-radius: var(--radius-lg);
+    transition: var(--transition-base);
+}
+
+.vision-card:hover {
+    box-shadow: var(--shadow-lg);
+    transform: translateY(-4px);
 }
 
 .vision-card h3 {

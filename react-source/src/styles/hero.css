@@ -95,6 +95,35 @@
     flex-wrap: wrap;
 }
 
+/* Hero buttons on dark gradient background */
+.hero-buttons .btn-primary {
+    background: #FFFFFF;
+    color: #0046C8;
+    border-color: #FFFFFF;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+}
+
+.hero-buttons .btn-primary:hover {
+    background: #F0F4FF;
+    border-color: #F0F4FF;
+    transform: translateY(-2px);
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.2);
+}
+
+.hero-buttons .btn-secondary {
+    background: transparent;
+    color: #FFFFFF;
+    border-color: rgba(255, 255, 255, 0.5);
+}
+
+.hero-buttons .btn-secondary:hover {
+    background: rgba(255, 255, 255, 0.15);
+    border-color: rgba(255, 255, 255, 0.8);
+    color: #FFFFFF;
+    transform: translateY(-2px);
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.15);
+}
+
 /* Scroll Indicator */
 .scroll-indicator {
     position: absolute;

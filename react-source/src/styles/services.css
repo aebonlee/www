@@ -186,6 +186,12 @@
     padding: 24px;
     border-radius: var(--radius-md);
     text-align: center;
+    transition: var(--transition-base);
+}
+
+.tech-card:hover {
+    box-shadow: var(--shadow-md);
+    transform: translateY(-2px);
 }
 
 .tech-card h4 {
@@ -259,10 +265,20 @@
     transition: var(--transition-base);
 }
 
+.pricing-card:hover {
+    box-shadow: var(--shadow-lg);
+    transform: translateY(-4px);
+}
+
 .pricing-card.featured {
     border: 2px solid var(--primary-blue);
     box-shadow: var(--shadow-lg);
     transform: scale(1.05);
+}
+
+.pricing-card.featured:hover {
+    box-shadow: var(--shadow-xl);
+    transform: scale(1.05) translateY(-4px);
 }
 
 .pricing-card h3 {
