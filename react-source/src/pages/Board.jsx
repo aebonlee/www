@@ -75,10 +75,10 @@ const Board = () => {
                     <tr key={post.id}>
                       <td className="col-num">{post.id}</td>
                       <td className="col-title">
-                        <a href="#!">
+                        <span className="board-post-link" style={{ cursor: 'default' }}>
                           <span className={`board-category-badge ${post.category}`}>{categoryLabel(post.category)}</span>
                           {post.title}
-                        </a>
+                        </span>
                       </td>
                       <td className="col-author">{post.author}</td>
                       <td className="col-date">{post.date}</td>

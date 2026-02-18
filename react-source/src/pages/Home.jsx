@@ -12,7 +12,7 @@ const Home = () => {
 
   const stat1 = useCountUp(50, 2000);
   const stat2 = useCountUp(98, 2000);
-  const stat3 = useCountUp(5, 2000);
+  const stat3 = useCountUp(22, 2000);
 
   return (
     <>
@@ -55,8 +55,8 @@ const Home = () => {
       <section id="services" style={{ padding: '80px 0', background: 'var(--bg-white)' }}>
         <div className="container">
           <div className="section-header">
-            <h2 className="section-title">Our Services</h2>
-            <p className="section-subtitle">드림아이티비즈가 제공하는 전문 IT 서비스</p>
+            <h2 className="section-title">{t('sections.ourServices')}</h2>
+            <p className="section-subtitle">{t('sections.servicesSubtitle')}</p>
           </div>
           <div className="services-grid">
             {[
@@ -106,8 +106,8 @@ const Home = () => {
       <section id="portfolio" style={{ padding: '80px 0', background: 'var(--bg-white)' }}>
         <div className="container">
           <div className="section-header">
-            <h2 className="section-title">Portfolio</h2>
-            <p className="section-subtitle">성공적으로 완수한 프로젝트를 소개합니다</p>
+            <h2 className="section-title">{t('sections.portfolio')}</h2>
+            <p className="section-subtitle">{t('sections.portfolioSubtitle')}</p>
           </div>
           <div className="portfolio-grid">
             <Link to="/portfolio#sejong" className="portfolio-card" data-aos="fade-up">
@@ -155,8 +155,8 @@ const Home = () => {
       <section style={{ padding: '80px 0', background: 'var(--bg-light-gray)' }}>
         <div className="container">
           <div className="section-header">
-            <h2 className="section-title">고객 후기</h2>
-            <p className="section-subtitle">드림아이티비즈와 함께한 고객들의 생생한 후기</p>
+            <h2 className="section-title">{t('sections.reviews')}</h2>
+            <p className="section-subtitle">{t('sections.reviewsSubtitle')}</p>
           </div>
           <div className="reviews-grid">
             {[
