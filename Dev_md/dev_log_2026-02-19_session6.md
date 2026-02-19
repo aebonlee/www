@@ -120,6 +120,67 @@
 
 ---
 
+## 세션 21: useAOS 동적 요소 감지 버그 수정 (블로그/갤러리 투명 문제 해결)
+
+**커밋**: `83e4a73` fix: useAOS 동적 요소 감지 + Blog/Gallery 로딩/빈상태 처리
+
+### 근본 원인 분석
+
+블로그 페이지가 아무것도 표시하지 않고, 갤러리 페이지가 공허한 영역으로 보이던 문제의 **근본 원인**을 발견하여 수정.
+
+#### 문제 메커니즘
+
+1. CSS 규칙 `[data-aos] { opacity: 0; }` — AOS 애니메이션용 초기 투명 처리
+2. `useAOS()` 훅이 컴포넌트 마운트 시 `document.querySelectorAll('[data-aos]')`로 **기존 DOM 요소만 관찰**
+3. Blog/Gallery 카드는 Supabase 비동기 데이터 로드 **이후** 렌더링됨
+4. 새로 추가된 카드에 `data-aos="fade-up"` 속성이 있지만 IntersectionObserver가 **관찰하지 않음**
+5. 결과: 카드가 `opacity: 0` 상태로 영구 유지 → 투명 = "빈 영역" / "아무것도 없음"
+
+#### Board가 정상이었던 이유
+
+Board는 컨테이너 `<div data-aos="fade-up">`에만 AOS 속성이 있고, 이 div는 데이터 로드 전에도 항상 DOM에 존재. 따라서 마운트 시점 IntersectionObserver가 정상 관찰.
+
+### 수정 파일 (3개)
+
+| 파일 | 변경 내용 |
+|------|----------|
+| `src/hooks/useAOS.js` | `MutationObserver` 추가 — DOM에 새로운 `[data-aos]` 요소가 추가될 때 자동으로 IntersectionObserver에 등록 |
+| `src/pages/Blog.jsx` | `loading` 상태 관리 + 데이터 없을 때 빈 목록 안내 메시지 표시 |
+| `src/pages/Gallery.jsx` | `loading` 상태 관리 + 데이터 없을 때 빈 목록 안내 메시지 표시 |
+
+### useAOS.js 핵심 변경
+
+```js
+// 기존: 마운트 시 1회만 스캔
+const elements = document.querySelectorAll('[data-aos]');
+elements.forEach((el) => observer.observe(el));
+
+// 수정: MutationObserver로 동적 요소 자동 감지
+const observeAll = () => {
+  document.querySelectorAll('[data-aos]:not(.aos-animate)').forEach((el) => {
+    observer.observe(el);
+  });
+};
+observeAll();
+const mutObs = new MutationObserver(observeAll);
+mutObs.observe(document.body, { childList: true, subtree: true });
+```
+
+### 추가 배포 이슈 발견
+
+이전 빌드가 실제로는 배포되지 않았던 것으로 확인. 빌드 해시 비교:
+
+| 구분 | 이전 배포 | 이번 배포 |
+|------|----------|----------|
+| Blog | `Blog-TAAOxpch.js` | `Blog-TMa_48G1.js` |
+| Gallery | `Gallery-DP8NfoWj.js` | `Gallery-1BtIvbfb.js` |
+| useAOS | `useAOS-CxKk3MXB.js` | `useAOS-kHyhlWgo.js` |
+| index | `index-BLgPhbCS.js` | `index-VBzfrMeh.js` |
+
+해시가 모두 변경됨 → 이전 배포본은 코드 수정 **이전** 빌드였음.
+
+---
+
 ## 금일 커밋 이력 (세션 6)
 
 | 순서 | 커밋 해시 | 내용 |
@@ -130,6 +191,8 @@
 | 4 | `adc82e0` | feat: 커뮤니티 디자인 개선 — 갤러리 카드형 + 블로그 매거진형 |
 | 5 | `dd5329b` | docs: 커뮤니티 디자인 개선 개발일지 작성 |
 | 6 | `47189f1` | fix: 갤러리/블로그 데이터 표시 수정 |
+| 7 | `e5fbc50` | docs: 세션 6 개발일지 작성 |
+| 8 | `83e4a73` | fix: useAOS 동적 요소 감지 + Blog/Gallery 로딩/빈상태 처리 |
 
 ---
 
