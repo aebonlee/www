@@ -27,20 +27,6 @@ export async function signInWithKakao() {
   return data;
 }
 
-/** Naver OAuth 로그인 (Supabase custom provider 또는 OIDC) */
-export async function signInWithNaver() {
-  const client = getSupabase();
-  if (!client) throw new Error('Supabase not configured');
-  // Naver는 Supabase에서 커스텀 OIDC provider로 설정해야 함
-  // Dashboard > Auth > Providers > 'naver' 로 등록된 경우:
-  const { data, error } = await client.auth.signInWithOAuth({
-    provider: 'naver',
-    options: { redirectTo: window.location.origin + window.location.pathname }
-  });
-  if (error) throw error;
-  return data;
-}
-
 /** 이메일/비밀번호 로그인 */
 export async function signInWithEmail(email, password) {
   const client = getSupabase();

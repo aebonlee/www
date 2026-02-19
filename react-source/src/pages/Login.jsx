@@ -2,7 +2,7 @@ import { useState } from 'react';
 import { Link, useNavigate, useLocation } from 'react-router-dom';
 import { useLanguage } from '../contexts/LanguageContext';
 import { useAuth } from '../contexts/AuthContext';
-import { signInWithGoogle, signInWithKakao, signInWithNaver, signInWithEmail } from '../utils/auth';
+import { signInWithGoogle, signInWithKakao, signInWithEmail } from '../utils/auth';
 import '../styles/auth.css';
 
 const Login = () => {
@@ -41,7 +41,6 @@ const Login = () => {
     try {
       if (provider === 'google') await signInWithGoogle();
       else if (provider === 'kakao') await signInWithKakao();
-      else if (provider === 'naver') await signInWithNaver();
     } catch (err) {
       setError(err.message || t('auth.loginError'));
     }
@@ -76,12 +75,6 @@ const Login = () => {
                   <path d="M12 3C6.48 3 2 6.58 2 10.9c0 2.78 1.8 5.22 4.52 6.6-.2.74-.72 2.68-.82 3.1-.13.5.18.49.38.36.16-.1 2.5-1.7 3.5-2.4.78.12 1.58.18 2.42.18 5.52 0 10-3.58 10-7.9S17.52 3 12 3z" fill="#3C1E1E"/>
                 </svg>
                 <span>Kakao</span>
-              </button>
-              <button className="social-btn naver" onClick={() => handleSocialLogin('naver')}>
-                <svg viewBox="0 0 24 24" width="20" height="20">
-                  <path d="M16.27 3H7.73A4.73 4.73 0 0 0 3 7.73v8.54A4.73 4.73 0 0 0 7.73 21h8.54A4.73 4.73 0 0 0 21 16.27V7.73A4.73 4.73 0 0 0 16.27 3zm-2.6 12.3L10 10.5v4.8H7.7V6.7h2.63L14 11.5V6.7h2.3v8.6h-2.63z" fill="#03C75A"/>
-                </svg>
-                <span>Naver</span>
               </button>
             </div>
 
