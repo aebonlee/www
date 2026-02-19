@@ -323,6 +323,51 @@ Supabase Management API를 통해 `EXTERNAL_KAKAO_SECRET` 업데이트 (HTTP 200
 | 12 | `add02d7` | deploy: 로그인 버튼 위치 이동 + 개발일지 빌드 배포 |
 | 13 | `e31addf` | feat: 로그인 페이지를 구글 스타일로 전면 리디자인 |
 | 14 | `0608d00` | deploy: 구글 스타일 로그인 페이지 빌드 배포 |
+| 15 | `d576152` | docs: 세션7 개발일지 업데이트 |
+| 16 | `c242980` | fix: Login/Register 레이아웃 + Navbar 로그인 버튼 개선 |
+
+---
+
+## 세션 31: Login/Register 레이아웃 수정 + Navbar 로그인 버튼 개선
+
+**커밋**: `c242980` fix: Login/Register 페이지 레이아웃 + Navbar 로그인 버튼 개선
+
+### 문제점
+
+1. **CSS 충돌**: `auth-section auth-fullpage` 이중 클래스 사용 시, `.auth-section`이 CSS 파일 뒤에 선언되어 `.auth-fullpage`의 `min-height`, `padding`을 덮어씌움 → 로그인/회원가입 페이지가 navbar-footer 사이에 여백 없이 짧게 표시
+2. **Navbar 밑줄**: "로그인" 텍스트에 링크 밑줄이 표시됨
+3. **일관성 부족**: Login은 fullpage 카드 레이아웃인데 Register는 page-header + auth-section 구식 레이아웃
+
+### 해결
+
+| 파일 | 변경 |
+|------|------|
+| `src/pages/Login.jsx` | `auth-section auth-fullpage` → `auth-fullpage`만 사용 (CSS 충돌 제거) |
+| `src/pages/Register.jsx` | Login과 동일한 fullpage 카드 레이아웃으로 전면 재작성 — `auth-fullpage` + `auth-card-google` + `auth-email-form` |
+| `src/styles/auth.css` | `.auth-fullpage`: `min-height: 100vh`, `padding-top: calc(var(--nav-height) + 40px)` — navbar 오프셋 반영 |
+| `src/styles/auth.css` | `.auth-btn-full`: 전체 너비 버튼 변형 클래스 추가 |
+| `src/styles/auth.css` | `.nav-login-btn`: `border-radius: 20px`, `text-decoration: none !important`, `::after { display: none }` — 밑줄 완전 제거 + 라운드 버튼 |
+| `src/styles/auth.css` | 모바일 반응형 `.auth-fullpage` 패딩 조정 |
+| `src/components/layout/Navbar.jsx` | 로그인 버튼 텍스트: `{t('auth.login')}` → **"Login"** (영어 고정) |
+| `src/components/layout/Navbar.jsx` | 드롭다운 로그아웃: `{t('auth.logout')}` → **"Logout"** (영어 고정) |
+
+### Register 페이지 신규 레이아웃
+
+```
+┌─────────────────────────────┐
+│      DreamIT Biz 로고        │
+│      회원가입 제목            │
+│      부제                    │
+│  ┌─────────────────────────┐│
+│  │ 이름 입력                ││
+│  │ 이메일 입력              ││
+│  │ 비밀번호 입력            ││
+│  │ 비밀번호 확인            ││
+│  │ [    회원가입 버튼   ]   ││
+│  └─────────────────────────┘│
+│  이미 계정이 있으신가요? 로그인│
+└─────────────────────────────┘
+```
 
 ---
 
@@ -347,3 +392,6 @@ Supabase Management API를 통해 `EXTERNAL_KAKAO_SECRET` 업데이트 (HTTP 200
 - [x] 네비바 유저 아이콘 (첫글자 원형)
 - [x] 드롭다운 메뉴 디자인 (아이콘 + 헤더)
 - [x] 로그인 페이지 구글 스타일 리디자인 (2-step UI)
+- [x] 회원가입 페이지 fullpage 카드 레이아웃 통일
+- [x] Navbar "Login" 라운드 버튼 (밑줄 제거)
+- [x] Navbar "Logout" 풍선 드롭다운 메뉴
