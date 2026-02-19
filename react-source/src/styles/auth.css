@@ -2,14 +2,15 @@
    Auth Styles — Login / Register / MyPage
    ============================================ */
 
-/* ── Google-style Login Page ── */
+/* ── Google-style Login / Register Page ── */
 .auth-fullpage {
-  min-height: calc(100vh - 70px);
+  min-height: 100vh;
   display: flex;
   align-items: center;
   justify-content: center;
   background: var(--bg-secondary, #f8f9fa);
-  padding: 40px 16px;
+  padding: calc(var(--nav-height, 80px) + 40px) 16px 60px;
+  box-sizing: border-box;
 }
 
 .auth-center-wrapper {
@@ -159,6 +160,15 @@
 .auth-next-btn:disabled {
   opacity: 0.6;
   cursor: not-allowed;
+}
+
+.auth-btn-full {
+  display: block;
+  width: 100%;
+  padding: 12px 24px;
+  text-align: center;
+  text-decoration: none;
+  font-size: 15px;
 }
 
 /* Bottom Link */
@@ -664,23 +674,40 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  padding: 6px 16px;
-  border-radius: var(--radius-sm);
+  padding: 7px 18px;
+  border-radius: 20px;
   background: var(--primary-blue);
-  color: white;
+  color: white !important;
   font-size: 13px;
   font-weight: 600;
-  text-decoration: none;
+  text-decoration: none !important;
   transition: all 0.2s ease;
   white-space: nowrap;
+  letter-spacing: 0.3px;
+  border: none;
 }
 
 .nav-login-btn:hover {
   background: var(--primary-blue-dark);
+  text-decoration: none !important;
+  transform: translateY(-1px);
+  box-shadow: 0 4px 12px rgba(0, 70, 200, 0.3);
+}
+
+.nav-login-btn::after {
+  display: none !important;
 }
 
 /* ── Responsive ── */
 @media (max-width: 768px) {
+  .auth-fullpage {
+    padding: calc(var(--nav-height, 80px) + 20px) 12px 40px;
+  }
+
+  .auth-card-google {
+    padding: 32px 24px 28px;
+  }
+
   .auth-card,
   .mypage-card {
     margin: 0 16px;

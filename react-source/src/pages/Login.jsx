@@ -48,7 +48,7 @@ const Login = () => {
   };
 
   return (
-    <section className="auth-section auth-fullpage">
+    <section className="auth-fullpage">
       <div className="auth-center-wrapper">
         <div className="auth-card-google">
           <div className="auth-logo-area">
