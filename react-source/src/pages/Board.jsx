@@ -6,7 +6,7 @@ import { getBoardPosts } from '../utils/boardStorage';
 import Pagination from '../components/Pagination';
 import useAOS from '../hooks/useAOS';
 
-const POSTS_PER_PAGE = 10;
+const POSTS_PER_PAGE = 20;
 
 const Board = () => {
   const { t } = useLanguage();
