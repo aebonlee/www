@@ -9,7 +9,11 @@ const POSTS_PER_PAGE = 6;
 
 const estimateReadTime = (text) => {
   if (!text) return 1;
-  return Math.max(1, Math.ceil(text.replace(/\s+/g, ' ').trim().split(' ').length / 200));
+  const len = text.replace(/\s+/g, '').length;
+  if (len > 0 && /[\uAC00-\uD7AF]/.test(text)) {
+    return Math.max(1, Math.ceil(len / 500));
+  }
+  return Math.max(1, Math.ceil(text.trim().split(/\s+/).length / 200));
 };
 
 const Blog = () => {

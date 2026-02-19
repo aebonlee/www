@@ -40,6 +40,11 @@ const Gallery = () => {
     { key: 'education', label: t('community.galleryEducation') }
   ];
 
+  const getCategoryLabel = (key) => {
+    const found = filters.find((f) => f.key === key);
+    return found ? found.label : key;
+  };
+
   const filteredItems = activeFilter === 'all'
     ? items
     : items.filter((item) => item.category === activeFilter);
@@ -136,11 +141,13 @@ const Gallery = () => {
                   </div>
                 </div>
                 <div className="gallery-info">
-                  <span className="gallery-category-badge">{item.category}</span>
+                  <span className="gallery-category-badge">{getCategoryLabel(item.category)}</span>
                   <h4>{language === 'en' ? item.titleEn : item.title}</h4>
-                  <p className="gallery-desc">
-                    {language === 'en' ? item.descriptionEn : item.description}
-                  </p>
+                  {(language === 'en' ? item.descriptionEn : item.description) && (
+                    <p className="gallery-desc">
+                      {language === 'en' ? item.descriptionEn : item.description}
+                    </p>
+                  )}
                   <span className="gallery-date">{item.date}</span>
                 </div>
               </div>
