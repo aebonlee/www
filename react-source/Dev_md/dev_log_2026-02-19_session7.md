@@ -476,6 +476,57 @@ Vite가 lazy-loaded 페이지의 CSS import를 코드 스플리팅하여 `auth-*
 
 ---
 
+## 세션 35: Phase C UX 보강 — 토스트 알림, 에러 UI, 업로드 진행률
+
+### 작업 내역
+
+평가보고서 Phase C 권장 작업 3건 일괄 구현:
+
+#### C8: 토스트 알림 시스템 구현
+- `src/contexts/ToastContext.jsx` 신규 — 외부 의존성 없이 커스텀 구현
+  - `showToast(message, type, duration)` API 제공 (success/error/info/warning)
+  - 자동 해제 타이머 (기본 4초) + 수동 닫기 버튼
+  - SVG 아이콘 4종 (체크/X/정보/경고)
+- `src/styles/toast.css` 신규 — 슬라이드-인 애니메이션, 좌측 색상 보더
+- `App.jsx`에 `<ToastProvider>` 래핑
+- `dark-mode.css`에 다크모드 토스트 스타일 추가
+- 기존 `alert()` 2건 교체:
+  - `ImageUpload.jsx` 업로드 에러 → `showToast(err.message, 'error')`
+  - `Gallery.jsx` 삭제 에러 → `showToast(msg, 'error')`
+- 모바일 반응형: 480px 이하에서 하단 풀폭 표시
+
+#### C9: OrderHistory 에러 상태 UI
+- `OrderHistory.jsx` 전면 리팩토링:
+  - `error` 상태 추가 + 에러 발생 시 빨간 X 아이콘 + 메시지 + 재시도 버튼
+  - `loadOrders()` 콜백으로 분리하여 재시도 가능
+  - 에러 발생 시 토스트 알림도 동시 표시
+  - 로딩 텍스트 다국어 적용 (`t('community.loading')`)
+- `translations.js`에 `auth.orderLoadError`, `auth.retry` 키 추가 (ko/en)
+
+#### C10: 이미지 업로드 진행률 표시 개선
+- `ImageUpload.jsx`:
+  - `progress` 상태 추가 + 시뮬레이션 프로그레스 바 (0→90% 자동, 완료 시 100%)
+  - 기존 "업로드 중..." 텍스트 → 프로그레스 바 + 퍼센트 표시로 교체
+  - 업로드 완료 시 성공 토스트 알림
+- `toast.css`에 `.upload-progress-*` 스타일 포함
+- `translations.js`에 `auth.uploadComplete` 키 추가 (ko/en)
+
+### 수정/생성 파일
+
+| 파일 | 변경 |
+|------|------|
+| `src/contexts/ToastContext.jsx` | **신규** — 토스트 Context + Provider + useToast 훅 |
+| `src/styles/toast.css` | **신규** — 토스트 + 프로그레스 바 스타일 |
+| `src/index.css` | `@import './styles/toast.css'` 추가 |
+| `src/App.jsx` | `ToastProvider` import + 래핑 |
+| `src/components/ImageUpload.jsx` | 진행률 바 + 토스트 교체 |
+| `src/pages/Gallery.jsx` | alert → showToast 교체 |
+| `src/pages/OrderHistory.jsx` | 에러 UI + 재시도 + 토스트 연동 |
+| `src/utils/translations.js` | uploadComplete, orderLoadError, retry 키 추가 |
+| `src/styles/dark-mode.css` | `.toast-item` 다크모드 스타일 추가 |
+
+---
+
 ## 프로젝트 현재 상태
 
 ### 완료된 기능
@@ -507,3 +558,6 @@ Vite가 lazy-loaded 페이지의 CSS import를 코드 스플리팅하여 `auth-*
 - [x] 게시판 write/edit AuthGuard 적용
 - [x] 비밀번호 재설정 페이지 (ForgotPassword.jsx)
 - [x] products 빈 테이블 폴백 보강
+- [x] 토스트 알림 시스템 (커스텀, 외부 의존성 없음)
+- [x] OrderHistory 에러 상태 UI + 재시도 버튼
+- [x] 이미지 업로드 진행률 바 + 완료 토스트

@@ -2,6 +2,7 @@ import { useState, useEffect, useCallback } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { useLanguage } from '../contexts/LanguageContext';
 import { useAuth } from '../contexts/AuthContext';
+import { useToast } from '../contexts/ToastContext';
 import { getGalleryItems, deleteGalleryItem } from '../utils/boardStorage';
 import Pagination from '../components/Pagination';
 import useAOS from '../hooks/useAOS';
@@ -22,6 +23,7 @@ const GRADIENTS = [
 const Gallery = () => {
   const { t, language } = useLanguage();
   const { isAdmin } = useAuth();
+  const { showToast } = useToast();
   const navigate = useNavigate();
   const [items, setItems] = useState([]);
   const [loading, setLoading] = useState(true);
@@ -110,7 +112,7 @@ const Gallery = () => {
       if (lightboxItem?.id === item.id) closeLightbox();
     } catch (err) {
       console.error('Delete error:', err);
-      alert(t('community.deleteError') || '삭제에 실패했습니다.');
+      showToast(t('community.deleteError') || '삭제에 실패했습니다.', 'error');
     }
   };
 

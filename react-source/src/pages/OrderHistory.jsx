@@ -1,30 +1,39 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useCallback } from 'react';
 import { Link } from 'react-router-dom';
 import { useLanguage } from '../contexts/LanguageContext';
 import { useAuth } from '../contexts/AuthContext';
+import { useToast } from '../contexts/ToastContext';
 import { getOrdersByUser } from '../utils/supabase';
 import '../styles/auth.css';
 
 const OrderHistory = () => {
   const { t, language } = useLanguage();
   const { user } = useAuth();
+  const { showToast } = useToast();
   const isEn = language === 'en';
   const [orders, setOrders] = useState([]);
   const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(false);
+
+  const loadOrders = useCallback(async () => {
+    if (!user) return;
+    setLoading(true);
+    setError(false);
+    try {
+      const data = await getOrdersByUser(user.id);
+      setOrders(data);
+    } catch (err) {
+      console.error('OrderHistory load error:', err);
+      setError(true);
+      showToast(t('auth.orderLoadError'), 'error');
+    } finally {
+      setLoading(false);
+    }
+  }, [user, showToast, t]);
 
   useEffect(() => {
-    if (!user) return;
-    (async () => {
-      try {
-        const data = await getOrdersByUser(user.id);
-        setOrders(data);
-      } catch (err) {
-        console.error('OrderHistory load error:', err);
-      } finally {
-        setLoading(false);
-      }
-    })();
-  }, [user]);
+    loadOrders();
+  }, [loadOrders]);
 
   const formatPrice = (price) => {
     return isEn
@@ -58,7 +67,32 @@ const OrderHistory = () => {
           <div style={{ maxWidth: '800px', margin: '0 auto' }}>
             {loading ? (
               <div style={{ textAlign: 'center', padding: '60px 0', color: 'var(--text-light)' }}>
-                로딩 중...
+                {t('community.loading') || '로딩 중...'}
+              </div>
+            ) : error ? (
+              <div style={{ textAlign: 'center', padding: '60px 0' }}>
+                <div style={{
+                  width: '56px', height: '56px', borderRadius: '50%',
+                  background: 'rgba(239, 68, 68, 0.1)', display: 'flex',
+                  alignItems: 'center', justifyContent: 'center', margin: '0 auto 16px'
+                }}>
+                  <svg viewBox="0 0 24 24" width="28" height="28" fill="none" stroke="#ef4444" strokeWidth="2">
+                    <circle cx="12" cy="12" r="10" />
+                    <line x1="15" y1="9" x2="9" y2="15" />
+                    <line x1="9" y1="9" x2="15" y2="15" />
+                  </svg>
+                </div>
+                <p style={{ color: 'var(--text-secondary)', marginBottom: '20px', fontSize: '15px' }}>
+                  {t('auth.orderLoadError')}
+                </p>
+                <button
+                  onClick={loadOrders}
+                  className="btn btn-primary"
+                  style={{ marginRight: '12px' }}
+                >
+                  {t('auth.retry')}
+                </button>
+                <Link to="/mypage" className="board-btn">{t('auth.myPage')}</Link>
               </div>
             ) : orders.length === 0 ? (
               <div style={{ textAlign: 'center', padding: '60px 0' }}>

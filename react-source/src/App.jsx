@@ -4,6 +4,7 @@ import { ThemeProvider } from './contexts/ThemeContext';
 import { LanguageProvider } from './contexts/LanguageContext';
 import { CartProvider } from './contexts/CartContext';
 import { AuthProvider } from './contexts/AuthContext';
+import { ToastProvider } from './contexts/ToastContext';
 import AuthGuard from './components/AuthGuard';
 import AdminGuard from './components/AdminGuard';
 import Navbar from './components/layout/Navbar';
@@ -61,6 +62,7 @@ function App() {
     <ThemeProvider>
       <LanguageProvider>
         <AuthProvider>
+          <ToastProvider>
           <CartProvider>
             <Router>
               <div className="App">
@@ -122,6 +124,7 @@ function App() {
               </div>
             </Router>
           </CartProvider>
+          </ToastProvider>
         </AuthProvider>
       </LanguageProvider>
     </ThemeProvider>

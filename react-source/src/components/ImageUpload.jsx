@@ -1,24 +1,39 @@
 import { useState, useRef } from 'react';
 import { useLanguage } from '../contexts/LanguageContext';
+import { useToast } from '../contexts/ToastContext';
 import { uploadImage } from '../utils/storage';
 
 const ImageUpload = ({ value, onChange, folder = 'uploads' }) => {
   const { t } = useLanguage();
+  const { showToast } = useToast();
   const [uploading, setUploading] = useState(false);
+  const [progress, setProgress] = useState(0);
   const [dragOver, setDragOver] = useState(false);
   const fileRef = useRef(null);
 
   const handleFile = async (file) => {
     if (!file || !file.type.startsWith('image/')) return;
     setUploading(true);
+    setProgress(0);
+    // Simulate progress since Supabase doesn't provide upload progress
+    const progressInterval = setInterval(() => {
+      setProgress((prev) => {
+        if (prev >= 90) { clearInterval(progressInterval); return 90; }
+        return prev + Math.random() * 15;
+      });
+    }, 200);
     try {
       const url = await uploadImage(file, folder);
+      clearInterval(progressInterval);
+      setProgress(100);
       onChange(url);
+      showToast(t('auth.uploadComplete') || '업로드 완료', 'success');
     } catch (err) {
+      clearInterval(progressInterval);
       console.error('Upload error:', err);
-      alert(err.message);
+      showToast(err.message, 'error');
     } finally {
-      setUploading(false);
+      setTimeout(() => { setUploading(false); setProgress(0); }, 300);
     }
   };
 
@@ -56,7 +71,12 @@ const ImageUpload = ({ value, onChange, folder = 'uploads' }) => {
           onClick={() => fileRef.current?.click()}
         >
           {uploading ? (
-            <span className="image-upload-status">{t('auth.uploading')}</span>
+            <div className="upload-progress-wrapper">
+              <div className="upload-progress-bar">
+                <div className="upload-progress-fill" style={{ width: `${Math.min(progress, 100)}%` }} />
+              </div>
+              <span className="upload-progress-text">{t('auth.uploading')} {Math.round(Math.min(progress, 100))}%</span>
+            </div>
           ) : (
             <>
               <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" width="32" height="32">
