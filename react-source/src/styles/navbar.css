@@ -520,6 +520,47 @@
 
 /* ── Navbar Responsive ── */
 @media (max-width: 768px) {
+  .theme-toggle {
+    width: 32px;
+    height: 32px;
+  }
+
+  .theme-toggle svg {
+    width: 16px;
+    height: 16px;
+  }
+
+  .color-picker-btn {
+    width: 32px;
+    height: 32px;
+  }
+
+  .color-picker-btn svg {
+    width: 16px;
+    height: 16px;
+  }
+
+  .cart-icon-link {
+    width: 32px;
+    height: 32px;
+  }
+
+  .cart-icon-svg {
+    width: 16px;
+    height: 16px;
+  }
+
+  .lang-switcher {
+    width: 28px;
+    height: 28px;
+    font-size: 9px;
+  }
+
+  .nav-login-btn {
+    padding: 5px 14px;
+    font-size: 12px;
+  }
+
   .nav-user-avatar-placeholder {
     width: 28px;
     height: 28px;

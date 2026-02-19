@@ -223,18 +223,40 @@
 }
 
 @media (max-width: 768px) {
+    /* ── Nav-height override for 2-row navbar ── */
+    :root {
+        --nav-height: 90px;
+    }
+
+    /* ── Navbar 2-row structure ── */
+    .nav-wrapper {
+        flex-wrap: wrap;
+        height: auto;
+        padding: 10px 0 6px;
+    }
+
+    .logo {
+        width: 100%;       /* Row 1: logo full width */
+    }
+
+    .logo h1 {
+        font-size: 22px;
+    }
+
     .nav-actions {
-        gap: 8px;
+        width: 100%;       /* Row 2: actions full width */
+        justify-content: flex-end;
+        gap: 6px;
     }
 
     .color-picker-btn {
-        width: 34px;
-        height: 34px;
+        width: 32px;
+        height: 32px;
     }
 
     .color-picker-btn svg {
-        width: 17px;
-        height: 17px;
+        width: 16px;
+        height: 16px;
     }
 
     .color-picker-tooltip {
@@ -262,9 +284,9 @@
     }
 
     .lang-switcher {
-        width: 32px;
-        height: 32px;
-        font-size: 10px;
+        width: 28px;
+        height: 28px;
+        font-size: 9px;
     }
 
     /* Hero */
@@ -278,10 +300,12 @@
 
     .hero-buttons {
         flex-direction: column;
+        align-items: center;
     }
 
-    .btn {
-        width: 100%;
+    .hero-buttons .btn {
+        width: 60%;
+        max-width: 280px;
         justify-content: center;
         border-radius: var(--radius-md);
     }
@@ -296,8 +320,17 @@
     .carousel-arrow--next { right: 10px; }
 
     .carousel-dots {
-        bottom: 48px;
-        gap: 8px;
+        bottom: 32px;
+        gap: 10px;
+    }
+
+    .scroll-indicator {
+        bottom: 6px;
+    }
+
+    .mouse {
+        width: 20px;
+        height: 32px;
     }
 
     .carousel-dot {
@@ -789,6 +822,14 @@
 @media (max-width: 480px) {
     .container {
         padding: 0 16px;
+    }
+
+    .carousel-dots {
+        bottom: 24px;
+    }
+
+    .scroll-indicator {
+        display: none;   /* Touch devices: scroll indicator unnecessary */
     }
 
     .carousel-arrow {
