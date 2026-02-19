@@ -170,3 +170,5 @@ CREATE TRIGGER on_auth_user_created
 
 - `40eb110` feat: 종합 기능 개발 (6 Phase, 92 files, +3385/-212)
 - `d054506` deploy: 네이버 제거 + OAuth 설정 반영 빌드 배포
+- `e5e776f` fix: 네비바 유저 표시를 이름 첫글자 원형 아이콘으로 변경
+- `28684cc` fix: 사용자 드롭다운 메뉴 디자인 개선 — 아이콘 + 유저 헤더 추가

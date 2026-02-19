@@ -183,42 +183,6 @@ const Navbar = () => {
           </ul>
 
           <div className="nav-actions">
-            {/* User Auth */}
-            {isLoggedIn ? (
-              <div className="nav-user-menu" ref={userMenuRef}>
-                <button className="nav-user-btn" onClick={() => setShowUserMenu(!showUserMenu)}>
-                  <span className="nav-user-avatar-placeholder">{userInitial}</span>
-                </button>
-                {showUserMenu && (
-                  <div className="nav-user-dropdown">
-                    <div className="dropdown-user-header">
-                      <span className="dropdown-user-avatar">{userInitial}</span>
-                      <div className="dropdown-user-info">
-                        <span className="dropdown-user-name">{profile?.display_name || ''}</span>
-                        <span className="dropdown-user-email">{profile?.email || ''}</span>
-                      </div>
-                    </div>
-                    <div className="divider" />
-                    <Link to="/mypage" className="dropdown-menu-item">
-                      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
-                      {t('auth.myPage')}
-                    </Link>
-                    <Link to="/mypage/orders" className="dropdown-menu-item">
-                      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/></svg>
-                      {t('auth.orderHistory')}
-                    </Link>
-                    <div className="divider" />
-                    <button onClick={handleSignOut} className="dropdown-menu-item logout">
-                      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"/><polyline points="16 17 21 12 16 7"/><line x1="21" y1="12" x2="9" y2="12"/></svg>
-                      {t('auth.logout')}
-                    </button>
-                  </div>
-                )}
-              </div>
-            ) : (
-              <Link to="/login" className="nav-login-btn">{t('auth.login')}</Link>
-            )}
-
             <Link to="/cart" className="cart-icon-link" aria-label="Cart">
               <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" className="cart-icon-svg">
                 <circle cx="9" cy="21" r="1" />
@@ -291,6 +255,41 @@ const Navbar = () => {
                 <line x1="4.22" y1="19.78" x2="5.64" y2="18.36" />
               </svg>
             </button>
+            {/* User Auth */}
+            {isLoggedIn ? (
+              <div className="nav-user-menu" ref={userMenuRef}>
+                <button className="nav-user-btn" onClick={() => setShowUserMenu(!showUserMenu)}>
+                  <span className="nav-user-avatar-placeholder">{userInitial}</span>
+                </button>
+                {showUserMenu && (
+                  <div className="nav-user-dropdown">
+                    <div className="dropdown-user-header">
+                      <span className="dropdown-user-avatar">{userInitial}</span>
+                      <div className="dropdown-user-info">
+                        <span className="dropdown-user-name">{profile?.display_name || ''}</span>
+                        <span className="dropdown-user-email">{profile?.email || ''}</span>
+                      </div>
+                    </div>
+                    <div className="divider" />
+                    <Link to="/mypage" className="dropdown-menu-item">
+                      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+                      {t('auth.myPage')}
+                    </Link>
+                    <Link to="/mypage/orders" className="dropdown-menu-item">
+                      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/></svg>
+                      {t('auth.orderHistory')}
+                    </Link>
+                    <div className="divider" />
+                    <button onClick={handleSignOut} className="dropdown-menu-item logout">
+                      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"/><polyline points="16 17 21 12 16 7"/><line x1="21" y1="12" x2="9" y2="12"/></svg>
+                      {t('auth.logout')}
+                    </button>
+                  </div>
+                )}
+              </div>
+            ) : (
+              <Link to="/login" className="nav-login-btn">{t('auth.login')}</Link>
+            )}
             <button
               className={`mobile-toggle ${isMobileMenuOpen ? 'active' : ''}`}
               onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
