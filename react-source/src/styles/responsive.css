@@ -370,6 +370,10 @@
         gap: 24px;
     }
 
+    .about-stats.rnd-stats {
+        grid-template-columns: repeat(4, 1fr);
+    }
+
     .stat-number {
         font-size: 36px;
     }
@@ -586,6 +590,10 @@
 
     .about-stats {
         grid-template-columns: 1fr;
+    }
+
+    .about-stats.rnd-stats {
+        grid-template-columns: repeat(2, 1fr);
     }
 
     .page-title {

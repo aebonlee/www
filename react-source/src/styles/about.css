@@ -31,6 +31,10 @@
     margin-top: 48px;
 }
 
+.about-stats.rnd-stats {
+    grid-template-columns: repeat(4, 1fr);
+}
+
 .stat-item {
     text-align: center;
 }

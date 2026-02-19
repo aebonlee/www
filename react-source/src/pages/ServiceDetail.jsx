@@ -97,8 +97,8 @@ const ServiceDetail = () => {
         <section style={{ padding: '80px 0', background: 'var(--bg-light-gray)' }}>
           <div className="container">
             <div className="section-header">
-              <h2 className="section-title">디자인 서비스</h2>
-              <p className="section-subtitle">다양한 디자인 솔루션을 제공합니다</p>
+              <h2 className="section-title">서비스 영역</h2>
+              <p className="section-subtitle">디자인과 디지털 콘텐츠를 통합 제공합니다</p>
             </div>
             <div className="design-grid">
               {service.designServices.map((item, i) => (
@@ -168,8 +168,8 @@ const ServiceDetail = () => {
         <section style={{ padding: '80px 0', background: 'var(--bg-white)' }}>
           <div className="container">
             <div className="section-header">
-              <h2 className="section-title">디자인 도구</h2>
-              <p className="section-subtitle">전문 디자인 도구를 활용합니다</p>
+              <h2 className="section-title">제작 도구</h2>
+              <p className="section-subtitle">전문 크리에이티브 도구를 활용합니다</p>
             </div>
             <div className="tech-grid">
               {service.tools.map((tool, i) => (
@@ -187,7 +187,7 @@ const ServiceDetail = () => {
         <section style={{ padding: '80px 0', background: service.techStack || service.tools ? 'var(--bg-light-gray)' : 'var(--bg-white)' }}>
           <div className="container">
             <div className="section-header">
-              <h2 className="section-title">{serviceType === 'design' ? '디자인 프로세스' : '진행 프로세스'}</h2>
+              <h2 className="section-title">{serviceType === 'design' ? '제작 프로세스' : '진행 프로세스'}</h2>
               <p className="section-subtitle">체계적인 프로세스로 프로젝트를 진행합니다</p>
             </div>
             <div className="process-grid" style={service.process.length === 5 ? { gridTemplateColumns: `repeat(5, 1fr)` } : undefined}>

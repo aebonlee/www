@@ -25,8 +25,8 @@ const Services = () => {
       path: '/services/design',
       icon: <><path d="M12 19l7-7 3 3-7 7-3-3z" /><path d="M18 13l-1.5-7.5L2 2l3.5 14.5L13 18l5-5z" /></>,
       title: t('services.design'),
-      description: '브랜드 아이덴티티부터 UI/UX까지',
-      features: ['브랜드 디자인', 'UI/UX 디자인', '편집 디자인']
+      description: '브랜드 디자인부터 영상·SNS 콘텐츠까지',
+      features: ['브랜드 디자인', 'UI/UX 디자인', '디지털 콘텐츠']
     },
   ];
 

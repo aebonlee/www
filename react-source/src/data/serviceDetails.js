@@ -71,29 +71,31 @@ const serviceDetails = {
     ctaSubtitle: '비즈니스에 맞는 호스팅 서비스를 추천받으세요'
   },
   'design': {
-    title: '디자인',
-    subtitle: '브랜드 아이덴티티부터 UI/UX까지, 비주얼 솔루션을 제공합니다',
+    title: '디자인 & 디지털콘텐츠',
+    subtitle: '브랜드 디자인부터 영상·SNS 콘텐츠까지, 통합 크리에이티브 솔루션을 제공합니다',
     overview: [
-      '드림아이티비즈의 디자인 서비스는 브랜드의 가치를 시각적으로 전달합니다.',
-      '사용자 중심의 UI/UX 디자인으로 최적의 사용자 경험을 제공합니다.',
-      'Figma, Adobe Creative Suite 등 전문 도구를 활용한 고품질 디자인을 보장합니다.'
+      '드림아이티비즈의 디자인 & 디지털콘텐츠 서비스는 브랜드의 가치를 시각적으로 전달합니다.',
+      '사용자 중심의 UI/UX 디자인은 물론 영상 콘텐츠, SNS 마케팅 소재까지 원스톱으로 제작합니다.',
+      'Figma, Adobe Creative Suite 등 전문 도구를 활용한 고품질 결과물을 보장합니다.'
     ],
     designServices: [
       { title: '브랜드 디자인', description: '로고, CI/BI, 브랜드 가이드라인 제작으로 일관된 브랜드 이미지를 구축합니다.' },
       { title: 'UI/UX 디자인', description: '사용자 리서치 기반의 인터페이스 설계와 프로토타입을 제작합니다.' },
+      { title: '영상 & 모션그래픽', description: '홍보 영상, 모션그래픽, 숏폼 콘텐츠를 기획·제작합니다.' },
+      { title: 'SNS 콘텐츠', description: '카드뉴스, 배너, 인포그래픽 등 SNS 마케팅 소재를 제작합니다.' },
       { title: '편집 디자인', description: '브로슈어, 카탈로그, 보고서 등 인쇄물 디자인을 제공합니다.' },
       { title: '웹/앱 디자인', description: '반응형 웹 디자인과 모바일 앱 UI 디자인을 제공합니다.' }
     ],
     process: [
       { step: 1, title: '리서치', description: '요구사항 파악 및\n시장 조사' },
-      { step: 2, title: '컨셉', description: '디자인 컨셉 수립 및\n무드보드 제작' },
-      { step: 3, title: '디자인', description: '시안 제작 및\n피드백 반영' },
-      { step: 4, title: '가이드', description: '디자인 가이드라인\n제작 및 전달' },
-      { step: 5, title: '지원', description: '추가 수정 및\n지속적 지원' }
+      { step: 2, title: '컨셉', description: '컨셉 수립 및\n무드보드 제작' },
+      { step: 3, title: '제작', description: '디자인·콘텐츠\n시안 제작' },
+      { step: 4, title: '피드백', description: '피드백 반영 및\n최종 확정' },
+      { step: 5, title: '납품', description: '가이드라인 전달 및\n지속 지원' }
     ],
-    tools: ['Figma', 'Adobe Photoshop', 'Adobe Illustrator', 'Adobe XD', 'Sketch', 'InDesign'],
-    ctaTitle: '디자인 프로젝트를 시작하세요',
-    ctaSubtitle: '전문 디자이너와 함께 브랜드 가치를 높이세요'
+    tools: ['Figma', 'Adobe Photoshop', 'Adobe Illustrator', 'Adobe Premiere Pro', 'After Effects', 'Adobe XD', 'Canva', 'InDesign'],
+    ctaTitle: '디자인 & 콘텐츠 프로젝트를 시작하세요',
+    ctaSubtitle: '전문 크리에이터와 함께 브랜드 가치를 높이세요'
   },
   'consulting': {
     title: '기업컨설팅',

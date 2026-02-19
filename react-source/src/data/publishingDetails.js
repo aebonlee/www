@@ -76,10 +76,10 @@ const publishingDetails = {
     ctaSubtitleEn: 'Create high-quality publications with our experts'
   },
   book: {
-    title: '책',
-    titleEn: 'Books',
-    subtitle: 'IT 전문 서적 및 교육 도서 기획, 집필, 출판',
-    subtitleEn: 'Planning, writing, and publishing IT and educational books',
+    title: '도서 & 교육교재',
+    titleEn: 'Books & Education Materials',
+    subtitle: 'IT 전문 서적 및 교육교재 기획, 집필, 출판',
+    subtitleEn: 'Planning, writing, and publishing IT books and educational materials',
     overview: [
       '드림아이티비즈의 도서 출판 서비스는 IT 분야의 전문 지식을 체계적으로 전달합니다.',
       '전문 저자 네트워크와 함께 양질의 IT 교육 콘텐츠를 기획하고 제작합니다.',

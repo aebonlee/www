@@ -96,8 +96,8 @@ const RnD = () => {
               <h2>{isEn ? 'R&D Overview' : '연구개발 개요'}</h2>
               <p>
                 {isEn
-                  ? 'DreamIT (predecessor of DreamIT Biz) conducted 5 government-funded Industry-Academia-Research consortium R&D projects from 2004 to 2009, accumulating deep expertise in mobile learning, LMS, broadcasting-based education, accessibility technology, and training management systems.'
-                  : '드림아이티(현 드림아이티비즈의 전신)는 2004년부터 2009년까지 정부 지원 산·학·연 공동기술개발 컨소시엄 과제 5건을 수행하여, 모바일 학습, LMS, 방송 기반 교육, 접근성 기술, 교육 관리 시스템 분야의 깊은 전문성을 축적했습니다.'}
+                  ? 'DreamIT conducted 5 government-funded Industry-Academia-Research consortium R&D projects from 2004 to 2009, accumulating deep expertise in mobile learning, LMS, broadcasting-based education, accessibility technology, and training management systems.'
+                  : '드림아이티(DreamIT)는 2004년부터 2009년까지 정부 지원 산·학·연 공동기술개발 컨소시엄 과제 5건을 수행하여, 모바일 학습, LMS, 방송 기반 교육, 접근성 기술, 교육 관리 시스템 분야의 깊은 전문성을 축적했습니다.'}
               </p>
               <p>
                 {isEn
@@ -128,7 +128,7 @@ const RnD = () => {
       {/* Stats */}
       <section style={{ padding: '60px 0', background: 'var(--bg-light-gray)' }}>
         <div className="container">
-          <div className="about-stats" data-aos="fade-up">
+          <div className="about-stats rnd-stats" data-aos="fade-up">
             {stats.map((stat, i) => (
               <div key={i} className="stat-item">
                 <span className="stat-number">{stat.number}</span>
