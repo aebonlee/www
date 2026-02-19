@@ -578,3 +578,66 @@ Vite가 lazy-loaded 페이지의 CSS import를 코드 스플리팅하여 `auth-*
 - [x] 토스트 알림 시스템 (커스텀, 외부 의존성 없음)
 - [x] OrderHistory 에러 상태 UI + 재시도 버튼
 - [x] 이미지 업로드 진행률 바 + 완료 토스트
+- [x] 모바일 타이포그래피 & 여백 최적화 (가독성 개선)
+
+---
+
+## 세션 37: 모바일 최적화 — 타이포그래피 & 여백 가독성 개선
+
+### 작업 배경
+
+모바일에서 영역(마진, 패딩)과 폰트(크기, 자간, 줄간)의 가독성 개선 요청.
+
+### 작업 내역
+
+`src/styles/responsive.css`에 768px 및 480px 브레이크포인트에 종합적인 모바일 최적화 규칙 추가:
+
+#### 768px (태블릿/모바일) 추가 규칙
+
+**타이포그래피:**
+- `body` letter-spacing: `-0.01em` → `0` (음수 자간 해제, 모바일 가독성 향상)
+- `body` line-height: `1.7` → `1.75` (줄간 여유 확보)
+- `h1~h4` 줄간·자간 각각 모바일에 맞게 완화
+- `.section-subtitle` 15px, `.hero-description` line-height 1.8
+- 콘텐츠 영역 line-height 전반 1.85로 상향 (블로그, 게시판, 리뷰, 어바웃, 서비스 상세)
+
+**여백 축소:**
+- 주요 섹션 padding: `80px 0` → `48px 0` (shop, cart, checkout, order, contact, service-detail, auth, cta, footer)
+- `.section-header` margin-bottom: `72px` → `40px`
+- 카드 패딩 일괄 축소: service/feature/pricing/design/value/vision/review/info-box/contact-form/category/course/highlight/company-detail/order-history
+- `.hero` min-height auto + padding-bottom 56px
+
+**그리드 gap 축소:**
+- services/portfolio/blog/values/reviews/pricing: `32px` → `20px`
+
+#### 480px (소형 모바일) 추가 규칙
+
+**타이포그래피:**
+- `body` line-height: `1.8` (더 관대한 줄간)
+- `.hero-title`: `34px` → `26px`, line-height 1.3
+- `.section-title`: `28px` → `24px`
+- `.page-title`: `28px` → `24px`
+- `.page-header` padding 축소 (상단/하단 28px)
+- 카드별 제목·본문 폰트 사이즈 세분화:
+  - service h3: 20px, feature h3: 18px, value h3: 18px, pricing h3: 20px
+  - blog h3: 16px, category h3: 18px, course h4: 16px, design h3: 18px
+  - vision h3: 20px, timeline h4: 16px, lightbox h3: 18px, auth heading: 20px
+- 본문 텍스트: 대부분 14-15px로 통일
+- `.blog-detail-content`, `.board-detail-body`: line-height 1.9 (긴 글 최적)
+
+**여백 축소:**
+- 섹션 padding: `48px 0` → `36px 0`
+- 카드 패딩: `28px 20px` → `24px 16px` (service/feature/value/pricing/design/review/category/vision/contact-form)
+- `.auth-card-google`: `32px 24px` → `24px 16px`
+- `.cart-summary/checkout-summary`: `28px` → `20px`
+- 푸터: `48px 0 24px` → `36px 0 20px`
+
+### 수정 파일
+
+| 파일 | 변경 |
+|------|------|
+| `src/styles/responsive.css` | 768px: +50 규칙, 480px: +80 규칙 (모바일 타이포그래피·여백·가독성) |
+
+### 커밋 & 배포
+- `npx vite build` 성공
+- `dist/*` → `D:/www/` 배포 완료

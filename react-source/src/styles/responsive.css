@@ -596,6 +596,194 @@
     .board-table .col-date {
         width: 80px;
     }
+
+    /* ── Mobile Typography & Readability ── */
+
+    /* Relax letter-spacing on mobile for readability */
+    body {
+        letter-spacing: 0;
+        line-height: 1.75;
+    }
+
+    h1 { line-height: 1.3; letter-spacing: -0.01em; }
+    h2 { line-height: 1.4; letter-spacing: -0.01em; }
+    h3 { line-height: 1.45; letter-spacing: 0; }
+    h4 { line-height: 1.5; letter-spacing: 0; }
+
+    .hero {
+        min-height: auto;
+        padding-bottom: 56px;
+    }
+
+    .hero-title {
+        line-height: 1.25;
+    }
+
+    .hero-description {
+        line-height: 1.8;
+        margin-bottom: 28px;
+    }
+
+    .section-header {
+        margin-bottom: 40px;
+    }
+
+    .section-subtitle {
+        font-size: 15px;
+        line-height: 1.7;
+    }
+
+    /* ── Section Vertical Spacing ── */
+    .shop-section,
+    .cart-section,
+    .checkout-section,
+    .order-section,
+    .contact-container,
+    .service-detail-overview,
+    .auth-section {
+        padding: 48px 0;
+    }
+
+    .cta-section {
+        padding: 48px 0;
+    }
+
+    .cta-content h2 {
+        line-height: 1.3;
+    }
+
+    .cta-content p {
+        font-size: 16px;
+    }
+
+    .footer {
+        padding: 48px 0 24px;
+    }
+
+    /* ── Card Padding Reduction ── */
+    .service-card {
+        padding: 28px 20px;
+    }
+
+    .feature-card {
+        padding: 28px 20px;
+    }
+
+    .pricing-card {
+        padding: 28px 20px;
+    }
+
+    .design-card {
+        padding: 28px 20px;
+    }
+
+    .value-card {
+        padding: 28px 20px;
+    }
+
+    .vision-card {
+        padding: 28px;
+    }
+
+    .review-card {
+        padding: 24px 20px;
+    }
+
+    .info-box {
+        padding: 24px 20px;
+    }
+
+    .contact-form,
+    .contact-form-box {
+        padding: 28px 20px;
+    }
+
+    .category-card {
+        padding: 32px 20px;
+    }
+
+    .course-card {
+        padding: 20px;
+    }
+
+    .highlight-card {
+        padding: 20px;
+    }
+
+    .company-detail-card {
+        padding: 24px 20px;
+    }
+
+    .order-history-card {
+        padding: 16px;
+    }
+
+    .order-history-meta {
+        flex-direction: column;
+        gap: 6px;
+    }
+
+    /* ── Grid Gap Reduction ── */
+    .services-grid,
+    .portfolio-grid {
+        gap: 20px;
+    }
+
+    .blog-grid {
+        gap: 20px;
+    }
+
+    .values-grid {
+        gap: 20px;
+    }
+
+    .reviews-grid {
+        gap: 20px;
+    }
+
+    .pricing-grid {
+        gap: 20px;
+    }
+
+    /* ── Content Readability ── */
+    .blog-content p,
+    .blog-detail-content {
+        line-height: 1.85;
+    }
+
+    .blog-detail-excerpt {
+        font-size: 15px;
+        line-height: 1.7;
+        margin-bottom: 24px;
+        padding-bottom: 24px;
+    }
+
+    .board-detail-body {
+        padding: 24px 20px;
+        line-height: 1.85;
+    }
+
+    .review-text {
+        font-size: 15px;
+        line-height: 1.75;
+    }
+
+    .about-description {
+        line-height: 1.85;
+    }
+
+    .timeline-content p {
+        line-height: 1.75;
+    }
+
+    .service-overview-text h2 {
+        font-size: 28px;
+    }
+
+    .service-overview-text p {
+        font-size: 15px;
+        line-height: 1.85;
+    }
 }
 
 @media (max-width: 480px) {
@@ -620,8 +808,12 @@
         grid-template-columns: repeat(2, 1fr);
     }
 
+    .page-header {
+        padding: calc(var(--nav-height) + 28px) 0 28px;
+    }
+
     .page-title {
-        font-size: 28px;
+        font-size: 24px;
     }
 
     .project-title {
@@ -667,5 +859,320 @@
 
     .board-detail-title {
         font-size: 20px;
+        line-height: 1.45;
+    }
+
+    /* ── Small Mobile Typography & Spacing ── */
+    body {
+        line-height: 1.8;
+    }
+
+    .hero-title {
+        font-size: 26px;
+        line-height: 1.3;
+        letter-spacing: -0.01em;
+        margin-bottom: 16px;
+    }
+
+    .hero-description {
+        font-size: 15px;
+    }
+
+    .section-title {
+        font-size: 24px;
+        letter-spacing: -0.01em;
+    }
+
+    .section-subtitle {
+        font-size: 14px;
+    }
+
+    .section-header {
+        margin-bottom: 32px;
+    }
+
+    /* Section spacing */
+    .shop-section,
+    .cart-section,
+    .checkout-section,
+    .order-section,
+    .contact-container,
+    .service-detail-overview,
+    .auth-section {
+        padding: 36px 0;
+    }
+
+    .cta-section {
+        padding: 36px 0;
+    }
+
+    .cta-content h2 {
+        font-size: 22px;
+    }
+
+    .cta-content p {
+        font-size: 15px;
+        margin-bottom: 24px;
+    }
+
+    /* Footer */
+    .footer {
+        padding: 36px 0 20px;
+    }
+
+    .footer-brand h3 {
+        font-size: 20px;
+    }
+
+    .footer-brand p {
+        font-size: 14px;
+    }
+
+    .footer-links a {
+        font-size: 14px;
+    }
+
+    .footer-bottom {
+        font-size: 12px;
+    }
+
+    /* Service cards */
+    .service-card h3 {
+        font-size: 20px;
+    }
+
+    .service-card p {
+        font-size: 15px;
+    }
+
+    .service-card {
+        padding: 24px 16px;
+    }
+
+    /* Feature cards */
+    .feature-card h3 {
+        font-size: 18px;
+    }
+
+    .feature-card p {
+        font-size: 15px;
+    }
+
+    .feature-card {
+        padding: 24px 16px;
+    }
+
+    /* Value cards */
+    .value-card h3 {
+        font-size: 18px;
+    }
+
+    .value-card p {
+        font-size: 15px;
+    }
+
+    .value-card {
+        padding: 24px 16px;
+    }
+
+    /* Pricing */
+    .pricing-card {
+        padding: 24px 16px;
+    }
+
+    .pricing-card h3 {
+        font-size: 20px;
+    }
+
+    .pricing-price {
+        font-size: 28px;
+    }
+
+    .pricing-features li {
+        font-size: 14px;
+    }
+
+    /* Blog */
+    .blog-content {
+        padding: 16px;
+    }
+
+    .blog-content h3 {
+        font-size: 16px;
+    }
+
+    .blog-content p {
+        font-size: 14px;
+    }
+
+    .blog-detail-content {
+        font-size: 15px;
+        line-height: 1.9;
+    }
+
+    /* Board */
+    .board-detail-body {
+        font-size: 14px;
+        line-height: 1.9;
+    }
+
+    /* Contact */
+    .contact-info h2 {
+        font-size: 24px;
+    }
+
+    .info-content h3 {
+        font-size: 15px;
+    }
+
+    .info-content p {
+        font-size: 14px;
+    }
+
+    .contact-form,
+    .contact-form-box {
+        padding: 20px 16px;
+    }
+
+    .company-detail-card h3 {
+        font-size: 16px;
+    }
+
+    .company-detail-card p {
+        font-size: 14px;
+    }
+
+    /* Service detail */
+    .service-overview-text h2 {
+        font-size: 24px;
+    }
+
+    .service-overview-text p {
+        font-size: 14px;
+    }
+
+    /* Category cards */
+    .category-card {
+        padding: 24px 16px;
+    }
+
+    .category-card h3 {
+        font-size: 18px;
+    }
+
+    .category-card p {
+        font-size: 14px;
+    }
+
+    /* Course cards */
+    .course-card h4 {
+        font-size: 16px;
+    }
+
+    .course-card p {
+        font-size: 14px;
+    }
+
+    /* Review */
+    .review-card {
+        padding: 20px 16px;
+    }
+
+    .review-text {
+        font-size: 14px;
+    }
+
+    /* Vision */
+    .vision-card {
+        padding: 24px 20px;
+    }
+
+    .vision-card h3 {
+        font-size: 20px;
+    }
+
+    .vision-card p {
+        font-size: 15px;
+    }
+
+    /* Timeline */
+    .timeline-content h4 {
+        font-size: 16px;
+    }
+
+    .timeline-content p {
+        font-size: 14px;
+    }
+
+    /* About stats */
+    .stat-number {
+        font-size: 32px;
+    }
+
+    .stat-label {
+        font-size: 13px;
+    }
+
+    /* Gallery */
+    .gallery-info h4 {
+        font-size: 14px;
+    }
+
+    .lightbox-body h3 {
+        font-size: 18px;
+    }
+
+    .lightbox-body p {
+        font-size: 14px;
+    }
+
+    /* Auth */
+    .auth-card-google {
+        padding: 24px 16px 20px;
+    }
+
+    .auth-heading {
+        font-size: 20px;
+    }
+
+    /* Shop */
+    .product-info {
+        padding: 16px;
+    }
+
+    .product-title {
+        font-size: 15px;
+    }
+
+    .product-price {
+        font-size: 16px;
+    }
+
+    /* Cart & Checkout */
+    .cart-summary,
+    .checkout-summary {
+        padding: 20px;
+    }
+
+    /* Order */
+    .order-confirmation h2 {
+        font-size: 20px;
+    }
+
+    .order-info-box {
+        padding: 16px;
+    }
+
+    /* Design cards */
+    .design-card {
+        padding: 24px 16px;
+    }
+
+    .design-card h3 {
+        font-size: 18px;
+    }
+
+    .design-card p {
+        font-size: 15px;
     }
 }
