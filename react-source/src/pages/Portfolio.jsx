@@ -66,7 +66,7 @@ const Portfolio = () => {
             <div className="project-visual" data-aos="fade-left">
               <div className="project-image-main">
                 <a href="https://cec.sejong.ac.kr" target="_blank" rel="noopener noreferrer">
-                  <img src="./assets/images/portfolio/sejong-cec.png" alt="세종대학교 미래교육원" />
+                  <img src="./assets/images/portfolio/sejong-cec.png" alt="세종대학교 미래교육원" style={{ objectPosition: 'top' }} />
                 </a>
               </div>
             </div>
@@ -80,7 +80,7 @@ const Portfolio = () => {
           <div className="project-content">
             <div className="project-info" data-aos="fade-right">
               <span className="project-badge">Featured Project</span>
-              <h2 className="project-title">진주교육대학교 100주년 기념 사이트</h2>
+              <h2 className="project-title">진주교육대학교<br />100주년 기념 사이트</h2>
               <p className="project-description">
                 진주교육대학교 개교 100주년을 기념하는 특별한 웹사이트입니다.
                 1923년부터 현재까지의 역사를 타임라인 형태로 구현하고,

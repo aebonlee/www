@@ -145,7 +145,7 @@
 .project-content {
     display: grid;
     grid-template-columns: 1fr 1fr;
-    gap: 60px;
+    gap: 48px;
     align-items: center;
 }
 

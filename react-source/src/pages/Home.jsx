@@ -79,7 +79,7 @@ const Home = () => {
           <div className="portfolio-grid">
             <Link to="/portfolio#sejong" className="portfolio-card" data-aos="fade-up">
               <div className="portfolio-image">
-                <img src="./assets/images/portfolio/sejong-cec.png" alt="세종대학교 미래교육원" />
+                <img src="./assets/images/portfolio/sejong-cec.png" alt="세종대학교 미래교육원" style={{ objectPosition: 'top' }} />
               </div>
               <div className="portfolio-content">
                 <div className="portfolio-tag">웹개발 · 디자인</div>
