@@ -81,11 +81,11 @@
     .carousel-arrow--next { right: 16px; }
 
     .carousel-dots {
-        bottom: 56px;
+        bottom: 68px;
     }
 
     .scroll-indicator {
-        bottom: 12px;
+        bottom: 22px;
     }
 
     .section-title {
@@ -333,12 +333,12 @@
     .carousel-arrow--next { right: 10px; }
 
     .carousel-dots {
-        bottom: 32px;
+        bottom: 40px;
         gap: 10px;
     }
 
     .scroll-indicator {
-        bottom: 6px;
+        bottom: 12px;
     }
 
     .mouse {
@@ -852,7 +852,7 @@
     }
 
     .carousel-dots {
-        bottom: 24px;
+        bottom: 28px;
     }
 
     .scroll-indicator {

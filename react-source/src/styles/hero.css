@@ -8,7 +8,7 @@
     align-items: center;
     background: var(--hero-bg);
     padding-top: calc(var(--nav-height) + 40px);
-    padding-bottom: 80px;
+    padding-bottom: 96px;
     position: relative;
     overflow: hidden;
 }
@@ -278,7 +278,7 @@
 /* ── Dot Indicators ── */
 .carousel-dots {
     position: absolute;
-    bottom: 64px;
+    bottom: 78px;
     left: 50%;
     transform: translateX(-50%);
     z-index: 3;
@@ -310,7 +310,7 @@
 /* ── Scroll Indicator ── */
 .scroll-indicator {
     position: absolute;
-    bottom: 14px;
+    bottom: 26px;
     left: 50%;
     transform: translateX(-50%);
     z-index: 3;
