@@ -1,0 +1,12 @@
+User-agent: *
+Allow: /
+
+Disallow: /login
+Disallow: /register
+Disallow: /forgot-password
+Disallow: /mypage
+Disallow: /cart
+Disallow: /checkout
+Disallow: /order-confirmation
+
+Sitemap: https://www.dreamitbiz.com/sitemap.xml
