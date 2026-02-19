@@ -30,7 +30,7 @@
 }
 
 .footer-brand .brand-biz {
-    color: #93C5FD;
+    color: var(--primary-blue-light);
 }
 
 .footer-brand p {
