@@ -26,7 +26,10 @@ const Gallery = () => {
   useAOS();
 
   useEffect(() => {
-    setItems(getGalleryItems().sort((a, b) => b.id - a.id));
+    (async () => {
+      const data = await getGalleryItems();
+      setItems(data.sort((a, b) => b.id - a.id));
+    })();
   }, []);
 
   const filters = [

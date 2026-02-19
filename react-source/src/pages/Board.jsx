@@ -15,7 +15,10 @@ const Board = () => {
   useAOS();
 
   useEffect(() => {
-    setPosts(getBoardPosts().sort((a, b) => b.id - a.id));
+    (async () => {
+      const data = await getBoardPosts();
+      setPosts(data.sort((a, b) => b.id - a.id));
+    })();
   }, []);
 
   const filters = [

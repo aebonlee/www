@@ -14,7 +14,10 @@ const Blog = () => {
   useAOS();
 
   useEffect(() => {
-    setPosts(getBlogPosts().sort((a, b) => b.id - a.id));
+    (async () => {
+      const data = await getBlogPosts();
+      setPosts(data.sort((a, b) => b.id - a.id));
+    })();
   }, []);
 
   const totalPages = Math.ceil(posts.length / POSTS_PER_PAGE);

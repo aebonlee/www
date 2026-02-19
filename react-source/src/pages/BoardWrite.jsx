@@ -18,15 +18,17 @@ const BoardWrite = () => {
 
   useEffect(() => {
     if (isEdit) {
-      const post = getBoardPost(id);
-      if (post) {
-        setForm({
-          category: post.category,
-          title: post.title,
-          author: post.author,
-          content: post.content
-        });
-      }
+      (async () => {
+        const post = await getBoardPost(id);
+        if (post) {
+          setForm({
+            category: post.category,
+            title: post.title,
+            author: post.author,
+            content: post.content
+          });
+        }
+      })();
     }
   }, [id, isEdit]);
 
@@ -34,12 +36,12 @@ const BoardWrite = () => {
     setForm({ ...form, [e.target.name]: e.target.value });
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
     if (!form.title.trim() || !form.content.trim() || !form.author.trim()) return;
 
     if (isEdit) {
-      updateBoardPost(id, {
+      await updateBoardPost(id, {
         category: form.category,
         title: form.title.trim(),
         author: form.author.trim(),
@@ -47,7 +49,7 @@ const BoardWrite = () => {
       });
       navigate(`/community/board/${id}`);
     } else {
-      const newPost = createBoardPost({
+      const newPost = await createBoardPost({
         category: form.category,
         title: form.title.trim(),
         content: form.content.trim(),

@@ -10,11 +10,13 @@ const BoardDetail = () => {
   const [post, setPost] = useState(null);
 
   useEffect(() => {
-    const found = getBoardPost(postId);
-    if (found) {
-      incrementBoardViews(postId);
-      setPost({ ...found, views: (found.views || 0) + 1 });
-    }
+    (async () => {
+      const found = await getBoardPost(postId);
+      if (found) {
+        await incrementBoardViews(postId);
+        setPost({ ...found, views: (found.views || 0) + 1 });
+      }
+    })();
   }, [postId]);
 
   const categoryLabel = (cat) => {
@@ -26,9 +28,9 @@ const BoardDetail = () => {
     }
   };
 
-  const handleDelete = () => {
+  const handleDelete = async () => {
     if (window.confirm(t('community.deleteConfirm'))) {
-      deleteBoardPost(postId);
+      await deleteBoardPost(postId);
       navigate('/community/board');
     }
   };

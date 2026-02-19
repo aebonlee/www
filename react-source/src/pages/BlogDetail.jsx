@@ -9,7 +9,9 @@ const BlogDetail = () => {
   const [post, setPost] = useState(null);
 
   useEffect(() => {
-    setPost(getBlogPost(postId));
+    (async () => {
+      setPost(await getBlogPost(postId));
+    })();
   }, [postId]);
 
   if (!post) {
