@@ -371,6 +371,38 @@ Supabase Management API를 통해 `EXTERNAL_KAKAO_SECRET` 업데이트 (HTTP 200
 
 ---
 
+## 세션 32: 다크모드 유저 드롭다운 + CSS 로딩 버그 수정
+
+**커밋**: `ff5c104` fix: 유저 드롭다운 다크모드 + 애니메이션 수정
+**커밋**: `b8451a7` fix: Navbar 유저 메뉴 CSS를 전역 로딩 navbar.css로 이동
+
+### 문제점
+
+1. **다크모드 드롭다운**: `.nav-user-dropdown`에 다크모드 스타일 없어 흰 배경에 흰 글씨 → 내용 불가시
+2. **애니메이션 충돌**: `tooltip-fade-in` 키프레임에 `translateX(-50%)`가 있어 드롭다운이 왼쪽으로 밀림
+3. **CSS 로딩 버그 (핵심)**: 유저 아바타 원형(`.nav-user-avatar-placeholder`) + 풍선 드롭다운(`.nav-user-dropdown`) 스타일이 `auth.css`에만 존재 → `auth.css`는 Login/Register/MyPage 등 lazy-loaded 페이지에서만 import → **Home 등 다른 페이지에서 CSS 미로딩** → 작은 네모 + 깨진 드롭다운
+
+### 해결
+
+| 변경 | 상세 |
+|------|------|
+| `dark-mode.css` | 드롭다운 다크모드 스타일 추가 (배경 `#1F2937`, 텍스트 `#F9FAFB`, 화살표 등) |
+| `dark-mode.css` | auth 페이지 다크모드 스타일 추가 (카드, 입력필드, 소셜 버튼 등) |
+| `auth.css` → `navbar.css` | `.nav-user-menu`, `.nav-user-btn`, `.nav-user-avatar-placeholder`, `.nav-user-dropdown` (화살표 포함), `@keyframes user-dropdown-fade`, `.dropdown-user-header/avatar/info/name/email`, `.dropdown-menu-item` (호버/로그아웃 변형), `.nav-user-dropdown .divider`, `.nav-login-btn` (+호버/::after) — **전부 navbar.css로 이동** |
+| `navbar.css` | 모바일 반응형 `.nav-user-avatar-placeholder` (28px) 추가 |
+| `auth.css` | 이동된 스타일 전부 제거, auth 페이지 전용 스타일만 유지 |
+
+### 원인 분석
+
+```
+index.css → @import './styles/navbar.css'  → 전역 로딩 (모든 페이지)
+Login.jsx → import '../styles/auth.css'    → lazy 로딩 (해당 페이지만)
+```
+
+Vite가 lazy-loaded 페이지의 CSS import를 코드 스플리팅하여 `auth-*.css` 번들은 Login 등 접근 시에만 로드됨. Navbar는 모든 페이지에 존재하므로 관련 CSS는 전역 번들에 있어야 함.
+
+---
+
 ## 프로젝트 현재 상태
 
 ### 완료된 기능
@@ -395,3 +427,5 @@ Supabase Management API를 통해 `EXTERNAL_KAKAO_SECRET` 업데이트 (HTTP 200
 - [x] 회원가입 페이지 fullpage 카드 레이아웃 통일
 - [x] Navbar "Login" 라운드 버튼 (밑줄 제거)
 - [x] Navbar "Logout" 풍선 드롭다운 메뉴
+- [x] 다크모드 유저 드롭다운 대응
+- [x] 유저 메뉴 CSS 전역 로딩 수정 (navbar.css로 이동)
