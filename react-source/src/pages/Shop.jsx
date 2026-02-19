@@ -1,30 +1,40 @@
 import { useState, useEffect } from 'react';
+import { Link } from 'react-router-dom';
 import { useLanguage } from '../contexts/LanguageContext';
 import { useCart } from '../contexts/CartContext';
+import { useAuth } from '../contexts/AuthContext';
+import { getProducts, toggleSoldOut, deleteProduct } from '../utils/productStorage';
 import useAOS from '../hooks/useAOS';
-import publishingDetails from '../data/publishingDetails';
-import educationDetails from '../data/educationDetails';
-
-const allProducts = [
-  ...publishingDetails.book.products.map(p => ({ ...p, category: 'book' })),
-  ...publishingDetails.ebook.products.map(p => ({ ...p, category: 'ebook' })),
-  ...publishingDetails.periodical.products.map(p => ({ ...p, category: 'periodical' })),
-  ...educationDetails.classroom.courses.map(p => ({ ...p, category: 'course' }))
-];
 
 const Shop = () => {
   const { language, t } = useLanguage();
   const { addItem } = useCart();
+  const { isAdmin } = useAuth();
   const isEn = language === 'en';
   const [filter, setFilter] = useState('all');
   const [addedId, setAddedId] = useState(null);
+  const [products, setProducts] = useState([]);
+  const [loading, setLoading] = useState(true);
   useAOS();
 
   useEffect(() => { window.scrollTo(0, 0); }, []);
 
+  useEffect(() => {
+    (async () => {
+      try {
+        const data = await getProducts(isAdmin);
+        setProducts(data);
+      } catch (err) {
+        console.error('Shop load error:', err);
+      } finally {
+        setLoading(false);
+      }
+    })();
+  }, [isAdmin]);
+
   const filtered = filter === 'all'
-    ? allProducts
-    : allProducts.filter(p => p.category === filter);
+    ? products
+    : products.filter(p => p.category === filter);
 
   const categories = [
     { key: 'all', label: t('shop.all') },
@@ -41,15 +51,37 @@ const Shop = () => {
   };
 
   const handleAddToCart = (product) => {
+    if (product.isSoldOut) return;
     addItem({
-      id: product.id,
+      id: product.slug || product.id,
       title: product.title,
       titleEn: product.titleEn,
       price: product.price,
       category: product.category
     });
-    setAddedId(product.id);
+    setAddedId(product.slug || product.id);
     setTimeout(() => setAddedId(null), 1500);
+  };
+
+  const handleToggleSoldOut = async (product) => {
+    try {
+      await toggleSoldOut(product.id, !product.isSoldOut);
+      setProducts(prev => prev.map(p =>
+        p.id === product.id ? { ...p, isSoldOut: !p.isSoldOut } : p
+      ));
+    } catch (err) {
+      console.error('Toggle sold out error:', err);
+    }
+  };
+
+  const handleDelete = async (product) => {
+    if (!window.confirm(t('community.deleteConfirm'))) return;
+    try {
+      await deleteProduct(product.id);
+      setProducts(prev => prev.filter(p => p.id !== product.id));
+    } catch (err) {
+      console.error('Delete product error:', err);
+    }
   };
 
   const getCategoryIcon = (category) => {
@@ -102,6 +134,12 @@ const Shop = () => {
 
       <section className="shop-section">
         <div className="container">
+          {isAdmin && (
+            <div className="board-actions" style={{ marginBottom: '24px' }}>
+              <Link to="/shop/product/new" className="board-write-btn">{t('auth.addProduct')}</Link>
+            </div>
+          )}
+
           <div className="shop-filters" data-aos="fade-up">
             {categories.map(cat => (
               <button
@@ -114,30 +152,72 @@ const Shop = () => {
             ))}
           </div>
 
-          {filtered.length === 0 ? (
+          {loading ? (
+            <div style={{ textAlign: 'center', padding: '60px 0', color: 'var(--text-light)' }}>
+              로딩 중...
+            </div>
+          ) : filtered.length === 0 ? (
             <p className="shop-empty">{t('shop.noProducts')}</p>
           ) : (
             <div className="shop-grid">
               {filtered.map((product, i) => (
-                <div key={product.id} className="product-card" data-aos="fade-up" data-aos-delay={i * 60}>
+                <div
+                  key={product.slug || product.id}
+                  className={`product-card ${product.isSoldOut ? 'sold-out' : ''}`}
+                  data-aos="fade-up"
+                  data-aos-delay={i * 60}
+                >
                   <div className="product-thumbnail">
-                    {getCategoryIcon(product.category)}
+                    {product.imageUrl ? (
+                      <img src={product.imageUrl} alt={isEn ? product.titleEn : product.title} style={{ width: '100%', height: '100%', objectFit: 'cover' }} />
+                    ) : (
+                      getCategoryIcon(product.category)
+                    )}
+                    {product.isSoldOut && (
+                      <span className="sold-out-badge">{t('auth.soldOut')}</span>
+                    )}
                   </div>
                   <div className="product-info">
                     <span className="product-category-badge">{t(`shop.${product.category}`)}</span>
-                    <h3 className="product-title">{isEn ? product.titleEn : product.title}</h3>
+                    <h3 className="product-title">{isEn ? (product.titleEn || product.title) : product.title}</h3>
                     <p className="product-description">
                       {isEn ? (product.descriptionEn || '') : (product.description || '')}
                     </p>
                     <div className="product-bottom">
                       <span className="product-price">{formatPrice(product.price)}</span>
                       <button
-                        className={`add-to-cart-btn ${addedId === product.id ? 'added' : ''}`}
+                        className={`add-to-cart-btn ${addedId === (product.slug || product.id) ? 'added' : ''}`}
                         onClick={() => handleAddToCart(product)}
+                        disabled={product.isSoldOut}
                       >
-                        {addedId === product.id ? t('shop.addedToCart') : t('shop.addToCart')}
+                        {product.isSoldOut
+                          ? t('auth.soldOut')
+                          : addedId === (product.slug || product.id)
+                            ? t('shop.addedToCart')
+                            : t('shop.addToCart')}
                       </button>
                     </div>
+                    {isAdmin && (
+                      <div className="product-admin-actions">
+                        <Link to={`/shop/product/edit/${product.id}`} className="board-btn" style={{ fontSize: '12px', padding: '4px 10px' }}>
+                          {t('community.edit')}
+                        </Link>
+                        <button
+                          className="board-btn"
+                          style={{ fontSize: '12px', padding: '4px 10px' }}
+                          onClick={() => handleToggleSoldOut(product)}
+                        >
+                          {product.isSoldOut ? '판매재개' : '품절처리'}
+                        </button>
+                        <button
+                          className="board-btn danger"
+                          style={{ fontSize: '12px', padding: '4px 10px' }}
+                          onClick={() => handleDelete(product)}
+                        >
+                          {t('community.delete')}
+                        </button>
+                      </div>
+                    )}
                   </div>
                 </div>
               ))}

@@ -21,6 +21,7 @@ export const CartProvider = ({ children }) => {
   }, [cartItems]);
 
   const addItem = useCallback((product) => {
+    if (product.isSoldOut) return;
     setCartItems(prev => {
       const existing = prev.find(item => item.id === product.id);
       if (existing) {

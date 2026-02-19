@@ -2,6 +2,7 @@ import { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useLanguage } from '../contexts/LanguageContext';
 import { useCart } from '../contexts/CartContext';
+import { useAuth } from '../contexts/AuthContext';
 import { createOrder, getOrderByNumber } from '../utils/supabase';
 import { requestPayment } from '../utils/portone';
 import useAOS from '../hooks/useAOS';
@@ -9,6 +10,7 @@ import useAOS from '../hooks/useAOS';
 const Checkout = () => {
   const { language, t } = useLanguage();
   const { cartItems, cartTotal, cartCount, clearCart } = useCart();
+  const { user, profile } = useAuth();
   const navigate = useNavigate();
   const isEn = language === 'en';
   useAOS();
@@ -20,6 +22,17 @@ const Checkout = () => {
   const [error, setError] = useState('');
 
   useEffect(() => { window.scrollTo(0, 0); }, []);
+
+  // Auto-fill form when logged in
+  useEffect(() => {
+    if (profile || user) {
+      setForm(prev => ({
+        name: prev.name || profile?.display_name || '',
+        email: prev.email || user?.email || '',
+        phone: prev.phone
+      }));
+    }
+  }, [profile, user]);
 
   useEffect(() => {
     if (cartItems.length === 0) {
@@ -60,6 +73,7 @@ const Checkout = () => {
         user_phone: form.phone,
         total_amount: cartTotal,
         payment_method: paymentMethod,
+        user_id: user?.id || null,
         items: cartItems.map(item => ({
           product_title: isEn ? item.titleEn : item.title,
           quantity: item.quantity,

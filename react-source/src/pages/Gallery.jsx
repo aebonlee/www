@@ -1,6 +1,8 @@
 import { useState, useEffect, useCallback } from 'react';
+import { Link } from 'react-router-dom';
 import { useLanguage } from '../contexts/LanguageContext';
-import { getGalleryItems } from '../utils/boardStorage';
+import { useAuth } from '../contexts/AuthContext';
+import { getGalleryItems, deleteGalleryItem } from '../utils/boardStorage';
 import Pagination from '../components/Pagination';
 import useAOS from '../hooks/useAOS';
 
@@ -19,6 +21,7 @@ const GRADIENTS = [
 
 const Gallery = () => {
   const { t, language } = useLanguage();
+  const { isAdmin } = useAuth();
   const [items, setItems] = useState([]);
   const [loading, setLoading] = useState(true);
   const [activeFilter, setActiveFilter] = useState('all');
@@ -113,6 +116,11 @@ const Gallery = () => {
 
       <section style={{ padding: '80px 0', background: 'var(--bg-white)' }}>
         <div className="container">
+          {isAdmin && (
+            <div className="board-actions" style={{ marginBottom: '24px' }}>
+              <Link to="/community/gallery/write" className="board-write-btn">{t('auth.uploadImage')}</Link>
+            </div>
+          )}
           <div className="gallery-filters" data-aos="fade-up">
             {filters.map((f) => (
               <button
@@ -143,14 +151,22 @@ const Gallery = () => {
                 onClick={() => openLightbox(item)}
               >
                 <div className="gallery-thumb">
-                  <div
-                    className="gallery-thumb-gradient"
-                    style={{ background: getGradient(item.id) }}
-                  >
-                    <span className="gallery-thumb-label">
-                      {language === 'en' ? item.titleEn : item.title}
-                    </span>
-                  </div>
+                  {item.imageUrl ? (
+                    <img
+                      src={item.imageUrl}
+                      alt={language === 'en' ? item.titleEn : item.title}
+                      className="gallery-thumb-image"
+                    />
+                  ) : (
+                    <div
+                      className="gallery-thumb-gradient"
+                      style={{ background: getGradient(item.id) }}
+                    >
+                      <span className="gallery-thumb-label">
+                        {language === 'en' ? item.titleEn : item.title}
+                      </span>
+                    </div>
+                  )}
                   <div className="gallery-overlay">
                     <span className="gallery-overlay-icon">+</span>
                   </div>
@@ -185,9 +201,13 @@ const Gallery = () => {
             <button className="lightbox-close" onClick={closeLightbox}>×</button>
             <div
               className="lightbox-image"
-              style={{ background: getGradient(lightboxItem.id) }}
+              style={lightboxItem.imageUrl ? {} : { background: getGradient(lightboxItem.id) }}
             >
-              {language === 'en' ? lightboxItem.titleEn : lightboxItem.title}
+              {lightboxItem.imageUrl ? (
+                <img src={lightboxItem.imageUrl} alt={language === 'en' ? lightboxItem.titleEn : lightboxItem.title} style={{ width: '100%', height: '100%', objectFit: 'contain' }} />
+              ) : (
+                language === 'en' ? lightboxItem.titleEn : lightboxItem.title
+              )}
             </div>
             <div className="lightbox-body">
               <h3>{language === 'en' ? lightboxItem.titleEn : lightboxItem.title}</h3>

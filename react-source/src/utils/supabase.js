@@ -35,16 +35,19 @@ export const createOrder = async (orderData) => {
   }
 
   // Insert order
+  const orderPayload = {
+    order_number: orderData.order_number,
+    user_email: orderData.user_email,
+    user_name: orderData.user_name,
+    user_phone: orderData.user_phone,
+    total_amount: orderData.total_amount,
+    payment_method: orderData.payment_method
+  };
+  if (orderData.user_id) orderPayload.user_id = orderData.user_id;
+
   const { data: order, error: orderError } = await client
     .from('orders')
-    .insert({
-      order_number: orderData.order_number,
-      user_email: orderData.user_email,
-      user_name: orderData.user_name,
-      user_phone: orderData.user_phone,
-      total_amount: orderData.total_amount,
-      payment_method: orderData.payment_method
-    })
+    .insert(orderPayload)
     .select()
     .single();
 
@@ -151,6 +154,26 @@ export const verifyPayment = async (paymentId, orderId) => {
 
   if (error) throw error;
   return data;
+};
+
+/**
+ * Get orders by user ID
+ */
+export const getOrdersByUser = async (userId) => {
+  const client = getSupabase();
+  if (!client) return [];
+
+  const { data, error } = await client
+    .from('orders')
+    .select('*, order_items(*)')
+    .eq('user_id', userId)
+    .order('created_at', { ascending: false });
+
+  if (error) {
+    console.error('getOrdersByUser error:', error);
+    return [];
+  }
+  return data || [];
 };
 
 export default getSupabase;

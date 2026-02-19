@@ -1,12 +1,14 @@
 import { useState, useEffect } from 'react';
 import { useParams, useNavigate, Link } from 'react-router-dom';
 import { useLanguage } from '../contexts/LanguageContext';
+import { useAuth } from '../contexts/AuthContext';
 import { getBoardPost, createBoardPost, updateBoardPost } from '../utils/boardStorage';
 
 const BoardWrite = () => {
   const { id } = useParams();
   const navigate = useNavigate();
   const { t } = useLanguage();
+  const { user, profile, isLoggedIn } = useAuth();
   const isEdit = Boolean(id);
 
   const [form, setForm] = useState({
@@ -15,6 +17,12 @@ const BoardWrite = () => {
     author: '',
     content: ''
   });
+
+  useEffect(() => {
+    if (!isEdit && profile) {
+      setForm(prev => ({ ...prev, author: profile.display_name || '' }));
+    }
+  }, [isEdit, profile]);
 
   useEffect(() => {
     if (isEdit) {
@@ -53,11 +61,18 @@ const BoardWrite = () => {
         category: form.category,
         title: form.title.trim(),
         content: form.content.trim(),
-        author: form.author.trim()
+        author: form.author.trim(),
+        authorId: user?.id
       });
       navigate(`/community/board/${newPost.id}`);
     }
   };
+
+  // Redirect if not logged in
+  if (!isLoggedIn) {
+    navigate('/login', { state: { from: { pathname: '/community/board/write' } } });
+    return null;
+  }
 
   return (
     <>

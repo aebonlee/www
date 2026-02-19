@@ -1,8 +1,9 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import { useTheme } from '../../contexts/ThemeContext';
 import { useLanguage } from '../../contexts/LanguageContext';
 import { useCart } from '../../contexts/CartContext';
+import { useAuth } from '../../contexts/AuthContext';
 
 const COLOR_OPTIONS = [
   { name: 'blue', color: '#0046C8' },
@@ -17,10 +18,13 @@ const Navbar = () => {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const [activeDropdown, setActiveDropdown] = useState(null);
   const [showColorPicker, setShowColorPicker] = useState(false);
+  const [showUserMenu, setShowUserMenu] = useState(false);
+  const userMenuRef = useRef(null);
   const location = useLocation();
   const { mode, toggleTheme, colorTheme, setColorTheme } = useTheme();
   const { language, toggleLanguage, t } = useLanguage();
   const { cartCount } = useCart();
+  const { isLoggedIn, profile, signOut } = useAuth();
 
   useEffect(() => {
     const handleScroll = () => setIsScrolled(window.scrollY > 50);
@@ -31,7 +35,23 @@ const Navbar = () => {
   useEffect(() => {
     setIsMobileMenuOpen(false);
     setActiveDropdown(null);
+    setShowUserMenu(false);
   }, [location]);
+
+  useEffect(() => {
+    const handleClickOutside = (e) => {
+      if (userMenuRef.current && !userMenuRef.current.contains(e.target)) {
+        setShowUserMenu(false);
+      }
+    };
+    document.addEventListener('mousedown', handleClickOutside);
+    return () => document.removeEventListener('mousedown', handleClickOutside);
+  }, []);
+
+  const handleSignOut = async () => {
+    await signOut();
+    setShowUserMenu(false);
+  };
 
   const menuItems = [
     { path: '/', label: t('nav.home') },
@@ -107,6 +127,8 @@ const Navbar = () => {
     return location.pathname.startsWith(checkPath);
   };
 
+  const userInitial = (profile?.display_name || profile?.email || '?')[0].toUpperCase();
+
   return (
     <nav className={`navbar ${isScrolled ? 'scrolled' : ''}`}>
       <div className="container">
@@ -161,6 +183,30 @@ const Navbar = () => {
           </ul>
 
           <div className="nav-actions">
+            {/* User Auth */}
+            {isLoggedIn ? (
+              <div className="nav-user-menu" ref={userMenuRef}>
+                <button className="nav-user-btn" onClick={() => setShowUserMenu(!showUserMenu)}>
+                  {profile?.avatar_url ? (
+                    <img src={profile.avatar_url} alt="" className="nav-user-avatar" />
+                  ) : (
+                    <span className="nav-user-avatar-placeholder">{userInitial}</span>
+                  )}
+                  <span className="nav-user-name">{profile?.display_name || ''}</span>
+                </button>
+                {showUserMenu && (
+                  <div className="nav-user-dropdown">
+                    <Link to="/mypage">{t('auth.myPage')}</Link>
+                    <Link to="/mypage/orders">{t('auth.orderHistory')}</Link>
+                    <div className="divider" />
+                    <button onClick={handleSignOut}>{t('auth.logout')}</button>
+                  </div>
+                )}
+              </div>
+            ) : (
+              <Link to="/login" className="nav-login-btn">{t('auth.login')}</Link>
+            )}
+
             <Link to="/cart" className="cart-icon-link" aria-label="Cart">
               <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" className="cart-icon-svg">
                 <circle cx="9" cy="21" r="1" />

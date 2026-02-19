@@ -1,0 +1,104 @@
+/**
+ * auth.js — Supabase Auth 헬퍼 함수
+ */
+import getSupabase from './supabase';
+
+/** Google OAuth 로그인 */
+export async function signInWithGoogle() {
+  const client = getSupabase();
+  if (!client) throw new Error('Supabase not configured');
+  const { data, error } = await client.auth.signInWithOAuth({
+    provider: 'google',
+    options: { redirectTo: window.location.origin + window.location.pathname }
+  });
+  if (error) throw error;
+  return data;
+}
+
+/** Kakao OAuth 로그인 */
+export async function signInWithKakao() {
+  const client = getSupabase();
+  if (!client) throw new Error('Supabase not configured');
+  const { data, error } = await client.auth.signInWithOAuth({
+    provider: 'kakao',
+    options: { redirectTo: window.location.origin + window.location.pathname }
+  });
+  if (error) throw error;
+  return data;
+}
+
+/** Naver OAuth 로그인 (Supabase custom provider 또는 OIDC) */
+export async function signInWithNaver() {
+  const client = getSupabase();
+  if (!client) throw new Error('Supabase not configured');
+  // Naver는 Supabase에서 커스텀 OIDC provider로 설정해야 함
+  // Dashboard > Auth > Providers > 'naver' 로 등록된 경우:
+  const { data, error } = await client.auth.signInWithOAuth({
+    provider: 'naver',
+    options: { redirectTo: window.location.origin + window.location.pathname }
+  });
+  if (error) throw error;
+  return data;
+}
+
+/** 이메일/비밀번호 로그인 */
+export async function signInWithEmail(email, password) {
+  const client = getSupabase();
+  if (!client) throw new Error('Supabase not configured');
+  const { data, error } = await client.auth.signInWithPassword({ email, password });
+  if (error) throw error;
+  return data;
+}
+
+/** 이메일 회원가입 */
+export async function signUp(email, password, displayName) {
+  const client = getSupabase();
+  if (!client) throw new Error('Supabase not configured');
+  const { data, error } = await client.auth.signUp({
+    email,
+    password,
+    options: {
+      data: { full_name: displayName }
+    }
+  });
+  if (error) throw error;
+  return data;
+}
+
+/** 로그아웃 */
+export async function signOut() {
+  const client = getSupabase();
+  if (!client) return;
+  const { error } = await client.auth.signOut();
+  if (error) throw error;
+}
+
+/** 프로필 조회 */
+export async function getProfile(userId) {
+  const client = getSupabase();
+  if (!client) return null;
+  const { data, error } = await client
+    .from('user_profiles')
+    .select('*')
+    .eq('id', userId)
+    .single();
+  if (error) {
+    console.error('getProfile error:', error);
+    return null;
+  }
+  return data;
+}
+
+/** 프로필 업데이트 */
+export async function updateProfile(userId, updates) {
+  const client = getSupabase();
+  if (!client) return null;
+  const { data, error } = await client
+    .from('user_profiles')
+    .update({ ...updates, updated_at: new Date().toISOString() })
+    .eq('id', userId)
+    .select()
+    .single();
+  if (error) throw error;
+  return data;
+}

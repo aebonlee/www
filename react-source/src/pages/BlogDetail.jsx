@@ -1,11 +1,14 @@
 import { useEffect, useState } from 'react';
-import { useParams, Link } from 'react-router-dom';
+import { useParams, useNavigate, Link } from 'react-router-dom';
 import { useLanguage } from '../contexts/LanguageContext';
-import { getBlogPost } from '../utils/boardStorage';
+import { useAuth } from '../contexts/AuthContext';
+import { getBlogPost, deleteBlogPost } from '../utils/boardStorage';
 
 const BlogDetail = () => {
   const { postId } = useParams();
+  const navigate = useNavigate();
   const { t, language } = useLanguage();
+  const { isAdmin } = useAuth();
   const [post, setPost] = useState(null);
 
   useEffect(() => {
@@ -13,6 +16,13 @@ const BlogDetail = () => {
       setPost(await getBlogPost(postId));
     })();
   }, [postId]);
+
+  const handleDelete = async () => {
+    if (window.confirm(t('community.deleteConfirm'))) {
+      await deleteBlogPost(postId);
+      navigate('/community/blog');
+    }
+  };
 
   if (!post) {
     return (
@@ -50,7 +60,11 @@ const BlogDetail = () => {
         <div className="container">
           <div className="blog-detail">
             <div className="blog-detail-hero">
-              <span>{post.icon}</span>
+              {post.imageUrl ? (
+                <img src={post.imageUrl} alt={title} style={{ width: '100%', height: '100%', objectFit: 'cover', borderRadius: 'var(--radius-md)' }} />
+              ) : (
+                <span>{post.icon}</span>
+              )}
             </div>
             <div className="blog-detail-meta">
               <span className="blog-detail-category">{category}</span>
@@ -61,6 +75,12 @@ const BlogDetail = () => {
             <div className="blog-detail-content">{content}</div>
             <div className="blog-detail-footer">
               <Link to="/community/blog" className="board-btn">{t('community.backToList')}</Link>
+              {isAdmin && (
+                <div className="board-detail-actions">
+                  <Link to={`/community/blog/edit/${post.id}`} className="board-btn">{t('community.edit')}</Link>
+                  <button className="board-btn danger" onClick={handleDelete}>{t('community.delete')}</button>
+                </div>
+              )}
             </div>
           </div>
         </div>

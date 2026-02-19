@@ -64,20 +64,22 @@ export async function getBoardPost(id) {
   return toCamel(data);
 }
 
-export async function createBoardPost({ category, title, content, author }) {
+export async function createBoardPost({ category, title, content, author, authorId }) {
   const client = getSupabase();
   if (!client) return null;
   const now = new Date().toISOString();
+  const payload = {
+    category,
+    title,
+    content,
+    author,
+    date: now.slice(0, 10),
+    views: 0
+  };
+  if (authorId) payload.author_id = authorId;
   const { data, error } = await client
     .from('board_posts')
-    .insert({
-      category,
-      title,
-      content,
-      author,
-      date: now.slice(0, 10),
-      views: 0
-    })
+    .insert(payload)
     .select()
     .single();
   if (error) {
@@ -165,6 +167,77 @@ export async function getBlogPost(id) {
   return toCamel(data);
 }
 
+export async function createBlogPost(postData) {
+  const client = getSupabase();
+  if (!client) return null;
+  const now = new Date().toISOString();
+  const { data, error } = await client
+    .from('blog_posts')
+    .insert({
+      category: postData.category,
+      category_en: postData.categoryEn,
+      title: postData.title,
+      title_en: postData.titleEn,
+      excerpt: postData.excerpt,
+      excerpt_en: postData.excerptEn,
+      content: postData.content,
+      content_en: postData.contentEn,
+      icon: postData.icon,
+      image_url: postData.imageUrl,
+      author_id: postData.authorId,
+      date: now.slice(0, 10)
+    })
+    .select()
+    .single();
+  if (error) {
+    console.error('createBlogPost error:', error);
+    return null;
+  }
+  return toCamel(data);
+}
+
+export async function updateBlogPost(id, updates) {
+  const client = getSupabase();
+  if (!client) return null;
+  const payload = {};
+  if (updates.category !== undefined) payload.category = updates.category;
+  if (updates.categoryEn !== undefined) payload.category_en = updates.categoryEn;
+  if (updates.title !== undefined) payload.title = updates.title;
+  if (updates.titleEn !== undefined) payload.title_en = updates.titleEn;
+  if (updates.excerpt !== undefined) payload.excerpt = updates.excerpt;
+  if (updates.excerptEn !== undefined) payload.excerpt_en = updates.excerptEn;
+  if (updates.content !== undefined) payload.content = updates.content;
+  if (updates.contentEn !== undefined) payload.content_en = updates.contentEn;
+  if (updates.icon !== undefined) payload.icon = updates.icon;
+  if (updates.imageUrl !== undefined) payload.image_url = updates.imageUrl;
+  payload.updated_at = new Date().toISOString();
+  const { data, error } = await client
+    .from('blog_posts')
+    .update(payload)
+    .eq('id', Number(id))
+    .select()
+    .single();
+  if (error) {
+    console.error('updateBlogPost error:', error);
+    return null;
+  }
+  return toCamel(data);
+}
+
+export async function deleteBlogPost(id) {
+  const client = getSupabase();
+  if (!client) return false;
+  const { error } = await client
+    .from('blog_posts')
+    .delete()
+    .eq('id', Number(id));
+  if (error) {
+    console.error('deleteBlogPost error:', error);
+    return false;
+  }
+  return true;
+}
+
 // ── Gallery CRUD ──
 
 export async function getGalleryItems() {
@@ -194,4 +267,67 @@ export async function getGalleryItem(id) {
     return null;
   }
   return toCamel(data);
+}
+
+export async function createGalleryItem(itemData) {
+  const client = getSupabase();
+  if (!client) return null;
+  const now = new Date().toISOString();
+  const { data, error } = await client
+    .from('gallery_items')
+    .insert({
+      category: itemData.category,
+      title: itemData.title,
+      title_en: itemData.titleEn,
+      description: itemData.description,
+      description_en: itemData.descriptionEn,
+      image_url: itemData.imageUrl,
+      author_id: itemData.authorId,
+      date: now.slice(0, 10)
+    })
+    .select()
+    .single();
+  if (error) {
+    console.error('createGalleryItem error:', error);
+    return null;
+  }
+  return toCamel(data);
+}
+
+export async function updateGalleryItem(id, updates) {
+  const client = getSupabase();
+  if (!client) return null;
+  const payload = {};
+  if (updates.category !== undefined) payload.category = updates.category;
+  if (updates.title !== undefined) payload.title = updates.title;
+  if (updates.titleEn !== undefined) payload.title_en = updates.titleEn;
+  if (updates.description !== undefined) payload.description = updates.description;
+  if (updates.descriptionEn !== undefined) payload.description_en = updates.descriptionEn;
+  if (updates.imageUrl !== undefined) payload.image_url = updates.imageUrl;
+  payload.updated_at = new Date().toISOString();
+  const { data, error } = await client
+    .from('gallery_items')
+    .update(payload)
+    .eq('id', Number(id))
+    .select()
+    .single();
+  if (error) {
+    console.error('updateGalleryItem error:', error);
+    return null;
+  }
+  return toCamel(data);
+}
+
+export async function deleteGalleryItem(id) {
+  const client = getSupabase();
+  if (!client) return false;
+  const { error } = await client
+    .from('gallery_items')
+    .delete()
+    .eq('id', Number(id));
+  if (error) {
+    console.error('deleteGalleryItem error:', error);
+    return false;
+  }
+  return true;
 }

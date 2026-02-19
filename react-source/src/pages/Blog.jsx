@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { useLanguage } from '../contexts/LanguageContext';
+import { useAuth } from '../contexts/AuthContext';
 import { getBlogPosts } from '../utils/boardStorage';
 import Pagination from '../components/Pagination';
 import useAOS from '../hooks/useAOS';
@@ -18,6 +19,7 @@ const estimateReadTime = (text) => {
 
 const Blog = () => {
   const { t, language } = useLanguage();
+  const { isAdmin } = useAuth();
   const [posts, setPosts] = useState([]);
   const [loading, setLoading] = useState(true);
   const [currentPage, setCurrentPage] = useState(1);
@@ -56,6 +58,11 @@ const Blog = () => {
 
       <section style={{ padding: '80px 0', background: 'var(--bg-white)' }}>
         <div className="container">
+          {isAdmin && (
+            <div className="board-actions" style={{ marginBottom: '24px' }}>
+              <Link to="/community/blog/write" className="board-write-btn">{t('community.writePost')}</Link>
+            </div>
+          )}
           {loading ? (
             <div style={{ textAlign: 'center', padding: '60px 0', color: 'var(--text-light)' }}>
               {t('community.loading') || '로딩 중...'}

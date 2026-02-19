@@ -1,12 +1,14 @@
 import { useEffect, useState } from 'react';
 import { useParams, useNavigate, Link } from 'react-router-dom';
 import { useLanguage } from '../contexts/LanguageContext';
+import { useAuth } from '../contexts/AuthContext';
 import { getBoardPost, deleteBoardPost, incrementBoardViews } from '../utils/boardStorage';
 
 const BoardDetail = () => {
   const { postId } = useParams();
   const navigate = useNavigate();
   const { t } = useLanguage();
+  const { user, isAdmin } = useAuth();
   const [post, setPost] = useState(null);
 
   useEffect(() => {
@@ -27,6 +29,8 @@ const BoardDetail = () => {
       default: return cat;
     }
   };
+
+  const canEditDelete = isAdmin || (user && post?.authorId && user.id === post.authorId);
 
   const handleDelete = async () => {
     if (window.confirm(t('community.deleteConfirm'))) {
@@ -81,10 +85,12 @@ const BoardDetail = () => {
             </div>
             <div className="board-detail-footer">
               <Link to="/community/board" className="board-btn">{t('community.backToList')}</Link>
-              <div className="board-detail-actions">
-                <Link to={`/community/board/edit/${post.id}`} className="board-btn">{t('community.edit')}</Link>
-                <button className="board-btn danger" onClick={handleDelete}>{t('community.delete')}</button>
-              </div>
+              {canEditDelete && (
+                <div className="board-detail-actions">
+                  <Link to={`/community/board/edit/${post.id}`} className="board-btn">{t('community.edit')}</Link>
+                  <button className="board-btn danger" onClick={handleDelete}>{t('community.delete')}</button>
+                </div>
+              )}
             </div>
           </div>
         </div>

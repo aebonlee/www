@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { useLanguage } from '../contexts/LanguageContext';
+import { useAuth } from '../contexts/AuthContext';
 import { getBoardPosts } from '../utils/boardStorage';
 import Pagination from '../components/Pagination';
 import useAOS from '../hooks/useAOS';
@@ -9,6 +10,7 @@ const POSTS_PER_PAGE = 10;
 
 const Board = () => {
   const { t } = useLanguage();
+  const { isLoggedIn } = useAuth();
   const [activeFilter, setActiveFilter] = useState('all');
   const [posts, setPosts] = useState([]);
   const [currentPage, setCurrentPage] = useState(1);
@@ -108,9 +110,11 @@ const Board = () => {
               <div className="board-empty">{t('community.noPost')}</div>
             )}
 
-            <div className="board-actions">
-              <Link to="/community/board/write" className="board-write-btn">{t('community.writePost')}</Link>
-            </div>
+            {isLoggedIn && (
+              <div className="board-actions">
+                <Link to="/community/board/write" className="board-write-btn">{t('community.writePost')}</Link>
+              </div>
+            )}
 
             <Pagination
               currentPage={currentPage}
