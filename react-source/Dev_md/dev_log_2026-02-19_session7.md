@@ -437,6 +437,45 @@ Vite가 lazy-loaded 페이지의 CSS import를 코드 스플리팅하여 `auth-*
 
 ---
 
+## 세션 34: Phase B 품질 개선 — 다국어, AuthGuard, 비밀번호 재설정
+
+### 작업 내역
+
+평가보고서 Phase B 권장 작업 4건 일괄 구현:
+
+#### B4: Contact.jsx 다국어 적용
+- `translations.js`에 `contactPage.*` 키 추가 (ko/en 양쪽)
+- `Contact.jsx`에 `useLanguage()` 훅 적용, 모든 하드코딩 텍스트 → `t()` 함수로 교체
+- 주소/전화/영업시간에 `white-space: pre-line` 적용으로 줄바꿈 보존
+
+#### B5: 게시판 write/edit 라우트에 AuthGuard 추가
+- `App.jsx`의 `/community/board/write`, `/community/board/edit/:id` 라우트에 `<AuthGuard>` 래핑
+- 비로그인 상태에서 글쓰기 접근 시 로그인 페이지로 리다이렉트
+
+#### B6: 비밀번호 재설정 페이지 구현
+- `auth.js`에 `resetPassword(email)` 함수 추가 (Supabase `resetPasswordForEmail`)
+- `ForgotPassword.jsx` 신규 생성 — Google 스타일 카드 UI, 전송 완료 시 성공 메시지
+- `translations.js`에 `auth.forgotPassword*` 키 추가 (ko/en)
+- `App.jsx`에 `/forgot-password` 라우트 + lazy import 추가
+- `Login.jsx`에 이메일 입력 단계 하단 "비밀번호를 잊으셨나요?" 링크 추가
+
+#### B7: products 테이블 빈 데이터 폴백 보강
+- `productStorage.js`의 `getProducts()`: DB가 빈 배열 반환 시에도 `fallbackProducts`로 폴백하도록 수정
+
+### 수정/생성 파일
+
+| 파일 | 변경 |
+|------|------|
+| `src/utils/translations.js` | `contactPage.*`, `auth.forgotPassword*` ko/en 키 추가 |
+| `src/pages/Contact.jsx` | 전면 다국어 적용 (useLanguage + t()) |
+| `src/App.jsx` | Board write/edit AuthGuard 추가, ForgotPassword lazy import + 라우트 |
+| `src/utils/auth.js` | `resetPassword()` 함수 추가 |
+| `src/pages/ForgotPassword.jsx` | 신규 생성 — 비밀번호 재설정 페이지 |
+| `src/pages/Login.jsx` | 비밀번호 찾기 링크 추가 |
+| `src/utils/productStorage.js` | 빈 결과 폴백 로직 보강 |
+
+---
+
 ## 프로젝트 현재 상태
 
 ### 완료된 기능
@@ -464,3 +503,7 @@ Vite가 lazy-loaded 페이지의 CSS import를 코드 스플리팅하여 `auth-*
 - [x] 다크모드 유저 드롭다운 대응
 - [x] 유저 메뉴 CSS 전역 로딩 수정 (navbar.css로 이동)
 - [x] 종합 평가보고서 작성 (evaluation_report_2026-02-19.md)
+- [x] Contact.jsx 다국어 적용 (ko/en)
+- [x] 게시판 write/edit AuthGuard 적용
+- [x] 비밀번호 재설정 페이지 (ForgotPassword.jsx)
+- [x] products 빈 테이블 폴백 보강

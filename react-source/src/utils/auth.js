@@ -75,6 +75,17 @@ export async function getProfile(userId) {
   return data;
 }
 
+/** 비밀번호 재설정 이메일 전송 */
+export async function resetPassword(email) {
+  const client = getSupabase();
+  if (!client) throw new Error('Supabase not configured');
+  const { data, error } = await client.auth.resetPasswordForEmail(email, {
+    redirectTo: window.location.origin + window.location.pathname
+  });
+  if (error) throw error;
+  return data;
+}
+
 /** 프로필 업데이트 */
 export async function updateProfile(userId, updates) {
   const client = getSupabase();

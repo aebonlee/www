@@ -1,7 +1,9 @@
 import { useState } from 'react';
+import { useLanguage } from '../contexts/LanguageContext';
 import useAOS from '../hooks/useAOS';
 
 const Contact = () => {
+  const { t } = useLanguage();
   useAOS();
   const [formData, setFormData] = useState({
     name: '',
@@ -27,8 +29,8 @@ const Contact = () => {
     <>
       <section className="page-header">
         <div className="container">
-          <h1 className="page-title">Contact Us</h1>
-          <p className="page-description">문의사항이 있으시면 언제든지 연락 주세요</p>
+          <h1 className="page-title">{t('contactPage.title')}</h1>
+          <p className="page-description">{t('contactPage.subtitle')}</p>
         </div>
       </section>
 
@@ -44,8 +46,8 @@ const Contact = () => {
                 </svg>
               </div>
               <div className="info-content">
-                <h3>주소</h3>
-                <p>경기도 수원시 팔달구<br />매산로 45, 419호</p>
+                <h3>{t('contactPage.address')}</h3>
+                <p style={{ whiteSpace: 'pre-line' }}>{t('contactPage.addressDetail')}</p>
               </div>
             </div>
 
@@ -56,8 +58,8 @@ const Contact = () => {
                 </svg>
               </div>
               <div className="info-content">
-                <h3>전화</h3>
-                <p>010-3700-0629<br />평일 09:00 ~ 18:00</p>
+                <h3>{t('contactPage.phone')}</h3>
+                <p style={{ whiteSpace: 'pre-line' }}>{t('contactPage.phoneDetail')}</p>
               </div>
             </div>
 
@@ -69,7 +71,7 @@ const Contact = () => {
                 </svg>
               </div>
               <div className="info-content">
-                <h3>이메일</h3>
+                <h3>{t('contactPage.email')}</h3>
                 <p><a href="mailto:aebon@dreamitbiz.com">aebon@dreamitbiz.com</a></p>
               </div>
             </div>
@@ -81,7 +83,7 @@ const Contact = () => {
                 </svg>
               </div>
               <div className="info-content">
-                <h3>카카오톡</h3>
+                <h3>{t('contactPage.kakao')}</h3>
                 <p>aebon</p>
               </div>
             </div>
@@ -94,46 +96,46 @@ const Contact = () => {
                 </svg>
               </div>
               <div className="info-content">
-                <h3>영업시간</h3>
-                <p>평일 09:00 ~ 18:00<br />토/일/공휴일 휴무</p>
+                <h3>{t('contactPage.hours')}</h3>
+                <p style={{ whiteSpace: 'pre-line' }}>{t('contactPage.hoursDetail')}</p>
               </div>
             </div>
           </div>
 
           {/* Contact Form */}
           <div className="contact-form-box" data-aos="fade-up">
-            <h3 style={{ fontSize: '24px', fontWeight: '700', marginBottom: '32px' }}>문의하기</h3>
+            <h3 style={{ fontSize: '24px', fontWeight: '700', marginBottom: '32px' }}>{t('contactPage.formTitle')}</h3>
             <form onSubmit={handleSubmit}>
               <div className="form-row">
                 <div className="form-group">
-                  <label htmlFor="name">이름 *</label>
+                  <label htmlFor="name">{t('contactPage.name')} *</label>
                   <input type="text" id="name" name="name" value={formData.name} onChange={handleChange} required />
                 </div>
                 <div className="form-group">
-                  <label htmlFor="email">이메일 *</label>
+                  <label htmlFor="email">{t('contactPage.emailLabel')} *</label>
                   <input type="email" id="email" name="email" value={formData.email} onChange={handleChange} required />
                 </div>
               </div>
               <div className="form-row">
                 <div className="form-group">
-                  <label htmlFor="phone">연락처</label>
+                  <label htmlFor="phone">{t('contactPage.phoneLabel')}</label>
                   <input type="tel" id="phone" name="phone" value={formData.phone} onChange={handleChange} />
                 </div>
                 <div className="form-group">
-                  <label htmlFor="subject">제목 *</label>
+                  <label htmlFor="subject">{t('contactPage.subject')} *</label>
                   <input type="text" id="subject" name="subject" value={formData.subject} onChange={handleChange} required />
                 </div>
               </div>
               <div className="form-group">
-                <label htmlFor="message">메시지 *</label>
+                <label htmlFor="message">{t('contactPage.message')} *</label>
                 <textarea id="message" name="message" rows="6" value={formData.message} onChange={handleChange} required />
               </div>
               <button type="submit" className="btn btn-primary" style={{ width: '100%' }}>
-                문의 보내기
+                {t('contactPage.submit')}
               </button>
               {submitStatus === 'success' && (
                 <div className="form-submit-status success">
-                  문의가 접수되었습니다. 빠른 시일 내에 연락드리겠습니다.
+                  {t('contactPage.success')}
                 </div>
               )}
             </form>

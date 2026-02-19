@@ -128,6 +128,11 @@ const Login = () => {
                 </div>
               </form>
 
+              <div className="auth-forgot-link" style={{ textAlign: 'center', marginBottom: '12px' }}>
+                <Link to="/forgot-password" style={{ fontSize: '13px', color: 'var(--text-light)' }}>
+                  {t('auth.forgotPassword')}
+                </Link>
+              </div>
               <div className="auth-bottom-link">
                 <span>{t('auth.noAccount')}</span>
                 <Link to="/register">{t('auth.signUp')}</Link>

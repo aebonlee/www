@@ -45,6 +45,7 @@ const Cart = lazy(() => import('./pages/Cart'));
 const Checkout = lazy(() => import('./pages/Checkout'));
 const OrderConfirmation = lazy(() => import('./pages/OrderConfirmation'));
 const Login = lazy(() => import('./pages/Login'));
+const ForgotPassword = lazy(() => import('./pages/ForgotPassword'));
 const Register = lazy(() => import('./pages/Register'));
 const MyPage = lazy(() => import('./pages/MyPage'));
 const OrderHistory = lazy(() => import('./pages/OrderHistory'));
@@ -93,8 +94,8 @@ function App() {
                       <Route path="/community/blog/write" element={<AdminGuard><BlogWrite /></AdminGuard>} />
                       <Route path="/community/blog/edit/:id" element={<AdminGuard><BlogWrite /></AdminGuard>} />
                       <Route path="/community/board" element={<Board />} />
-                      <Route path="/community/board/write" element={<BoardWrite />} />
-                      <Route path="/community/board/edit/:id" element={<BoardWrite />} />
+                      <Route path="/community/board/write" element={<AuthGuard><BoardWrite /></AuthGuard>} />
+                      <Route path="/community/board/edit/:id" element={<AuthGuard><BoardWrite /></AuthGuard>} />
                       <Route path="/community/board/:postId" element={<BoardDetail />} />
                       <Route path="/community/gallery" element={<Gallery />} />
                       <Route path="/community/gallery/write" element={<AdminGuard><GalleryWrite /></AdminGuard>} />
@@ -110,6 +111,7 @@ function App() {
                       <Route path="/order-confirmation" element={<OrderConfirmation />} />
                       {/* Auth */}
                       <Route path="/login" element={<Login />} />
+                      <Route path="/forgot-password" element={<ForgotPassword />} />
                       <Route path="/register" element={<Register />} />
                       <Route path="/mypage" element={<AuthGuard><MyPage /></AuthGuard>} />
                       <Route path="/mypage/orders" element={<AuthGuard><OrderHistory /></AuthGuard>} />

@@ -327,7 +327,35 @@ export const translations = {
       uploadImage: '이미지 업로드',
       dragOrClick: '이미지를 드래그하거나 클릭하여 업로드',
       uploading: '업로드 중...',
-      removeImage: '이미지 삭제'
+      removeImage: '이미지 삭제',
+      forgotPassword: '비밀번호를 잊으셨나요?',
+      forgotPasswordTitle: '비밀번호 재설정',
+      forgotPasswordSubtitle: '가입하신 이메일을 입력하시면 재설정 링크를 보내드립니다.',
+      sendResetLink: '재설정 링크 보내기',
+      sending: '전송 중...',
+      resetEmailSent: '비밀번호 재설정 이메일이 전송되었습니다.',
+      checkEmailForReset: '이메일의 링크를 클릭하여 비밀번호를 재설정하세요.',
+      backToLogin: '로그인으로 돌아가기'
+    },
+    contactPage: {
+      title: '문의하기',
+      subtitle: '문의사항이 있으시면 언제든지 연락 주세요',
+      address: '주소',
+      addressDetail: '경기도 수원시 팔달구\n매산로 45, 419호',
+      phone: '전화',
+      phoneDetail: '010-3700-0629\n평일 09:00 ~ 18:00',
+      email: '이메일',
+      kakao: '카카오톡',
+      hours: '영업시간',
+      hoursDetail: '평일 09:00 ~ 18:00\n토/일/공휴일 휴무',
+      formTitle: '문의하기',
+      name: '이름',
+      emailLabel: '이메일',
+      phoneLabel: '연락처',
+      subject: '제목',
+      message: '메시지',
+      submit: '문의 보내기',
+      success: '문의가 접수되었습니다. 빠른 시일 내에 연락드리겠습니다.'
     }
   },
   en: {
@@ -657,7 +685,35 @@ export const translations = {
       uploadImage: 'Upload Image',
       dragOrClick: 'Drag or click to upload an image',
       uploading: 'Uploading...',
-      removeImage: 'Remove Image'
+      removeImage: 'Remove Image',
+      forgotPassword: 'Forgot password?',
+      forgotPasswordTitle: 'Reset Password',
+      forgotPasswordSubtitle: 'Enter your email and we\'ll send you a reset link.',
+      sendResetLink: 'Send Reset Link',
+      sending: 'Sending...',
+      resetEmailSent: 'Password reset email has been sent.',
+      checkEmailForReset: 'Click the link in the email to reset your password.',
+      backToLogin: 'Back to Login'
+    },
+    contactPage: {
+      title: 'Contact Us',
+      subtitle: 'Feel free to reach out to us anytime',
+      address: 'Address',
+      addressDetail: '45 Maesan-ro, Paldal-gu\nSuwon, Gyeonggi-do, #419',
+      phone: 'Phone',
+      phoneDetail: '010-3700-0629\nMon-Fri 09:00 ~ 18:00',
+      email: 'Email',
+      kakao: 'KakaoTalk',
+      hours: 'Business Hours',
+      hoursDetail: 'Mon-Fri 09:00 ~ 18:00\nClosed on weekends & holidays',
+      formTitle: 'Send a Message',
+      name: 'Name',
+      emailLabel: 'Email',
+      phoneLabel: 'Phone',
+      subject: 'Subject',
+      message: 'Message',
+      submit: 'Send Message',
+      success: 'Your inquiry has been submitted. We will get back to you shortly.'
     }
   }
 };

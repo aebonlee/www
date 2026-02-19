@@ -54,7 +54,8 @@ export async function getProducts(includeInactive = false) {
     console.error('getProducts error:', error);
     return fallbackProducts;
   }
-  return (data || []).map(toProduct);
+  if (!data || data.length === 0) return fallbackProducts;
+  return data.map(toProduct);
 }
 
 /** 단일 상품 조회 */
