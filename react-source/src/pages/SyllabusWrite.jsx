@@ -12,7 +12,7 @@ const SyllabusWrite = () => {
   const isEdit = Boolean(id);
 
   const [form, setForm] = useState({
-    category: 'ai_basic',
+    category: 'gen_ai',
     title: '',
     content: '',
     author: '',
@@ -100,9 +100,13 @@ const SyllabusWrite = () => {
                 <div className="board-form-group">
                   <label>{t('community.category')}</label>
                   <select name="category" value={form.category} onChange={handleChange}>
-                    <option value="ai_basic">{t('education.aiBasic')}</option>
-                    <option value="application">{t('education.application')}</option>
-                    <option value="custom_etc">{t('education.customEtc')}</option>
+                    <option value="gen_ai">{t('education.catGenAi')}</option>
+                    <option value="automation">{t('education.catAutomation')}</option>
+                    <option value="certificate">{t('education.catCertificate')}</option>
+                    <option value="corporate">{t('education.catCorporate')}</option>
+                    <option value="programming">{t('education.catProgramming')}</option>
+                    <option value="university">{t('education.catUniversity')}</option>
+                    <option value="etc">{t('education.catEtc')}</option>
                   </select>
                 </div>
                 <div className="board-form-group">

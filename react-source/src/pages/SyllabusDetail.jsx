@@ -23,9 +23,13 @@ const SyllabusDetail = () => {
 
   const categoryLabel = (cat) => {
     switch (cat) {
-      case 'ai_basic': return t('education.aiBasic');
-      case 'application': return t('education.application');
-      case 'custom_etc': return t('education.customEtc');
+      case 'gen_ai': return t('education.catGenAi');
+      case 'automation': return t('education.catAutomation');
+      case 'certificate': return t('education.catCertificate');
+      case 'corporate': return t('education.catCorporate');
+      case 'programming': return t('education.catProgramming');
+      case 'university': return t('education.catUniversity');
+      case 'etc': return t('education.catEtc');
       default: return cat;
     }
   };
