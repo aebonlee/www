@@ -331,3 +331,108 @@ export async function deleteGalleryItem(id) {
   }
   return true;
 }
+
+// ── Syllabus CRUD ──
+
+export async function getSyllabusPosts() {
+  const client = getSupabase();
+  if (!client) return [];
+  const { data, error } = await client
+    .from('syllabi')
+    .select('*')
+    .order('id', { ascending: false });
+  if (error) {
+    console.error('getSyllabusPosts error:', error);
+    return [];
+  }
+  return (data || []).map(toCamel);
+}
+
+export async function getSyllabusPost(id) {
+  const client = getSupabase();
+  if (!client) return null;
+  const { data, error } = await client
+    .from('syllabi')
+    .select('*')
+    .eq('id', Number(id))
+    .single();
+  if (error) {
+    console.error('getSyllabusPost error:', error);
+    return null;
+  }
+  return toCamel(data);
+}
+
+export async function createSyllabusPost({ category, title, content, author, authorId, status, runCount }) {
+  const client = getSupabase();
+  if (!client) return null;
+  const now = new Date().toISOString();
+  const payload = {
+    category,
+    title,
+    content,
+    author,
+    status: status || 'active',
+    run_count: runCount || 0,
+    date: now.slice(0, 10),
+    views: 0
+  };
+  if (authorId) payload.author_id = authorId;
+  const { data, error } = await client
+    .from('syllabi')
+    .insert(payload)
+    .select()
+    .single();
+  if (error) {
+    console.error('createSyllabusPost error:', error);
+    return null;
+  }
+  return toCamel(data);
+}
+
+export async function updateSyllabusPost(id, updates) {
+  const client = getSupabase();
+  if (!client) return null;
+  const snaked = toSnake(updates);
+  snaked.updated_at = new Date().toISOString();
+  const { data, error } = await client
+    .from('syllabi')
+    .update(snaked)
+    .eq('id', Number(id))
+    .select()
+    .single();
+  if (error) {
+    console.error('updateSyllabusPost error:', error);
+    return null;
+  }
+  return toCamel(data);
+}
+
+export async function deleteSyllabusPost(id) {
+  const client = getSupabase();
+  if (!client) return false;
+  const { error } = await client
+    .from('syllabi')
+    .delete()
+    .eq('id', Number(id));
+  if (error) {
+    console.error('deleteSyllabusPost error:', error);
+    return false;
+  }
+  return true;
+}
+
+export async function incrementSyllabusViews(id) {
+  const client = getSupabase();
+  if (!client) return;
+  const { data } = await client
+    .from('syllabi')
+    .select('views')
+    .eq('id', Number(id))
+    .single();
+  if (!data) return;
+  await client
+    .from('syllabi')
+    .update({ views: (data.views || 0) + 1 })
+    .eq('id', Number(id));
+}

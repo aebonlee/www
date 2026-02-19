@@ -51,6 +51,9 @@ const ForgotPassword = lazy(() => import('./pages/ForgotPassword'));
 const Register = lazy(() => import('./pages/Register'));
 const MyPage = lazy(() => import('./pages/MyPage'));
 const OrderHistory = lazy(() => import('./pages/OrderHistory'));
+const Syllabus = lazy(() => import('./pages/Syllabus'));
+const SyllabusWrite = lazy(() => import('./pages/SyllabusWrite'));
+const SyllabusDetail = lazy(() => import('./pages/SyllabusDetail'));
 
 const Loading = () => (
   <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', minHeight: '60vh' }}>
@@ -88,6 +91,10 @@ function App() {
                       <Route path="/education" element={<Education />} />
                       <Route path="/education/custom" element={<EducationCustom />} />
                       <Route path="/education/classroom" element={<Classroom />} />
+                      <Route path="/education/syllabus" element={<Syllabus />} />
+                      <Route path="/education/syllabus/write" element={<AdminGuard><SyllabusWrite /></AdminGuard>} />
+                      <Route path="/education/syllabus/edit/:id" element={<AdminGuard><SyllabusWrite /></AdminGuard>} />
+                      <Route path="/education/syllabus/:postId" element={<SyllabusDetail />} />
                       <Route path="/publishing" element={<Publishing />} />
                       <Route path="/publishing/ebook" element={<PublishingEbook />} />
                       <Route path="/publishing/periodical" element={<PublishingPeriodical />} />

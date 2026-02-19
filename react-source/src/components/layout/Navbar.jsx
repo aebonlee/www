@@ -83,7 +83,8 @@ const Navbar = () => {
       activePath: '/education',
       dropdown: [
         { path: '/education/custom', label: t('education.custom') },
-        { path: '/education/classroom', label: t('education.classroom') }
+        { path: '/education/classroom', label: t('education.classroom') },
+        { path: '/education/syllabus', label: t('education.syllabus') }
       ]
     },
     {

@@ -9,6 +9,7 @@
   <url><loc>https://www.dreamitbiz.com/education</loc><changefreq>monthly</changefreq><priority>0.8</priority></url>
   <url><loc>https://www.dreamitbiz.com/education/custom</loc><changefreq>monthly</changefreq><priority>0.7</priority></url>
   <url><loc>https://www.dreamitbiz.com/education/classroom</loc><changefreq>monthly</changefreq><priority>0.6</priority></url>
+  <url><loc>https://www.dreamitbiz.com/education/syllabus</loc><changefreq>weekly</changefreq><priority>0.7</priority></url>
   <url><loc>https://www.dreamitbiz.com/publishing</loc><changefreq>monthly</changefreq><priority>0.8</priority></url>
   <url><loc>https://www.dreamitbiz.com/publishing/ebook</loc><changefreq>monthly</changefreq><priority>0.6</priority></url>
   <url><loc>https://www.dreamitbiz.com/publishing/periodical</loc><changefreq>monthly</changefreq><priority>0.6</priority></url>
