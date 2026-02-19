@@ -80,6 +80,14 @@
     .carousel-arrow--prev { left: 16px; }
     .carousel-arrow--next { right: 16px; }
 
+    .carousel-dots {
+        bottom: 56px;
+    }
+
+    .scroll-indicator {
+        bottom: 12px;
+    }
+
     .section-title {
         font-size: 36px;
     }
