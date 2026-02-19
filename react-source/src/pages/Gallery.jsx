@@ -6,6 +6,7 @@ import { useToast } from '../contexts/ToastContext';
 import { getGalleryItems, deleteGalleryItem } from '../utils/boardStorage';
 import Pagination from '../components/Pagination';
 import useAOS from '../hooks/useAOS';
+import SEOHead from '../components/SEOHead';
 
 const ITEMS_PER_PAGE = 8;
 
@@ -129,6 +130,7 @@ const Gallery = () => {
 
   return (
     <>
+      <SEOHead title="갤러리" description="드림아이티비즈 갤러리 - 프로젝트 사진 및 활동 기록" path="/community/gallery" />
       <section className="page-header">
         <div className="container">
           <h1 className="page-title">{t('community.galleryTitle')}</h1>

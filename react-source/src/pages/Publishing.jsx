@@ -1,6 +1,7 @@
 import { Link } from 'react-router-dom';
 import { useLanguage } from '../contexts/LanguageContext';
 import useAOS from '../hooks/useAOS';
+import SEOHead from '../components/SEOHead';
 
 const Publishing = () => {
   const { t } = useLanguage();
@@ -8,6 +9,7 @@ const Publishing = () => {
 
   return (
     <>
+      <SEOHead title="출판 서비스" description="전자책, 정기간행물, 단행본, 교재 등 출판 서비스" path="/publishing" />
       <section className="page-header">
         <div className="container">
           <h1 className="page-title">{t('publishing.title')}</h1>

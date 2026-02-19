@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import { useLanguage } from '../contexts/LanguageContext';
 import useAOS from '../hooks/useAOS';
+import SEOHead from '../components/SEOHead';
 
 const Contact = () => {
   const { t } = useLanguage();
@@ -27,6 +28,7 @@ const Contact = () => {
 
   return (
     <>
+      <SEOHead title="문의하기" description="드림아이티비즈에 문의하기 - IT 서비스, 컨설팅, 교육 상담" path="/contact" />
       <section className="page-header">
         <div className="container">
           <h1 className="page-title">{t('contactPage.title')}</h1>

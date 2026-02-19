@@ -2,6 +2,7 @@ import { useEffect } from 'react';
 import { useLanguage } from '../contexts/LanguageContext';
 import useAOS from '../hooks/useAOS';
 import CTA from '../components/CTA';
+import SEOHead from '../components/SEOHead';
 
 const CeoProfile = () => {
   const { language, t } = useLanguage();
@@ -12,6 +13,7 @@ const CeoProfile = () => {
 
   return (
     <>
+      <SEOHead title="대표 소개" description="드림아이티비즈 대표이사 소개" path="/about/ceo" />
       <section className="page-header">
         <div className="container">
           <h1 className="page-title">{isEn ? 'CEO Profile' : '대표 소개'}</h1>

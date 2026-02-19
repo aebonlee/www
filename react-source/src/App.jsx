@@ -1,5 +1,5 @@
 import { lazy, Suspense } from 'react';
-import { HashRouter as Router, Routes, Route, Navigate } from 'react-router-dom';
+import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-dom';
 import { ThemeProvider } from './contexts/ThemeContext';
 import { LanguageProvider } from './contexts/LanguageContext';
 import { CartProvider } from './contexts/CartContext';
@@ -9,6 +9,7 @@ import AuthGuard from './components/AuthGuard';
 import AdminGuard from './components/AdminGuard';
 import Navbar from './components/layout/Navbar';
 import Footer from './components/layout/Footer';
+import usePageTracking from './hooks/usePageTracking';
 import './index.css';
 
 const Home = lazy(() => import('./pages/Home'));
@@ -57,6 +58,11 @@ const Loading = () => (
   </div>
 );
 
+const PageTracker = () => {
+  usePageTracking();
+  return null;
+};
+
 function App() {
   return (
     <ThemeProvider>
@@ -65,6 +71,7 @@ function App() {
           <ToastProvider>
           <CartProvider>
             <Router>
+              <PageTracker />
               <div className="App">
                 <Navbar />
                 <main>

@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom';
 import { useLanguage } from '../contexts/LanguageContext';
 import { useCart } from '../contexts/CartContext';
 import useAOS from '../hooks/useAOS';
+import SEOHead from '../components/SEOHead';
 
 const Cart = () => {
   const { language, t } = useLanguage();
@@ -20,6 +21,7 @@ const Cart = () => {
 
   return (
     <>
+      <SEOHead title="장바구니" path="/cart" noindex />
       <section className="page-header">
         <div className="container">
           <h1 className="page-title">{t('cart.title')}</h1>

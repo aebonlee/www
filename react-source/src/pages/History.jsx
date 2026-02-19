@@ -2,6 +2,7 @@ import { useEffect } from 'react';
 import useAOS from '../hooks/useAOS';
 import { useLanguage } from '../contexts/LanguageContext';
 import CTA from '../components/CTA';
+import SEOHead from '../components/SEOHead';
 
 const History = () => {
   const { language } = useLanguage();
@@ -87,6 +88,7 @@ const History = () => {
 
   return (
     <>
+      <SEOHead title="연혁" description="드림아이티비즈 연혁 - 20년 이상의 IT 전문 기업 역사" path="/about/history" />
       <section className="page-header">
         <div className="container">
           <h1 className="page-title">{isEn ? 'History' : '연혁'}</h1>

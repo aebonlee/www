@@ -5,6 +5,7 @@ import { useCart } from '../contexts/CartContext';
 import { useAuth } from '../contexts/AuthContext';
 import { getProducts, toggleSoldOut, deleteProduct } from '../utils/productStorage';
 import useAOS from '../hooks/useAOS';
+import SEOHead from '../components/SEOHead';
 
 const Shop = () => {
   const { language, t } = useLanguage();
@@ -125,6 +126,7 @@ const Shop = () => {
 
   return (
     <>
+      <SEOHead title="스토어" description="드림아이티비즈 스토어 - IT 교재, 전자책, 교육 자료" path="/shop" />
       <section className="page-header">
         <div className="container">
           <h1 className="page-title">{t('shop.title')}</h1>

@@ -1,6 +1,7 @@
 import { Link } from 'react-router-dom';
 import { useLanguage } from '../contexts/LanguageContext';
 import useAOS from '../hooks/useAOS';
+import SEOHead from '../components/SEOHead';
 
 const Education = () => {
   const { t } = useLanguage();
@@ -8,6 +9,7 @@ const Education = () => {
 
   return (
     <>
+      <SEOHead title="교육 서비스" description="기업 맞춤 강의, 온라인 교육, 실무 중심 IT 교육 프로그램" path="/education" />
       <section className="page-header">
         <div className="container">
           <h1 className="page-title">{t('education.title')}</h1>

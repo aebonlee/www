@@ -5,6 +5,7 @@ import { useAuth } from '../contexts/AuthContext';
 import { getBlogPosts } from '../utils/boardStorage';
 import Pagination from '../components/Pagination';
 import useAOS from '../hooks/useAOS';
+import SEOHead from '../components/SEOHead';
 
 const POSTS_PER_PAGE = 6;
 
@@ -49,6 +50,7 @@ const Blog = () => {
 
   return (
     <>
+      <SEOHead title="블로그" description="드림아이티비즈 블로그 - IT 트렌드, 기술 정보, 기업 소식" path="/community/blog" />
       <section className="page-header">
         <div className="container">
           <h1 className="page-title">{t('community.blogTitle')}</h1>

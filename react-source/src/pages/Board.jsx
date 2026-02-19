@@ -5,6 +5,7 @@ import { useAuth } from '../contexts/AuthContext';
 import { getBoardPosts } from '../utils/boardStorage';
 import Pagination from '../components/Pagination';
 import useAOS from '../hooks/useAOS';
+import SEOHead from '../components/SEOHead';
 
 const POSTS_PER_PAGE = 20;
 
@@ -56,6 +57,7 @@ const Board = () => {
 
   return (
     <>
+      <SEOHead title="게시판" description="드림아이티비즈 커뮤니티 게시판" path="/community/board" />
       <section className="page-header">
         <div className="container">
           <h1 className="page-title">{t('community.boardTitle')}</h1>

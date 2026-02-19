@@ -2,6 +2,7 @@ import { useEffect } from 'react';
 import { useLocation } from 'react-router-dom';
 import useAOS from '../hooks/useAOS';
 import CTA from '../components/CTA';
+import SEOHead from '../components/SEOHead';
 
 const Portfolio = () => {
   const location = useLocation();
@@ -21,6 +22,7 @@ const Portfolio = () => {
 
   return (
     <>
+      <SEOHead title="포트폴리오" description="드림아이티비즈 프로젝트 포트폴리오 - 웹개발, 디자인, 컨설팅 성과" path="/portfolio" />
       <section className="page-header">
         <div className="container">
           <h1 className="page-title">Portfolio</h1>

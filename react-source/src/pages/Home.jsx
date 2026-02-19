@@ -4,6 +4,7 @@ import useAOS from '../hooks/useAOS';
 import useCountUp from '../hooks/useCountUp';
 import HeroCarousel from '../components/HeroCarousel';
 import CTA from '../components/CTA';
+import SEOHead from '../components/SEOHead';
 
 const Home = () => {
   const { t } = useLanguage();
@@ -15,6 +16,10 @@ const Home = () => {
 
   return (
     <>
+      <SEOHead
+        description="혁신적인 IT 솔루션으로 비즈니스의 미래를 만듭니다. 웹개발, 웹호스팅, 디자인, 컨설팅, 교육, 출판 서비스"
+        path="/"
+      />
       {/* Hero Carousel */}
       <HeroCarousel />
 

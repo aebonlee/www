@@ -3,6 +3,7 @@ import { Link, useSearchParams } from 'react-router-dom';
 import { useLanguage } from '../contexts/LanguageContext';
 import { getOrderByNumber } from '../utils/supabase';
 import useAOS from '../hooks/useAOS';
+import SEOHead from '../components/SEOHead';
 
 const OrderConfirmation = () => {
   const { language, t } = useLanguage();
@@ -59,6 +60,7 @@ const OrderConfirmation = () => {
 
   return (
     <>
+      <SEOHead title="주문 확인" path="/order-confirmation" noindex />
       <section className="page-header">
         <div className="container">
           <h1 className="page-title">{t('order.title')}</h1>

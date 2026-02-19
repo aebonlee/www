@@ -2,6 +2,7 @@ import { useState } from 'react';
 import { Link } from 'react-router-dom';
 import { useLanguage } from '../contexts/LanguageContext';
 import { resetPassword } from '../utils/auth';
+import SEOHead from '../components/SEOHead';
 import '../styles/auth.css';
 
 const ForgotPassword = () => {
@@ -27,6 +28,8 @@ const ForgotPassword = () => {
   };
 
   return (
+    <>
+    <SEOHead title="비밀번호 찾기" path="/forgot-password" noindex />
     <section className="auth-fullpage">
       <div className="auth-center-wrapper">
         <div className="auth-card-google">
@@ -87,6 +90,7 @@ const ForgotPassword = () => {
         </div>
       </div>
     </section>
+    </>
   );
 };
 

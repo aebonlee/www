@@ -641,3 +641,110 @@ Vite가 lazy-loaded 페이지의 CSS import를 코드 스플리팅하여 `auth-*
 ### 커밋 & 배포
 - `npx vite build` 성공
 - `dist/*` → `D:/www/` 배포 완료
+
+---
+
+## 세션 38: SEO + 마케팅 인프라 고도화 (6단계)
+
+### 작업 배경
+
+DreamIT Biz React SPA(33페이지)가 **HashRouter** 사용 중이라 검색엔진 크롤러가 홈 이외 페이지를 인덱싱 불가. OG 이미지, 동적 타이틀, sitemap, 애널리틱스 등 SEO 필수 요소가 모두 누락된 상태에서 한국(네이버) + 글로벌(Google) 양쪽 검색 노출을 위한 핵심 SEO 인프라 구축.
+
+### 6단계 구현 내역
+
+| 단계 | 내용 | 상태 |
+|------|------|------|
+| Step 1 | **HashRouter → BrowserRouter 전환** + vite base `/` + SPA decode script + CNAME | 완료 |
+| Step 2 | **react-helmet-async + SEOHead 컴포넌트** + HelmetProvider 래핑 | 완료 |
+| Step 3 | **index.html 메타 태그 보강** — OG image/locale/site_name, Twitter Card, canonical, theme-color, 네이버 인증, GA4, JSON-LD (Organization + WebSite) | 완료 |
+| Step 4 | **robots.txt + sitemap.xml** — 공개 24 URL, 비공개 7 URL Disallow | 완료 |
+| Step 5 | **usePageTracking 훅** — GA4 SPA 페이지뷰 추적 + App.jsx 내 PageTracker 컴포넌트 | 완료 |
+| Step 6 | **페이지별 SEOHead 삽입** — 공개 13개 (title+description+path) + 비공개 7개 (noindex) | 완료 |
+
+### 신규 파일 (5개)
+
+| # | 파일 | 용도 |
+|---|------|------|
+| 1 | `src/components/SEOHead.jsx` | 재사용 SEO 메타 컴포넌트 (title, description, canonical, OG, Twitter, noindex, 다국어 lang) |
+| 2 | `src/hooks/usePageTracking.js` | GA4 SPA 페이지뷰 추적 (location 변경 시 gtag event 전송) |
+| 3 | `public/robots.txt` | 크롤러 지시 (Allow + Disallow + Sitemap URL) |
+| 4 | `public/sitemap.xml` | 검색엔진 URL 목록 (24개, priority/changefreq 포함) |
+| 5 | `public/assets/images/og-default.svg` | OG 공유 이미지 템플릿 (1200×630, 브랜드 블루 그라데이션) |
+
+### 신규 의존성 (1개)
+
+| 패키지 | 용도 | 크기 |
+|--------|------|------|
+| `react-helmet-async` | 동적 meta/title 관리 | ~5KB gzipped |
+
+### 수정 파일 (24개)
+
+| 파일 | 변경 |
+|------|------|
+| `src/App.jsx` | HashRouter→BrowserRouter, usePageTracking import, PageTracker 컴포넌트 추가 |
+| `src/main.jsx` | HelmetProvider import + `<App />` 래핑 |
+| `index.html` | OG image/width/height/locale/site_name, Twitter Card, canonical, theme-color, 네이버 인증 placeholder, GA4 placeholder (`G-XXXXXXXXXX`), JSON-LD Organization + WebSite, SPA decode script, favicon href `/` 기준 |
+| `vite.config.js` | `base: './'` → `base: '/'` |
+| `public/CNAME` | **신규** — `www.dreamitbiz.com` |
+| `src/pages/Home.jsx` | SEOHead 추가 (path="/") |
+| `src/pages/Services.jsx` | SEOHead 추가 (title="IT 서비스") |
+| `src/pages/Consulting.jsx` | SEOHead 추가 (title="컨설팅") |
+| `src/pages/ConsultingBusiness.jsx` | SEOHead 추가 (title="기업 컨설팅") |
+| `src/pages/ConsultingUniversity.jsx` | SEOHead 추가 (title="대학 컨설팅") |
+| `src/pages/ConsultingInstitution.jsx` | SEOHead 추가 (title="교육기관 컨설팅") |
+| `src/pages/Education.jsx` | SEOHead 추가 (title="교육 서비스") |
+| `src/pages/EducationCustom.jsx` | SEOHead 추가 (title="맞춤 교육") |
+| `src/pages/Publishing.jsx` | SEOHead 추가 (title="출판 서비스") |
+| `src/pages/RnD.jsx` | SEOHead 추가 (title="연구개발") |
+| `src/pages/Portfolio.jsx` | SEOHead 추가 (title="포트폴리오") |
+| `src/pages/About.jsx` | SEOHead 추가 (title="회사소개") |
+| `src/pages/CeoProfile.jsx` | SEOHead 추가 (title="대표 소개") |
+| `src/pages/History.jsx` | SEOHead 추가 (title="연혁") |
+| `src/pages/Contact.jsx` | SEOHead 추가 (title="문의하기") |
+| `src/pages/Shop.jsx` | SEOHead 추가 (title="스토어") |
+| `src/pages/Blog.jsx` | SEOHead 추가 (title="블로그") |
+| `src/pages/Board.jsx` | SEOHead 추가 (title="게시판") |
+| `src/pages/Gallery.jsx` | SEOHead 추가 (title="갤러리") |
+| `src/pages/Login.jsx` | SEOHead noindex 추가 + Fragment 래핑 |
+| `src/pages/Register.jsx` | SEOHead noindex 추가 + Fragment 래핑 |
+| `src/pages/ForgotPassword.jsx` | SEOHead noindex 추가 + Fragment 래핑 |
+| `src/pages/MyPage.jsx` | SEOHead noindex 추가 |
+| `src/pages/Cart.jsx` | SEOHead noindex 추가 |
+| `src/pages/Checkout.jsx` | SEOHead noindex 추가 |
+| `src/pages/OrderConfirmation.jsx` | SEOHead noindex 추가 |
+
+### index.html 추가된 SEO 요소
+
+| 요소 | 내용 |
+|------|------|
+| OG image | `https://www.dreamitbiz.com/assets/images/og-default.png` (1200×630) |
+| OG locale | `ko_KR` + alternate `en_US` |
+| OG site_name | `DreamIT Biz` |
+| Twitter Card | `summary_large_image` |
+| Canonical | `https://www.dreamitbiz.com/` |
+| Theme Color | `#0046C8` |
+| 네이버 인증 | placeholder (`VERIFICATION_CODE`) |
+| GA4 | placeholder (`G-XXXXXXXXXX`) |
+| JSON-LD | Organization (name, logo, contactPoint) + WebSite (name, url) |
+
+### 빌드 검증
+
+- `npx vite build` 성공 (158 모듈, 4.17초)
+- dist/ 출력: robots.txt, sitemap.xml, CNAME, 404.html, og-default.svg 모두 포함
+- SEOHead 컴포넌트 별도 청크: `SEOHead-BM77U57q.js` (1.08KB, gzip 0.60KB)
+
+### 사용자 후속 작업 (필수)
+
+1. GA4 Measurement ID: `G-XXXXXXXXXX` → 실제 ID 교체
+2. 네이버 인증 코드: `VERIFICATION_CODE` → searchadvisor.naver.com 발급 코드 교체
+3. OG 이미지: `og-default.svg` → 1200×630 PNG 변환 후 `og-default.png`으로 저장
+4. 네이버 Search Advisor: 사이트 인증 후 sitemap.xml 제출
+5. Google Search Console: 사이트 등록 + sitemap.xml 제출
+
+### 프로젝트 현재 상태
+
+- [x] SEO 인프라 — BrowserRouter + 동적 타이틀/메타 + sitemap + robots.txt
+- [x] 소셜 공유 — OG + Twitter Card 전 페이지 대응
+- [x] 구조화 데이터 — JSON-LD Organization + WebSite
+- [x] 애널리틱스 — GA4 SPA 페이지뷰 추적 (ID 교체 필요)
+- [x] 검색엔진 — 네이버/구글 인증 placeholder + sitemap (코드 교체 필요)

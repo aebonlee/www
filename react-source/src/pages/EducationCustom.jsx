@@ -4,6 +4,7 @@ import { useLanguage } from '../contexts/LanguageContext';
 import useAOS from '../hooks/useAOS';
 import CTA from '../components/CTA';
 import educationDetails from '../data/educationDetails';
+import SEOHead from '../components/SEOHead';
 
 const EducationCustom = () => {
   const { language, t } = useLanguage();
@@ -15,6 +16,7 @@ const EducationCustom = () => {
 
   return (
     <>
+      <SEOHead title="맞춤 교육" description="기업 맞춤형 IT 교육 프로그램 설계 및 운영" path="/education/custom" />
       <section className="page-header">
         <div className="container">
           <h1 className="page-title">{isEn ? data.titleEn : data.title}</h1>

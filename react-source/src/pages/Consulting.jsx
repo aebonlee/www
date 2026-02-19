@@ -1,6 +1,7 @@
 import { Link } from 'react-router-dom';
 import { useLanguage } from '../contexts/LanguageContext';
 import useAOS from '../hooks/useAOS';
+import SEOHead from '../components/SEOHead';
 
 const Consulting = () => {
   const { t } = useLanguage();
@@ -8,6 +9,7 @@ const Consulting = () => {
 
   return (
     <>
+      <SEOHead title="컨설팅" description="기업, 대학, 교육기관 맞춤 IT 컨설팅 서비스" path="/consulting" />
       <section className="page-header">
         <div className="container">
           <h1 className="page-title">{t('consulting.title')}</h1>

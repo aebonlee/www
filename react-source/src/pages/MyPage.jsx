@@ -3,6 +3,7 @@ import { Link, useNavigate } from 'react-router-dom';
 import { useLanguage } from '../contexts/LanguageContext';
 import { useAuth } from '../contexts/AuthContext';
 import { updateProfile } from '../utils/auth';
+import SEOHead from '../components/SEOHead';
 import '../styles/auth.css';
 
 const MyPage = () => {
@@ -49,6 +50,7 @@ const MyPage = () => {
 
   return (
     <>
+      <SEOHead title="마이페이지" path="/mypage" noindex />
       <section className="page-header">
         <div className="container">
           <h1 className="page-title">{t('auth.myPage')}</h1>

@@ -2,6 +2,7 @@ import { useEffect } from 'react';
 import { useLanguage } from '../contexts/LanguageContext';
 import useAOS from '../hooks/useAOS';
 import CTA from '../components/CTA';
+import SEOHead from '../components/SEOHead';
 
 const RnD = () => {
   const { language } = useLanguage();
@@ -77,6 +78,7 @@ const RnD = () => {
 
   return (
     <>
+      <SEOHead title="연구개발" description="드림아이티비즈 R&D - IT 연구개발 프로젝트 및 기술 혁신" path="/rnd" />
       <section className="page-header">
         <div className="container">
           <h1 className="page-title">{isEn ? 'R&D' : '연구개발'}</h1>

@@ -6,6 +6,7 @@ import { useAuth } from '../contexts/AuthContext';
 import { createOrder, getOrderByNumber } from '../utils/supabase';
 import { requestPayment } from '../utils/portone';
 import useAOS from '../hooks/useAOS';
+import SEOHead from '../components/SEOHead';
 
 const Checkout = () => {
   const { language, t } = useLanguage();
@@ -125,6 +126,7 @@ const Checkout = () => {
 
   return (
     <>
+      <SEOHead title="결제" path="/checkout" noindex />
       <section className="page-header">
         <div className="container">
           <h1 className="page-title">{t('checkout.title')}</h1>

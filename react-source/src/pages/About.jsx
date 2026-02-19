@@ -1,6 +1,7 @@
 import useAOS from '../hooks/useAOS';
 import useCountUp from '../hooks/useCountUp';
 import CTA from '../components/CTA';
+import SEOHead from '../components/SEOHead';
 
 const About = () => {
   useAOS();
@@ -10,6 +11,7 @@ const About = () => {
 
   return (
     <>
+      <SEOHead title="회사소개" description="드림아이티비즈 회사소개 - IT 정보통신 전문 기업" path="/about" />
       <section className="page-header">
         <div className="container">
           <h1 className="page-title">About Us</h1>

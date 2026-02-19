@@ -3,6 +3,7 @@ import { useLanguage } from '../contexts/LanguageContext';
 import useAOS from '../hooks/useAOS';
 import CTA from '../components/CTA';
 import consultingDetails from '../data/consultingDetails';
+import SEOHead from '../components/SEOHead';
 
 const ConsultingBusiness = () => {
   const { language, t } = useLanguage();
@@ -14,6 +15,7 @@ const ConsultingBusiness = () => {
 
   return (
     <>
+      <SEOHead title="기업 컨설팅" description="기업 맞춤형 IT 컨설팅 및 디지털 전환 서비스" path="/consulting/business" />
       <section className="page-header">
         <div className="container">
           <h1 className="page-title">{isEn ? data.titleEn : data.title}</h1>

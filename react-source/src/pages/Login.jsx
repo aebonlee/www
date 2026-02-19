@@ -3,6 +3,7 @@ import { Link, useNavigate, useLocation } from 'react-router-dom';
 import { useLanguage } from '../contexts/LanguageContext';
 import { useAuth } from '../contexts/AuthContext';
 import { signInWithGoogle, signInWithKakao, signInWithEmail } from '../utils/auth';
+import SEOHead from '../components/SEOHead';
 import '../styles/auth.css';
 
 const Login = () => {
@@ -48,6 +49,8 @@ const Login = () => {
   };
 
   return (
+    <>
+    <SEOHead title="로그인" path="/login" noindex />
     <section className="auth-fullpage">
       <div className="auth-center-wrapper">
         <div className="auth-card-google">
@@ -142,6 +145,7 @@ const Login = () => {
         </div>
       </div>
     </section>
+    </>
   );
 };
 
