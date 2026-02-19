@@ -2,7 +2,9 @@
 
 **작업일**: 2026-02-19
 **작업자**: Claude Opus 4.6
-**커밋**: feat: 커뮤니티 디자인 개선 - 갤러리(카드형) + 블로그(매거진형)
+**커밋**:
+- `adc82e0` feat: 커뮤니티 디자인 개선 - 갤러리(카드형) + 블로그(매거진형)
+- `47189f1` fix: 갤러리/블로그 데이터 표시 수정
 
 ---
 
@@ -44,8 +46,8 @@
 
 각 `gallery-card` 내부에 추가:
 - `gallery-overlay` + `gallery-overlay-icon` 호버 오버레이
-- `gallery-category-badge` 카테고리 뱃지
-- `gallery-desc` 설명 미리보기 (다국어 지원)
+- `gallery-category-badge` 카테고리 뱃지 (현지화 레이블 표시)
+- `gallery-desc` 설명 미리보기 (다국어 지원, null 시 숨김)
 - `gallery-date` 날짜 표시 (기존 `<p>` 태그 대체)
 
 ---
@@ -68,7 +70,7 @@
 
 ### 4.2 JSX 변경 (`Blog.jsx`)
 
-- `estimateReadTime()` 함수 추가 — 단어 수 기반 읽기 시간 계산 (200 wpm)
+- `estimateReadTime()` 함수 추가 — 한국어: 500자/분, 영어: 200 wpm 기준
 - 1페이지 첫 번째 포스트를 `blog-featured` 피처드 히어로로 분리
 - 나머지 포스트는 기존 `blog-grid` 3열 카드 유지
 - 2페이지 이후는 피처드 없이 전체 그리드만 표시
@@ -93,38 +95,78 @@
 
 ---
 
-## 6. 검증 체크리스트
+## 6. 점검 후 수정 사항 (커밋 `47189f1`)
+
+### 6.1 갤러리 카테고리 뱃지 현지화
+
+**문제**: `item.category` 원시 값("project", "office" 등)이 그대로 표시됨
+**해결**: `getCategoryLabel()` 헬퍼 함수 추가 — 필터 목록에서 현지화된 레이블 조회
+
+```jsx
+const getCategoryLabel = (key) => {
+  const found = filters.find((f) => f.key === key);
+  return found ? found.label : key;
+};
+```
+
+### 6.2 갤러리 설명 null 처리
+
+**문제**: Supabase DB에 `description`이 null이면 빈 `<p>` 태그가 공간 차지
+**해결**: 조건부 렌더링으로 null일 때 `<p>` 태그 자체를 숨김
+
+```jsx
+{(language === 'en' ? item.descriptionEn : item.description) && (
+  <p className="gallery-desc">...</p>
+)}
+```
+
+### 6.3 블로그 읽기 시간 한국어 대응
+
+**문제**: 영문 기준 200 wpm 계산 시 한국어 텍스트가 띄어쓰기가 적어 항상 "1 min read" 표시
+**해결**: 한글 감지 후 500자/분 기준 적용
+
+```jsx
+const estimateReadTime = (text) => {
+  if (!text) return 1;
+  const len = text.replace(/\s+/g, '').length;
+  if (len > 0 && /[\uAC00-\uD7AF]/.test(text)) {
+    return Math.max(1, Math.ceil(len / 500));
+  }
+  return Math.max(1, Math.ceil(text.trim().split(/\s+/).length / 200));
+};
+```
+
+---
+
+## 7. 검증 체크리스트
 
 - [x] 갤러리: 카드 호버 시 줌 + 어두운 오버레이 + "+" 아이콘 표시
-- [x] 갤러리: 카테고리 뱃지, 설명 2줄 제한, 날짜 표시
+- [x] 갤러리: 카테고리 뱃지 한국어 표시 (프로젝트, 사무실, 이벤트, 교육)
+- [x] 갤러리: 설명 null일 때 빈 공간 없음
+- [x] 갤러리: 설명 있을 때 2줄 제한 표시
 - [x] 블로그 1페이지: 피처드 히어로 (좌: 이미지, 우: 콘텐츠) 표시
 - [x] 블로그 2페이지+: 피처드 없이 일반 그리드만 표시
-- [x] 블로그: 읽기 시간 뱃지 표시
+- [x] 블로그: 한국어 읽기 시간 정확 계산 (500자/분)
 - [x] 반응형: 768px에서 피처드 1열, 480px 패딩 축소
 - [x] 라이트박스: 기존 동작 정상 유지
-- [x] `npm run build` 성공
+- [x] `npm run build` 성공 (2회)
 - [x] dist → 배포 디렉토리 복사 완료
-- [x] git commit & push 완료
+- [x] git commit & push 완료 (2회)
 
 ---
 
-## 7. 빌드 결과
+## 8. 커밋 이력
 
-```
-✓ 132 modules transformed
-✓ built in 2.52s
-
-주요 파일:
-- assets/index-DJtvi8S1.css    82.36 kB (gzip: 13.53 kB)
-- assets/Gallery-DftkjGFD.js    3.96 kB (gzip: 1.48 kB)
-- assets/Blog-D7nfUd7r.js       2.72 kB (gzip: 0.95 kB)
-- assets/index-tf7gT-tr.js    265.51 kB (gzip: 84.96 kB)
-```
+| 순서 | 커밋 해시 | 내용 |
+|------|----------|------|
+| 1 | `adc82e0` | feat: 커뮤니티 디자인 개선 — 갤러리 카드형 + 블로그 매거진형 |
+| 2 | `dd5329b` | docs: 커뮤니티 디자인 개선 개발일지 작성 |
+| 3 | `47189f1` | fix: 갤러리/블로그 데이터 표시 수정 (현지화, null처리, 한국어 읽기시간) |
 
 ---
 
-## 8. 배포
+## 9. 배포
 
 - GitHub Pages: https://www.dreamitbiz.com
-- 커밋 해시: `adc82e0`
+- 최종 커밋: `47189f1`
 - 브랜치: `main`
