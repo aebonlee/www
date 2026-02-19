@@ -100,6 +100,101 @@
     background: rgba(74, 143, 231, 0.1);
 }
 
+/* User Dropdown (Navbar) dark mode */
+[data-theme="dark"] .nav-user-dropdown {
+    background: rgba(31, 41, 55, 0.98);
+    border-color: rgba(255, 255, 255, 0.08);
+    box-shadow: 0 8px 30px rgba(0, 0, 0, 0.4);
+}
+
+[data-theme="dark"] .nav-user-dropdown::before {
+    background: rgba(31, 41, 55, 0.98);
+    border-color: rgba(255, 255, 255, 0.08);
+}
+
+[data-theme="dark"] .dropdown-user-header {
+    background: rgba(255, 255, 255, 0.04);
+}
+
+[data-theme="dark"] .dropdown-user-name {
+    color: #F9FAFB;
+}
+
+[data-theme="dark"] .dropdown-user-email {
+    color: #9CA3AF;
+}
+
+[data-theme="dark"] .dropdown-menu-item {
+    color: #D1D5DB;
+}
+
+[data-theme="dark"] .dropdown-menu-item:hover {
+    background: rgba(74, 143, 231, 0.12);
+    color: var(--primary-blue-light);
+}
+
+[data-theme="dark"] .dropdown-menu-item:hover svg {
+    color: var(--primary-blue-light);
+}
+
+[data-theme="dark"] .dropdown-menu-item.logout {
+    color: #FCA5A5;
+}
+
+[data-theme="dark"] .dropdown-menu-item.logout svg {
+    color: #FCA5A5;
+}
+
+[data-theme="dark"] .dropdown-menu-item.logout:hover {
+    background: rgba(220, 38, 38, 0.12);
+}
+
+[data-theme="dark"] .nav-user-dropdown .divider {
+    background: rgba(255, 255, 255, 0.08);
+}
+
+/* Auth pages dark mode */
+[data-theme="dark"] .auth-fullpage {
+    background: var(--bg-light-gray);
+}
+
+[data-theme="dark"] .auth-card-google {
+    background: var(--bg-white);
+    border-color: var(--border-medium);
+}
+
+[data-theme="dark"] .auth-method-btn {
+    background: var(--bg-light-gray);
+    border-color: var(--border-medium);
+    color: var(--text-primary);
+}
+
+[data-theme="dark"] .auth-method-btn:hover {
+    background: var(--bg-medium-gray);
+}
+
+[data-theme="dark"] .auth-method-btn.kakao {
+    background: #FEE500;
+    border-color: #FEE500;
+    color: #3C1E1E;
+}
+
+[data-theme="dark"] .auth-input-group input {
+    background: var(--bg-light-gray);
+    border-color: var(--border-medium);
+    color: var(--text-primary);
+}
+
+[data-theme="dark"] .auth-error {
+    background: #7f1d1d;
+    border-color: #991b1b;
+    color: #fca5a5;
+}
+
+[data-theme="dark"] .auth-bottom-link {
+    border-top-color: var(--border-medium);
+}
+
 [data-theme="dark"] .cta-section {
     background: var(--hero-bg-dark);
 }

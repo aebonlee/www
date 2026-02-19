@@ -558,9 +558,9 @@
 
 .nav-user-dropdown {
   position: absolute;
-  top: calc(100% + 8px);
-  right: 0;
-  min-width: 220px;
+  top: calc(100% + 12px);
+  right: -8px;
+  min-width: 230px;
   background: rgba(255, 255, 255, 0.98);
   backdrop-filter: blur(16px);
   -webkit-backdrop-filter: blur(16px);
@@ -569,8 +569,28 @@
   box-shadow: 0 8px 30px rgba(0, 0, 0, 0.12);
   padding: 0;
   z-index: 999;
-  animation: tooltip-fade-in 0.2s ease;
+  animation: user-dropdown-fade 0.2s ease;
   overflow: hidden;
+}
+
+/* 풍선도움말 화살표 */
+.nav-user-dropdown::before {
+  content: '';
+  position: absolute;
+  top: -6px;
+  right: 16px;
+  width: 12px;
+  height: 12px;
+  background: rgba(255, 255, 255, 0.98);
+  border-left: 1px solid var(--border-light);
+  border-top: 1px solid var(--border-light);
+  transform: rotate(45deg);
+  z-index: 1;
+}
+
+@keyframes user-dropdown-fade {
+  from { opacity: 0; transform: translateY(6px); }
+  to   { opacity: 1; transform: translateY(0); }
 }
 
 .dropdown-user-header {
