@@ -351,47 +351,30 @@
 .nav-user-btn {
   display: flex;
   align-items: center;
-  gap: 6px;
+  justify-content: center;
   background: none;
-  border: 1px solid var(--border-medium);
-  border-radius: var(--radius-full);
-  padding: 4px 12px 4px 4px;
+  border: none;
+  padding: 0;
   cursor: pointer;
   transition: all 0.2s ease;
 }
 
-.nav-user-btn:hover {
-  border-color: var(--primary-blue);
-}
-
-.nav-user-avatar {
-  width: 28px;
-  height: 28px;
-  border-radius: 50%;
-  object-fit: cover;
+.nav-user-btn:hover .nav-user-avatar-placeholder {
+  box-shadow: 0 0 0 2px var(--primary-blue);
 }
 
 .nav-user-avatar-placeholder {
-  width: 28px;
-  height: 28px;
+  width: 32px;
+  height: 32px;
   border-radius: 50%;
   background: var(--primary-blue);
   color: white;
-  font-size: 12px;
+  font-size: 13px;
   font-weight: 700;
   display: flex;
   align-items: center;
   justify-content: center;
-}
-
-.nav-user-name {
-  font-size: 13px;
-  font-weight: 500;
-  color: var(--text-primary);
-  max-width: 100px;
-  overflow: hidden;
-  text-overflow: ellipsis;
-  white-space: nowrap;
+  transition: box-shadow 0.2s ease;
 }
 
 .nav-user-dropdown {
@@ -464,11 +447,9 @@
     padding: 28px 20px;
   }
 
-  .nav-user-name {
-    display: none;
-  }
-
-  .nav-user-btn {
-    padding: 4px;
+  .nav-user-avatar-placeholder {
+    width: 28px;
+    height: 28px;
+    font-size: 12px;
   }
 }

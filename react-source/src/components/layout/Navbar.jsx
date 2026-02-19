@@ -187,12 +187,7 @@ const Navbar = () => {
             {isLoggedIn ? (
               <div className="nav-user-menu" ref={userMenuRef}>
                 <button className="nav-user-btn" onClick={() => setShowUserMenu(!showUserMenu)}>
-                  {profile?.avatar_url ? (
-                    <img src={profile.avatar_url} alt="" className="nav-user-avatar" />
-                  ) : (
-                    <span className="nav-user-avatar-placeholder">{userInitial}</span>
-                  )}
-                  <span className="nav-user-name">{profile?.display_name || ''}</span>
+                  <span className="nav-user-avatar-placeholder">{userInitial}</span>
                 </button>
                 {showUserMenu && (
                   <div className="nav-user-dropdown">
