@@ -197,6 +197,52 @@ Tablet:  도트 하단 = 56px, 마우스 상단 = 12px + 32px = 44px
 
 ---
 
+## 세션 26: 스크롤 인디케이터 도트 위로 배치 + 1.5배 크기 확대
+
+**커밋**: `d99cf06` style: 히어로 하단 여백 확대 + 캐러셀 도트·스크롤 인디케이터 간격 재조정
+
+### 변경 내용
+
+#### 배치 순서 반전: 마우스를 도트 위로
+
+```
+Before:  [도트 ●●●●●]  ← 위
+         [🖱 마우스]    ← 아래 (바닥에 붙음)
+
+After:   [🖱 마우스]    ← 위 (스크롤 유도)
+         [도트 ●●●●●]  ← 아래 (고정)
+```
+
+#### 크기 1.5배 확대
+
+| 요소 | Before | After (1.5x) |
+|------|--------|-------------|
+| `.carousel-dot` | 10px, border 2px | **15px**, border **3px** |
+| `.carousel-dots gap` | 10px | **14px** |
+| `.mouse` | 20×32px | **30×48px** |
+| `.mouse border` | 2px, radius 10px | **3px**, radius **15px** |
+| `.wheel` | 3×7px, top 6px | **4×10px**, top **9px** |
+
+#### 뷰포트별 배치 (도트 하단 고정, 마우스 상단)
+
+| 뷰포트 | 도트 (bottom) | 도트 크기 | 마우스 (bottom) | 마우스 크기 |
+|--------|-------------|----------|---------------|-----------|
+| Desktop (1025px+) | 30px | 15px | 64px | 30×48px |
+| Tablet (1024px) | 26px | 15px | 58px | 30×48px |
+| Mobile (768px) | 20px | 12px | 50px | 26×42px |
+| Small (480px) | 16px | 10px | 숨김 | — |
+
+### 변경 파일
+
+| 파일 | 변경 |
+|------|------|
+| `src/styles/hero.css` | dots bottom 78→30px, indicator bottom 26→64px (순서 반전), 도트·마우스·휠 1.5배 확대 |
+| `src/styles/responsive.css` @1024px | dots 26px, indicator 58px |
+| `src/styles/responsive.css` @768px | dots 20px/12px, indicator 50px, mouse 26×42px |
+| `src/styles/responsive.css` @480px | dots 16px/10px, indicator 숨김 |
+
+---
+
 ## 금일 커밋 이력 (세션 7)
 
 | 순서 | 커밋 해시 | 내용 |
@@ -208,3 +254,6 @@ Tablet:  도트 하단 = 56px, 마우스 상단 = 12px + 32px = 44px
 | 5 | `d814269` | style: PC/태블릿 히어로 캐러셀 도트·스크롤 인디케이터 간격 조정 + 빌드 배포 |
 | 6 | `359b839` | docs: 세션 25 개발일지 — PC/태블릿 캐러셀 도트·스크롤 인디케이터 간격 조정 |
 | 7 | `36738ee` | build: 프로덕션 빌드 배포 (Vite v7.3.1) |
+| 8 | `5700558` | docs: 세션 7 커밋 이력 업데이트 (7건) |
+| 9 | `d99cf06` | style: 히어로 하단 여백 확대 + 캐러셀 도트·스크롤 인디케이터 간격 재조정 |
+| 10 | (본 커밋) | style: 스크롤 인디케이터 도트 위로 배치 + 1.5배 크기 확대 + 빌드 배포 |

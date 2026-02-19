@@ -275,22 +275,22 @@
     right: 24px;
 }
 
-/* ── Dot Indicators ── */
+/* ── Dot Indicators (fixed near bottom) ── */
 .carousel-dots {
     position: absolute;
-    bottom: 78px;
+    bottom: 30px;
     left: 50%;
     transform: translateX(-50%);
     z-index: 3;
     display: flex;
-    gap: 10px;
+    gap: 14px;
 }
 
 .carousel-dot {
-    width: 10px;
-    height: 10px;
+    width: 15px;
+    height: 15px;
     border-radius: 50%;
-    border: 2px solid rgba(255, 255, 255, 0.5);
+    border: 3px solid rgba(255, 255, 255, 0.5);
     background: transparent;
     cursor: pointer;
     transition: background 0.3s, border-color 0.3s, transform 0.3s;
@@ -307,30 +307,30 @@
     transform: scale(1.25);
 }
 
-/* ── Scroll Indicator ── */
+/* ── Scroll Indicator (above dots) ── */
 .scroll-indicator {
     position: absolute;
-    bottom: 26px;
+    bottom: 64px;
     left: 50%;
     transform: translateX(-50%);
     z-index: 3;
 }
 
 .mouse {
-    width: 20px;
-    height: 32px;
-    border: 2px solid rgba(255, 255, 255, 0.35);
-    border-radius: 10px;
+    width: 30px;
+    height: 48px;
+    border: 3px solid rgba(255, 255, 255, 0.35);
+    border-radius: 15px;
     position: relative;
 }
 
 .wheel {
-    width: 3px;
-    height: 7px;
+    width: 4px;
+    height: 10px;
     background: rgba(255, 255, 255, 0.5);
     border-radius: 2px;
     position: absolute;
-    top: 6px;
+    top: 9px;
     left: 50%;
     transform: translateX(-50%);
     animation: scroll-wheel 1.5s infinite;
