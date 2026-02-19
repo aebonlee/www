@@ -57,7 +57,8 @@ export const AuthProvider = ({ children }) => {
     if (user) await loadProfile(user);
   }, [user, loadProfile]);
 
-  const isAdmin = profile?.role === 'admin';
+  const ADMIN_EMAILS = ['aebon@kakao.com', 'aebon@kyonggi.ac.kr'];
+  const isAdmin = !!(user?.email && ADMIN_EMAILS.includes(user.email));
   const isLoggedIn = !!user;
 
   return (

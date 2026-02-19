@@ -1,8 +1,8 @@
 import { useState, useEffect } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { useLanguage } from '../contexts/LanguageContext';
 import { useAuth } from '../contexts/AuthContext';
-import { getBlogPosts } from '../utils/boardStorage';
+import { getBlogPosts, deleteBlogPost } from '../utils/boardStorage';
 import Pagination from '../components/Pagination';
 import useAOS from '../hooks/useAOS';
 import SEOHead from '../components/SEOHead';
@@ -21,10 +21,29 @@ const estimateReadTime = (text) => {
 const Blog = () => {
   const { t, language } = useLanguage();
   const { isAdmin } = useAuth();
+  const navigate = useNavigate();
   const [posts, setPosts] = useState([]);
   const [loading, setLoading] = useState(true);
   const [currentPage, setCurrentPage] = useState(1);
   useAOS();
+
+  const handleEdit = (e, postId) => {
+    e.preventDefault();
+    e.stopPropagation();
+    navigate(`/community/blog/edit/${postId}`);
+  };
+
+  const handleDelete = async (e, postId) => {
+    e.preventDefault();
+    e.stopPropagation();
+    if (!window.confirm(t('community.deleteConfirm') || '삭제하시겠습니까?')) return;
+    try {
+      await deleteBlogPost(postId);
+      setPosts((prev) => prev.filter((p) => p.id !== postId));
+    } catch (err) {
+      console.error('Delete error:', err);
+    }
+  };
 
   useEffect(() => {
     (async () => {
@@ -96,6 +115,12 @@ const Blog = () => {
                 <h2>{language === 'en' ? featured.titleEn : featured.title}</h2>
                 <p>{language === 'en' ? featured.excerptEn : featured.excerpt}</p>
                 <span className="blog-link">{t('community.readMore')} →</span>
+                {isAdmin && (
+                  <div className="blog-admin-actions" style={{ display: 'flex', gap: '8px', marginTop: '12px' }}>
+                    <button className="board-btn" onClick={(e) => handleEdit(e, featured.id)} style={{ fontSize: '13px', padding: '6px 14px' }}>{t('community.edit') || '수정'}</button>
+                    <button className="board-btn danger" onClick={(e) => handleDelete(e, featured.id)} style={{ fontSize: '13px', padding: '6px 14px' }}>{t('community.delete') || '삭제'}</button>
+                  </div>
+                )}
               </div>
             </Link>
           )}
@@ -126,6 +151,12 @@ const Blog = () => {
                   <h3>{language === 'en' ? post.titleEn : post.title}</h3>
                   <p>{language === 'en' ? post.excerptEn : post.excerpt}</p>
                   <span className="blog-link">{t('community.readMore')} →</span>
+                  {isAdmin && (
+                    <div className="blog-admin-actions" style={{ display: 'flex', gap: '8px', marginTop: '10px' }}>
+                      <button className="board-btn" onClick={(e) => handleEdit(e, post.id)} style={{ fontSize: '13px', padding: '5px 12px' }}>{t('community.edit') || '수정'}</button>
+                      <button className="board-btn danger" onClick={(e) => handleDelete(e, post.id)} style={{ fontSize: '13px', padding: '5px 12px' }}>{t('community.delete') || '삭제'}</button>
+                    </div>
+                  )}
                 </div>
               </Link>
             ))}

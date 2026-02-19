@@ -1,8 +1,8 @@
 import { useState, useEffect } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { useLanguage } from '../contexts/LanguageContext';
 import { useAuth } from '../contexts/AuthContext';
-import { getBoardPosts } from '../utils/boardStorage';
+import { getBoardPosts, deleteBoardPost } from '../utils/boardStorage';
 import Pagination from '../components/Pagination';
 import useAOS from '../hooks/useAOS';
 import SEOHead from '../components/SEOHead';
@@ -11,11 +11,30 @@ const POSTS_PER_PAGE = 20;
 
 const Board = () => {
   const { t } = useLanguage();
-  const { isLoggedIn } = useAuth();
+  const { isLoggedIn, isAdmin } = useAuth();
+  const navigate = useNavigate();
   const [activeFilter, setActiveFilter] = useState('all');
   const [posts, setPosts] = useState([]);
   const [currentPage, setCurrentPage] = useState(1);
   useAOS();
+
+  const handleEdit = (e, postId) => {
+    e.preventDefault();
+    e.stopPropagation();
+    navigate(`/community/board/edit/${postId}`);
+  };
+
+  const handleDeletePost = async (e, postId) => {
+    e.preventDefault();
+    e.stopPropagation();
+    if (!window.confirm(t('community.deleteConfirm') || '삭제하시겠습니까?')) return;
+    try {
+      await deleteBoardPost(postId);
+      setPosts((prev) => prev.filter((p) => p.id !== postId));
+    } catch (err) {
+      console.error('Delete error:', err);
+    }
+  };
 
   useEffect(() => {
     (async () => {
@@ -89,6 +108,7 @@ const Board = () => {
                     <th className="col-author">{t('community.author')}</th>
                     <th className="col-date">{t('community.date')}</th>
                     <th className="col-views">{t('community.views')}</th>
+                    {isAdmin && <th className="col-actions" style={{ width: '100px', textAlign: 'center' }}>관리</th>}
                   </tr>
                 </thead>
                 <tbody>
@@ -104,6 +124,14 @@ const Board = () => {
                       <td className="col-author">{post.author}</td>
                       <td className="col-date">{post.date}</td>
                       <td className="col-views">{post.views}</td>
+                      {isAdmin && (
+                        <td className="col-actions" style={{ textAlign: 'center' }}>
+                          <div style={{ display: 'flex', gap: '4px', justifyContent: 'center' }}>
+                            <button className="board-btn" onClick={(e) => handleEdit(e, post.id)} style={{ fontSize: '12px', padding: '3px 8px' }}>{t('community.edit') || '수정'}</button>
+                            <button className="board-btn danger" onClick={(e) => handleDeletePost(e, post.id)} style={{ fontSize: '12px', padding: '3px 8px' }}>{t('community.delete') || '삭제'}</button>
+                          </div>
+                        </td>
+                      )}
                     </tr>
                   ))}
                 </tbody>
