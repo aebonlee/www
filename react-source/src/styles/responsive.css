@@ -236,7 +236,8 @@
     }
 
     .logo {
-        width: 100%;       /* Row 1: logo full width */
+        flex: 0 0 100%;    /* Row 1: logo forced full width, no shrink */
+        width: 100%;
     }
 
     .logo h1 {
@@ -244,7 +245,8 @@
     }
 
     .nav-actions {
-        width: 100%;       /* Row 2: actions full width */
+        flex: 0 0 100%;    /* Row 2: actions forced full width, no shrink */
+        width: 100%;
         justify-content: flex-end;
         gap: 6px;
     }
@@ -301,13 +303,20 @@
     .hero-buttons {
         flex-direction: column;
         align-items: center;
+        width: 100%;
     }
 
     .hero-buttons .btn {
-        width: 60%;
+        width: 60% !important;
         max-width: 280px;
+        box-sizing: border-box;
         justify-content: center;
         border-radius: var(--radius-md);
+    }
+
+    /* Reserve space for 2 stacked buttons so 1-button slides match height */
+    .hero-buttons {
+        min-height: 104px;
     }
 
     .carousel-arrow {
@@ -644,17 +653,29 @@
     h4 { line-height: 1.5; letter-spacing: 0; }
 
     .hero {
-        min-height: auto;
+        min-height: 560px;
         padding-bottom: 56px;
+    }
+
+    .hero-content {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        min-height: 300px;
     }
 
     .hero-title {
         line-height: 1.25;
+        min-height: 4.2em;        /* Reserve space for 3~4 title lines */
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
     }
 
     .hero-description {
         line-height: 1.8;
         margin-bottom: 28px;
+        min-height: 3.6em;        /* Reserve space for 2 description lines */
     }
 
     .section-header {
@@ -908,11 +929,16 @@
         line-height: 1.8;
     }
 
+    .hero {
+        min-height: 500px;
+    }
+
     .hero-title {
         font-size: 26px;
         line-height: 1.3;
         letter-spacing: -0.01em;
         margin-bottom: 16px;
+        min-height: 5em;          /* 26px × 1.3 × 4 lines ≈ 5em */
     }
 
     .hero-description {
