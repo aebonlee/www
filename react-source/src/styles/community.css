@@ -559,3 +559,91 @@
 .lightbox-nav.next {
     right: -56px;
 }
+
+/* ── Gallery Admin Actions (card) ── */
+.gallery-admin-actions {
+    display: flex;
+    gap: 6px;
+    margin-top: 8px;
+}
+
+.gallery-admin-btn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 30px;
+    height: 30px;
+    border-radius: 6px;
+    border: 1px solid var(--border-medium);
+    background: var(--bg-white);
+    cursor: pointer;
+    transition: all 0.2s ease;
+    padding: 0;
+}
+
+.gallery-admin-btn svg {
+    width: 14px;
+    height: 14px;
+    color: var(--text-secondary);
+}
+
+.gallery-admin-btn.edit:hover {
+    border-color: var(--primary-blue);
+    background: rgba(0, 70, 200, 0.06);
+}
+
+.gallery-admin-btn.edit:hover svg {
+    color: var(--primary-blue);
+}
+
+.gallery-admin-btn.delete:hover {
+    border-color: #dc2626;
+    background: rgba(220, 38, 38, 0.06);
+}
+
+.gallery-admin-btn.delete:hover svg {
+    color: #dc2626;
+}
+
+/* ── Lightbox Admin Actions ── */
+.lightbox-admin-actions {
+    display: flex;
+    gap: 8px;
+    margin-top: 12px;
+    padding-top: 12px;
+    border-top: 1px solid var(--border-light);
+}
+
+.lightbox-admin-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    padding: 6px 14px;
+    border-radius: 6px;
+    font-size: 13px;
+    font-weight: 500;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    text-decoration: none;
+    border: 1px solid var(--border-medium);
+    background: var(--bg-white);
+    color: var(--text-secondary);
+}
+
+.lightbox-admin-btn svg {
+    width: 14px;
+    height: 14px;
+    flex-shrink: 0;
+}
+
+.lightbox-admin-btn.edit:hover {
+    border-color: var(--primary-blue);
+    color: var(--primary-blue);
+    background: rgba(0, 70, 200, 0.06);
+}
+
+.lightbox-admin-btn.delete:hover {
+    border-color: #dc2626;
+    color: #dc2626;
+    background: rgba(220, 38, 38, 0.06);
+}
