@@ -7,6 +7,11 @@ import useAOS from '../hooks/useAOS';
 
 const POSTS_PER_PAGE = 6;
 
+const estimateReadTime = (text) => {
+  if (!text) return 1;
+  return Math.max(1, Math.ceil(text.replace(/\s+/g, ' ').trim().split(' ').length / 200));
+};
+
 const Blog = () => {
   const { t, language } = useLanguage();
   const [posts, setPosts] = useState([]);
@@ -26,6 +31,9 @@ const Blog = () => {
     currentPage * POSTS_PER_PAGE
   );
 
+  const featured = currentPage === 1 ? paginatedPosts[0] : null;
+  const gridPosts = currentPage === 1 ? paginatedPosts.slice(1) : paginatedPosts;
+
   return (
     <>
       <section className="page-header">
@@ -37,8 +45,35 @@ const Blog = () => {
 
       <section style={{ padding: '80px 0', background: 'var(--bg-white)' }}>
         <div className="container">
+          {featured && (
+            <Link
+              to={`/community/blog/${featured.id}`}
+              className="blog-featured"
+              data-aos="fade-up"
+              style={{ textDecoration: 'none', color: 'inherit' }}
+            >
+              <div className="blog-featured-image">
+                <span className="blog-image-icon">{featured.icon}</span>
+              </div>
+              <div className="blog-featured-content">
+                <div className="blog-meta">
+                  <span className="blog-category">
+                    {language === 'en' ? featured.categoryEn : featured.category}
+                  </span>
+                  <span className="blog-date">{featured.date}</span>
+                  <span className="blog-read-time">
+                    {estimateReadTime(language === 'en' ? featured.contentEn : featured.content)} min read
+                  </span>
+                </div>
+                <h2>{language === 'en' ? featured.titleEn : featured.title}</h2>
+                <p>{language === 'en' ? featured.excerptEn : featured.excerpt}</p>
+                <span className="blog-link">{t('community.readMore')} →</span>
+              </div>
+            </Link>
+          )}
+
           <div className="blog-grid">
-            {paginatedPosts.map((post, i) => (
+            {gridPosts.map((post, i) => (
               <Link
                 to={`/community/blog/${post.id}`}
                 key={post.id}
@@ -56,6 +91,9 @@ const Blog = () => {
                       {language === 'en' ? post.categoryEn : post.category}
                     </span>
                     <span className="blog-date">{post.date}</span>
+                    <span className="blog-read-time">
+                      {estimateReadTime(language === 'en' ? post.contentEn : post.content)} min read
+                    </span>
                   </div>
                   <h3>{language === 'en' ? post.titleEn : post.title}</h3>
                   <p>{language === 'en' ? post.excerptEn : post.excerpt}</p>

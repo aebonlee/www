@@ -131,10 +131,17 @@ const Gallery = () => {
                       {language === 'en' ? item.titleEn : item.title}
                     </span>
                   </div>
+                  <div className="gallery-overlay">
+                    <span className="gallery-overlay-icon">+</span>
+                  </div>
                 </div>
                 <div className="gallery-info">
+                  <span className="gallery-category-badge">{item.category}</span>
                   <h4>{language === 'en' ? item.titleEn : item.title}</h4>
-                  <p>{item.date}</p>
+                  <p className="gallery-desc">
+                    {language === 'en' ? item.descriptionEn : item.description}
+                  </p>
+                  <span className="gallery-date">{item.date}</span>
                 </div>
               </div>
             ))}
