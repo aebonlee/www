@@ -19,13 +19,20 @@ const estimateReadTime = (text) => {
 const Blog = () => {
   const { t, language } = useLanguage();
   const [posts, setPosts] = useState([]);
+  const [loading, setLoading] = useState(true);
   const [currentPage, setCurrentPage] = useState(1);
   useAOS();
 
   useEffect(() => {
     (async () => {
-      const data = await getBlogPosts();
-      setPosts(data.sort((a, b) => b.id - a.id));
+      try {
+        const data = await getBlogPosts();
+        setPosts(data.sort((a, b) => b.id - a.id));
+      } catch (err) {
+        console.error('Blog load error:', err);
+      } finally {
+        setLoading(false);
+      }
     })();
   }, []);
 
@@ -49,6 +56,14 @@ const Blog = () => {
 
       <section style={{ padding: '80px 0', background: 'var(--bg-white)' }}>
         <div className="container">
+          {loading ? (
+            <div style={{ textAlign: 'center', padding: '60px 0', color: 'var(--text-light)' }}>
+              {t('community.loading') || '로딩 중...'}
+            </div>
+          ) : posts.length === 0 ? (
+            <div className="board-empty">{t('community.noPost')}</div>
+          ) : (
+          <>
           {featured && (
             <Link
               to={`/community/blog/${featured.id}`}
@@ -111,6 +126,8 @@ const Blog = () => {
             totalPages={totalPages}
             onPageChange={setCurrentPage}
           />
+          </>
+          )}
         </div>
       </section>
     </>

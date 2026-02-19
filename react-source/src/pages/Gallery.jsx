@@ -20,6 +20,7 @@ const GRADIENTS = [
 const Gallery = () => {
   const { t, language } = useLanguage();
   const [items, setItems] = useState([]);
+  const [loading, setLoading] = useState(true);
   const [activeFilter, setActiveFilter] = useState('all');
   const [currentPage, setCurrentPage] = useState(1);
   const [lightboxItem, setLightboxItem] = useState(null);
@@ -27,8 +28,14 @@ const Gallery = () => {
 
   useEffect(() => {
     (async () => {
-      const data = await getGalleryItems();
-      setItems(data.sort((a, b) => b.id - a.id));
+      try {
+        const data = await getGalleryItems();
+        setItems(data.sort((a, b) => b.id - a.id));
+      } catch (err) {
+        console.error('Gallery load error:', err);
+      } finally {
+        setLoading(false);
+      }
     })();
   }, []);
 
@@ -118,6 +125,14 @@ const Gallery = () => {
             ))}
           </div>
 
+          {loading ? (
+            <div style={{ textAlign: 'center', padding: '60px 0', color: 'var(--text-light)' }}>
+              {t('community.loading') || '로딩 중...'}
+            </div>
+          ) : filteredItems.length === 0 ? (
+            <div className="board-empty">{t('community.noPost')}</div>
+          ) : (
+          <>
           <div className="gallery-grid">
             {paginatedItems.map((item, i) => (
               <div
@@ -159,6 +174,8 @@ const Gallery = () => {
             totalPages={totalPages}
             onPageChange={setCurrentPage}
           />
+          </>
+          )}
         </div>
       </section>
 

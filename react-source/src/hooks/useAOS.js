@@ -16,11 +16,22 @@ const useAOS = () => {
       { threshold: 0.1, rootMargin: '0px 0px -50px 0px' }
     );
 
-    const elements = document.querySelectorAll('[data-aos]');
-    elements.forEach((el) => observer.observe(el));
+    // Observe all [data-aos] elements not yet animated
+    const observeAll = () => {
+      document.querySelectorAll('[data-aos]:not(.aos-animate)').forEach((el) => {
+        observer.observe(el);
+      });
+    };
+
+    observeAll();
+
+    // Watch for dynamically added elements (e.g. after async data loads)
+    const mutObs = new MutationObserver(observeAll);
+    mutObs.observe(document.body, { childList: true, subtree: true });
 
     return () => {
-      elements.forEach((el) => observer.unobserve(el));
+      observer.disconnect();
+      mutObs.disconnect();
     };
   }, []);
 };
