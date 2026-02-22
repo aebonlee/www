@@ -69,6 +69,8 @@ const OrderConfirmation = () => {
       case 'paid': return t('order.paid');
       case 'pending': return t('order.pending');
       case 'failed': return t('order.failed');
+      case 'cancelled': return isEn ? 'Cancelled' : '취소';
+      case 'refunded': return isEn ? 'Refunded' : '환불';
       default: return status;
     }
   };

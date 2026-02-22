@@ -65,16 +65,22 @@ const AdminDashboard = () => {
     )},
     { label: '결제금액', value: `${payment.totalAmount.toLocaleString()}원`, color: '#D97706', icon: (
       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><line x1="12" y1="1" x2="12" y2="23"/><path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg>
+    )},
+    { label: '취소', value: payment.cancelledCount, color: '#DC2626', icon: (
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><circle cx="12" cy="12" r="10"/><line x1="15" y1="9" x2="9" y2="15"/><line x1="9" y1="9" x2="15" y2="15"/></svg>
+    )},
+    { label: '취소금액', value: `${(payment.cancelledAmount || 0).toLocaleString()}원`, color: '#991B1B', icon: (
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><line x1="12" y1="1" x2="12" y2="23"/><path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg>
     )}
   ];
 
   const statusLabel = (s) => {
-    const map = { paid: '결제완료', pending: '대기', failed: '실패', cancelled: '취소' };
+    const map = { paid: '결제완료', pending: '대기', failed: '실패', cancelled: '취소', refunded: '환불' };
     return map[s] || s || '대기';
   };
 
   const statusColor = (s) => {
-    const map = { paid: 'green', pending: 'yellow', failed: 'red', cancelled: 'gray' };
+    const map = { paid: 'green', pending: 'yellow', failed: 'red', cancelled: 'red', refunded: 'purple' };
     return map[s] || 'gray';
   };
 

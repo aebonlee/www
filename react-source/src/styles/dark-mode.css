@@ -833,6 +833,66 @@
     border-top-color: #374151;
 }
 
+[data-theme="dark"] .admin-order-summary-card {
+    background: #1F2937;
+    border-color: #374151;
+}
+
+[data-theme="dark"] .admin-order-summary-value {
+    color: #F3F4F6;
+}
+
+[data-theme="dark"] .admin-order-detail-info h4,
+[data-theme="dark"] .admin-order-detail-items h4 {
+    color: #F3F4F6;
+    border-bottom-color: #374151;
+}
+
+[data-theme="dark"] .admin-order-dl dt { color: #9CA3AF; }
+[data-theme="dark"] .admin-order-dl dd { color: #E5E7EB; }
+
+[data-theme="dark"] .admin-order-item-table th {
+    background: #1F2937;
+    border-bottom-color: #374151;
+    color: #9CA3AF;
+}
+
+[data-theme="dark"] .admin-order-item-table td {
+    border-bottom-color: #374151;
+    color: #E5E7EB;
+}
+
+[data-theme="dark"] .admin-order-actions { border-top-color: #374151; }
+
+[data-theme="dark"] .admin-order-status-btn {
+    background: #1F2937;
+    border-color: #374151;
+    color: #9CA3AF;
+}
+
+[data-theme="dark"] .admin-cancel-input {
+    background: #1F2937;
+    border-color: #374151;
+    color: #F3F4F6;
+}
+
+[data-theme="dark"] .admin-cancel-btn.dismiss {
+    background: #374151;
+    border-color: #4B5563;
+    color: #D1D5DB;
+}
+
+[data-theme="dark"] .admin-refresh-btn {
+    background: #1F2937;
+    border-color: #374151;
+    color: #9CA3AF;
+}
+
+[data-theme="dark"] .order-history-cancel-info {
+    background: rgba(220, 38, 38, 0.15);
+    color: #f87171;
+}
+
 [data-theme="dark"] .admin-toggle {
     background: #4B5563;
 }

@@ -654,6 +654,16 @@
     color: #dc2626;
 }
 
+.order-status-badge.cancelled {
+    background: #fef2f2;
+    color: #dc2626;
+}
+
+.order-status-badge.refunded {
+    background: #f5f3ff;
+    color: #7c3aed;
+}
+
 /* Order Table */
 .order-details {
     text-align: left;
@@ -872,6 +882,17 @@
     padding: 4px 0;
     font-size: 13px;
     color: var(--text-secondary);
+}
+
+.order-history-cancel-info {
+    display: flex;
+    gap: 16px;
+    font-size: 12px;
+    color: #dc2626;
+    padding: 6px 10px;
+    background: #fef2f2;
+    border-radius: var(--radius-sm);
+    margin-bottom: 8px;
 }
 
 .cart-badge {

@@ -46,7 +46,9 @@ const OrderHistory = () => {
     const labels = {
       paid: t('order.paid'),
       pending: t('order.pending'),
-      failed: t('order.failed')
+      failed: t('order.failed'),
+      cancelled: isEn ? 'Cancelled' : '취소',
+      refunded: isEn ? 'Refunded' : '환불'
     };
     return (
       <span className={`order-status-badge ${status}`}>
@@ -143,6 +145,16 @@ const OrderHistory = () => {
                         <span>{isEn ? 'Method' : '결제수단'}: {getMethodLabel(order.payment_method)}</span>
                         <span>{isEn ? 'Amount' : '결제금액'}: {formatPrice(order.total_amount)}</span>
                       </div>
+                      {order.payment_status === 'cancelled' && (
+                        <div className="order-history-cancel-info">
+                          {order.cancelled_at && (
+                            <span>{isEn ? 'Cancelled' : '취소일'}: {new Date(order.cancelled_at).toLocaleDateString('ko-KR')}</span>
+                          )}
+                          {order.cancel_reason && (
+                            <span>{isEn ? 'Reason' : '사유'}: {order.cancel_reason}</span>
+                          )}
+                        </div>
+                      )}
                       {isExpanded && items.length > 0 && (
                         <div className="order-history-items">
                           {items.map((item, idx) => (

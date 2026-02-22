@@ -74,22 +74,25 @@ export async function getAllOrders() {
   return data || [];
 }
 
-/** 결제 통계 (결제완료 건수 + 총 금액) */
+/** 결제 통계 (결제완료/취소 건수 + 금액) */
 export async function getPaymentStats() {
   const client = getSupabase();
-  if (!client) return { paidCount: 0, totalAmount: 0 };
+  if (!client) return { paidCount: 0, totalAmount: 0, cancelledCount: 0, cancelledAmount: 0 };
   const { data, error } = await client
     .from('orders')
-    .select('total_amount')
-    .eq('payment_status', 'paid');
+    .select('total_amount, payment_status');
   if (error) {
     console.error('getPaymentStats error:', error);
-    return { paidCount: 0, totalAmount: 0 };
+    return { paidCount: 0, totalAmount: 0, cancelledCount: 0, cancelledAmount: 0 };
   }
   const rows = data || [];
+  const paid = rows.filter(r => r.payment_status === 'paid');
+  const cancelled = rows.filter(r => r.payment_status === 'cancelled');
   return {
-    paidCount: rows.length,
-    totalAmount: rows.reduce((sum, r) => sum + (Number(r.total_amount) || 0), 0)
+    paidCount: paid.length,
+    totalAmount: paid.reduce((sum, r) => sum + (Number(r.total_amount) || 0), 0),
+    cancelledCount: cancelled.length,
+    cancelledAmount: cancelled.reduce((sum, r) => sum + (Number(r.total_amount) || 0), 0)
   };
 }
 

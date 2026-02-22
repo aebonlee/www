@@ -754,47 +754,258 @@
   opacity: 0.8;
 }
 
-/* ── Order Detail Expand ── */
+/* ── Order Summary Cards ── */
+.admin-order-summary {
+  display: flex;
+  gap: 12px;
+  margin-bottom: 20px;
+  flex-wrap: wrap;
+}
+
+.admin-order-summary-card {
+  flex: 1;
+  min-width: 180px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 14px 18px;
+  background: var(--bg-white);
+  border: 1px solid var(--border-light);
+  border-radius: var(--radius-md);
+}
+
+.admin-order-summary-card.paid {
+  border-left: 3px solid #059669;
+}
+
+.admin-order-summary-card.cancelled {
+  border-left: 3px solid #dc2626;
+}
+
+.admin-order-summary-label {
+  font-size: 13px;
+  color: var(--text-secondary);
+  font-weight: 500;
+}
+
+.admin-order-summary-value {
+  font-size: 14px;
+  font-weight: 700;
+  color: var(--text-primary);
+}
+
+/* ── Order Detail Expand (enhanced) ── */
 .admin-order-expand {
   background: var(--bg-light-gray);
-  padding: 16px 20px;
+  padding: 20px 24px;
   border-bottom: 1px solid var(--border-light);
 }
 
-.admin-order-items {
-  list-style: none;
-  padding: 0;
-  margin: 0;
+.admin-order-detail-grid {
+  display: grid;
+  grid-template-columns: 1fr 1.2fr;
+  gap: 24px;
+  margin-bottom: 16px;
 }
 
-.admin-order-items li {
-  display: flex;
-  justify-content: space-between;
-  padding: 6px 0;
+.admin-order-detail-info h4,
+.admin-order-detail-items h4 {
+  font-size: 14px;
+  font-weight: 700;
+  color: var(--text-primary);
+  margin-bottom: 12px;
+  padding-bottom: 8px;
+  border-bottom: 1px solid var(--border-light);
+}
+
+.admin-order-dl {
+  display: grid;
+  grid-template-columns: 80px 1fr;
+  gap: 6px 12px;
   font-size: 13px;
-  color: var(--text-secondary);
 }
 
-.admin-order-items li + li {
-  border-top: 1px solid var(--border-light);
-}
-
-/* Status select */
-.admin-status-select {
-  padding: 4px 8px;
-  border: 1px solid var(--border-light);
-  border-radius: 6px;
-  font-size: 12px;
+.admin-order-dl dt {
+  color: var(--text-light);
   font-weight: 500;
+}
+
+.admin-order-dl dd {
+  color: var(--text-primary);
+  margin: 0;
+  word-break: break-all;
+}
+
+.admin-order-item-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 13px;
+}
+
+.admin-order-item-table th {
+  background: var(--bg-white);
+  padding: 8px 10px;
+  text-align: left;
+  font-size: 12px;
+  font-weight: 600;
+  color: var(--text-secondary);
+  border-bottom: 1px solid var(--border-medium);
+}
+
+.admin-order-item-table td {
+  padding: 8px 10px;
+  border-bottom: 1px solid var(--border-light);
+  color: var(--text-primary);
+}
+
+/* ── Order Status Buttons ── */
+.admin-order-actions {
+  border-top: 1px solid var(--border-light);
+  padding-top: 14px;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.admin-order-status-group {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+
+.admin-order-status-btn {
+  padding: 5px 14px;
+  border: 1px solid var(--border-light);
+  border-radius: var(--radius-full);
+  font-size: 12px;
+  font-weight: 600;
   background: var(--bg-white);
   color: var(--text-secondary);
   cursor: pointer;
+  transition: all 0.2s;
+}
+
+.admin-order-status-btn:hover:not(:disabled) {
+  border-color: var(--primary-blue);
+  color: var(--primary-blue);
+}
+
+.admin-order-status-btn.active {
+  background: var(--primary-blue);
+  color: white;
+  border-color: var(--primary-blue);
+  cursor: default;
+}
+
+.admin-order-status-btn:disabled:not(.active) {
+  opacity: 0.4;
+  cursor: not-allowed;
+}
+
+.admin-order-status-btn[data-status="cancelled"]:hover:not(:disabled) {
+  border-color: #dc2626;
+  color: #dc2626;
+}
+
+.admin-order-status-btn[data-status="cancelled"].active {
+  background: #dc2626;
+  border-color: #dc2626;
+}
+
+.admin-order-status-btn[data-status="refunded"]:hover:not(:disabled) {
+  border-color: #7c3aed;
+  color: #7c3aed;
+}
+
+.admin-order-status-btn[data-status="refunded"].active {
+  background: #7c3aed;
+  border-color: #7c3aed;
+}
+
+/* ── Cancel Form ── */
+.admin-cancel-form {
+  display: flex;
+  gap: 8px;
+  align-items: center;
+  flex-wrap: wrap;
+}
+
+.admin-cancel-input {
+  flex: 1;
+  min-width: 200px;
+  padding: 8px 12px;
+  border: 1px solid var(--border-medium);
+  border-radius: var(--radius-sm);
+  font-size: 13px;
   outline: none;
   transition: border-color 0.2s;
 }
 
-.admin-status-select:focus {
+.admin-cancel-input:focus {
+  border-color: #dc2626;
+}
+
+.admin-cancel-btn {
+  padding: 8px 16px;
+  border: none;
+  border-radius: var(--radius-sm);
+  font-size: 13px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: opacity 0.2s;
+}
+
+.admin-cancel-btn.confirm {
+  background: #dc2626;
+  color: white;
+}
+
+.admin-cancel-btn.confirm:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.admin-cancel-btn.dismiss {
+  background: var(--bg-light-gray);
+  color: var(--text-secondary);
+  border: 1px solid var(--border-light);
+}
+
+/* Refresh button */
+.admin-refresh-btn {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  padding: 6px 14px;
+  border: 1px solid var(--border-light);
+  border-radius: var(--radius-sm);
+  background: var(--bg-white);
+  color: var(--text-secondary);
+  font-size: 13px;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.admin-refresh-btn:hover {
   border-color: var(--primary-blue);
+  color: var(--primary-blue);
+}
+
+@media (max-width: 768px) {
+  .admin-order-detail-grid {
+    grid-template-columns: 1fr;
+    gap: 16px;
+  }
+  .admin-order-summary {
+    flex-direction: column;
+  }
+  .admin-cancel-form {
+    flex-direction: column;
+  }
+  .admin-cancel-input {
+    width: 100%;
+  }
 }
 
 /* Toggle switch */

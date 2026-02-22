@@ -108,18 +108,25 @@ export const getOrderByNumber = async (orderNumber) => {
 
 /**
  * Update order payment status
+ * @param {string} orderId
+ * @param {string} status - 'pending' | 'paid' | 'failed' | 'cancelled' | 'refunded'
+ * @param {string} [paymentId] - portone payment ID
+ * @param {string} [cancelReason] - reason for cancellation
  */
-export const updateOrderStatus = async (orderId, status, paymentId) => {
+export const updateOrderStatus = async (orderId, status, paymentId, cancelReason) => {
   const client = getSupabase();
 
   if (!client) {
-    // Fallback: update localStorage
     const orders = JSON.parse(localStorage.getItem('dreamitbiz_orders') || '[]');
     const idx = orders.findIndex(o => o.id === orderId || o.order_number === orderId);
     if (idx >= 0) {
       orders[idx].payment_status = status;
-      orders[idx].portone_payment_id = paymentId;
+      if (paymentId) orders[idx].portone_payment_id = paymentId;
       if (status === 'paid') orders[idx].paid_at = new Date().toISOString();
+      if (status === 'cancelled') {
+        orders[idx].cancelled_at = new Date().toISOString();
+        if (cancelReason) orders[idx].cancel_reason = cancelReason;
+      }
       localStorage.setItem('dreamitbiz_orders', JSON.stringify(orders));
     }
     return orders[idx];
@@ -127,18 +134,26 @@ export const updateOrderStatus = async (orderId, status, paymentId) => {
 
   const updatePayload = { payment_status: status };
   if (status === 'paid') updatePayload.paid_at = new Date().toISOString();
+  if (status === 'cancelled') {
+    updatePayload.cancelled_at = new Date().toISOString();
+    if (cancelReason) updatePayload.cancel_reason = cancelReason;
+  }
 
-  // portone_payment_id column may not exist yet — try with it, fall back without
+  // Build full payload with optional columns (may not exist in DB yet)
+  const extras = {};
+  if (paymentId) extras.portone_payment_id = paymentId;
+
   try {
     const { data, error } = await client
       .from('orders')
-      .update({ ...updatePayload, portone_payment_id: paymentId })
+      .update({ ...updatePayload, ...extras })
       .eq('id', orderId)
       .select();
 
     if (error) throw error;
     return data?.[0] || null;
   } catch {
+    // Fallback: update without optional columns
     const { data, error } = await client
       .from('orders')
       .update(updatePayload)
