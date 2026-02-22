@@ -31,10 +31,12 @@ export const requestPayment = async ({ orderId, orderName, totalAmount, payMetho
     // Dynamic import of PortOne SDK
     const PortOne = await import('@portone/browser-sdk/v2');
 
+    const paymentId = `payment-${crypto.randomUUID()}`;
+
     const response = await PortOne.requestPayment({
       storeId: STORE_ID,
       channelKey: CHANNEL_KEY,
-      paymentId: `payment-${orderId}-${Date.now()}`,
+      paymentId,
       orderName,
       totalAmount,
       currency: 'CURRENCY_KRW',

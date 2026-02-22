@@ -3,7 +3,7 @@ import { useNavigate } from 'react-router-dom';
 import { useLanguage } from '../contexts/LanguageContext';
 import { useCart } from '../contexts/CartContext';
 import { useAuth } from '../contexts/AuthContext';
-import { createOrder, getOrderByNumber } from '../utils/supabase';
+import { createOrder, verifyPayment, updateOrderStatus } from '../utils/supabase';
 import { requestPayment } from '../utils/portone';
 import useAOS from '../hooks/useAOS';
 import SEOHead from '../components/SEOHead';
@@ -111,7 +111,15 @@ const Checkout = () => {
         return;
       }
 
-      // 3. Payment successful - clear cart and redirect
+      // 3. Verify payment and update order status
+      try {
+        await verifyPayment(paymentResult.paymentId, orderId);
+      } catch {
+        // Fallback: directly update order status
+        await updateOrderStatus(orderId, 'paid', paymentResult.paymentId);
+      }
+
+      // 4. Payment successful - clear cart and redirect
       clearCart();
       navigate(`/order-confirmation?orderNumber=${orderNumber}`);
 
