@@ -4,40 +4,40 @@ import { getAllUsers } from '../../utils/adminStorage';
 
 const PROVIDER_LABELS = { google: 'Google', kakao: 'Kakao', email: 'Email' };
 
-const getDomain = (email) => {
-  if (!email) return '기타';
-  const parts = email.split('@');
-  return parts.length > 1 ? parts[1].toLowerCase() : '기타';
-};
-
-/** 상위 도메인(TLD 유형) 분류 */
-const getDomainType = (domain) => {
-  if (!domain || domain === '기타') return { type: '기타', color: 'gray' };
+/** signup_domain에서 사이트 이름 추출 — 예: hohai.dreamitbiz.com → hohai */
+const getSiteName = (domain) => {
+  if (!domain) return '-';
   const d = domain.toLowerCase();
-  if (d.endsWith('.ac.kr')) return { type: '교육기관', color: 'blue' };
-  if (d.endsWith('.edu')) return { type: '교육기관', color: 'blue' };
-  if (d.endsWith('.go.kr')) return { type: '정부기관', color: 'red' };
-  if (d.endsWith('.gov')) return { type: '정부기관', color: 'red' };
-  if (d.endsWith('.co.kr')) return { type: '기업', color: 'purple' };
-  if (d.endsWith('.or.kr')) return { type: '기관/단체', color: 'green' };
-  if (d.endsWith('.org')) return { type: '기관/단체', color: 'green' };
-  if (d.endsWith('.com') || d.endsWith('.net')) return { type: '글로벌', color: 'yellow' };
-  if (d.endsWith('.kr')) return { type: '한국', color: 'green' };
-  return { type: '기타', color: 'gray' };
+  // dreamitbiz.com 하위 도메인 추출
+  if (d.endsWith('.dreamitbiz.com')) {
+    const sub = d.replace('.dreamitbiz.com', '');
+    return sub || 'www';
+  }
+  // dreamitbiz.com 자체
+  if (d === 'dreamitbiz.com' || d === 'www.dreamitbiz.com') return 'www';
+  // localhost 등 개발환경
+  if (d.includes('localhost') || d.includes('127.0.0.1')) return 'localhost';
+  // 기타 도메인은 그대로
+  return d;
 };
 
-/** 하위 도메인(서비스명) 추출 — 예: kakao.com → kakao, kyonggi.ac.kr → kyonggi */
-const getSubdomain = (domain) => {
-  if (!domain || domain === '기타') return '-';
-  const parts = domain.split('.');
-  return parts[0];
+/** 사이트별 뱃지 색상 */
+const getSiteColor = (siteName) => {
+  const colorMap = {
+    hohai: 'blue',
+    competency: 'green',
+    'ahp-basic': 'purple',
+    www: 'yellow',
+    localhost: 'gray',
+  };
+  return colorMap[siteName] || 'gray';
 };
 
 const AdminUsers = () => {
   const [users, setUsers] = useState([]);
   const [loading, setLoading] = useState(true);
   const [filter, setFilter] = useState('all');
-  const [domainFilter, setDomainFilter] = useState('all');
+  const [siteFilter, setSiteFilter] = useState('all');
 
   useEffect(() => {
     getAllUsers().then((data) => {
@@ -51,16 +51,11 @@ const AdminUsers = () => {
     return provs;
   }, [users]);
 
-  const domains = useMemo(() => {
-    const doms = [...new Set(users.map((u) => getDomain(u.email)))];
-    return doms.sort();
-  }, [users]);
-
-  /** 상위 도메인 유형 목록 (필터용) */
-  const domainTypes = useMemo(() => {
-    const types = [...new Set(users.map((u) => getDomainType(getDomain(u.email)).type))];
-    const order = ['글로벌', '교육기관', '기업', '정부기관', '기관/단체', '한국', '기타'];
-    return order.filter(t => types.includes(t));
+  /** 가입 사이트(하위 도메인) 목록 */
+  const siteNames = useMemo(() => {
+    const names = [...new Set(users.map((u) => getSiteName(u.signup_domain)))];
+    // 미설정('-')은 맨 뒤로
+    return names.filter(n => n !== '-').sort().concat(names.includes('-') ? ['-'] : []);
   }, [users]);
 
   const filtered = useMemo(() => {
@@ -68,17 +63,11 @@ const AdminUsers = () => {
     if (filter !== 'all') {
       list = list.filter((u) => (u.provider || 'email') === filter);
     }
-    if (domainFilter !== 'all') {
-      // domainFilter가 상위 도메인 유형(교육기관 등)인지, 개별 도메인(kakao.com 등)인지 구분
-      const isType = domainTypes.includes(domainFilter);
-      if (isType) {
-        list = list.filter((u) => getDomainType(getDomain(u.email)).type === domainFilter);
-      } else {
-        list = list.filter((u) => getDomain(u.email) === domainFilter);
-      }
+    if (siteFilter !== 'all') {
+      list = list.filter((u) => getSiteName(u.signup_domain) === siteFilter);
     }
     return list;
-  }, [users, filter, domainFilter, domainTypes]);
+  }, [users, filter, siteFilter]);
 
   const columns = [
     { key: 'id', label: 'ID', width: '80px' },
@@ -92,6 +81,7 @@ const AdminUsers = () => {
     {
       key: 'provider',
       label: '가입방법',
+      width: '100px',
       render: (val) => {
         const p = val || 'email';
         const colorMap = { google: 'blue', kakao: 'yellow', email: 'gray' };
@@ -103,24 +93,13 @@ const AdminUsers = () => {
       }
     },
     {
-      key: 'email',
-      label: '하위도메인',
-      width: '110px',
+      key: 'signup_domain',
+      label: '가입 사이트',
+      width: '140px',
       render: (val) => {
-        const d = getDomain(val);
-        const sub = getSubdomain(d);
-        const colorMap = { gmail: 'blue', kakao: 'yellow', naver: 'green', daum: 'yellow', hanmail: 'yellow' };
-        return <span className={`td-badge ${colorMap[sub] || 'gray'}`}>{sub}</span>;
-      }
-    },
-    {
-      key: 'email',
-      label: '상위도메인',
-      width: '100px',
-      render: (val) => {
-        const d = getDomain(val);
-        const info = getDomainType(d);
-        return <span className={`td-badge ${info.color}`}>{info.type}</span>;
+        const name = getSiteName(val);
+        const color = getSiteColor(name);
+        return <span className={`td-badge ${color}`}>{name}</span>;
       }
     },
     {
@@ -135,6 +114,7 @@ const AdminUsers = () => {
       <div className="admin-page-header">
         <h2>회원 관리</h2>
       </div>
+      {/* 가입방법 필터 */}
       <div className="admin-filter-tabs">
         <button className={`admin-filter-tab ${filter === 'all' ? 'active' : ''}`} onClick={() => setFilter('all')}>
           전체<span className="admin-filter-count">({users.length})</span>
@@ -148,18 +128,18 @@ const AdminUsers = () => {
           );
         })}
       </div>
-      {/* 상위 도메인 유형 필터 */}
-      {domainTypes.length > 1 && (
+      {/* 가입 사이트(하위 도메인) 필터 */}
+      {siteNames.length > 1 && (
         <div className="admin-filter-tabs">
-          <button className={`admin-filter-tab ${domainFilter === 'all' ? 'active' : ''}`} onClick={() => setDomainFilter('all')}>
-            전체 도메인<span className="admin-filter-count">({users.filter((u) => filter === 'all' || (u.provider || 'email') === filter).length})</span>
+          <button className={`admin-filter-tab ${siteFilter === 'all' ? 'active' : ''}`} onClick={() => setSiteFilter('all')}>
+            전체 사이트<span className="admin-filter-count">({filtered.length})</span>
           </button>
-          {domainTypes.map((type) => {
-            const count = users.filter((u) => getDomainType(getDomain(u.email)).type === type && (filter === 'all' || (u.provider || 'email') === filter)).length;
+          {siteNames.map((name) => {
+            const count = users.filter((u) => getSiteName(u.signup_domain) === name && (filter === 'all' || (u.provider || 'email') === filter)).length;
             if (count === 0) return null;
             return (
-              <button key={type} className={`admin-filter-tab ${domainFilter === type ? 'active' : ''}`} onClick={() => setDomainFilter(type)}>
-                {type}<span className="admin-filter-count">({count})</span>
+              <button key={name} className={`admin-filter-tab ${siteFilter === name ? 'active' : ''}`} onClick={() => setSiteFilter(name)}>
+                {name === '-' ? '미설정' : name}<span className="admin-filter-count">({count})</span>
               </button>
             );
           })}
@@ -169,7 +149,7 @@ const AdminUsers = () => {
         columns={columns}
         data={filtered}
         loading={loading}
-        searchKeys={['display_name', 'email']}
+        searchKeys={['display_name', 'email', 'signup_domain']}
       />
     </>
   );

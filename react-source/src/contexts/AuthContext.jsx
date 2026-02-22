@@ -1,6 +1,6 @@
 import { createContext, useContext, useState, useEffect, useCallback } from 'react';
 import getSupabase from '../utils/supabase';
-import { getProfile, signOut as authSignOut } from '../utils/auth';
+import { getProfile, updateProfile, signOut as authSignOut } from '../utils/auth';
 
 const AuthContext = createContext();
 
@@ -15,6 +15,17 @@ export const AuthProvider = ({ children }) => {
       return;
     }
     const p = await getProfile(authUser.id);
+    // signup_domain이 없으면 현재 접속 도메인 자동 저장
+    if (p && !p.signup_domain) {
+      const hostname = window.location.hostname;
+      try {
+        const updated = await updateProfile(authUser.id, { signup_domain: hostname });
+        setProfile(updated);
+        return;
+      } catch {
+        // 컬럼 미존재 등 오류 시 무시
+      }
+    }
     setProfile(p);
   }, []);
 
