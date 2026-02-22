@@ -490,6 +490,16 @@
     font-size: 14px;
     margin-top: 16px;
 }
+.checkout-hint {
+    padding: 10px 16px;
+    background: #fffbeb;
+    border: 1px solid #fcd34d;
+    border-left: 4px solid #f59e0b;
+    border-radius: var(--radius-sm);
+    color: #92400e;
+    font-size: 13px;
+    margin-top: 12px;
+}
 
 /* Checkout Summary */
 .checkout-summary {

@@ -27,10 +27,15 @@ const Checkout = () => {
   // Auto-fill form when logged in
   useEffect(() => {
     if (profile || user) {
+      const email = user?.email
+        || user?.user_metadata?.email
+        || user?.identities?.[0]?.identity_data?.email
+        || profile?.email
+        || '';
       setForm(prev => ({
-        name: prev.name || profile?.display_name || '',
-        email: prev.email || user?.email || '',
-        phone: prev.phone
+        name: prev.name || profile?.display_name || user?.user_metadata?.full_name || '',
+        email: prev.email || email,
+        phone: prev.phone || profile?.phone || ''
       }));
     }
   }, [profile, user]);
@@ -229,6 +234,9 @@ const Checkout = () => {
               </div>
 
               {error && <div className="checkout-error">{error}</div>}
+              {!agreed && !error && (
+                <div className="checkout-hint">{isEn ? 'Please agree to the terms to proceed.' : '결제를 진행하려면 약관에 동의해 주세요.'}</div>
+              )}
             </div>
 
             {/* Order Summary Sidebar */}
