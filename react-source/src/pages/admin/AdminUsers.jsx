@@ -3,6 +3,7 @@ import AdminDataTable from '../../components/admin/AdminDataTable';
 import { getAllUsers } from '../../utils/adminStorage';
 
 const PROVIDER_LABELS = { google: 'Google', kakao: 'Kakao', email: 'Email' };
+const ADMIN_EMAILS = ['aebon@kakao.com', 'aebon@kyonggi.ac.kr'];
 
 /** signup_domain에서 사이트 이름 추출 — 예: hohai.dreamitbiz.com → hohai */
 const getSiteName = (domain) => {
@@ -100,6 +101,17 @@ const AdminUsers = () => {
         const name = getSiteName(val);
         const color = getSiteColor(name);
         return <span className={`td-badge ${color}`}>{name}</span>;
+      }
+    },
+    {
+      key: 'role',
+      label: '권한',
+      width: '80px',
+      render: (val, row) => {
+        const isAdmin = val === 'admin' || ADMIN_EMAILS.includes((row.email || '').toLowerCase());
+        return isAdmin
+          ? <span className="td-badge red">관리자</span>
+          : <span className="td-badge gray">일반</span>;
       }
     },
     {
