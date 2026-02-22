@@ -3,6 +3,7 @@ import AdminDataTable from '../../components/admin/AdminDataTable';
 import { getAllOrders } from '../../utils/adminStorage';
 import { updateOrderStatus } from '../../utils/supabase';
 import { useToast } from '../../contexts/ToastContext';
+import { formatDate, formatPrice } from '../../utils/format';
 
 const STATUS_LABELS = { paid: '결제완료', pending: '대기', failed: '실패', cancelled: '취소', refunded: '환불' };
 const STATUS_COLORS = { paid: 'green', pending: 'yellow', failed: 'red', cancelled: 'gray', refunded: 'purple' };
@@ -85,7 +86,7 @@ const AdminOrders = () => {
     { key: 'user_name', label: '주문자', width: '100px', render: (val, row) => val || row.user_email?.split('@')[0] || '-' },
     {
       key: 'total_amount', label: '금액', width: '110px',
-      render: (val) => val != null ? `${Number(val).toLocaleString()}원` : '-'
+      render: (val) => formatPrice(val)
     },
     { key: 'payment_method', label: '결제수단', width: '90px', render: (val) => METHOD_LABELS[val] || val || '-' },
     {
@@ -97,7 +98,7 @@ const AdminOrders = () => {
     },
     {
       key: 'created_at', label: '주문일시', width: '140px',
-      render: (val) => val ? new Date(val).toLocaleString('ko-KR', { year: '2-digit', month: '2-digit', day: '2-digit', hour: '2-digit', minute: '2-digit' }) : '-'
+      render: (val) => formatDate(val)
     }
   ];
 
@@ -116,7 +117,7 @@ const AdminOrders = () => {
               <dt>이메일</dt><dd>{row.user_email || '-'}</dd>
               <dt>전화번호</dt><dd>{row.user_phone || '-'}</dd>
               <dt>결제수단</dt><dd>{METHOD_LABELS[row.payment_method] || row.payment_method || '-'}</dd>
-              <dt>결제금액</dt><dd style={{ fontWeight: 700, color: 'var(--primary-blue)' }}>{Number(row.total_amount || 0).toLocaleString()}원</dd>
+              <dt>결제금액</dt><dd style={{ fontWeight: 700, color: 'var(--primary-blue)' }}>{formatPrice(row.total_amount || 0)}</dd>
               {row.portone_payment_id && <><dt>결제 ID</dt><dd style={{ fontSize: '11px', fontFamily: 'monospace' }}>{row.portone_payment_id}</dd></>}
               {row.paid_at && <><dt>결제일시</dt><dd>{new Date(row.paid_at).toLocaleString('ko-KR')}</dd></>}
               {row.cancelled_at && <><dt>취소일시</dt><dd style={{ color: '#dc2626' }}>{new Date(row.cancelled_at).toLocaleString('ko-KR')}</dd></>}
@@ -143,9 +144,9 @@ const AdminOrders = () => {
                   {items.map((item, i) => (
                     <tr key={i}>
                       <td>{item.product_title}</td>
-                      <td>{Number(item.unit_price || 0).toLocaleString()}원</td>
+                      <td>{formatPrice(item.unit_price || 0)}</td>
                       <td>{item.quantity}</td>
-                      <td>{Number(item.subtotal || 0).toLocaleString()}원</td>
+                      <td>{formatPrice(item.subtotal || 0)}</td>
                     </tr>
                   ))}
                 </tbody>

@@ -19,14 +19,14 @@ const AdminGallery = () => {
 
   useEffect(() => { load(); }, []);
 
-  const handleDelete = async (id) => {
-    if (!window.confirm('정말 삭제하시겠습니까?')) return;
-    const ok = await deleteGalleryItem(id);
-    if (ok) {
-      showToast('갤러리 항목이 삭제되었습니다.', 'success');
+  const handleDelete = async (id, title) => {
+    if (!window.confirm(`"${title}" — 정말 삭제하시겠습니까?`)) return;
+    try {
+      await deleteGalleryItem(id);
+      showToast('삭제되었습니다.', 'success');
       load();
-    } else {
-      showToast('삭제에 실패했습니다.', 'error');
+    } catch (err) {
+      showToast('삭제 실패: ' + err.message, 'error');
     }
   };
 
@@ -47,7 +47,7 @@ const AdminGallery = () => {
       label: '이미지',
       width: '80px',
       render: (val) => val ? (
-        <img src={val} alt="" style={{ width: 48, height: 36, objectFit: 'cover', borderRadius: 4 }} />
+        <img src={val} alt="" style={{ width: 48, height: 36, objectFit: 'cover', borderRadius: 4 }} loading="lazy" onError={(e) => { e.target.style.display = 'none'; }} />
       ) : '-'
     },
     { key: 'title', label: '제목', className: 'td-title' },
@@ -62,7 +62,7 @@ const AdminGallery = () => {
   const actions = (row) => (
     <div className="admin-row-actions">
       <Link to={`/community/gallery/edit/${row.id}`} className="admin-row-btn">수정</Link>
-      <button className="admin-row-btn danger" onClick={() => handleDelete(row.id)}>삭제</button>
+      <button className="admin-row-btn danger" onClick={() => handleDelete(row.id, row.title)}>삭제</button>
     </div>
   );
 

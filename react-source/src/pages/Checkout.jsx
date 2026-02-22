@@ -3,6 +3,7 @@ import { useNavigate } from 'react-router-dom';
 import { useLanguage } from '../contexts/LanguageContext';
 import { useCart } from '../contexts/CartContext';
 import { useAuth } from '../contexts/AuthContext';
+import { useToast } from '../contexts/ToastContext';
 import { createOrder, verifyPayment, updateOrderStatus } from '../utils/supabase';
 import { requestPayment } from '../utils/portone';
 import useAOS from '../hooks/useAOS';
@@ -12,6 +13,7 @@ const Checkout = () => {
   const { language, t } = useLanguage();
   const { cartItems, cartTotal, cartCount, clearCart } = useCart();
   const { user, profile } = useAuth();
+  const { showToast } = useToast();
   const navigate = useNavigate();
   const isEn = language === 'en';
   useAOS();
@@ -65,6 +67,25 @@ const Checkout = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     if (!agreed || processing) return;
+
+    // Form validation
+    const trimmedName = form.name.trim();
+    if (!trimmedName) {
+      showToast(isEn ? 'Please enter your name.' : '이름을 입력해 주세요.', 'error');
+      return;
+    }
+
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    if (!emailRegex.test(form.email)) {
+      showToast(isEn ? 'Please enter a valid email address.' : '올바른 이메일 주소를 입력해 주세요.', 'error');
+      return;
+    }
+
+    const phoneDigits = form.phone.replace(/\D/g, '');
+    if (phoneDigits.length < 10) {
+      showToast(isEn ? 'Please enter a valid phone number (at least 10 digits).' : '올바른 전화번호를 입력해 주세요 (최소 10자리).', 'error');
+      return;
+    }
 
     setProcessing(true);
     setError('');

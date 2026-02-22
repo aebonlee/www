@@ -1,6 +1,7 @@
 import { createContext, useContext, useState, useEffect, useCallback } from 'react';
 import getSupabase from '../utils/supabase';
 import { getProfile, updateProfile, signOut as authSignOut } from '../utils/auth';
+import { ADMIN_EMAILS } from '../config/admin';
 
 const AuthContext = createContext();
 
@@ -68,7 +69,6 @@ export const AuthProvider = ({ children }) => {
     if (user) await loadProfile(user);
   }, [user, loadProfile]);
 
-  const ADMIN_EMAILS = ['aebon@kakao.com', 'aebon@kyonggi.ac.kr'];
   const allEmails = [
     user?.email,
     user?.user_metadata?.email,

@@ -13,6 +13,10 @@ const ImageUpload = ({ value, onChange, folder = 'uploads' }) => {
 
   const handleFile = async (file) => {
     if (!file || !file.type.startsWith('image/')) return;
+    if (file.size > 5 * 1024 * 1024) {
+      showToast('파일 크기는 5MB 이하만 가능합니다.', 'error');
+      return;
+    }
     setUploading(true);
     setProgress(0);
     // Simulate progress since Supabase doesn't provide upload progress

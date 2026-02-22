@@ -917,3 +917,166 @@
     border-color: var(--primary-blue);
     color: #fff;
 }
+
+[data-theme="dark"] .not-found-code { color: var(--primary-blue-light); }
+[data-theme="dark"] .not-found-btn.secondary { background: #2a2a2a; color: #ccc; }
+[data-theme="dark"] .not-found-btn.secondary:hover { background: #333; }
+
+/* ── Admin Components Dark Mode — Gap Fixes ── */
+
+/* Admin page header container */
+[data-theme="dark"] .admin-page-header {
+    border-color: #374151;
+}
+
+/* Admin content area */
+[data-theme="dark"] .admin-content {
+    background: #111827;
+}
+
+/* Order summary label text */
+[data-theme="dark"] .admin-order-summary-label {
+    color: #9CA3AF;
+}
+
+/* Order summary card status variants — softened borders for dark */
+[data-theme="dark"] .admin-order-summary-card.paid {
+    border-left-color: #10B981;
+}
+
+[data-theme="dark"] .admin-order-summary-card.cancelled {
+    border-left-color: #EF4444;
+}
+
+/* Order detail grid background */
+[data-theme="dark"] .admin-order-detail-grid {
+    color: #E5E7EB;
+}
+
+[data-theme="dark"] .admin-order-detail-info {
+    background: transparent;
+}
+
+/* Order item table row hover */
+[data-theme="dark"] .admin-order-item-table tr:hover td {
+    background: rgba(74, 143, 231, 0.06);
+}
+
+/* Cancel form container */
+[data-theme="dark"] .admin-cancel-form {
+    background: transparent;
+    color: #E5E7EB;
+}
+
+[data-theme="dark"] .admin-cancel-input::placeholder {
+    color: #6B7280;
+}
+
+[data-theme="dark"] .admin-cancel-input:focus {
+    border-color: #EF4444;
+    box-shadow: 0 0 0 2px rgba(239, 68, 68, 0.15);
+}
+
+/* Cancel button confirm variant in dark */
+[data-theme="dark"] .admin-cancel-btn.confirm {
+    background: #DC2626;
+    color: #fff;
+}
+
+[data-theme="dark"] .admin-cancel-btn.confirm:hover:not(:disabled) {
+    background: #EF4444;
+}
+
+/* Filter tabs container */
+[data-theme="dark"] .admin-filter-tabs {
+    border-color: #374151;
+}
+
+/* Filter count badge */
+[data-theme="dark"] .admin-filter-count {
+    color: inherit;
+    opacity: 0.7;
+}
+
+/* Stat card icon backgrounds — slightly brighter in dark */
+[data-theme="dark"] .admin-stat-card:hover {
+    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.35);
+    border-color: #4B5563;
+}
+
+/* Order status button dark mode variants */
+[data-theme="dark"] .admin-order-status-btn:hover:not(:disabled) {
+    border-color: var(--primary-blue);
+    color: var(--primary-blue-light);
+    background: rgba(74, 143, 231, 0.08);
+}
+
+[data-theme="dark"] .admin-order-status-btn[data-status="cancelled"] {
+    color: #FCA5A5;
+}
+
+[data-theme="dark"] .admin-order-status-btn[data-status="cancelled"]:hover:not(:disabled) {
+    border-color: #EF4444;
+    color: #FCA5A5;
+    background: rgba(239, 68, 68, 0.1);
+}
+
+[data-theme="dark"] .admin-order-status-btn[data-status="cancelled"].active {
+    background: #DC2626;
+    border-color: #DC2626;
+    color: #fff;
+}
+
+[data-theme="dark"] .admin-order-status-btn[data-status="refunded"] {
+    color: #C4B5FD;
+}
+
+[data-theme="dark"] .admin-order-status-btn[data-status="refunded"]:hover:not(:disabled) {
+    border-color: #8B5CF6;
+    color: #C4B5FD;
+    background: rgba(139, 92, 246, 0.1);
+}
+
+[data-theme="dark"] .admin-order-status-btn[data-status="refunded"].active {
+    background: #7C3AED;
+    border-color: #7C3AED;
+    color: #fff;
+}
+
+/* Admin empty state dark */
+[data-theme="dark"] .admin-empty {
+    color: #6B7280;
+}
+
+[data-theme="dark"] .admin-empty svg {
+    color: #4B5563;
+}
+
+/* Admin add button dark hover glow */
+[data-theme="dark"] .admin-add-btn:hover {
+    box-shadow: 0 4px 12px rgba(74, 143, 231, 0.3);
+}
+
+/* Admin refresh button hover in dark */
+[data-theme="dark"] .admin-refresh-btn:hover {
+    border-color: var(--primary-blue);
+    color: var(--primary-blue-light);
+    background: rgba(74, 143, 231, 0.08);
+}
+
+/* Admin status select focus ring dark */
+[data-theme="dark"] .admin-status-select:focus {
+    border-color: var(--primary-blue);
+    box-shadow: 0 0 0 2px rgba(74, 143, 231, 0.2);
+}
+
+/* Admin table search focus state dark */
+[data-theme="dark"] .admin-table-search:focus-within {
+    border-color: var(--primary-blue);
+    box-shadow: 0 0 0 2px rgba(74, 143, 231, 0.15);
+}
+
+/* Admin loading spinner dark */
+[data-theme="dark"] .admin-loading {
+    color: #6B7280;
+}

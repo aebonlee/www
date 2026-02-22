@@ -27,7 +27,7 @@ export const CartProvider = ({ children }) => {
       if (existing) {
         return prev.map(item =>
           item.id === product.id
-            ? { ...item, quantity: item.quantity + 1 }
+            ? { ...item, quantity: Math.min(item.quantity + 1, 99) }
             : item
         );
       }
@@ -40,7 +40,7 @@ export const CartProvider = ({ children }) => {
   }, []);
 
   const updateQuantity = useCallback((productId, quantity) => {
-    if (quantity < 1) return;
+    if (quantity < 1 || quantity > 99) return;
     setCartItems(prev =>
       prev.map(item =>
         item.id === productId ? { ...item, quantity } : item

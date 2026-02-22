@@ -15,6 +15,8 @@ const OrderHistory = () => {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(false);
   const [expandedId, setExpandedId] = useState(null);
+  const [page, setPage] = useState(1);
+  const PAGE_SIZE = 10;
 
   const loadOrders = useCallback(async () => {
     if (!user) return;
@@ -121,7 +123,11 @@ const OrderHistory = () => {
               </div>
             ) : (
               <div className="order-history-list">
-                {orders.map((order) => {
+                {(() => {
+                  const totalPages = Math.ceil(orders.length / PAGE_SIZE);
+                  const paged = orders.slice((page - 1) * PAGE_SIZE, page * PAGE_SIZE);
+                  return (<>
+                {paged.map((order) => {
                   const isExpanded = expandedId === order.id;
                   const items = order.order_items || [];
                   return (
@@ -179,6 +185,34 @@ const OrderHistory = () => {
                     </div>
                   );
                 })}
+                {totalPages > 1 && (
+                  <div style={{
+                    display: 'flex', justifyContent: 'center', alignItems: 'center',
+                    gap: '16px', marginTop: '24px', padding: '16px 0'
+                  }}>
+                    <button
+                      className="board-btn"
+                      onClick={() => setPage((p) => Math.max(1, p - 1))}
+                      disabled={page === 1}
+                      style={{ opacity: page === 1 ? 0.5 : 1 }}
+                    >
+                      {isEn ? 'Previous' : '이전'}
+                    </button>
+                    <span style={{ fontSize: '14px', color: 'var(--text-secondary)' }}>
+                      {page} / {totalPages}
+                    </span>
+                    <button
+                      className="board-btn"
+                      onClick={() => setPage((p) => Math.min(totalPages, p + 1))}
+                      disabled={page === totalPages}
+                      style={{ opacity: page === totalPages ? 0.5 : 1 }}
+                    >
+                      {isEn ? 'Next' : '다음'}
+                    </button>
+                  </div>
+                )}
+                </>);
+                })()}
               </div>
             )}
 

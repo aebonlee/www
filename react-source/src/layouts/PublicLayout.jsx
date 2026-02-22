@@ -47,6 +47,7 @@ const OrderHistory = lazy(() => import('../pages/OrderHistory'));
 const Syllabus = lazy(() => import('../pages/Syllabus'));
 const SyllabusWrite = lazy(() => import('../pages/SyllabusWrite'));
 const SyllabusDetail = lazy(() => import('../pages/SyllabusDetail'));
+const NotFound = lazy(() => import('../pages/NotFound'));
 
 const Loading = () => (
   <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', minHeight: '60vh' }}>
@@ -112,6 +113,7 @@ const PublicLayout = () => {
             <Route path="/register" element={<Register />} />
             <Route path="/mypage" element={<AuthGuard><MyPage /></AuthGuard>} />
             <Route path="/mypage/orders" element={<AuthGuard><OrderHistory /></AuthGuard>} />
+            <Route path="*" element={<NotFound />} />
           </Routes>
         </Suspense>
       </main>

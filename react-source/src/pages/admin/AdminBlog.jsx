@@ -19,14 +19,14 @@ const AdminBlog = () => {
 
   useEffect(() => { load(); }, []);
 
-  const handleDelete = async (id) => {
-    if (!window.confirm('정말 삭제하시겠습니까?')) return;
-    const ok = await deleteBlogPost(id);
-    if (ok) {
-      showToast('블로그 글이 삭제되었습니다.', 'success');
+  const handleDelete = async (id, title) => {
+    if (!window.confirm(`"${title}" — 정말 삭제하시겠습니까?`)) return;
+    try {
+      await deleteBlogPost(id);
+      showToast('삭제되었습니다.', 'success');
       load();
-    } else {
-      showToast('삭제에 실패했습니다.', 'error');
+    } catch (err) {
+      showToast('삭제 실패: ' + err.message, 'error');
     }
   };
 
@@ -55,7 +55,7 @@ const AdminBlog = () => {
   const actions = (row) => (
     <div className="admin-row-actions">
       <Link to={`/community/blog/edit/${row.id}`} className="admin-row-btn">수정</Link>
-      <button className="admin-row-btn danger" onClick={() => handleDelete(row.id)}>삭제</button>
+      <button className="admin-row-btn danger" onClick={() => handleDelete(row.id, row.title)}>삭제</button>
     </div>
   );
 

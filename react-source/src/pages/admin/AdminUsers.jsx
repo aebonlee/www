@@ -1,9 +1,9 @@
 import { useState, useEffect, useMemo } from 'react';
 import AdminDataTable from '../../components/admin/AdminDataTable';
 import { getAllUsers } from '../../utils/adminStorage';
+import { ADMIN_EMAILS } from '../../config/admin';
 
 const PROVIDER_LABELS = { google: 'Google', kakao: 'Kakao', email: 'Email' };
-const ADMIN_EMAILS = ['aebon@kakao.com', 'aebon@kyonggi.ac.kr'];
 
 /** signup_domain에서 사이트 이름 추출 — 예: hohai.dreamitbiz.com → hohai */
 const getSiteName = (domain) => {

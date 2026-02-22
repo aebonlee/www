@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useCallback } from 'react';
 import { Link } from 'react-router-dom';
 import AdminStatCard from '../../components/admin/AdminStatCard';
 import { getDashboardCounts, getRecentOrders, getPaymentStats } from '../../utils/adminStorage';
@@ -11,28 +11,30 @@ const AdminDashboard = () => {
   const [recentPosts, setRecentPosts] = useState([]);
   const [loading, setLoading] = useState(true);
 
-  useEffect(() => {
-    const load = async () => {
-      const [c, pay, orders, blogs, boards] = await Promise.all([
-        getDashboardCounts(),
-        getPaymentStats(),
-        getRecentOrders(5),
-        getBlogPosts(),
-        getBoardPosts()
-      ]);
-      setPayment(pay);
-      setCounts(c);
-      setRecentOrders(orders);
-      // Merge and sort recent posts
-      const allPosts = [
-        ...blogs.slice(0, 5).map((p) => ({ ...p, type: '블로그' })),
-        ...boards.slice(0, 5).map((p) => ({ ...p, type: '게시판' }))
-      ].sort((a, b) => (b.id || 0) - (a.id || 0)).slice(0, 5);
-      setRecentPosts(allPosts);
-      setLoading(false);
-    };
-    load();
+  const load = useCallback(async () => {
+    setLoading(true);
+    const [c, pay, orders, blogs, boards] = await Promise.all([
+      getDashboardCounts(),
+      getPaymentStats(),
+      getRecentOrders(5),
+      getBlogPosts(),
+      getBoardPosts()
+    ]);
+    setPayment(pay);
+    setCounts(c);
+    setRecentOrders(orders);
+    // Merge and sort recent posts
+    const allPosts = [
+      ...blogs.slice(0, 5).map((p) => ({ ...p, type: '블로그' })),
+      ...boards.slice(0, 5).map((p) => ({ ...p, type: '게시판' }))
+    ].sort((a, b) => (b.id || 0) - (a.id || 0)).slice(0, 5);
+    setRecentPosts(allPosts);
+    setLoading(false);
   }, []);
+
+  useEffect(() => {
+    load();
+  }, [load]);
 
   if (loading || !counts) {
     return <div className="admin-loading"><div className="loading-spinner"></div></div>;
@@ -88,6 +90,13 @@ const AdminDashboard = () => {
     <>
       <div className="admin-page-header">
         <h2>대시보드</h2>
+        <button className="admin-refresh-btn" onClick={load} disabled={loading}>
+          <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" strokeWidth="2">
+            <polyline points="23 4 23 10 17 10" /><polyline points="1 20 1 14 7 14" />
+            <path d="M3.51 9a9 9 0 0 1 14.85-3.36L23 10M1 14l4.64 4.36A9 9 0 0 0 20.49 15" />
+          </svg>
+          새로고침
+        </button>
       </div>
 
       <div className="admin-stats">

@@ -27,8 +27,8 @@ const Register = () => {
       setError(t('auth.passwordMismatch'));
       return;
     }
-    if (form.password.length < 6) {
-      setError(t('auth.passwordTooShort'));
+    if (!/^(?=.*[a-zA-Z])(?=.*\d).{8,}$/.test(form.password)) {
+      setError('비밀번호는 8자 이상, 영문과 숫자를 포함해야 합니다.');
       return;
     }
     setLoading(true);
@@ -105,7 +105,7 @@ const Register = () => {
                 value={form.password}
                 onChange={e => setForm({ ...form, password: e.target.value })}
                 placeholder={t('auth.passwordPlaceholder')}
-                minLength={6}
+                minLength={8}
                 required
               />
             </div>

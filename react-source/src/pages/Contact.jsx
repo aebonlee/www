@@ -2,10 +2,13 @@ import { useState } from 'react';
 import { useLanguage } from '../contexts/LanguageContext';
 import useAOS from '../hooks/useAOS';
 import SEOHead from '../components/SEOHead';
+import getSupabase from '../utils/supabase';
+import { useToast } from '../contexts/ToastContext';
 
 const Contact = () => {
   const { t } = useLanguage();
   useAOS();
+  const { showToast } = useToast();
   const [formData, setFormData] = useState({
     name: '',
     email: '',
@@ -19,11 +22,44 @@ const Contact = () => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    setSubmitStatus('success');
-    setFormData({ name: '', email: '', phone: '', subject: '', message: '' });
-    setTimeout(() => setSubmitStatus(null), 5000);
+    const client = getSupabase();
+
+    if (client) {
+      try {
+        const { error } = await client
+          .from('contact_messages')
+          .insert({
+            name: formData.name,
+            email: formData.email,
+            phone: formData.phone,
+            subject: formData.subject,
+            message: formData.message
+          });
+
+        if (error) throw error;
+
+        showToast('문의가 성공적으로 전송되었습니다.', 'success');
+        setSubmitStatus('success');
+        setFormData({ name: '', email: '', phone: '', subject: '', message: '' });
+        setTimeout(() => setSubmitStatus(null), 5000);
+      } catch (err) {
+        console.error('Contact form error:', err);
+        showToast('문의 전송에 실패했습니다. 다시 시도해주세요.', 'error');
+      }
+    } else {
+      // Fallback to mailto link when Supabase is not available
+      const mailtoSubject = encodeURIComponent(formData.subject);
+      const mailtoBody = encodeURIComponent(
+        `이름: ${formData.name}\n이메일: ${formData.email}\n전화: ${formData.phone}\n\n${formData.message}`
+      );
+      window.location.href = `mailto:aebon@dreamitbiz.com?subject=${mailtoSubject}&body=${mailtoBody}`;
+      showToast('이메일 클라이언트로 연결합니다.', 'success');
+      setSubmitStatus('success');
+      setFormData({ name: '', email: '', phone: '', subject: '', message: '' });
+      setTimeout(() => setSubmitStatus(null), 5000);
+    }
   };
 
   return (

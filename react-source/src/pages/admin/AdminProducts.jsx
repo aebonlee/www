@@ -1,7 +1,7 @@
 import { useState, useEffect, useMemo } from 'react';
 import { Link } from 'react-router-dom';
 import AdminDataTable from '../../components/admin/AdminDataTable';
-import { getProducts, toggleSoldOut, updateProduct } from '../../utils/productStorage';
+import { getProducts, toggleSoldOut, updateProduct, deleteProduct } from '../../utils/productStorage';
 import { useToast } from '../../contexts/ToastContext';
 
 const CATEGORY_LABELS = { book: '도서', ebook: '전자출판', periodical: '간행물', course: '강좌' };
@@ -28,6 +28,17 @@ const AdminProducts = () => {
       load();
     } catch {
       showToast('변경에 실패했습니다.', 'error');
+    }
+  };
+
+  const handleDelete = async (id, title) => {
+    if (!window.confirm(`"${title}" 상품을 삭제하시겠습니까?`)) return;
+    try {
+      await deleteProduct(id);
+      showToast('삭제되었습니다.', 'success');
+      load();
+    } catch (err) {
+      showToast('삭제 실패: ' + err.message, 'error');
     }
   };
 
@@ -58,7 +69,7 @@ const AdminProducts = () => {
       label: '이미지',
       width: '80px',
       render: (val) => val ? (
-        <img src={val} alt="" style={{ width: 48, height: 36, objectFit: 'cover', borderRadius: 4 }} />
+        <img src={val} alt="" style={{ width: 48, height: 36, objectFit: 'cover', borderRadius: 4 }} loading="lazy" onError={(e) => { e.target.style.display = 'none'; }} />
       ) : '-'
     },
     { key: 'title', label: '상품명', className: 'td-title' },
@@ -102,6 +113,7 @@ const AdminProducts = () => {
   const actions = (row) => (
     <div className="admin-row-actions">
       <Link to={`/shop/product/edit/${row.id}`} className="admin-row-btn">수정</Link>
+      <button className="admin-row-btn danger" onClick={() => handleDelete(row.id, row.title)}>삭제</button>
     </div>
   );
 
