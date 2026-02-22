@@ -58,7 +58,11 @@ export const AuthProvider = ({ children }) => {
   }, [user, loadProfile]);
 
   const ADMIN_EMAILS = ['aebon@kakao.com', 'aebon@kyonggi.ac.kr'];
-  const isAdmin = !!(user?.email && ADMIN_EMAILS.includes(user.email));
+  const userEmail = user?.email
+    || user?.user_metadata?.email
+    || profile?.email
+    || '';
+  const isAdmin = !!(userEmail && ADMIN_EMAILS.includes(userEmail.toLowerCase()));
   const isLoggedIn = !!user;
 
   return (
