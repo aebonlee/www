@@ -14,6 +14,7 @@ const OrderHistory = () => {
   const [orders, setOrders] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(false);
+  const [expandedId, setExpandedId] = useState(null);
 
   const loadOrders = useCallback(async () => {
     if (!user) return;
@@ -37,8 +38,8 @@ const OrderHistory = () => {
 
   const formatPrice = (price) => {
     return isEn
-      ? `₩${price?.toLocaleString()}`
-      : `${price?.toLocaleString()}${t('shop.currency')}`;
+      ? `₩${Number(price || 0).toLocaleString()}`
+      : `${Number(price || 0).toLocaleString()}${t('shop.currency')}`;
   };
 
   const statusBadge = (status) => {
@@ -52,6 +53,12 @@ const OrderHistory = () => {
         {labels[status] || status}
       </span>
     );
+  };
+
+  const getMethodLabel = (method) => {
+    if (method === 'card') return isEn ? 'Credit Card' : '카드결제';
+    if (method === 'transfer') return isEn ? 'Bank Transfer' : '계좌이체';
+    return method || '-';
   };
 
   return (
@@ -96,43 +103,76 @@ const OrderHistory = () => {
               </div>
             ) : orders.length === 0 ? (
               <div style={{ textAlign: 'center', padding: '60px 0' }}>
+                <div style={{
+                  width: '56px', height: '56px', borderRadius: '50%',
+                  background: 'rgba(0, 70, 200, 0.08)', display: 'flex',
+                  alignItems: 'center', justifyContent: 'center', margin: '0 auto 16px'
+                }}>
+                  <svg viewBox="0 0 24 24" width="28" height="28" fill="none" stroke="var(--primary-blue)" strokeWidth="2">
+                    <rect x="2" y="3" width="20" height="18" rx="2" />
+                    <line x1="2" y1="9" x2="22" y2="9" />
+                    <line x1="7" y1="15" x2="11" y2="15" />
+                  </svg>
+                </div>
                 <p style={{ color: 'var(--text-light)', marginBottom: '24px' }}>{t('auth.noOrders')}</p>
                 <Link to="/shop" className="btn btn-primary">{t('order.backToShop')}</Link>
               </div>
             ) : (
               <div className="order-history-list">
-                {orders.map((order) => (
-                  <div key={order.id} className="order-history-card">
-                    <div className="order-history-header">
-                      <div>
-                        <span className="order-info-label">{t('order.orderNumber')}</span>
-                        <span className="order-info-value" style={{ marginLeft: '8px' }}>
-                          {order.order_number}
-                        </span>
+                {orders.map((order) => {
+                  const isExpanded = expandedId === order.id;
+                  const items = order.order_items || [];
+                  return (
+                    <div
+                      key={order.id}
+                      className="order-history-card"
+                      style={{ cursor: items.length > 0 ? 'pointer' : 'default' }}
+                      onClick={() => items.length > 0 && setExpandedId(isExpanded ? null : order.id)}
+                    >
+                      <div className="order-history-header">
+                        <div>
+                          <span className="order-info-label">{t('order.orderNumber')}</span>
+                          <span className="order-info-value" style={{ marginLeft: '8px' }}>
+                            {order.order_number}
+                          </span>
+                        </div>
+                        {statusBadge(order.payment_status)}
                       </div>
-                      {statusBadge(order.payment_status)}
-                    </div>
-                    <div className="order-history-meta">
-                      <span>{t('auth.orderDate')}: {new Date(order.created_at).toLocaleDateString()}</span>
-                      <span>{t('auth.orderAmount')}: {formatPrice(order.total_amount)}</span>
-                    </div>
-                    {order.order_items && order.order_items.length > 0 && (
-                      <div className="order-history-items">
-                        {order.order_items.map((item, idx) => (
-                          <div key={idx} className="order-history-item">
-                            <span>{item.product_title} {item.quantity > 1 ? `× ${item.quantity}` : ''}</span>
-                            <span>{formatPrice(item.subtotal)}</span>
-                          </div>
-                        ))}
+                      <div className="order-history-meta">
+                        <span>{isEn ? 'Date' : '주문일'}: {new Date(order.created_at).toLocaleDateString('ko-KR')}</span>
+                        <span>{isEn ? 'Method' : '결제수단'}: {getMethodLabel(order.payment_method)}</span>
+                        <span>{isEn ? 'Amount' : '결제금액'}: {formatPrice(order.total_amount)}</span>
                       </div>
-                    )}
-                  </div>
-                ))}
+                      {isExpanded && items.length > 0 && (
+                        <div className="order-history-items">
+                          {items.map((item, idx) => (
+                            <div key={idx} className="order-history-item">
+                              <span>{item.product_title} {item.quantity > 1 ? `× ${item.quantity}` : ''}</span>
+                              <span>{formatPrice(item.subtotal)}</span>
+                            </div>
+                          ))}
+                        </div>
+                      )}
+                      {items.length > 0 && (
+                        <div style={{
+                          textAlign: 'center', paddingTop: '8px',
+                          fontSize: '12px', color: 'var(--text-light)'
+                        }}>
+                          {isExpanded
+                            ? (isEn ? '▲ Collapse' : '▲ 접기')
+                            : (isEn ? '▼ View details' : '▼ 상세보기')
+                          }
+                        </div>
+                      )}
+                    </div>
+                  );
+                })}
               </div>
             )}
 
             <div style={{ textAlign: 'center', marginTop: '32px' }}>
-              <Link to="/mypage" className="board-btn">{t('auth.myPage')}</Link>
+              <Link to="/mypage" className="board-btn" style={{ marginRight: '12px' }}>{t('auth.myPage')}</Link>
+              <Link to="/shop" className="board-btn">{t('order.backToShop')}</Link>
             </div>
           </div>
         </div>

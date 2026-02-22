@@ -86,13 +86,16 @@ export const getOrderByNumber = async (orderNumber) => {
     return orders.find(o => o.order_number === orderNumber) || null;
   }
 
-  const { data: order, error } = await client
+  const { data: orders, error } = await client
     .from('orders')
     .select('*')
     .eq('order_number', orderNumber)
-    .single();
+    .limit(1);
 
   if (error) throw error;
+  if (!orders || orders.length === 0) return null;
+
+  const order = orders[0];
 
   // Fetch order items
   const { data: items } = await client

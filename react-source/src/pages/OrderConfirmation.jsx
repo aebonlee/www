@@ -1,13 +1,16 @@
 import { useState, useEffect } from 'react';
-import { Link, useSearchParams } from 'react-router-dom';
+import { Link, useSearchParams, useLocation } from 'react-router-dom';
 import { useLanguage } from '../contexts/LanguageContext';
+import { useAuth } from '../contexts/AuthContext';
 import { getOrderByNumber } from '../utils/supabase';
 import useAOS from '../hooks/useAOS';
 import SEOHead from '../components/SEOHead';
 
 const OrderConfirmation = () => {
   const { language, t } = useLanguage();
+  const { user } = useAuth();
   const [searchParams] = useSearchParams();
+  const location = useLocation();
   const orderNumber = searchParams.get('orderNumber');
   const isEn = language === 'en';
   const [order, setOrder] = useState(null);
@@ -22,21 +25,43 @@ const OrderConfirmation = () => {
         setLoading(false);
         return;
       }
+
+      // Try fetching from Supabase first
       try {
         const data = await getOrderByNumber(orderNumber);
-        setOrder(data);
+        if (data) {
+          setOrder(data);
+          setLoading(false);
+          return;
+        }
       } catch (err) {
-        console.error('Failed to fetch order:', err);
+        console.warn('Failed to fetch order from DB:', err);
       }
+
+      // Fallback: use navigation state passed from Checkout
+      if (location.state?.orderNumber) {
+        const s = location.state;
+        setOrder({
+          order_number: s.orderNumber,
+          user_name: s.userName,
+          user_email: s.userEmail,
+          total_amount: s.totalAmount,
+          payment_method: s.paymentMethod,
+          payment_status: 'paid',
+          paid_at: s.paidAt,
+          items: s.items || []
+        });
+      }
+
       setLoading(false);
     };
     fetchOrder();
-  }, [orderNumber]);
+  }, [orderNumber, location.state]);
 
   const formatPrice = (price) => {
     return isEn
-      ? `₩${price.toLocaleString()}`
-      : `${price.toLocaleString()}${t('shop.currency')}`;
+      ? `₩${Number(price).toLocaleString()}`
+      : `${Number(price).toLocaleString()}${t('shop.currency')}`;
   };
 
   const getStatusLabel = (status) => {
@@ -46,6 +71,12 @@ const OrderConfirmation = () => {
       case 'failed': return t('order.failed');
       default: return status;
     }
+  };
+
+  const getMethodLabel = (method) => {
+    if (method === 'card') return isEn ? 'Credit Card' : '카드결제';
+    if (method === 'transfer') return isEn ? 'Bank Transfer' : '계좌이체';
+    return method;
   };
 
   if (loading) {
@@ -78,19 +109,43 @@ const OrderConfirmation = () => {
             </div>
             <h2>{t('order.success')}</h2>
 
-            {orderNumber && (
+            {(orderNumber || order) && (
               <div className="order-info-box">
                 <div className="order-info-row">
                   <span className="order-info-label">{t('order.orderNumber')}</span>
-                  <span className="order-info-value">{orderNumber}</span>
+                  <span className="order-info-value">{orderNumber || order?.order_number}</span>
                 </div>
                 {order && (
-                  <div className="order-info-row">
-                    <span className="order-info-label">{t('order.paymentStatus')}</span>
-                    <span className={`order-status-badge ${order.payment_status || 'paid'}`}>
-                      {getStatusLabel(order.payment_status || 'paid')}
-                    </span>
-                  </div>
+                  <>
+                    <div className="order-info-row">
+                      <span className="order-info-label">{t('order.paymentStatus')}</span>
+                      <span className={`order-status-badge ${order.payment_status || 'paid'}`}>
+                        {getStatusLabel(order.payment_status || 'paid')}
+                      </span>
+                    </div>
+                    <div className="order-info-row">
+                      <span className="order-info-label">{isEn ? 'Payment Method' : '결제수단'}</span>
+                      <span className="order-info-value" style={{ fontFamily: 'inherit', fontSize: '14px' }}>
+                        {getMethodLabel(order.payment_method)}
+                      </span>
+                    </div>
+                    {order.user_name && (
+                      <div className="order-info-row">
+                        <span className="order-info-label">{isEn ? 'Customer' : '주문자'}</span>
+                        <span className="order-info-value" style={{ fontFamily: 'inherit', fontSize: '14px' }}>
+                          {order.user_name}
+                        </span>
+                      </div>
+                    )}
+                    {order.paid_at && (
+                      <div className="order-info-row">
+                        <span className="order-info-label">{isEn ? 'Payment Date' : '결제일시'}</span>
+                        <span className="order-info-value" style={{ fontFamily: 'inherit', fontSize: '14px' }}>
+                          {new Date(order.paid_at).toLocaleString('ko-KR')}
+                        </span>
+                      </div>
+                    )}
+                  </>
                 )}
               </div>
             )}
@@ -128,7 +183,14 @@ const OrderConfirmation = () => {
             )}
 
             <div className="order-actions">
-              <Link to="/shop" className="btn btn-primary">{t('order.backToShop')}</Link>
+              {user && (
+                <Link to="/mypage/orders" className="btn btn-primary">
+                  {isEn ? 'Order History' : '주문 이력'}
+                </Link>
+              )}
+              <Link to="/shop" className={user ? 'btn btn-secondary' : 'btn btn-primary'}>
+                {t('order.backToShop')}
+              </Link>
               <Link to="/" className="btn btn-secondary">{t('order.backToHome')}</Link>
             </div>
           </div>

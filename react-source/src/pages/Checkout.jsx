@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useLanguage } from '../contexts/LanguageContext';
 import { useCart } from '../contexts/CartContext';
@@ -21,6 +21,7 @@ const Checkout = () => {
   const [agreed, setAgreed] = useState(false);
   const [processing, setProcessing] = useState(false);
   const [error, setError] = useState('');
+  const paymentDone = useRef(false);
 
   useEffect(() => { window.scrollTo(0, 0); }, []);
 
@@ -41,7 +42,7 @@ const Checkout = () => {
   }, [profile, user]);
 
   useEffect(() => {
-    if (cartItems.length === 0) {
+    if (cartItems.length === 0 && !paymentDone.current) {
       navigate('/cart');
     }
   }, [cartItems, navigate]);
@@ -128,8 +129,24 @@ const Checkout = () => {
       }
 
       // 4. Payment successful - clear cart and redirect
+      paymentDone.current = true;
+      const confirmState = {
+        orderNumber,
+        userName: form.name,
+        userEmail: form.email,
+        totalAmount: cartTotal,
+        paymentMethod,
+        paymentId: paymentResult.paymentId,
+        items: cartItems.map(item => ({
+          product_title: isEn ? item.titleEn : item.title,
+          quantity: item.quantity,
+          unit_price: item.price,
+          subtotal: item.price * item.quantity
+        })),
+        paidAt: new Date().toISOString()
+      };
       clearCart();
-      navigate(`/order-confirmation?orderNumber=${orderNumber}`);
+      navigate(`/order-confirmation?orderNumber=${orderNumber}`, { state: confirmState });
 
     } catch (err) {
       console.error('Checkout error:', err);
@@ -138,7 +155,7 @@ const Checkout = () => {
     }
   };
 
-  if (cartItems.length === 0) return null;
+  if (cartItems.length === 0 && !paymentDone.current) return null;
 
   return (
     <>
