@@ -58,11 +58,13 @@ export const AuthProvider = ({ children }) => {
   }, [user, loadProfile]);
 
   const ADMIN_EMAILS = ['aebon@kakao.com', 'aebon@kyonggi.ac.kr'];
-  const userEmail = user?.email
-    || user?.user_metadata?.email
-    || profile?.email
-    || '';
-  const isAdmin = !!(userEmail && ADMIN_EMAILS.includes(userEmail.toLowerCase()));
+  const allEmails = [
+    user?.email,
+    user?.user_metadata?.email,
+    user?.identities?.[0]?.identity_data?.email,
+    profile?.email,
+  ].filter(Boolean).map((e) => e.toLowerCase());
+  const isAdmin = allEmails.some((e) => ADMIN_EMAILS.includes(e));
   const isLoggedIn = !!user;
 
   return (
