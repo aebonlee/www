@@ -31,14 +31,16 @@ const AdminOrders = () => {
     try {
       await updateOrderStatus(orderId, newStatus, null, memo);
       showToast('주문 상태가 변경되었습니다.', 'success');
+      setDetail(null);
       await load();
-      // Update detail panel if open
-      if (detail?.id === orderId) {
-        const updated = orders.find(o => o.id === orderId);
-        if (updated) setDetail({ ...updated, payment_status: newStatus, cancel_reason: memo || updated.cancel_reason });
+    } catch (err) {
+      const msg = err?.message || '';
+      if (msg.includes('UPDATE_NO_ROWS')) {
+        showToast('업데이트 권한 없음 — Supabase orders 테이블에 UPDATE 정책을 추가하세요.', 'error');
+      } else {
+        showToast(`상태 변경 실패: ${msg || '알 수 없는 오류'}`, 'error');
       }
-    } catch {
-      showToast('상태 변경에 실패했습니다.', 'error');
+      console.error('Order status update error:', err);
     }
     setUpdating(false);
   };

@@ -143,6 +143,8 @@ export const updateOrderStatus = async (orderId, status, paymentId, cancelReason
   const extras = {};
   if (paymentId) extras.portone_payment_id = paymentId;
 
+  let result = null;
+
   try {
     const { data, error } = await client
       .from('orders')
@@ -151,7 +153,7 @@ export const updateOrderStatus = async (orderId, status, paymentId, cancelReason
       .select();
 
     if (error) throw error;
-    return data?.[0] || null;
+    result = data;
   } catch {
     // Fallback: update without optional columns
     const { data, error } = await client
@@ -161,8 +163,14 @@ export const updateOrderStatus = async (orderId, status, paymentId, cancelReason
       .select();
 
     if (error) throw error;
-    return data?.[0] || null;
+    result = data;
   }
+
+  if (!result || result.length === 0) {
+    throw new Error('UPDATE_NO_ROWS: 주문 업데이트 권한이 없거나 해당 주문을 찾을 수 없습니다. Supabase orders 테이블의 UPDATE RLS 정책을 확인하세요.');
+  }
+
+  return result[0];
 };
 
 /**
