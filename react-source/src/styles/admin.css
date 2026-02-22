@@ -341,6 +341,10 @@
   line-height: 1.2;
 }
 
+.stat-value.stat-value-sm {
+  font-size: 18px;
+}
+
 .stat-label {
   font-size: 13px;
   color: var(--text-secondary);
@@ -1142,6 +1146,10 @@
 
   .stat-value {
     font-size: 22px;
+  }
+
+  .stat-value.stat-value-sm {
+    font-size: 15px;
   }
 
   .admin-table-toolbar {
