@@ -1,59 +1,74 @@
 /**
- * PortOne V2 Payment Utility
+ * PortOne V1 (iamport) Payment Utility
  * KG이니시스 경유 카드결제/계좌이체
  */
 
-const STORE_ID = import.meta.env.VITE_PORTONE_STORE_ID;
-const CHANNEL_KEY = import.meta.env.VITE_PORTONE_CHANNEL_KEY;
+const IMP_CODE = import.meta.env.VITE_IMP_CODE;
+const PG_PROVIDER = import.meta.env.VITE_PG_PROVIDER;
+
+let initialized = false;
+
+function getIMP() {
+  if (!window.IMP) {
+    console.error('iamport SDK not loaded');
+    return null;
+  }
+  if (!initialized && IMP_CODE) {
+    window.IMP.init(IMP_CODE);
+    initialized = true;
+  }
+  return window.IMP;
+}
 
 /**
- * Request payment via PortOne V2 SDK
+ * Request payment via PortOne V1 SDK
  * @param {Object} params
- * @param {string} params.orderId - Order ID (UUID or order number)
+ * @param {string} params.orderId - Merchant UID (order number)
  * @param {string} params.orderName - Display name for the order
  * @param {number} params.totalAmount - Total amount in KRW
  * @param {string} params.payMethod - 'CARD' or 'TRANSFER'
  * @param {Object} params.customer - { fullName, email, phoneNumber }
  * @returns {Promise<Object>} Payment result
  */
-export const requestPayment = async ({ orderId, orderName, totalAmount, payMethod, customer }) => {
-  // Check if PortOne SDK is available
-  if (!STORE_ID || !CHANNEL_KEY) {
-    console.warn('PortOne credentials not configured. Running in demo mode.');
-    // Demo mode: simulate successful payment
-    return {
-      paymentId: `demo-pay-${Date.now()}`,
-      txId: `demo-tx-${Date.now()}`
-    };
-  }
+export const requestPayment = ({ orderId, orderName, totalAmount, payMethod, customer }) => {
+  return new Promise((resolve) => {
+    const IMP = getIMP();
 
-  try {
-    // Dynamic import of PortOne SDK
-    const PortOne = await import('@portone/browser-sdk/v2');
+    if (!IMP || !IMP_CODE) {
+      console.warn('PortOne credentials not configured. Running in demo mode.');
+      resolve({
+        paymentId: `demo-pay-${Date.now()}`,
+        txId: `demo-tx-${Date.now()}`
+      });
+      return;
+    }
 
-    const paymentId = `payment-${crypto.randomUUID()}`;
+    const payMethodMap = { CARD: 'card', TRANSFER: 'trans' };
 
-    const response = await PortOne.requestPayment({
-      storeId: STORE_ID,
-      channelKey: CHANNEL_KEY,
-      paymentId,
-      orderName,
-      totalAmount,
-      currency: 'CURRENCY_KRW',
-      payMethod,
-      customer: {
-        fullName: customer.fullName,
-        email: customer.email,
-        phoneNumber: customer.phoneNumber,
+    IMP.request_pay(
+      {
+        pg: PG_PROVIDER,
+        pay_method: payMethodMap[payMethod] || 'card',
+        merchant_uid: `order_${orderId}_${Date.now()}`,
+        name: orderName,
+        amount: totalAmount,
+        buyer_email: customer.email,
+        buyer_name: customer.fullName,
+        buyer_tel: customer.phoneNumber,
       },
-    });
-
-    return response;
-  } catch (err) {
-    console.error('PortOne payment error:', err);
-    return {
-      code: 'PAYMENT_ERROR',
-      message: err.message || 'Payment request failed'
-    };
-  }
+      (response) => {
+        if (response.success) {
+          resolve({
+            paymentId: response.imp_uid,
+            txId: response.merchant_uid,
+          });
+        } else {
+          resolve({
+            code: response.error_code || 'PAYMENT_FAILED',
+            message: response.error_msg || '결제가 취소되었습니다.',
+          });
+        }
+      }
+    );
+  });
 };
