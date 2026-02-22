@@ -116,12 +116,15 @@ const Checkout = () => {
         return;
       }
 
-      // 3. Verify payment and update order status
+      // 3. Verify payment and update order status (non-blocking)
       try {
         await verifyPayment(paymentResult.paymentId, orderId);
       } catch {
-        // Fallback: directly update order status
-        await updateOrderStatus(orderId, 'paid', paymentResult.paymentId);
+        try {
+          await updateOrderStatus(orderId, 'paid', paymentResult.paymentId);
+        } catch (updateErr) {
+          console.warn('Order status update failed (payment was successful):', updateErr);
+        }
       }
 
       // 4. Payment successful - clear cart and redirect

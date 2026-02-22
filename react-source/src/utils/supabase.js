@@ -122,19 +122,29 @@ export const updateOrderStatus = async (orderId, status, paymentId) => {
     return orders[idx];
   }
 
-  const { data, error } = await client
-    .from('orders')
-    .update({
-      payment_status: status,
-      portone_payment_id: paymentId,
-      ...(status === 'paid' ? { paid_at: new Date().toISOString() } : {})
-    })
-    .eq('id', orderId)
-    .select()
-    .single();
+  const updatePayload = { payment_status: status };
+  if (status === 'paid') updatePayload.paid_at = new Date().toISOString();
 
-  if (error) throw error;
-  return data;
+  // portone_payment_id column may not exist yet — try with it, fall back without
+  try {
+    const { data, error } = await client
+      .from('orders')
+      .update({ ...updatePayload, portone_payment_id: paymentId })
+      .eq('id', orderId)
+      .select();
+
+    if (error) throw error;
+    return data?.[0] || null;
+  } catch {
+    const { data, error } = await client
+      .from('orders')
+      .update(updatePayload)
+      .eq('id', orderId)
+      .select();
+
+    if (error) throw error;
+    return data?.[0] || null;
+  }
 };
 
 /**
