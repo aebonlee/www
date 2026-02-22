@@ -74,6 +74,25 @@ export async function getAllOrders() {
   return data || [];
 }
 
+/** 결제 통계 (결제완료 건수 + 총 금액) */
+export async function getPaymentStats() {
+  const client = getSupabase();
+  if (!client) return { paidCount: 0, totalAmount: 0 };
+  const { data, error } = await client
+    .from('orders')
+    .select('total_amount')
+    .eq('payment_status', 'paid');
+  if (error) {
+    console.error('getPaymentStats error:', error);
+    return { paidCount: 0, totalAmount: 0 };
+  }
+  const rows = data || [];
+  return {
+    paidCount: rows.length,
+    totalAmount: rows.reduce((sum, r) => sum + (Number(r.total_amount) || 0), 0)
+  };
+}
+
 /** 최근 주문 N건 */
 export async function getRecentOrders(limit = 5) {
   const client = getSupabase();

@@ -1,23 +1,26 @@
 import { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import AdminStatCard from '../../components/admin/AdminStatCard';
-import { getDashboardCounts, getRecentOrders } from '../../utils/adminStorage';
+import { getDashboardCounts, getRecentOrders, getPaymentStats } from '../../utils/adminStorage';
 import { getBlogPosts, getBoardPosts } from '../../utils/boardStorage';
 
 const AdminDashboard = () => {
   const [counts, setCounts] = useState(null);
+  const [payment, setPayment] = useState({ paidCount: 0, totalAmount: 0 });
   const [recentOrders, setRecentOrders] = useState([]);
   const [recentPosts, setRecentPosts] = useState([]);
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
     const load = async () => {
-      const [c, orders, blogs, boards] = await Promise.all([
+      const [c, pay, orders, blogs, boards] = await Promise.all([
         getDashboardCounts(),
+        getPaymentStats(),
         getRecentOrders(5),
         getBlogPosts(),
         getBoardPosts()
       ]);
+      setPayment(pay);
       setCounts(c);
       setRecentOrders(orders);
       // Merge and sort recent posts
@@ -56,6 +59,12 @@ const AdminDashboard = () => {
     )},
     { label: '주문', value: counts.orders, color: '#06B6D4', icon: (
       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><rect x="1" y="4" width="22" height="16" rx="2"/><line x1="1" y1="10" x2="23" y2="10"/></svg>
+    )},
+    { label: '결제완료', value: payment.paidCount, color: '#059669', icon: (
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>
+    )},
+    { label: '결제금액', value: `${payment.totalAmount.toLocaleString()}원`, color: '#D97706', icon: (
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><line x1="12" y1="1" x2="12" y2="23"/><path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg>
     )}
   ];
 
