@@ -10,6 +10,29 @@ const getDomain = (email) => {
   return parts.length > 1 ? parts[1].toLowerCase() : '기타';
 };
 
+/** 상위 도메인(TLD 유형) 분류 */
+const getDomainType = (domain) => {
+  if (!domain || domain === '기타') return { type: '기타', color: 'gray' };
+  const d = domain.toLowerCase();
+  if (d.endsWith('.ac.kr')) return { type: '교육기관', color: 'blue' };
+  if (d.endsWith('.edu')) return { type: '교육기관', color: 'blue' };
+  if (d.endsWith('.go.kr')) return { type: '정부기관', color: 'red' };
+  if (d.endsWith('.gov')) return { type: '정부기관', color: 'red' };
+  if (d.endsWith('.co.kr')) return { type: '기업', color: 'purple' };
+  if (d.endsWith('.or.kr')) return { type: '기관/단체', color: 'green' };
+  if (d.endsWith('.org')) return { type: '기관/단체', color: 'green' };
+  if (d.endsWith('.com') || d.endsWith('.net')) return { type: '글로벌', color: 'yellow' };
+  if (d.endsWith('.kr')) return { type: '한국', color: 'green' };
+  return { type: '기타', color: 'gray' };
+};
+
+/** 하위 도메인(서비스명) 추출 — 예: kakao.com → kakao, kyonggi.ac.kr → kyonggi */
+const getSubdomain = (domain) => {
+  if (!domain || domain === '기타') return '-';
+  const parts = domain.split('.');
+  return parts[0];
+};
+
 const AdminUsers = () => {
   const [users, setUsers] = useState([]);
   const [loading, setLoading] = useState(true);
@@ -33,16 +56,29 @@ const AdminUsers = () => {
     return doms.sort();
   }, [users]);
 
+  /** 상위 도메인 유형 목록 (필터용) */
+  const domainTypes = useMemo(() => {
+    const types = [...new Set(users.map((u) => getDomainType(getDomain(u.email)).type))];
+    const order = ['글로벌', '교육기관', '기업', '정부기관', '기관/단체', '한국', '기타'];
+    return order.filter(t => types.includes(t));
+  }, [users]);
+
   const filtered = useMemo(() => {
     let list = users;
     if (filter !== 'all') {
       list = list.filter((u) => (u.provider || 'email') === filter);
     }
     if (domainFilter !== 'all') {
-      list = list.filter((u) => getDomain(u.email) === domainFilter);
+      // domainFilter가 상위 도메인 유형(교육기관 등)인지, 개별 도메인(kakao.com 등)인지 구분
+      const isType = domainTypes.includes(domainFilter);
+      if (isType) {
+        list = list.filter((u) => getDomainType(getDomain(u.email)).type === domainFilter);
+      } else {
+        list = list.filter((u) => getDomain(u.email) === domainFilter);
+      }
     }
     return list;
-  }, [users, filter, domainFilter]);
+  }, [users, filter, domainFilter, domainTypes]);
 
   const columns = [
     { key: 'id', label: 'ID', width: '80px' },
@@ -68,12 +104,23 @@ const AdminUsers = () => {
     },
     {
       key: 'email',
-      label: '도메인',
-      width: '130px',
+      label: '하위도메인',
+      width: '110px',
       render: (val) => {
         const d = getDomain(val);
-        const colorMap = { 'gmail.com': 'blue', 'kakao.com': 'yellow', 'naver.com': 'green' };
-        return <span className={`td-badge ${colorMap[d] || 'gray'}`}>{d}</span>;
+        const sub = getSubdomain(d);
+        const colorMap = { gmail: 'blue', kakao: 'yellow', naver: 'green', daum: 'yellow', hanmail: 'yellow' };
+        return <span className={`td-badge ${colorMap[sub] || 'gray'}`}>{sub}</span>;
+      }
+    },
+    {
+      key: 'email',
+      label: '상위도메인',
+      width: '100px',
+      render: (val) => {
+        const d = getDomain(val);
+        const info = getDomainType(d);
+        return <span className={`td-badge ${info.color}`}>{info.type}</span>;
       }
     },
     {
@@ -101,17 +148,18 @@ const AdminUsers = () => {
           );
         })}
       </div>
-      {domains.length > 1 && (
+      {/* 상위 도메인 유형 필터 */}
+      {domainTypes.length > 1 && (
         <div className="admin-filter-tabs">
           <button className={`admin-filter-tab ${domainFilter === 'all' ? 'active' : ''}`} onClick={() => setDomainFilter('all')}>
             전체 도메인<span className="admin-filter-count">({users.filter((u) => filter === 'all' || (u.provider || 'email') === filter).length})</span>
           </button>
-          {domains.map((dom) => {
-            const count = users.filter((u) => getDomain(u.email) === dom && (filter === 'all' || (u.provider || 'email') === filter)).length;
+          {domainTypes.map((type) => {
+            const count = users.filter((u) => getDomainType(getDomain(u.email)).type === type && (filter === 'all' || (u.provider || 'email') === filter)).length;
             if (count === 0) return null;
             return (
-              <button key={dom} className={`admin-filter-tab ${domainFilter === dom ? 'active' : ''}`} onClick={() => setDomainFilter(dom)}>
-                @{dom}<span className="admin-filter-count">({count})</span>
+              <button key={type} className={`admin-filter-tab ${domainFilter === type ? 'active' : ''}`} onClick={() => setDomainFilter(type)}>
+                {type}<span className="admin-filter-count">({count})</span>
               </button>
             );
           })}
