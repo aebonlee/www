@@ -21,7 +21,10 @@ export async function signInWithKakao() {
   if (!client) throw new Error('Supabase not configured');
   const { data, error } = await client.auth.signInWithOAuth({
     provider: 'kakao',
-    options: { redirectTo: window.location.origin + window.location.pathname }
+    options: {
+      redirectTo: window.location.origin + window.location.pathname,
+      scopes: 'profile_nickname profile_image account_email',
+    }
   });
   if (error) throw error;
   return data;
@@ -51,11 +54,11 @@ export async function signUp(email, password, displayName) {
   return data;
 }
 
-/** 로그아웃 */
+/** 로그아웃 — local scope로 OAuth 세션 만료 시 에러 방지 */
 export async function signOut() {
   const client = getSupabase();
   if (!client) return;
-  const { error } = await client.auth.signOut();
+  const { error } = await client.auth.signOut({ scope: 'local' });
   if (error) throw error;
 }
 

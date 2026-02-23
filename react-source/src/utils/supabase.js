@@ -8,7 +8,14 @@ let supabase = null;
 
 const getSupabase = () => {
   if (!supabase && supabaseUrl && supabaseAnonKey) {
-    supabase = createClient(supabaseUrl, supabaseAnonKey);
+    supabase = createClient(supabaseUrl, supabaseAnonKey, {
+      auth: {
+        flowType: 'pkce',
+        detectSessionInUrl: true,
+        autoRefreshToken: true,
+        persistSession: true,
+      }
+    });
   }
   return supabase;
 };

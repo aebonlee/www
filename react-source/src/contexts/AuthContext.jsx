@@ -37,16 +37,8 @@ export const AuthProvider = ({ children }) => {
       return;
     }
 
-    // 현재 세션 가져오기
-    client.auth.getSession().then(({ data: { session } }) => {
-      const u = session?.user ?? null;
-      setUser(u);
-      if (u) loadProfile(u);
-      setLoading(false);
-    });
-
-    // 인증 상태 변경 리스너
-    const { data: { subscription } } = client.auth.onAuthStateChange((_event, session) => {
+    // onAuthStateChange 하나로 통합 — INITIAL_SESSION은 OAuth 코드 교환 완료 후 발생
+    const { data: { subscription } } = client.auth.onAuthStateChange((event, session) => {
       const u = session?.user ?? null;
       setUser(u);
       if (u) {
@@ -54,9 +46,24 @@ export const AuthProvider = ({ children }) => {
       } else {
         setProfile(null);
       }
+      // INITIAL_SESSION: 초기 로드 완료 (OAuth 콜백 코드 교환 포함)
+      if (event === 'INITIAL_SESSION') {
+        setLoading(false);
+      }
     });
 
-    return () => subscription.unsubscribe();
+    // 안전장치: INITIAL_SESSION이 5초 내 안 오면 loading 해제
+    const fallbackTimer = setTimeout(() => {
+      setLoading((prev) => {
+        if (prev) console.warn('Auth: INITIAL_SESSION timeout, forcing loading=false');
+        return false;
+      });
+    }, 5000);
+
+    return () => {
+      clearTimeout(fallbackTimer);
+      subscription.unsubscribe();
+    };
   }, [loadProfile]);
 
   const signOut = useCallback(async () => {
