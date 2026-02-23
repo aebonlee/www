@@ -1080,3 +1080,84 @@
 [data-theme="dark"] .admin-loading {
     color: #6B7280;
 }
+
+/* ── Dashboard Redesign Dark Mode ── */
+[data-theme="dark"] .dash-welcome {
+    background: var(--primary-gradient);
+}
+
+[data-theme="dark"] .dash-refresh-btn {
+    background: rgba(255,255,255,0.1);
+    border-color: rgba(255,255,255,0.25);
+}
+
+[data-theme="dark"] .dash-refresh-btn:hover {
+    background: rgba(255,255,255,0.2);
+    border-color: rgba(255,255,255,0.4);
+}
+
+[data-theme="dark"] .dash-panel {
+    background: #1F2937;
+    border-color: #374151;
+}
+
+[data-theme="dark"] .dash-panel-header {
+    border-bottom-color: #374151;
+}
+
+[data-theme="dark"] .dash-panel-header h3 {
+    color: #F9FAFB;
+}
+
+[data-theme="dark"] .dash-bar-label {
+    color: #9CA3AF;
+}
+
+[data-theme="dark"] .dash-bar-value {
+    color: #F3F4F6;
+}
+
+[data-theme="dark"] .dash-bar-track {
+    background: #374151;
+}
+
+[data-theme="dark"] .dash-revenue-metrics {
+    border-top-color: #374151;
+}
+
+[data-theme="dark"] .dash-metric-value {
+    color: #F3F4F6;
+}
+
+[data-theme="dark"] .dash-metric-label {
+    color: #6B7280;
+}
+
+[data-theme="dark"] .dash-legend-label {
+    color: #9CA3AF;
+}
+
+[data-theme="dark"] .dash-legend-count {
+    color: #F3F4F6;
+}
+
+[data-theme="dark"] .dash-quick-btn {
+    background: #1F2937;
+    border-color: #374151;
+}
+
+[data-theme="dark"] .dash-quick-btn:hover {
+    border-color: var(--primary-blue);
+    box-shadow: 0 2px 8px rgba(0,0,0,0.3);
+}
+
+[data-theme="dark"] .dash-quick-label {
+    color: #F3F4F6;
+}
+
+[data-theme="dark"] .td-badge.green { background: #064E3B; color: #6EE7B7; }
+[data-theme="dark"] .td-badge.yellow { background: #78350F; color: #FCD34D; }
+[data-theme="dark"] .td-badge.red { background: #7F1D1D; color: #FCA5A5; }
+[data-theme="dark"] .td-badge.blue { background: #1E3A5F; color: #93C5FD; }
+[data-theme="dark"] .td-badge.purple { background: #4C1D95; color: #C4B5FD; }
+[data-theme="dark"] .td-badge.gray { background: #374151; color: #9CA3AF; }

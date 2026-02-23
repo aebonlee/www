@@ -1178,3 +1178,449 @@
     grid-template-columns: 1fr;
   }
 }
+
+/* ============================================
+   Dashboard Redesign — Zone Layout
+   ============================================ */
+
+.dash-container {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+}
+
+/* ── Zone 1: Welcome Header ── */
+.dash-welcome {
+  background: var(--primary-gradient);
+  border-radius: var(--radius-md);
+  padding: 28px 32px;
+  color: #fff;
+}
+
+.dash-welcome-content {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  flex-wrap: wrap;
+}
+
+.dash-welcome-text h2 {
+  font-size: 22px;
+  font-weight: 700;
+  margin: 0 0 4px;
+  color: #fff;
+}
+
+.dash-welcome-date {
+  font-size: 13px;
+  opacity: 0.85;
+  margin: 0 0 8px;
+}
+
+.dash-welcome-summary {
+  font-size: 14px;
+  opacity: 0.95;
+  margin: 0;
+  font-weight: 500;
+}
+
+.dash-refresh-btn {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  padding: 8px 18px;
+  border: 1px solid rgba(255,255,255,0.35);
+  border-radius: var(--radius-sm);
+  background: rgba(255,255,255,0.15);
+  color: #fff;
+  font-size: 13px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.2s;
+  flex-shrink: 0;
+}
+
+.dash-refresh-btn:hover {
+  background: rgba(255,255,255,0.25);
+  border-color: rgba(255,255,255,0.5);
+}
+
+.dash-refresh-btn:disabled {
+  opacity: 0.5;
+  cursor: default;
+}
+
+/* ── Zone 2: Hero Stats ── */
+.dash-hero-stats {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 16px;
+}
+
+.dash-hero-stats .admin-stat-card {
+  padding: 24px;
+}
+
+.dash-hero-stats .stat-value {
+  font-size: 26px;
+}
+
+.dash-hero-stats .stat-value.stat-value-sm {
+  font-size: 19px;
+}
+
+/* ── Split Row (3/4/5) ── */
+.dash-split-row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 24px;
+}
+
+/* ── Panel (shared) ── */
+.dash-panel {
+  background: var(--bg-white);
+  border: 1px solid var(--border-light);
+  border-radius: var(--radius-md);
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+}
+
+.dash-panel-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 16px 20px;
+  border-bottom: 1px solid var(--border-light);
+}
+
+.dash-panel-header h3 {
+  font-size: 15px;
+  font-weight: 600;
+  color: var(--text-primary);
+  margin: 0;
+}
+
+.dash-panel-header a {
+  font-size: 13px;
+  color: var(--primary-blue);
+  text-decoration: none;
+  font-weight: 500;
+}
+
+.dash-panel-header a:hover {
+  text-decoration: underline;
+}
+
+.dash-panel-sub {
+  font-size: 12px;
+  color: var(--text-light);
+  font-weight: 500;
+}
+
+.dash-panel-body {
+  padding: 20px;
+  flex: 1;
+}
+
+.dash-panel-body-flush {
+  padding: 0;
+}
+
+/* ── Zone 3a: Compact Stats ── */
+.dash-compact-stats {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 12px;
+  padding: 16px;
+}
+
+.dash-compact-stats .admin-stat-card {
+  padding: 14px;
+}
+
+.dash-compact-stats .stat-icon {
+  width: 36px;
+  height: 36px;
+}
+
+.dash-compact-stats .stat-icon svg {
+  width: 18px;
+  height: 18px;
+}
+
+.dash-compact-stats .stat-value {
+  font-size: 20px;
+}
+
+.dash-compact-stats .stat-label {
+  font-size: 12px;
+}
+
+/* ── Zone 3b: Revenue ── */
+.dash-revenue {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+}
+
+.dash-revenue-bars {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.dash-bar-group {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.dash-bar-label {
+  display: flex;
+  justify-content: space-between;
+  font-size: 13px;
+  color: var(--text-secondary);
+  font-weight: 500;
+}
+
+.dash-bar-value {
+  font-weight: 600;
+  color: var(--text-primary);
+}
+
+.dash-bar-track {
+  height: 10px;
+  background: var(--bg-light-gray);
+  border-radius: 5px;
+  overflow: hidden;
+}
+
+.dash-bar-fill {
+  height: 100%;
+  border-radius: 5px;
+  transition: width 0.6s ease;
+  min-width: 2px;
+}
+
+.dash-bar-paid {
+  background: linear-gradient(90deg, #059669, #34D399);
+}
+
+.dash-bar-cancel {
+  background: linear-gradient(90deg, #DC2626, #F87171);
+}
+
+.dash-revenue-metrics {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 12px;
+  border-top: 1px solid var(--border-light);
+  padding-top: 16px;
+}
+
+.dash-metric {
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.dash-metric-value {
+  font-size: 16px;
+  font-weight: 700;
+  color: var(--text-primary);
+}
+
+.dash-metric-label {
+  font-size: 11px;
+  color: var(--text-light);
+  font-weight: 500;
+}
+
+/* ── Zone 4b: Content Distribution ── */
+.dash-stack-bar {
+  display: flex;
+  height: 14px;
+  border-radius: 7px;
+  overflow: hidden;
+  margin-bottom: 20px;
+}
+
+.dash-stack-segment {
+  transition: width 0.6s ease;
+  min-width: 3px;
+}
+
+.dash-legend {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.dash-legend-item {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 13px;
+}
+
+.dash-legend-dot {
+  width: 10px;
+  height: 10px;
+  border-radius: 3px;
+  flex-shrink: 0;
+}
+
+.dash-legend-label {
+  color: var(--text-secondary);
+  flex: 1;
+}
+
+.dash-legend-count {
+  font-weight: 600;
+  color: var(--text-primary);
+}
+
+/* ── Zone 5a: Type Icon in content list ── */
+.dash-type-icon {
+  width: 32px;
+  height: 32px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.dash-type-icon svg {
+  width: 18px;
+  height: 18px;
+}
+
+/* ── Zone 5b: Quick Actions ── */
+.dash-quick-actions {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 12px;
+}
+
+.dash-quick-btn {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 14px 16px;
+  border: 1px solid var(--border-light);
+  border-radius: var(--radius-sm);
+  text-decoration: none;
+  transition: all 0.2s;
+  background: var(--bg-white);
+}
+
+.dash-quick-btn:hover {
+  border-color: var(--primary-blue);
+  box-shadow: 0 2px 8px rgba(0,0,0,0.06);
+  transform: translateY(-1px);
+}
+
+.dash-quick-icon {
+  width: 36px;
+  height: 36px;
+  border-radius: var(--radius-sm);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.dash-quick-icon svg {
+  width: 18px;
+  height: 18px;
+  color: #fff;
+}
+
+.dash-quick-label {
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--text-primary);
+}
+
+/* ── td-badge standalone (outside table) ── */
+.td-badge {
+  display: inline-block;
+  padding: 2px 10px;
+  border-radius: var(--radius-full);
+  font-size: 12px;
+  font-weight: 600;
+}
+
+.td-badge.green { background: #DCFCE7; color: #166534; }
+.td-badge.yellow { background: #FEF9C3; color: #854D0E; }
+.td-badge.red { background: #FEE2E2; color: #991B1B; }
+.td-badge.blue { background: #DBEAFE; color: #1E40AF; }
+.td-badge.purple { background: #F3E8FF; color: #6B21A8; }
+.td-badge.gray { background: var(--bg-light-gray); color: var(--text-secondary); }
+
+/* ── Dashboard Responsive ── */
+@media (max-width: 1024px) {
+  .dash-hero-stats {
+    grid-template-columns: repeat(2, 1fr);
+  }
+  .dash-split-row {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 768px) {
+  .dash-welcome {
+    padding: 20px;
+  }
+  .dash-welcome-text h2 {
+    font-size: 18px;
+  }
+  .dash-welcome-content {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+  .dash-hero-stats {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 12px;
+  }
+  .dash-hero-stats .admin-stat-card {
+    padding: 16px;
+  }
+  .dash-hero-stats .stat-value {
+    font-size: 20px;
+  }
+  .dash-hero-stats .stat-value.stat-value-sm {
+    font-size: 15px;
+  }
+  .dash-compact-stats {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 8px;
+    padding: 12px;
+  }
+  .dash-revenue-metrics {
+    grid-template-columns: repeat(3, 1fr);
+    gap: 8px;
+  }
+  .dash-metric-value {
+    font-size: 14px;
+  }
+  .dash-quick-actions {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 8px;
+  }
+}
+
+@media (max-width: 480px) {
+  .dash-hero-stats {
+    grid-template-columns: 1fr;
+  }
+  .dash-compact-stats {
+    grid-template-columns: 1fr;
+  }
+  .dash-quick-actions {
+    grid-template-columns: 1fr;
+  }
+}
