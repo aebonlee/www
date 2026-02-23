@@ -1,4 +1,3 @@
-import { Helmet } from 'react-helmet-async';
 import { useLanguage } from '../contexts/LanguageContext';
 
 const SEOHead = ({ title, description, path = '', ogImage, noindex = false }) => {
@@ -11,9 +10,9 @@ const SEOHead = ({ title, description, path = '', ogImage, noindex = false }) =>
 
   const { language } = useLanguage();
 
+  // React 19+ natively hoists <title>, <meta>, <link> to <head>
   return (
-    <Helmet>
-      <html lang={language} />
+    <>
       <title>{fullTitle}</title>
       <meta name="description" content={desc} />
       <link rel="canonical" href={`${BASE}${path}`} />
@@ -26,7 +25,7 @@ const SEOHead = ({ title, description, path = '', ogImage, noindex = false }) =>
       <meta name="twitter:title" content={fullTitle} />
       <meta name="twitter:description" content={desc} />
       <meta name="twitter:image" content={image} />
-    </Helmet>
+    </>
   );
 };
 
