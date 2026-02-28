@@ -144,9 +144,10 @@ BEGIN
 END;
 $$;
 
--- ── 5. check_user_status — 로그인 시 상태 확인 + 만료 정지 자동 해제 ──
+-- ── 5. check_user_status — 로그인 시 상태 확인 + signup_domain 자동 설정 ──
 CREATE OR REPLACE FUNCTION check_user_status(
-  target_user_id UUID
+  target_user_id UUID,
+  current_domain TEXT DEFAULT NULL
 )
 RETURNS JSONB
 LANGUAGE plpgsql
@@ -156,14 +157,22 @@ DECLARE
   user_status TEXT;
   user_suspended_until TIMESTAMPTZ;
   user_reason TEXT;
+  user_signup_domain TEXT;
 BEGIN
-  SELECT status, suspended_until, status_reason
-  INTO user_status, user_suspended_until, user_reason
+  SELECT status, suspended_until, status_reason, signup_domain
+  INTO user_status, user_suspended_until, user_reason, user_signup_domain
   FROM user_profiles
   WHERE id = target_user_id;
 
   IF user_status IS NULL THEN
     RETURN jsonb_build_object('status', 'active');
+  END IF;
+
+  -- signup_domain이 미설정이고 current_domain이 전달되면 자동 설정 (SECURITY DEFINER로 RLS 우회)
+  IF (user_signup_domain IS NULL OR user_signup_domain = '') AND current_domain IS NOT NULL AND current_domain != '' THEN
+    UPDATE user_profiles
+    SET signup_domain = current_domain
+    WHERE id = target_user_id;
   END IF;
 
   -- 정지 기간 만료 시 자동 복구

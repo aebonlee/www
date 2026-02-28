@@ -40,6 +40,7 @@ export const AuthProvider = ({ children }) => {
       if (client) {
         const { data: statusData } = await client.rpc('check_user_status', {
           target_user_id: authUser.id,
+          current_domain: window.location.hostname,
         });
         if (statusData && statusData.status && statusData.status !== 'active') {
           setAccountBlock({
