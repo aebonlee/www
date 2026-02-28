@@ -48,15 +48,18 @@ const Footer = () => {
             <p className="business-hours">평일: 09:00 ~ 18:00</p>
 
             <div className="footer-family">
-              <h4>Family Site</h4>
-              <dl>
-                <dt><a href="https://books.dreamitbiz.com" target="_blank" rel="noopener noreferrer">DreamIT Biz 출판사</a></dt>
-                <dd>도서 출판 · 전자책 · 학습자료</dd>
-                <dt><a href="https://ahp-basic.dreamitbiz.com" target="_blank" rel="noopener noreferrer">AHP 연구 플랫폼</a></dt>
-                <dd>계층분석과정 기반 의사결정 도구</dd>
-                <dt><a href="https://competency.dreamitbiz.com" target="_blank" rel="noopener noreferrer">핵심역량 자가측정</a></dt>
-                <dd>역량 진단 · 자가평가 앱</dd>
-              </dl>
+              <select
+                defaultValue=""
+                onChange={(e) => {
+                  if (e.target.value) window.open(e.target.value, '_blank');
+                  e.target.value = '';
+                }}
+              >
+                <option value="" disabled>Family Site</option>
+                <option value="https://books.dreamitbiz.com">DreamIT Biz 출판사</option>
+                <option value="https://ahp-basic.dreamitbiz.com">AHP 연구 플랫폼</option>
+                <option value="https://competency.dreamitbiz.com">핵심역량 자가측정</option>
+              </select>
             </div>
           </div>
         </div>

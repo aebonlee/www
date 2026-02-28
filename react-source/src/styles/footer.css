@@ -103,45 +103,28 @@
 }
 
 .footer-family {
-    margin-top: 24px;
-    padding-top: 20px;
-    border-top: 1px solid rgba(255, 255, 255, 0.08);
+    margin-top: 20px;
 }
 
-.footer-family h4 {
-    font-size: 14px;
-    margin-bottom: 12px;
-    color: rgba(255, 255, 255, 0.95);
-}
-
-.footer-family dl {
-    margin: 0;
-}
-
-.footer-family dt {
-    margin-top: 8px;
-}
-
-.footer-family dt:first-child {
-    margin-top: 0;
-}
-
-.footer-family dt a {
-    color: rgba(255, 255, 255, 0.9);
-    text-decoration: none;
+.footer-family select {
+    width: 100%;
+    padding: 8px 12px;
+    background: rgba(255, 255, 255, 0.08);
+    color: rgba(255, 255, 255, 0.8);
+    border: 1px solid rgba(255, 255, 255, 0.15);
+    border-radius: 6px;
     font-size: 13px;
-    font-weight: 500;
-    transition: color 0.2s ease;
+    cursor: pointer;
+    appearance: auto;
 }
 
-.footer-family dt a:hover {
-    color: #93C5FD;
+.footer-family select:hover {
+    border-color: rgba(255, 255, 255, 0.3);
 }
 
-.footer-family dd {
-    margin: 2px 0 0 0;
-    color: rgba(255, 255, 255, 0.5);
-    font-size: 12px;
+.footer-family select option {
+    background: #1f2937;
+    color: #e5e7eb;
 }
 
 .footer-bottom {
