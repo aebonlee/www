@@ -12,8 +12,6 @@ const ROLE_OPTIONS = [
   { value: 'associate', label: '준회원', color: 'gray' },
 ];
 
-const ROLE_MAP = Object.fromEntries(ROLE_OPTIONS.map((r) => [r.value, r]));
-
 /** signup_domain에서 사이트 이름 추출 — 예: hohai.dreamitbiz.com → hohai */
 const getSiteName = (domain) => {
   if (!domain) return '-';
@@ -31,8 +29,9 @@ const getSiteName = (domain) => {
 const getSiteColor = (siteName) => {
   const colorMap = {
     hohai: 'blue',
-    competency: 'green',
-    'ahp-basic': 'purple',
+    books: 'green',
+    competency: 'purple',
+    'ahp-basic': 'red',
     www: 'yellow',
     localhost: 'gray',
   };
@@ -48,7 +47,6 @@ const resolveRole = (user) => {
 const AdminUsers = () => {
   const [users, setUsers] = useState([]);
   const [loading, setLoading] = useState(true);
-  const [filter, setFilter] = useState('all');
   const [siteFilter, setSiteFilter] = useState('all');
   const [roleFilter, setRoleFilter] = useState('all');
 
@@ -72,10 +70,6 @@ const AdminUsers = () => {
     }
   }, []);
 
-  const providers = useMemo(() => {
-    return [...new Set(users.map((u) => u.provider || 'email'))];
-  }, [users]);
-
   const siteNames = useMemo(() => {
     const names = [...new Set(users.map((u) => getSiteName(u.signup_domain)))];
     return names.filter((n) => n !== '-').sort().concat(names.includes('-') ? ['-'] : []);
@@ -83,9 +77,6 @@ const AdminUsers = () => {
 
   const filtered = useMemo(() => {
     let list = users;
-    if (filter !== 'all') {
-      list = list.filter((u) => (u.provider || 'email') === filter);
-    }
     if (siteFilter !== 'all') {
       list = list.filter((u) => getSiteName(u.signup_domain) === siteFilter);
     }
@@ -93,7 +84,7 @@ const AdminUsers = () => {
       list = list.filter((u) => resolveRole(u) === roleFilter);
     }
     return list;
-  }, [users, filter, siteFilter, roleFilter]);
+  }, [users, siteFilter, roleFilter]);
 
   const columns = [
     { key: 'id', label: 'ID', width: '80px' },
@@ -191,30 +182,7 @@ const AdminUsers = () => {
         })}
       </div>
 
-      {/* 가입방법 필터 */}
-      <div className="admin-filter-tabs">
-        <button
-          className={`admin-filter-tab ${filter === 'all' ? 'active' : ''}`}
-          onClick={() => setFilter('all')}
-        >
-          전체<span className="admin-filter-count">({users.length})</span>
-        </button>
-        {providers.map((prov) => {
-          const count = users.filter((u) => (u.provider || 'email') === prov).length;
-          return (
-            <button
-              key={prov}
-              className={`admin-filter-tab ${filter === prov ? 'active' : ''}`}
-              onClick={() => setFilter(prov)}
-            >
-              {PROVIDER_LABELS[prov] || prov}
-              <span className="admin-filter-count">({count})</span>
-            </button>
-          );
-        })}
-      </div>
-
-      {/* 가입 사이트(하위 도메인) 필터 */}
+      {/* 방문 가입 사이트 필터 */}
       {siteNames.length > 1 && (
         <div className="admin-filter-tabs">
           <button
@@ -225,9 +193,7 @@ const AdminUsers = () => {
           </button>
           {siteNames.map((name) => {
             const count = users.filter(
-              (u) =>
-                getSiteName(u.signup_domain) === name &&
-                (filter === 'all' || (u.provider || 'email') === filter)
+              (u) => getSiteName(u.signup_domain) === name
             ).length;
             if (count === 0) return null;
             return (
