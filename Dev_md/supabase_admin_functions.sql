@@ -3,9 +3,10 @@
 -- Supabase Dashboard > SQL Editor에서 실행
 -- ============================================
 
--- ── 0. role 기본값 'member'로 변경 + signup_domain 컬럼 ──
+-- ── 0. role 기본값 'member'로 변경 + signup_domain / visited_sites 컬럼 ──
 ALTER TABLE user_profiles ALTER COLUMN role SET DEFAULT 'member';
 ALTER TABLE user_profiles ADD COLUMN IF NOT EXISTS signup_domain TEXT;
+ALTER TABLE user_profiles ADD COLUMN IF NOT EXISTS visited_sites TEXT[] DEFAULT '{}';
 
 -- ── 0-1. 회원가입 트리거 업데이트 (role='member', signup_domain 자동 설정) ──
 CREATE OR REPLACE FUNCTION public.handle_new_user()
@@ -144,7 +145,9 @@ BEGIN
 END;
 $$;
 
--- ── 5. check_user_status — 로그인 시 상태 확인 + signup_domain 자동 설정 ──
+-- ── 5. check_user_status — 로그인 시 상태 확인 + signup_domain/visited_sites 자동 설정 ──
+-- 주의: 기존 1파라미터 버전이 있으면 먼저 삭제 필요
+--   DROP FUNCTION IF EXISTS check_user_status(UUID);
 CREATE OR REPLACE FUNCTION check_user_status(
   target_user_id UUID,
   current_domain TEXT DEFAULT NULL
@@ -158,21 +161,31 @@ DECLARE
   user_suspended_until TIMESTAMPTZ;
   user_reason TEXT;
   user_signup_domain TEXT;
+  user_visited_sites TEXT[];
 BEGIN
-  SELECT status, suspended_until, status_reason, signup_domain
-  INTO user_status, user_suspended_until, user_reason, user_signup_domain
+  SELECT status, suspended_until, status_reason, signup_domain, visited_sites
+  INTO user_status, user_suspended_until, user_reason, user_signup_domain, user_visited_sites
   FROM user_profiles
   WHERE id = target_user_id;
 
-  IF user_status IS NULL THEN
-    RETURN jsonb_build_object('status', 'active');
-  END IF;
-
-  -- signup_domain이 미설정이고 current_domain이 전달되면 자동 설정 (SECURITY DEFINER로 RLS 우회)
+  -- signup_domain 자동 설정 (최초 가입 사이트)
   IF (user_signup_domain IS NULL OR user_signup_domain = '') AND current_domain IS NOT NULL AND current_domain != '' THEN
     UPDATE user_profiles
     SET signup_domain = current_domain
     WHERE id = target_user_id;
+  END IF;
+
+  -- visited_sites 배열에 현재 도메인 추가 (중복 방지)
+  IF current_domain IS NOT NULL AND current_domain != '' THEN
+    IF user_visited_sites IS NULL OR NOT (current_domain = ANY(user_visited_sites)) THEN
+      UPDATE user_profiles
+      SET visited_sites = array_append(COALESCE(visited_sites, '{}'), current_domain)
+      WHERE id = target_user_id;
+    END IF;
+  END IF;
+
+  IF user_status IS NULL THEN
+    RETURN jsonb_build_object('status', 'active');
   END IF;
 
   -- 정지 기간 만료 시 자동 복구

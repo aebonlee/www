@@ -3,7 +3,6 @@ import AdminDataTable from '../../components/admin/AdminDataTable';
 import {
   getAllUsers,
   updateUserRole,
-  updateUserSignupDomain,
   updateUserStatus,
   adminUpdateUserProfile,
   deleteUser,
@@ -107,20 +106,6 @@ const AdminUsers = () => {
     }
   }, [users]);
 
-  const handleSiteChange = useCallback(async (userId, newDomain) => {
-    const oldDomain = users.find((u) => u.id === userId)?.signup_domain;
-    setUsers((prev) =>
-      prev.map((u) => (u.id === userId ? { ...u, signup_domain: newDomain } : u))
-    );
-    const result = await updateUserSignupDomain(userId, newDomain);
-    if (result.error) {
-      alert('가입 사이트 변경 실패: ' + result.error);
-      setUsers((prev) =>
-        prev.map((u) => (u.id === userId ? { ...u, signup_domain: oldDomain } : u))
-      );
-    }
-  }, [users]);
-
   // 액션 열기
   const openAction = (user, type) => {
     setActionTarget({ user, type });
@@ -220,15 +205,40 @@ const AdminUsers = () => {
     }
   };
 
+  /** 유저의 visited_sites 배열에서 사이트 이름 목록 추출 */
+  const getUserSiteNames = (user) => {
+    const sites = user.visited_sites;
+    if (Array.isArray(sites) && sites.length > 0) {
+      return sites.map(getSiteName);
+    }
+    // visited_sites 비어있으면 signup_domain 폴백
+    const name = getSiteName(user.signup_domain);
+    return name !== '-' ? [name] : [];
+  };
+
   const siteNames = useMemo(() => {
-    const names = [...new Set(users.map((u) => getSiteName(u.signup_domain)))];
-    return names.filter((n) => n !== '-').sort().concat(names.includes('-') ? ['-'] : []);
+    const nameSet = new Set();
+    let hasEmpty = false;
+    users.forEach((u) => {
+      const names = getUserSiteNames(u);
+      if (names.length === 0) {
+        hasEmpty = true;
+      } else {
+        names.forEach((n) => nameSet.add(n));
+      }
+    });
+    const sorted = [...nameSet].sort();
+    return hasEmpty ? [...sorted, '-'] : sorted;
   }, [users]);
 
   const filtered = useMemo(() => {
     let list = users;
     if (siteFilter !== 'all') {
-      list = list.filter((u) => getSiteName(u.signup_domain) === siteFilter);
+      list = list.filter((u) => {
+        const names = getUserSiteNames(u);
+        if (siteFilter === '-') return names.length === 0;
+        return names.includes(siteFilter);
+      });
     }
     if (roleFilter !== 'all') {
       list = list.filter((u) => resolveRole(u) === roleFilter);
@@ -273,26 +283,24 @@ const AdminUsers = () => {
       },
     },
     {
-      key: 'signup_domain',
-      label: '방문 가입 사이트',
-      width: '160px',
+      key: 'visited_sites',
+      label: '방문 사이트',
+      width: '180px',
       render: (val, row) => {
-        const name = getSiteName(val);
-        const color = getSiteColor(name);
-
+        const sites = Array.isArray(val) && val.length > 0
+          ? val
+          : row.signup_domain ? [row.signup_domain] : [];
+        if (sites.length === 0) return <span className="td-badge gray">-</span>;
         return (
-          <select
-            className={`role-select role-site-${color}`}
-            value={val || ''}
-            onChange={(e) => handleSiteChange(row.id, e.target.value)}
-          >
-            {!val && <option value="">미설정</option>}
-            {SITE_OPTIONS.map((opt) => (
-              <option key={opt.value} value={opt.value}>
-                {opt.label}
-              </option>
-            ))}
-          </select>
+          <div style={{ display: 'flex', flexWrap: 'wrap', gap: '3px' }}>
+            {sites.map((domain) => {
+              const name = getSiteName(domain);
+              const color = getSiteColor(name);
+              return (
+                <span key={domain} className={`td-badge ${color}`}>{name}</span>
+              );
+            })}
+          </div>
         );
       },
     },
@@ -485,9 +493,11 @@ const AdminUsers = () => {
             전체 사이트<span className="admin-filter-count">({filtered.length})</span>
           </button>
           {siteNames.map((name) => {
-            const count = users.filter(
-              (u) => getSiteName(u.signup_domain) === name
-            ).length;
+            const count = users.filter((u) => {
+              const names = getUserSiteNames(u);
+              if (name === '-') return names.length === 0;
+              return names.includes(name);
+            }).length;
             if (count === 0) return null;
             return (
               <button
@@ -510,7 +520,7 @@ const AdminUsers = () => {
         columns={columns}
         data={filtered}
         loading={loading}
-        searchKeys={['display_name', 'email', 'signup_domain']}
+        searchKeys={['display_name', 'email']}
         actions={renderActions}
       />
     </>
