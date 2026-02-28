@@ -308,7 +308,7 @@ const AdminUsers = () => {
     },
     {
       key: 'visited_sites',
-      label: '방문 사이트',
+      label: '가입 사이트',
       width: '200px',
       render: (val, row) => {
         const sites = Array.isArray(val) && val.length > 0
@@ -522,7 +522,7 @@ const AdminUsers = () => {
         })}
       </div>
 
-      {/* 방문 가입 사이트 필터 */}
+      {/* 가입 사이트 필터 */}
       {siteNames.length > 1 && (
         <div className="admin-filter-tabs">
           <button
