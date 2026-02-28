@@ -120,7 +120,7 @@ const AdminUsers = () => {
     },
     {
       key: 'signup_domain',
-      label: '가입 사이트',
+      label: '방문 가입 사이트',
       width: '140px',
       render: (val) => {
         const name = getSiteName(val);
