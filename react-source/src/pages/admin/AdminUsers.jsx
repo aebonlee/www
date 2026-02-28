@@ -66,30 +66,32 @@ const AdminUsers = () => {
   }, []);
 
   const handleRoleChange = useCallback(async (userId, newRole) => {
+    const oldRole = users.find((u) => u.id === userId)?.role;
     setUsers((prev) =>
       prev.map((u) => (u.id === userId ? { ...u, role: newRole } : u))
     );
     const result = await updateUserRole(userId, newRole);
     if (result.error) {
-      alert('등급 변경에 실패했습니다.');
+      alert('등급 변경 실패: ' + result.error);
       setUsers((prev) =>
-        prev.map((u) => (u.id === userId ? { ...u, role: u.role } : u))
+        prev.map((u) => (u.id === userId ? { ...u, role: oldRole } : u))
       );
     }
-  }, []);
+  }, [users]);
 
   const handleSiteChange = useCallback(async (userId, newDomain) => {
+    const oldDomain = users.find((u) => u.id === userId)?.signup_domain;
     setUsers((prev) =>
       prev.map((u) => (u.id === userId ? { ...u, signup_domain: newDomain } : u))
     );
     const result = await updateUserSignupDomain(userId, newDomain);
     if (result.error) {
-      alert('가입 사이트 변경에 실패했습니다.');
+      alert('가입 사이트 변경 실패: ' + result.error);
       setUsers((prev) =>
-        prev.map((u) => (u.id === userId ? { ...u, signup_domain: u.signup_domain } : u))
+        prev.map((u) => (u.id === userId ? { ...u, signup_domain: oldDomain } : u))
       );
     }
-  }, []);
+  }, [users]);
 
   const siteNames = useMemo(() => {
     const names = [...new Set(users.map((u) => getSiteName(u.signup_domain)))];
