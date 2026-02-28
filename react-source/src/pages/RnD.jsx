@@ -13,37 +13,37 @@ const RnD = () => {
 
   const projects = [
     {
-      period: '2004 ~ 2005',
-      duration: isEn ? '10 months' : '10개월',
-      title: isEn ? 'Web-based PDA e-Learning Content Development' : 'Web기반 PDA용 e-Learning 콘텐츠 개발',
-      type: isEn ? 'Industry-Academia-Research Consortium' : '산·학·연 공동기술개발 컨소시엄',
+      period: '2025.08 ~ 2025.12',
+      duration: isEn ? '5 months' : '5개월',
+      title: isEn ? 'AHP Research Platform Development' : 'AHP 연구 플랫폼 개발',
+      type: isEn ? 'Research Platform Development' : '연구 플랫폼 개발',
       desc: isEn
-        ? 'Developed e-Learning content optimized for PDA (Personal Digital Assistant) devices. Built a web-based content delivery platform enabling mobile learning in education and corporate training environments.'
-        : 'PDA(Personal Digital Assistant) 기기에 최적화된 e-Learning 콘텐츠를 개발하였습니다. 웹 기반 콘텐츠 전송 플랫폼을 구축하여 교육 및 기업 교육 환경에서의 모바일 학습을 구현했습니다.',
-      techs: ['Web', 'PDA', 'e-Learning', 'Content Authoring'],
-      icon: <><rect x="5" y="2" width="14" height="20" rx="2" ry="2" /><line x1="12" y1="18" x2="12.01" y2="18" /></>
+        ? 'Developed a web-based research platform implementing the Analytic Hierarchy Process (AHP), a structured multi-criteria decision-making methodology. The platform enables researchers to design pairwise comparison surveys, collect respondent data, and automatically calculate priority weights with consistency ratio (CR) validation. Supports hierarchical criteria modeling and result visualization for academic and institutional research applications.'
+        : 'AHP(Analytic Hierarchy Process, 계층분석과정) 기반의 웹 연구 플랫폼을 개발하였습니다. 다기준 의사결정 방법론인 AHP를 활용하여 연구자가 쌍대비교 설문을 설계하고, 응답 데이터를 수집하며, 우선순위 가중치와 일관성 비율(CR)을 자동으로 산출할 수 있는 플랫폼을 구축했습니다. 계층적 평가기준 모델링과 결과 시각화를 지원하여 학술 및 기관 연구에 활용할 수 있도록 구현하였습니다.',
+      techs: ['AHP', 'Web Platform', 'Survey Design', 'Data Visualization', 'Statistics'],
+      icon: <><circle cx="12" cy="12" r="10" /><line x1="12" y1="8" x2="12" y2="16" /><line x1="8" y1="12" x2="16" y2="12" /><path d="M12 2v4M12 18v4M2 12h4M18 12h4" /></>
     },
     {
-      period: '2005 ~ 2006',
-      duration: isEn ? '10 months' : '10개월',
-      title: isEn ? 'PDA Online Learning System LMS Development' : 'PDA 온라인 학습 시스템 LMS 개발',
-      type: isEn ? 'Industry-Academia-Research Consortium' : '산·학·연 공동기술개발 컨소시엄',
+      period: '2019 ~ 2020',
+      duration: isEn ? '12 months' : '12개월',
+      title: isEn ? 'Competency — Core Competency Self-Assessment App Development' : 'Competency — 핵심역량 자가측정 앱 개발',
+      type: isEn ? 'App Development' : '앱 개발',
       desc: isEn
-        ? 'Developed a Learning Management System (LMS) exclusively for PDA. Implemented learner progress tracking, assessment management, and content distribution features tailored for mobile learning.'
-        : 'PDA 전용 Learning Management System(LMS)을 개발하였습니다. 학습자 진도 추적, 평가 관리, 콘텐츠 배포 기능을 모바일 학습 환경에 최적화하여 구현했습니다.',
-      techs: ['LMS', 'PDA', 'Database', 'Server Architecture'],
-      icon: <><rect x="2" y="3" width="20" height="14" rx="2" ry="2" /><line x1="8" y1="21" x2="16" y2="21" /><line x1="12" y1="17" x2="12" y2="21" /></>
+        ? 'Developed a bilingual (English/Korean) core competency self-assessment mobile application utilizing measurement instruments from the University of Virginia research team. The app enables users to evaluate their own competencies through validated psychometric scales, providing personalized assessment results and competency profiles for individual growth and organizational development purposes.'
+        : '미국 버지니아대학(University of Virginia) 연구팀의 측정도구를 활용하여 영문·국문 핵심역량 자가측정 앱을 개발하였습니다. 검증된 심리측정 척도를 기반으로 사용자가 자신의 핵심역량을 평가하고, 개인 맞춤형 측정 결과와 역량 프로파일을 제공하여 개인 성장 및 조직 개발에 활용할 수 있도록 구현하였습니다.',
+      techs: ['Mobile App', 'Psychometrics', 'Bilingual', 'Self-Assessment', 'UVA Research'],
+      icon: <><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2" /><circle cx="9" cy="7" r="4" /><path d="M22 21v-2a4 4 0 0 0-3-3.87" /><path d="M16 3.13a4 4 0 0 1 0 7.75" /></>
     },
     {
-      period: '2006 ~ 2007',
-      duration: isEn ? '6 months' : '6개월',
-      title: isEn ? 'Mobile Broadcast Learning Management Solution' : '모바일 방송 학습 관리 솔루션 개발',
+      period: '2008 ~ 2009',
+      duration: isEn ? '12 months' : '12개월',
+      title: isEn ? 'Training Management System (TMS) Development' : '학습 능률 향상 통합 솔루션 TMS 개발',
       type: isEn ? 'Industry-Academia-Research Consortium' : '산·학·연 공동기술개발 컨소시엄',
       desc: isEn
-        ? 'Developed "Any Study Pro" — an e-Learning solution for mobile broadcast systems. Integrated real-time broadcast content with interactive learning management for on-the-go education.'
-        : '"Any Study Pro" — 모바일 방송 시스템용 e-Learning 솔루션을 개발하였습니다. 실시간 방송 콘텐츠와 인터랙티브 학습 관리를 통합하여 이동 중 교육을 구현했습니다.',
-      techs: ['Mobile Broadcasting', 'Streaming', 'e-Learning', 'Any Study Pro'],
-      icon: <><polygon points="23 7 16 12 23 17 23 7" /><rect x="1" y="5" width="15" height="14" rx="2" ry="2" /></>
+        ? 'Developed "Education Synergy Tools: Training Management System (TMS)" — a comprehensive training management platform. Integrated learning analytics, performance tracking, curriculum management, and assessment tools to enhance learning efficiency.'
+        : '"Education Synergy Tools: Training Management System(TMS)" — 종합 교육 관리 플랫폼을 개발하였습니다. 학습 분석, 성과 추적, 커리큘럼 관리, 평가 도구를 통합하여 학습 능률 향상을 구현했습니다.',
+      techs: ['TMS', 'Analytics', 'Curriculum Management', 'Assessment'],
+      icon: <><path d="M22 10v6M2 10l10-5 10 5-10 5z" /><path d="M6 12v5c3 3 9 3 12 0v-5" /></>
     },
     {
       period: '2007',
@@ -57,23 +57,45 @@ const RnD = () => {
       icon: <><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z" /><circle cx="12" cy="10" r="3" /></>
     },
     {
-      period: '2008 ~ 2009',
-      duration: isEn ? '12 months' : '12개월',
-      title: isEn ? 'Training Management System (TMS) Development' : '학습 능률 향상 통합 솔루션 TMS 개발',
+      period: '2006 ~ 2007',
+      duration: isEn ? '6 months' : '6개월',
+      title: isEn ? 'Mobile Broadcast Learning Management Solution' : '모바일 방송 학습 관리 솔루션 개발',
       type: isEn ? 'Industry-Academia-Research Consortium' : '산·학·연 공동기술개발 컨소시엄',
       desc: isEn
-        ? 'Developed "Education Synergy Tools: Training Management System (TMS)" — a comprehensive training management platform. Integrated learning analytics, performance tracking, curriculum management, and assessment tools to enhance learning efficiency.'
-        : '"Education Synergy Tools: Training Management System(TMS)" — 종합 교육 관리 플랫폼을 개발하였습니다. 학습 분석, 성과 추적, 커리큘럼 관리, 평가 도구를 통합하여 학습 능률 향상을 구현했습니다.',
-      techs: ['TMS', 'Analytics', 'Curriculum Management', 'Assessment'],
-      icon: <><path d="M22 10v6M2 10l10-5 10 5-10 5z" /><path d="M6 12v5c3 3 9 3 12 0v-5" /></>
+        ? 'Developed "Any Study Pro" — an e-Learning solution for mobile broadcast systems. Integrated real-time broadcast content with interactive learning management for on-the-go education.'
+        : '"Any Study Pro" — 모바일 방송 시스템용 e-Learning 솔루션을 개발하였습니다. 실시간 방송 콘텐츠와 인터랙티브 학습 관리를 통합하여 이동 중 교육을 구현했습니다.',
+      techs: ['Mobile Broadcasting', 'Streaming', 'e-Learning', 'Any Study Pro'],
+      icon: <><polygon points="23 7 16 12 23 17 23 7" /><rect x="1" y="5" width="15" height="14" rx="2" ry="2" /></>
+    },
+    {
+      period: '2005 ~ 2006',
+      duration: isEn ? '10 months' : '10개월',
+      title: isEn ? 'PDA Online Learning System LMS Development' : 'PDA 온라인 학습 시스템 LMS 개발',
+      type: isEn ? 'Industry-Academia-Research Consortium' : '산·학·연 공동기술개발 컨소시엄',
+      desc: isEn
+        ? 'Developed a Learning Management System (LMS) exclusively for PDA. Implemented learner progress tracking, assessment management, and content distribution features tailored for mobile learning.'
+        : 'PDA 전용 Learning Management System(LMS)을 개발하였습니다. 학습자 진도 추적, 평가 관리, 콘텐츠 배포 기능을 모바일 학습 환경에 최적화하여 구현했습니다.',
+      techs: ['LMS', 'PDA', 'Database', 'Server Architecture'],
+      icon: <><rect x="2" y="3" width="20" height="14" rx="2" ry="2" /><line x1="8" y1="21" x2="16" y2="21" /><line x1="12" y1="17" x2="12" y2="21" /></>
+    },
+    {
+      period: '2004 ~ 2005',
+      duration: isEn ? '10 months' : '10개월',
+      title: isEn ? 'Web-based PDA e-Learning Content Development' : 'Web기반 PDA용 e-Learning 콘텐츠 개발',
+      type: isEn ? 'Industry-Academia-Research Consortium' : '산·학·연 공동기술개발 컨소시엄',
+      desc: isEn
+        ? 'Developed e-Learning content optimized for PDA (Personal Digital Assistant) devices. Built a web-based content delivery platform enabling mobile learning in education and corporate training environments.'
+        : 'PDA(Personal Digital Assistant) 기기에 최적화된 e-Learning 콘텐츠를 개발하였습니다. 웹 기반 콘텐츠 전송 플랫폼을 구축하여 교육 및 기업 교육 환경에서의 모바일 학습을 구현했습니다.',
+      techs: ['Web', 'PDA', 'e-Learning', 'Content Authoring'],
+      icon: <><rect x="5" y="2" width="14" height="20" rx="2" ry="2" /><line x1="12" y1="18" x2="12.01" y2="18" /></>
     }
   ];
 
   const stats = [
-    { number: '5', label: isEn ? 'R&D Projects' : '연구개발 과제' },
-    { number: '44', label: isEn ? 'Months of Research' : '개월 연구 수행' },
-    { number: '6', label: isEn ? 'Years of R&D' : '년간 R&D 수행' },
-    { number: '100%', label: isEn ? 'Gov. Funded' : '정부지원 과제' }
+    { number: '7', label: isEn ? 'R&D Projects' : '연구개발 과제' },
+    { number: '61', label: isEn ? 'Months of Research' : '개월 연구 수행' },
+    { number: '21', label: isEn ? 'Years of R&D' : '년간 R&D 수행' },
+    { number: '2004~2025', label: isEn ? 'Active Period' : '수행 기간' }
   ];
 
   return (
@@ -84,8 +106,8 @@ const RnD = () => {
           <h1 className="page-title">{isEn ? 'R&D' : '연구개발'}</h1>
           <p className="page-description">
             {isEn
-              ? 'Industry-Academia-Research R&D projects by DreamIT (2004~2009)'
-              : '드림아이티 산·학·연 공동기술개발 컨소시엄 사업 수행 내역 (2004~2009)'}
+              ? 'R&D projects by DreamIT (2004~2025)'
+              : '드림아이티 연구개발 과제 수행 내역 (2004~2025)'}
           </p>
         </div>
       </section>
@@ -98,13 +120,13 @@ const RnD = () => {
               <h2>{isEn ? 'R&D Overview' : '연구개발 개요'}</h2>
               <p>
                 {isEn
-                  ? 'DreamIT conducted 5 government-funded Industry-Academia-Research consortium R&D projects from 2004 to 2009, accumulating deep expertise in mobile learning, LMS, broadcasting-based education, accessibility technology, and training management systems.'
-                  : '드림아이티(DreamIT)는 2004년부터 2009년까지 정부 지원 산·학·연 공동기술개발 컨소시엄 과제 5건을 수행하여, 모바일 학습, LMS, 방송 기반 교육, 접근성 기술, 교육 관리 시스템 분야의 깊은 전문성을 축적했습니다.'}
+                  ? 'DreamIT has conducted 7 R&D projects from 2004 to 2025, accumulating deep expertise in mobile learning, LMS, broadcasting-based education, accessibility technology, training management systems, competency assessment, and research platform development.'
+                  : '드림아이티(DreamIT)는 2004년부터 2025년까지 총 7건의 연구개발 과제를 수행하여, 모바일 학습, LMS, 방송 기반 교육, 접근성 기술, 교육 관리 시스템, 역량 측정, 연구 플랫폼 개발 분야의 깊은 전문성을 축적했습니다.'}
               </p>
               <p>
                 {isEn
-                  ? 'These R&D achievements laid the foundation for DreamIT Biz\'s current education and IT consulting services, combining proven research expertise with practical business solutions.'
-                  : '이러한 연구개발 성과는 현재 드림아이티비즈의 교육 및 IT 컨설팅 서비스의 기반이 되었으며, 검증된 연구 역량과 실무 비즈니스 솔루션을 결합하고 있습니다.'}
+                  ? 'These R&D achievements laid the foundation for DreamIT Biz\'s current education and IT consulting services. From early-stage mobile learning to recent AHP research platforms and competency assessment apps, we continue to combine proven research expertise with practical business solutions.'
+                  : '이러한 연구개발 성과는 현재 드림아이티비즈의 교육 및 IT 컨설팅 서비스의 기반이 되었습니다. 초기 모바일 학습부터 최근 AHP 연구 플랫폼, 핵심역량 자가측정 앱까지, 검증된 연구 역량과 실무 비즈니스 솔루션을 지속적으로 결합하고 있습니다.'}
               </p>
             </div>
             <div className="service-overview-image" data-aos="fade-left">
