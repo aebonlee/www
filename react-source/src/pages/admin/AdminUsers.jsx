@@ -3,6 +3,7 @@ import AdminDataTable from '../../components/admin/AdminDataTable';
 import {
   getAllUsers,
   updateUserRole,
+  addVisitedSite,
   updateUserStatus,
   adminUpdateUserProfile,
   deleteUser,
@@ -105,6 +106,29 @@ const AdminUsers = () => {
       );
     }
   }, [users]);
+
+  const handleAddSite = useCallback(async (userId, domain) => {
+    // 즉시 UI 반영
+    setUsers((prev) =>
+      prev.map((u) => {
+        if (u.id !== userId) return u;
+        const current = Array.isArray(u.visited_sites) ? u.visited_sites : [];
+        if (current.includes(domain)) return u;
+        return { ...u, visited_sites: [...current, domain] };
+      })
+    );
+    const result = await addVisitedSite(userId, domain);
+    if (result.error) {
+      alert('사이트 추가 실패: ' + result.error);
+      // 롤백
+      setUsers((prev) =>
+        prev.map((u) => {
+          if (u.id !== userId) return u;
+          return { ...u, visited_sites: (u.visited_sites || []).filter((d) => d !== domain) };
+        })
+      );
+    }
+  }, []);
 
   // 액션 열기
   const openAction = (user, type) => {
@@ -285,14 +309,14 @@ const AdminUsers = () => {
     {
       key: 'visited_sites',
       label: '방문 사이트',
-      width: '180px',
+      width: '200px',
       render: (val, row) => {
         const sites = Array.isArray(val) && val.length > 0
           ? val
           : row.signup_domain ? [row.signup_domain] : [];
-        if (sites.length === 0) return <span className="td-badge gray">-</span>;
+        const remaining = SITE_OPTIONS.filter((opt) => !sites.includes(opt.value));
         return (
-          <div style={{ display: 'flex', flexWrap: 'wrap', gap: '3px' }}>
+          <div style={{ display: 'flex', flexWrap: 'wrap', gap: '3px', alignItems: 'center' }}>
             {sites.map((domain) => {
               const name = getSiteName(domain);
               const color = getSiteColor(name);
@@ -300,6 +324,21 @@ const AdminUsers = () => {
                 <span key={domain} className={`td-badge ${color}`}>{name}</span>
               );
             })}
+            {remaining.length > 0 && (
+              <select
+                className="role-select"
+                style={{ width: '40px', minWidth: '40px', padding: '1px 2px', fontSize: '11px' }}
+                value=""
+                onChange={(e) => {
+                  if (e.target.value) handleAddSite(row.id, e.target.value);
+                }}
+              >
+                <option value="">+</option>
+                {remaining.map((opt) => (
+                  <option key={opt.value} value={opt.value}>{opt.label}</option>
+                ))}
+              </select>
+            )}
           </div>
         );
       },

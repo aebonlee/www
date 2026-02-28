@@ -134,6 +134,25 @@ export async function updateUserSignupDomain(userId, domain) {
   return { success: true };
 }
 
+/** 관리자 수동 방문 사이트 추가 — rpc() 사용 */
+export async function addVisitedSite(userId, domain) {
+  const client = getSupabase();
+  if (!client) return { error: 'Supabase client not available' };
+  const { data, error } = await client.rpc('admin_add_visited_site', {
+    target_user_id: userId,
+    site_domain: domain,
+  });
+  if (error) {
+    console.error('addVisitedSite error:', error);
+    return { error: error.message };
+  }
+  if (data?.error) {
+    console.error('addVisitedSite denied:', data.error);
+    return { error: data.error };
+  }
+  return { success: true };
+}
+
 /** 회원 상태 변경 (정지/차단/복구/소프트삭제) — rpc() 사용 */
 export async function updateUserStatus(userId, status, reason = null, suspendedUntil = null) {
   const client = getSupabase();

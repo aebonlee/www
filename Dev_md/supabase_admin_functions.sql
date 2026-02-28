@@ -145,6 +145,41 @@ BEGIN
 END;
 $$;
 
+-- ── 4-1. admin_add_visited_site — 관리자가 수동으로 방문 사이트 추가 ──
+CREATE OR REPLACE FUNCTION admin_add_visited_site(
+  target_user_id UUID,
+  site_domain TEXT
+)
+RETURNS JSONB
+LANGUAGE plpgsql
+SECURITY DEFINER
+AS $$
+DECLARE
+  caller_email TEXT;
+  admin_emails TEXT[] := ARRAY['aebon@kakao.com', 'aebon@kyonggi.ac.kr'];
+  current_sites TEXT[];
+BEGIN
+  SELECT email INTO caller_email FROM auth.users WHERE id = auth.uid();
+  IF caller_email IS NULL OR NOT (lower(caller_email) = ANY(admin_emails)) THEN
+    RETURN jsonb_build_object('error', '관리자 권한이 필요합니다.');
+  END IF;
+
+  SELECT visited_sites INTO current_sites FROM user_profiles WHERE id = target_user_id;
+
+  -- 이미 포함되어 있으면 스킵
+  IF current_sites IS NOT NULL AND site_domain = ANY(current_sites) THEN
+    RETURN jsonb_build_object('success', true, 'message', '이미 등록된 사이트');
+  END IF;
+
+  UPDATE user_profiles
+  SET visited_sites = array_append(COALESCE(visited_sites, '{}'), site_domain),
+      signup_domain = COALESCE(NULLIF(signup_domain, ''), site_domain)
+  WHERE id = target_user_id;
+
+  RETURN jsonb_build_object('success', true);
+END;
+$$;
+
 -- ── 5. check_user_status — 로그인 시 상태 확인 + signup_domain/visited_sites 자동 설정 ──
 -- 주의: 기존 1파라미터 버전이 있으면 먼저 삭제 필요
 --   DROP FUNCTION IF EXISTS check_user_status(UUID);
