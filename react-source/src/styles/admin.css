@@ -1561,6 +1561,52 @@
 .td-badge.purple { background: #F3E8FF; color: #6B21A8; }
 .td-badge.gray { background: var(--bg-light-gray); color: var(--text-secondary); }
 
+/* ── Role Select Dropdown ── */
+.role-select {
+  appearance: none;
+  -webkit-appearance: none;
+  padding: 4px 24px 4px 10px;
+  border-radius: var(--radius-full);
+  font-size: 12px;
+  font-weight: 600;
+  border: 1px solid transparent;
+  cursor: pointer;
+  outline: none;
+  transition: all 0.2s;
+  background-repeat: no-repeat;
+  background-position: right 8px center;
+  background-size: 10px;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 12 12'%3E%3Cpath d='M6 8L1 3h10z' fill='%23888'/%3E%3C/svg%3E");
+}
+
+.role-select:hover {
+  border-color: var(--border-medium);
+}
+
+.role-select:focus {
+  box-shadow: 0 0 0 2px rgba(0, 70, 200, 0.15);
+}
+
+.role-select.role-admin {
+  background-color: #FEE2E2;
+  color: #991B1B;
+}
+
+.role-select.role-vip {
+  background-color: #F3E8FF;
+  color: #6B21A8;
+}
+
+.role-select.role-member {
+  background-color: #DBEAFE;
+  color: #1E40AF;
+}
+
+.role-select.role-associate {
+  background-color: var(--bg-light-gray);
+  color: var(--text-secondary);
+}
+
 /* ── Dashboard Responsive ── */
 @media (max-width: 1024px) {
   .dash-hero-stats {

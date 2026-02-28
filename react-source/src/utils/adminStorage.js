@@ -96,6 +96,21 @@ export async function getPaymentStats() {
   };
 }
 
+/** 회원 등급(role) 변경 */
+export async function updateUserRole(userId, role) {
+  const client = getSupabase();
+  if (!client) return { error: 'Supabase client not available' };
+  const { error } = await client
+    .from('user_profiles')
+    .update({ role })
+    .eq('id', userId);
+  if (error) {
+    console.error('updateUserRole error:', error);
+    return { error };
+  }
+  return { success: true };
+}
+
 /** 최근 주문 N건 */
 export async function getRecentOrders(limit = 5) {
   const client = getSupabase();

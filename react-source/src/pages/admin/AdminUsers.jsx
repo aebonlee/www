@@ -1,24 +1,29 @@
-import { useState, useEffect, useMemo } from 'react';
+import { useState, useEffect, useMemo, useCallback } from 'react';
 import AdminDataTable from '../../components/admin/AdminDataTable';
-import { getAllUsers } from '../../utils/adminStorage';
+import { getAllUsers, updateUserRole } from '../../utils/adminStorage';
 import { ADMIN_EMAILS } from '../../config/admin';
 
 const PROVIDER_LABELS = { google: 'Google', kakao: 'Kakao', email: 'Email' };
+
+const ROLE_OPTIONS = [
+  { value: 'admin', label: '관리자', color: 'red' },
+  { value: 'vip', label: 'VIP회원', color: 'purple' },
+  { value: 'member', label: '정회원', color: 'blue' },
+  { value: 'associate', label: '준회원', color: 'gray' },
+];
+
+const ROLE_MAP = Object.fromEntries(ROLE_OPTIONS.map((r) => [r.value, r]));
 
 /** signup_domain에서 사이트 이름 추출 — 예: hohai.dreamitbiz.com → hohai */
 const getSiteName = (domain) => {
   if (!domain) return '-';
   const d = domain.toLowerCase();
-  // dreamitbiz.com 하위 도메인 추출
   if (d.endsWith('.dreamitbiz.com')) {
     const sub = d.replace('.dreamitbiz.com', '');
     return sub || 'www';
   }
-  // dreamitbiz.com 자체
   if (d === 'dreamitbiz.com' || d === 'www.dreamitbiz.com') return 'www';
-  // localhost 등 개발환경
   if (d.includes('localhost') || d.includes('127.0.0.1')) return 'localhost';
-  // 기타 도메인은 그대로
   return d;
 };
 
@@ -34,11 +39,18 @@ const getSiteColor = (siteName) => {
   return colorMap[siteName] || 'gray';
 };
 
+/** 유저의 실제 role 결정 (ADMIN_EMAILS이면 admin 강제) */
+const resolveRole = (user) => {
+  if (ADMIN_EMAILS.includes((user.email || '').toLowerCase())) return 'admin';
+  return user.role || 'member';
+};
+
 const AdminUsers = () => {
   const [users, setUsers] = useState([]);
   const [loading, setLoading] = useState(true);
   const [filter, setFilter] = useState('all');
   const [siteFilter, setSiteFilter] = useState('all');
+  const [roleFilter, setRoleFilter] = useState('all');
 
   useEffect(() => {
     getAllUsers().then((data) => {
@@ -47,16 +59,26 @@ const AdminUsers = () => {
     });
   }, []);
 
+  const handleRoleChange = useCallback(async (userId, newRole) => {
+    setUsers((prev) =>
+      prev.map((u) => (u.id === userId ? { ...u, role: newRole } : u))
+    );
+    const result = await updateUserRole(userId, newRole);
+    if (result.error) {
+      alert('등급 변경에 실패했습니다.');
+      setUsers((prev) =>
+        prev.map((u) => (u.id === userId ? { ...u, role: u.role } : u))
+      );
+    }
+  }, []);
+
   const providers = useMemo(() => {
-    const provs = [...new Set(users.map((u) => u.provider || 'email'))];
-    return provs;
+    return [...new Set(users.map((u) => u.provider || 'email'))];
   }, [users]);
 
-  /** 가입 사이트(하위 도메인) 목록 */
   const siteNames = useMemo(() => {
     const names = [...new Set(users.map((u) => getSiteName(u.signup_domain)))];
-    // 미설정('-')은 맨 뒤로
-    return names.filter(n => n !== '-').sort().concat(names.includes('-') ? ['-'] : []);
+    return names.filter((n) => n !== '-').sort().concat(names.includes('-') ? ['-'] : []);
   }, [users]);
 
   const filtered = useMemo(() => {
@@ -67,8 +89,11 @@ const AdminUsers = () => {
     if (siteFilter !== 'all') {
       list = list.filter((u) => getSiteName(u.signup_domain) === siteFilter);
     }
+    if (roleFilter !== 'all') {
+      list = list.filter((u) => resolveRole(u) === roleFilter);
+    }
     return list;
-  }, [users, filter, siteFilter]);
+  }, [users, filter, siteFilter, roleFilter]);
 
   const columns = [
     { key: 'id', label: 'ID', width: '80px' },
@@ -76,7 +101,7 @@ const AdminUsers = () => {
       key: 'display_name',
       label: '이름',
       className: 'td-title',
-      render: (val) => val || '-'
+      render: (val) => val || '-',
     },
     { key: 'email', label: '이메일' },
     {
@@ -91,7 +116,7 @@ const AdminUsers = () => {
             {PROVIDER_LABELS[p] || p}
           </span>
         );
-      }
+      },
     },
     {
       key: 'signup_domain',
@@ -101,24 +126,40 @@ const AdminUsers = () => {
         const name = getSiteName(val);
         const color = getSiteColor(name);
         return <span className={`td-badge ${color}`}>{name}</span>;
-      }
+      },
     },
     {
       key: 'role',
-      label: '권한',
-      width: '80px',
+      label: '등급',
+      width: '120px',
       render: (val, row) => {
-        const isAdmin = val === 'admin' || ADMIN_EMAILS.includes((row.email || '').toLowerCase());
-        return isAdmin
-          ? <span className="td-badge red">관리자</span>
-          : <span className="td-badge gray">일반</span>;
-      }
+        const isAdminEmail = ADMIN_EMAILS.includes((row.email || '').toLowerCase());
+        const currentRole = resolveRole(row);
+
+        if (isAdminEmail) {
+          return <span className="td-badge red">관리자</span>;
+        }
+
+        return (
+          <select
+            className={`role-select role-${currentRole}`}
+            value={currentRole}
+            onChange={(e) => handleRoleChange(row.id, e.target.value)}
+          >
+            {ROLE_OPTIONS.map((opt) => (
+              <option key={opt.value} value={opt.value}>
+                {opt.label}
+              </option>
+            ))}
+          </select>
+        );
+      },
     },
     {
       key: 'created_at',
       label: '가입일',
-      render: (val) => val ? val.slice(0, 10) : '-'
-    }
+      render: (val) => (val ? val.slice(0, 10) : '-'),
+    },
   ];
 
   return (
@@ -126,37 +167,83 @@ const AdminUsers = () => {
       <div className="admin-page-header">
         <h2>회원 관리</h2>
       </div>
+
+      {/* 등급 필터 */}
+      <div className="admin-filter-tabs">
+        <button
+          className={`admin-filter-tab ${roleFilter === 'all' ? 'active' : ''}`}
+          onClick={() => setRoleFilter('all')}
+        >
+          전체 등급<span className="admin-filter-count">({users.length})</span>
+        </button>
+        {ROLE_OPTIONS.map((opt) => {
+          const count = users.filter((u) => resolveRole(u) === opt.value).length;
+          if (count === 0) return null;
+          return (
+            <button
+              key={opt.value}
+              className={`admin-filter-tab ${roleFilter === opt.value ? 'active' : ''}`}
+              onClick={() => setRoleFilter(opt.value)}
+            >
+              {opt.label}<span className="admin-filter-count">({count})</span>
+            </button>
+          );
+        })}
+      </div>
+
       {/* 가입방법 필터 */}
       <div className="admin-filter-tabs">
-        <button className={`admin-filter-tab ${filter === 'all' ? 'active' : ''}`} onClick={() => setFilter('all')}>
+        <button
+          className={`admin-filter-tab ${filter === 'all' ? 'active' : ''}`}
+          onClick={() => setFilter('all')}
+        >
           전체<span className="admin-filter-count">({users.length})</span>
         </button>
         {providers.map((prov) => {
           const count = users.filter((u) => (u.provider || 'email') === prov).length;
           return (
-            <button key={prov} className={`admin-filter-tab ${filter === prov ? 'active' : ''}`} onClick={() => setFilter(prov)}>
-              {PROVIDER_LABELS[prov] || prov}<span className="admin-filter-count">({count})</span>
+            <button
+              key={prov}
+              className={`admin-filter-tab ${filter === prov ? 'active' : ''}`}
+              onClick={() => setFilter(prov)}
+            >
+              {PROVIDER_LABELS[prov] || prov}
+              <span className="admin-filter-count">({count})</span>
             </button>
           );
         })}
       </div>
+
       {/* 가입 사이트(하위 도메인) 필터 */}
       {siteNames.length > 1 && (
         <div className="admin-filter-tabs">
-          <button className={`admin-filter-tab ${siteFilter === 'all' ? 'active' : ''}`} onClick={() => setSiteFilter('all')}>
+          <button
+            className={`admin-filter-tab ${siteFilter === 'all' ? 'active' : ''}`}
+            onClick={() => setSiteFilter('all')}
+          >
             전체 사이트<span className="admin-filter-count">({filtered.length})</span>
           </button>
           {siteNames.map((name) => {
-            const count = users.filter((u) => getSiteName(u.signup_domain) === name && (filter === 'all' || (u.provider || 'email') === filter)).length;
+            const count = users.filter(
+              (u) =>
+                getSiteName(u.signup_domain) === name &&
+                (filter === 'all' || (u.provider || 'email') === filter)
+            ).length;
             if (count === 0) return null;
             return (
-              <button key={name} className={`admin-filter-tab ${siteFilter === name ? 'active' : ''}`} onClick={() => setSiteFilter(name)}>
-                {name === '-' ? '미설정' : name}<span className="admin-filter-count">({count})</span>
+              <button
+                key={name}
+                className={`admin-filter-tab ${siteFilter === name ? 'active' : ''}`}
+                onClick={() => setSiteFilter(name)}
+              >
+                {name === '-' ? '미설정' : name}
+                <span className="admin-filter-count">({count})</span>
               </button>
             );
           })}
         </div>
       )}
+
       <AdminDataTable
         columns={columns}
         data={filtered}
