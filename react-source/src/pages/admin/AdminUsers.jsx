@@ -29,17 +29,8 @@ const SITE_OPTIONS = [
 
 const STATUS_OPTIONS = [
   { value: 'active', label: '정상', color: 'green' },
-  { value: 'suspended', label: '정지', color: 'yellow' },
   { value: 'banned', label: '차단', color: 'red' },
   { value: 'deleted', label: '탈퇴', color: 'gray' },
-];
-
-const SUSPEND_PRESETS = [
-  { label: '1일', days: 1 },
-  { label: '3일', days: 3 },
-  { label: '7일', days: 7 },
-  { label: '30일', days: 30 },
-  { label: '90일', days: 90 },
 ];
 
 /** signup_domain에서 사이트 이름 추출 — 예: hohai.dreamitbiz.com → hohai */
@@ -92,10 +83,6 @@ const AdminUsers = () => {
   // 수정 폼
   const [editName, setEditName] = useState('');
 
-  // 정지 폼
-  const [suspendDays, setSuspendDays] = useState(null);
-  const [suspendReason, setSuspendReason] = useState('');
-
   // 차단 폼
   const [banReason, setBanReason] = useState('');
 
@@ -139,7 +126,6 @@ const AdminUsers = () => {
     setActionTarget({ user, type });
     setActionLoading(false);
     if (type === 'edit') setEditName(user.display_name || '');
-    if (type === 'suspend') { setSuspendDays(null); setSuspendReason(''); }
     if (type === 'ban') setBanReason('');
   };
 
@@ -158,28 +144,6 @@ const AdminUsers = () => {
     } else {
       setUsers((prev) =>
         prev.map((u) => u.id === actionTarget.user.id ? { ...u, display_name: editName } : u)
-      );
-      closeAction();
-    }
-    setActionLoading(false);
-  };
-
-  // 정지 실행
-  const handleSuspend = async () => {
-    if (!actionTarget || !suspendDays) return;
-    setActionLoading(true);
-    const until = new Date();
-    until.setDate(until.getDate() + suspendDays);
-    const result = await updateUserStatus(
-      actionTarget.user.id, 'suspended', suspendReason || null, until.toISOString()
-    );
-    if (result.error) {
-      alert('정지 실패: ' + result.error);
-    } else {
-      setUsers((prev) =>
-        prev.map((u) => u.id === actionTarget.user.id
-          ? { ...u, status: 'suspended', suspended_until: until.toISOString(), status_reason: suspendReason }
-          : u)
       );
       closeAction();
     }
@@ -371,10 +335,10 @@ const AdminUsers = () => {
     if (isProtectedAdmin(row)) return null;
     const status = row.status || 'active';
 
-    if (status === 'suspended' || status === 'banned') {
+    if (status === 'banned') {
       return (
         <div className="admin-row-actions">
-          <button className="admin-row-btn" onClick={() => handleRestore(row)}>복구</button>
+          <button className="admin-row-btn" onClick={() => handleRestore(row)}>해제</button>
           <button className="admin-row-btn danger" onClick={() => handleDelete(row)}>삭제</button>
         </div>
       );
@@ -392,7 +356,6 @@ const AdminUsers = () => {
     return (
       <div className="admin-row-actions">
         <button className="admin-row-btn" onClick={() => openAction(row, 'edit')}>수정</button>
-        <button className="admin-row-btn" onClick={() => openAction(row, 'suspend')}>정지</button>
         <button className="admin-row-btn danger" onClick={() => openAction(row, 'ban')}>차단</button>
         <button className="admin-row-btn danger" onClick={() => handleDelete(row)}>삭제</button>
       </div>
@@ -409,8 +372,7 @@ const AdminUsers = () => {
         <div className="admin-user-action-panel-header">
           <strong>
             {type === 'edit' && '프로필 수정'}
-            {type === 'suspend' && '기간 정지'}
-            {type === 'ban' && '영구 차단'}
+            {type === 'ban' && '접근 차단'}
           </strong>
           <span className="admin-user-action-target">
             {user.display_name || user.email}
@@ -438,38 +400,6 @@ const AdminUsers = () => {
           </div>
         )}
 
-        {type === 'suspend' && (
-          <div className="admin-user-action-body">
-            <label>정지 기간</label>
-            <div className="admin-suspend-presets">
-              {SUSPEND_PRESETS.map((p) => (
-                <button
-                  key={p.days}
-                  className={`admin-row-btn ${suspendDays === p.days ? 'active' : ''}`}
-                  onClick={() => setSuspendDays(p.days)}
-                >
-                  {p.label}
-                </button>
-              ))}
-            </div>
-            <label>사유 (선택)</label>
-            <input
-              type="text"
-              className="admin-action-input"
-              value={suspendReason}
-              onChange={(e) => setSuspendReason(e.target.value)}
-              placeholder="정지 사유 입력"
-            />
-            <button
-              className="admin-row-btn danger"
-              onClick={handleSuspend}
-              disabled={actionLoading || !suspendDays}
-            >
-              {actionLoading ? '처리 중...' : '정지 적용'}
-            </button>
-          </div>
-        )}
-
         {type === 'ban' && (
           <div className="admin-user-action-body">
             <label>사유 (선택)</label>
@@ -485,7 +415,7 @@ const AdminUsers = () => {
               onClick={handleBan}
               disabled={actionLoading}
             >
-              {actionLoading ? '처리 중...' : '영구 차단'}
+              {actionLoading ? '처리 중...' : '차단 적용'}
             </button>
           </div>
         )}

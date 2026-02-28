@@ -1598,12 +1598,6 @@
   box-shadow: 0 0 0 2px rgba(0, 70, 200, 0.1);
 }
 
-.admin-suspend-presets {
-  display: flex;
-  gap: 6px;
-  flex-wrap: wrap;
-}
-
 .admin-row-btn.active {
   background: var(--primary-blue);
   border-color: var(--primary-blue);
