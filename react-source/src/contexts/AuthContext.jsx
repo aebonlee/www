@@ -17,18 +17,21 @@ export const AuthProvider = ({ children }) => {
       return;
     }
     const p = await getProfile(authUser.id);
-    // signup_domain이 없으면 현재 접속 도메인 자동 저장
-    if (p && !p.signup_domain) {
-      const hostname = window.location.hostname;
-      try {
-        const updated = await updateProfile(authUser.id, { signup_domain: hostname });
-        setProfile(updated);
-      } catch {
-        // 컬럼 미존재 등 오류 시 무시
+    // signup_domain 또는 role이 미설정이면 자동 초기화
+    if (p) {
+      const updates = {};
+      if (!p.signup_domain) updates.signup_domain = window.location.hostname;
+      if (!p.role || p.role === 'user') updates.role = 'member';
+      if (Object.keys(updates).length > 0) {
+        try {
+          const updated = await updateProfile(authUser.id, updates);
+          setProfile(updated);
+        } catch {
+          setProfile(p);
+        }
+      } else {
         setProfile(p);
       }
-    } else {
-      setProfile(p);
     }
 
     // 계정 상태 체크

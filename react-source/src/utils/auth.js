@@ -47,7 +47,10 @@ export async function signUp(email, password, displayName) {
     email,
     password,
     options: {
-      data: { full_name: displayName }
+      data: {
+        full_name: displayName,
+        signup_domain: window.location.hostname,
+      }
     }
   });
   if (error) throw error;

@@ -3,6 +3,32 @@
 -- Supabase Dashboard > SQL Editor에서 실행
 -- ============================================
 
+-- ── 0. role 기본값 'member'로 변경 + signup_domain 컬럼 ──
+ALTER TABLE user_profiles ALTER COLUMN role SET DEFAULT 'member';
+ALTER TABLE user_profiles ADD COLUMN IF NOT EXISTS signup_domain TEXT;
+
+-- ── 0-1. 회원가입 트리거 업데이트 (role='member', signup_domain 자동 설정) ──
+CREATE OR REPLACE FUNCTION public.handle_new_user()
+RETURNS TRIGGER AS $$
+BEGIN
+  INSERT INTO public.user_profiles (id, email, display_name, avatar_url, provider, role, signup_domain)
+  VALUES (
+    NEW.id,
+    NEW.email,
+    COALESCE(
+      NEW.raw_user_meta_data->>'full_name',
+      NEW.raw_user_meta_data->>'name',
+      split_part(NEW.email, '@', 1)
+    ),
+    NEW.raw_user_meta_data->>'avatar_url',
+    NEW.raw_app_meta_data->>'provider',
+    'member',
+    NEW.raw_user_meta_data->>'signup_domain'
+  );
+  RETURN NEW;
+END;
+$$ LANGUAGE plpgsql SECURITY DEFINER;
+
 -- ── 1. user_profiles 테이블 컬럼 추가 ──
 ALTER TABLE user_profiles ADD COLUMN IF NOT EXISTS status TEXT DEFAULT 'active';
 ALTER TABLE user_profiles ADD COLUMN IF NOT EXISTS suspended_until TIMESTAMPTZ;
