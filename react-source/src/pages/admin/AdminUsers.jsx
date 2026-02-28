@@ -1,6 +1,6 @@
 import { useState, useEffect, useMemo, useCallback } from 'react';
 import AdminDataTable from '../../components/admin/AdminDataTable';
-import { getAllUsers, updateUserRole } from '../../utils/adminStorage';
+import { getAllUsers, updateUserRole, updateUserSignupDomain } from '../../utils/adminStorage';
 import { ADMIN_EMAILS } from '../../config/admin';
 
 const PROVIDER_LABELS = { google: 'Google', kakao: 'Kakao', email: 'Email' };
@@ -10,6 +10,14 @@ const ROLE_OPTIONS = [
   { value: 'vip', label: 'VIP회원', color: 'purple' },
   { value: 'member', label: '정회원', color: 'blue' },
   { value: 'associate', label: '준회원', color: 'gray' },
+];
+
+const SITE_OPTIONS = [
+  { value: 'hohai.dreamitbiz.com', label: 'hohai', color: 'blue' },
+  { value: 'books.dreamitbiz.com', label: 'books', color: 'green' },
+  { value: 'competency.dreamitbiz.com', label: 'competency', color: 'purple' },
+  { value: 'ahp-basic.dreamitbiz.com', label: 'ahp-basic', color: 'red' },
+  { value: 'www.dreamitbiz.com', label: 'www', color: 'yellow' },
 ];
 
 /** signup_domain에서 사이트 이름 추출 — 예: hohai.dreamitbiz.com → hohai */
@@ -70,6 +78,19 @@ const AdminUsers = () => {
     }
   }, []);
 
+  const handleSiteChange = useCallback(async (userId, newDomain) => {
+    setUsers((prev) =>
+      prev.map((u) => (u.id === userId ? { ...u, signup_domain: newDomain } : u))
+    );
+    const result = await updateUserSignupDomain(userId, newDomain);
+    if (result.error) {
+      alert('가입 사이트 변경에 실패했습니다.');
+      setUsers((prev) =>
+        prev.map((u) => (u.id === userId ? { ...u, signup_domain: u.signup_domain } : u))
+      );
+    }
+  }, []);
+
   const siteNames = useMemo(() => {
     const names = [...new Set(users.map((u) => getSiteName(u.signup_domain)))];
     return names.filter((n) => n !== '-').sort().concat(names.includes('-') ? ['-'] : []);
@@ -112,11 +133,25 @@ const AdminUsers = () => {
     {
       key: 'signup_domain',
       label: '방문 가입 사이트',
-      width: '140px',
-      render: (val) => {
+      width: '160px',
+      render: (val, row) => {
         const name = getSiteName(val);
         const color = getSiteColor(name);
-        return <span className={`td-badge ${color}`}>{name}</span>;
+
+        return (
+          <select
+            className={`role-select role-site-${color}`}
+            value={val || ''}
+            onChange={(e) => handleSiteChange(row.id, e.target.value)}
+          >
+            {!val && <option value="">미설정</option>}
+            {SITE_OPTIONS.map((opt) => (
+              <option key={opt.value} value={opt.value}>
+                {opt.label}
+              </option>
+            ))}
+          </select>
+        );
       },
     },
     {
