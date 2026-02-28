@@ -96,32 +96,40 @@ export async function getPaymentStats() {
   };
 }
 
-/** 회원 등급(role) 변경 */
+/** 회원 등급(role) 변경 — RLS 우회를 위해 rpc() 사용 */
 export async function updateUserRole(userId, role) {
   const client = getSupabase();
   if (!client) return { error: 'Supabase client not available' };
-  const { error } = await client
-    .from('user_profiles')
-    .update({ role })
-    .eq('id', userId);
+  const { data, error } = await client.rpc('update_user_role', {
+    target_user_id: userId,
+    new_role: role,
+  });
   if (error) {
     console.error('updateUserRole error:', error);
-    return { error };
+    return { error: error.message };
+  }
+  if (data?.error) {
+    console.error('updateUserRole denied:', data.error);
+    return { error: data.error };
   }
   return { success: true };
 }
 
-/** 회원 가입 사이트(signup_domain) 변경 */
+/** 회원 가입 사이트(signup_domain) 변경 — RLS 우회를 위해 rpc() 사용 */
 export async function updateUserSignupDomain(userId, domain) {
   const client = getSupabase();
   if (!client) return { error: 'Supabase client not available' };
-  const { error } = await client
-    .from('user_profiles')
-    .update({ signup_domain: domain })
-    .eq('id', userId);
+  const { data, error } = await client.rpc('update_user_signup_domain', {
+    target_user_id: userId,
+    new_domain: domain,
+  });
   if (error) {
     console.error('updateUserSignupDomain error:', error);
-    return { error };
+    return { error: error.message };
+  }
+  if (data?.error) {
+    console.error('updateUserSignupDomain denied:', data.error);
+    return { error: data.error };
   }
   return { success: true };
 }
