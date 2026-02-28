@@ -9,6 +9,7 @@ export const AuthProvider = ({ children }) => {
   const [user, setUser] = useState(null);
   const [profile, setProfile] = useState(null);
   const [loading, setLoading] = useState(true);
+  const [accountBlock, setAccountBlock] = useState(null);
 
   const loadProfile = useCallback(async (authUser) => {
     if (!authUser) {
@@ -22,12 +23,36 @@ export const AuthProvider = ({ children }) => {
       try {
         const updated = await updateProfile(authUser.id, { signup_domain: hostname });
         setProfile(updated);
-        return;
       } catch {
         // 컬럼 미존재 등 오류 시 무시
+        setProfile(p);
       }
+    } else {
+      setProfile(p);
     }
-    setProfile(p);
+
+    // 계정 상태 체크
+    try {
+      const client = getSupabase();
+      if (client) {
+        const { data: statusData } = await client.rpc('check_user_status', {
+          target_user_id: authUser.id,
+        });
+        if (statusData && statusData.status && statusData.status !== 'active') {
+          setAccountBlock({
+            status: statusData.status,
+            reason: statusData.reason || '',
+            suspended_until: statusData.suspended_until || null,
+          });
+          await authSignOut();
+          setUser(null);
+          setProfile(null);
+          return;
+        }
+      }
+    } catch {
+      // check_user_status 함수 미존재 시 무시
+    }
   }, []);
 
   useEffect(() => {
@@ -93,7 +118,9 @@ export const AuthProvider = ({ children }) => {
       isLoggedIn,
       isAdmin,
       signOut,
-      refreshProfile
+      refreshProfile,
+      accountBlock,
+      clearAccountBlock: () => setAccountBlock(null),
     }}>
       {children}
     </AuthContext.Provider>

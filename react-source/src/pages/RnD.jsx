@@ -15,7 +15,7 @@ const RnD = () => {
     {
       period: '2025.08 ~ 2025.12',
       duration: isEn ? '5 months' : '5개월',
-      title: isEn ? 'AHP Research Platform Development' : 'AHP 연구 플랫폼 개발',
+      title: isEn ? 'AHP Research Platform Development (Patent Filed Dec. 2025)' : 'AHP 연구 플랫폼 개발 (2025. 12 특허출원등록)',
       type: isEn ? 'Research Platform Development' : '연구 플랫폼 개발',
       desc: isEn
         ? 'Developed a web-based research platform implementing the Analytic Hierarchy Process (AHP), a structured multi-criteria decision-making methodology. The platform enables researchers to design pairwise comparison surveys, collect respondent data, and automatically calculate priority weights with consistency ratio (CR) validation. Supports hierarchical criteria modeling and result visualization for academic and institutional research applications.'

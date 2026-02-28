@@ -1161,3 +1161,42 @@
 [data-theme="dark"] .td-badge.blue { background: #1E3A5F; color: #93C5FD; }
 [data-theme="dark"] .td-badge.purple { background: #4C1D95; color: #C4B5FD; }
 [data-theme="dark"] .td-badge.gray { background: #374151; color: #9CA3AF; }
+
+/* ── User Action Panel Dark Mode ── */
+[data-theme="dark"] .admin-user-action-panel {
+  background: #1F2937;
+  border-color: #374151;
+}
+
+[data-theme="dark"] .admin-user-action-panel-header {
+  color: #F3F4F6;
+}
+
+[data-theme="dark"] .admin-user-action-target {
+  color: var(--primary-blue-light);
+}
+
+[data-theme="dark"] .admin-user-action-body label {
+  color: #9CA3AF;
+}
+
+[data-theme="dark"] .admin-action-input {
+  background: #111827;
+  border-color: #374151;
+  color: #F3F4F6;
+}
+
+[data-theme="dark"] .admin-action-input:focus {
+  border-color: var(--primary-blue);
+  box-shadow: 0 0 0 2px rgba(74, 143, 231, 0.15);
+}
+
+[data-theme="dark"] .admin-action-input::placeholder {
+  color: #6B7280;
+}
+
+[data-theme="dark"] .admin-row-btn.active {
+  background: var(--primary-blue);
+  border-color: var(--primary-blue);
+  color: #fff;
+}

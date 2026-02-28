@@ -1545,6 +1545,71 @@
   color: var(--text-primary);
 }
 
+/* ── User Action Panel ── */
+.admin-user-action-panel {
+  background: var(--bg-white);
+  border: 1px solid var(--border-light);
+  border-radius: var(--radius-md);
+  padding: 16px 20px;
+  margin-bottom: 16px;
+}
+
+.admin-user-action-panel-header {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 12px;
+  font-size: 14px;
+}
+
+.admin-user-action-target {
+  color: var(--primary-blue);
+  font-weight: 600;
+}
+
+.admin-user-action-body {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  flex-wrap: wrap;
+  font-size: 13px;
+}
+
+.admin-user-action-body label {
+  font-weight: 600;
+  color: var(--text-secondary);
+  white-space: nowrap;
+}
+
+.admin-action-input {
+  padding: 6px 12px;
+  border: 1px solid var(--border-medium);
+  border-radius: var(--radius-sm);
+  font-size: 13px;
+  outline: none;
+  min-width: 200px;
+  transition: border-color 0.2s;
+  background: var(--bg-white);
+  color: var(--text-primary);
+}
+
+.admin-action-input:focus {
+  border-color: var(--primary-blue);
+  box-shadow: 0 0 0 2px rgba(0, 70, 200, 0.1);
+}
+
+.admin-suspend-presets {
+  display: flex;
+  gap: 6px;
+  flex-wrap: wrap;
+}
+
+.admin-row-btn.active {
+  background: var(--primary-blue);
+  border-color: var(--primary-blue);
+  color: #fff;
+}
+
 /* ── td-badge standalone (outside table) ── */
 .td-badge {
   display: inline-block;

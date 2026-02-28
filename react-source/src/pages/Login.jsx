@@ -8,7 +8,7 @@ import '../styles/auth.css';
 
 const Login = () => {
   const { t } = useLanguage();
-  const { isLoggedIn } = useAuth();
+  const { isLoggedIn, accountBlock, clearAccountBlock } = useAuth();
   const navigate = useNavigate();
   const location = useLocation();
   const from = location.state?.from?.pathname || '/';
@@ -73,6 +73,39 @@ const Login = () => {
           </div>
           <h2 className="auth-heading">{t('auth.loginTitle')}</h2>
           <p className="auth-sub">{t('auth.loginSubtitle')}</p>
+
+          {accountBlock && (
+            <div className="auth-error" style={{ marginBottom: '16px' }}>
+              {accountBlock.status === 'suspended' && (
+                <>
+                  계정이 정지되었습니다.
+                  {accountBlock.reason && <> 사유: {accountBlock.reason}</>}
+                  {accountBlock.suspended_until && (
+                    <> | 해제일: {new Date(accountBlock.suspended_until).toLocaleDateString('ko-KR')}</>
+                  )}
+                </>
+              )}
+              {accountBlock.status === 'banned' && (
+                <>
+                  계정이 영구 차단되었습니다.
+                  {accountBlock.reason && <> 사유: {accountBlock.reason}</>}
+                </>
+              )}
+              {accountBlock.status === 'deleted' && (
+                <>탈퇴 처리된 계정입니다.</>
+              )}
+              <button
+                onClick={clearAccountBlock}
+                style={{
+                  display: 'block', marginTop: '8px', background: 'none',
+                  border: 'none', textDecoration: 'underline', cursor: 'pointer',
+                  color: 'inherit', fontSize: '12px', padding: 0,
+                }}
+              >
+                닫기
+              </button>
+            </div>
+          )}
 
           {step === 'method' ? (
             <>

@@ -134,6 +134,64 @@ export async function updateUserSignupDomain(userId, domain) {
   return { success: true };
 }
 
+/** 회원 상태 변경 (정지/차단/복구/소프트삭제) — rpc() 사용 */
+export async function updateUserStatus(userId, status, reason = null, suspendedUntil = null) {
+  const client = getSupabase();
+  if (!client) return { error: 'Supabase client not available' };
+  const { data, error } = await client.rpc('admin_update_user_status', {
+    target_user_id: userId,
+    new_status: status,
+    reason,
+    suspend_until: suspendedUntil,
+  });
+  if (error) {
+    console.error('updateUserStatus error:', error);
+    return { error: error.message };
+  }
+  if (data?.error) {
+    console.error('updateUserStatus denied:', data.error);
+    return { error: data.error };
+  }
+  return { success: true };
+}
+
+/** 관리자 프로필 수정 (display_name) — rpc() 사용 */
+export async function adminUpdateUserProfile(userId, displayName) {
+  const client = getSupabase();
+  if (!client) return { error: 'Supabase client not available' };
+  const { data, error } = await client.rpc('admin_update_user_profile', {
+    target_user_id: userId,
+    new_display_name: displayName,
+  });
+  if (error) {
+    console.error('adminUpdateUserProfile error:', error);
+    return { error: error.message };
+  }
+  if (data?.error) {
+    console.error('adminUpdateUserProfile denied:', data.error);
+    return { error: data.error };
+  }
+  return { success: true };
+}
+
+/** 회원 완전 삭제 (auth.users CASCADE) — rpc() 사용 */
+export async function deleteUser(userId) {
+  const client = getSupabase();
+  if (!client) return { error: 'Supabase client not available' };
+  const { data, error } = await client.rpc('admin_delete_user', {
+    target_user_id: userId,
+  });
+  if (error) {
+    console.error('deleteUser error:', error);
+    return { error: error.message };
+  }
+  if (data?.error) {
+    console.error('deleteUser denied:', data.error);
+    return { error: data.error };
+  }
+  return { success: true };
+}
+
 /** 최근 주문 N건 */
 export async function getRecentOrders(limit = 5) {
   const client = getSupabase();
