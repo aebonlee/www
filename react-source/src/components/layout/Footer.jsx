@@ -46,6 +46,16 @@ const Footer = () => {
             <p>010-3700-0629</p>
             <p>카카오톡: aebon</p>
             <p className="business-hours">평일: 09:00 ~ 18:00</p>
+
+            <div className="footer-family">
+              <h4>Family Site</h4>
+              <ul>
+                <li><a href="https://books.dreamitbiz.com" target="_blank" rel="noopener noreferrer">DreamIT Biz 출판사</a></li>
+                <li><a href="https://hohai.dreamitbiz.com" target="_blank" rel="noopener noreferrer">호해 - 학습관리(LMS)</a></li>
+                <li><a href="https://ahp-basic.dreamitbiz.com" target="_blank" rel="noopener noreferrer">AHP 연구 플랫폼</a></li>
+                <li><a href="https://competency.dreamitbiz.com" target="_blank" rel="noopener noreferrer">핵심역량 자가측정</a></li>
+              </ul>
+            </div>
           </div>
         </div>
         <div className="footer-bottom">
