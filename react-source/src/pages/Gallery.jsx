@@ -1,4 +1,4 @@
-import { useState, useEffect, useCallback } from 'react';
+import { useState, useEffect, useCallback, memo } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { useLanguage } from '../contexts/LanguageContext';
 import { useAuth } from '../contexts/AuthContext';
@@ -20,6 +20,58 @@ const GRADIENTS = [
   'linear-gradient(135deg, #fccb90 0%, #d57eeb 100%)',
   'linear-gradient(135deg, #89f7fe 0%, #66a6ff 100%)',
 ];
+
+const GalleryCard = memo(({ item, index, language, isAdmin, getGradient, getCategoryLabel, openLightbox, handleEdit, handleDelete, t }) => (
+  <div
+    className="gallery-card"
+    data-aos="fade-up"
+    data-aos-delay={index * 50}
+    onClick={() => openLightbox(item)}
+  >
+    <div className="gallery-thumb">
+      {item.imageUrl ? (
+        <img
+          src={item.imageUrl}
+          alt={language === 'en' ? item.titleEn : item.title}
+          className="gallery-thumb-image"
+          loading="lazy"
+        />
+      ) : (
+        <div
+          className="gallery-thumb-gradient"
+          style={{ background: getGradient(item.id) }}
+        >
+          <span className="gallery-thumb-label">
+            {language === 'en' ? item.titleEn : item.title}
+          </span>
+        </div>
+      )}
+      <div className="gallery-overlay">
+        <span className="gallery-overlay-icon">+</span>
+      </div>
+    </div>
+    <div className="gallery-info">
+      <span className="gallery-category-badge">{getCategoryLabel(item.category)}</span>
+      <h4>{language === 'en' ? item.titleEn : item.title}</h4>
+      {(language === 'en' ? item.descriptionEn : item.description) && (
+        <p className="gallery-desc">
+          {language === 'en' ? item.descriptionEn : item.description}
+        </p>
+      )}
+      <span className="gallery-date">{item.date}</span>
+      {isAdmin && (
+        <div className="gallery-admin-actions">
+          <button className="gallery-admin-btn edit" onClick={(e) => handleEdit(e, item)} title={t('community.edit') || '수정'}>
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"/><path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"/></svg>
+          </button>
+          <button className="gallery-admin-btn delete" onClick={(e) => handleDelete(e, item)} title={t('community.delete') || '삭제'}>
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><polyline points="3 6 5 6 21 6"/><path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"/></svg>
+          </button>
+        </div>
+      )}
+    </div>
+  </div>
+));
 
 const Gallery = () => {
   const { t, language } = useLanguage();
@@ -167,55 +219,19 @@ const Gallery = () => {
           <>
           <div className="gallery-grid">
             {paginatedItems.map((item, i) => (
-              <div
+              <GalleryCard
                 key={item.id}
-                className="gallery-card"
-                data-aos="fade-up"
-                data-aos-delay={i * 50}
-                onClick={() => openLightbox(item)}
-              >
-                <div className="gallery-thumb">
-                  {item.imageUrl ? (
-                    <img
-                      src={item.imageUrl}
-                      alt={language === 'en' ? item.titleEn : item.title}
-                      className="gallery-thumb-image"
-                    />
-                  ) : (
-                    <div
-                      className="gallery-thumb-gradient"
-                      style={{ background: getGradient(item.id) }}
-                    >
-                      <span className="gallery-thumb-label">
-                        {language === 'en' ? item.titleEn : item.title}
-                      </span>
-                    </div>
-                  )}
-                  <div className="gallery-overlay">
-                    <span className="gallery-overlay-icon">+</span>
-                  </div>
-                </div>
-                <div className="gallery-info">
-                  <span className="gallery-category-badge">{getCategoryLabel(item.category)}</span>
-                  <h4>{language === 'en' ? item.titleEn : item.title}</h4>
-                  {(language === 'en' ? item.descriptionEn : item.description) && (
-                    <p className="gallery-desc">
-                      {language === 'en' ? item.descriptionEn : item.description}
-                    </p>
-                  )}
-                  <span className="gallery-date">{item.date}</span>
-                  {isAdmin && (
-                    <div className="gallery-admin-actions">
-                      <button className="gallery-admin-btn edit" onClick={(e) => handleEdit(e, item)} title={t('community.edit') || '수정'}>
-                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"/><path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"/></svg>
-                      </button>
-                      <button className="gallery-admin-btn delete" onClick={(e) => handleDelete(e, item)} title={t('community.delete') || '삭제'}>
-                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><polyline points="3 6 5 6 21 6"/><path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"/></svg>
-                      </button>
-                    </div>
-                  )}
-                </div>
-              </div>
+                item={item}
+                index={i}
+                language={language}
+                isAdmin={isAdmin}
+                getGradient={getGradient}
+                getCategoryLabel={getCategoryLabel}
+                openLightbox={openLightbox}
+                handleEdit={handleEdit}
+                handleDelete={handleDelete}
+                t={t}
+              />
             ))}
           </div>
 

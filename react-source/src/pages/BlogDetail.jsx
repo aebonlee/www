@@ -3,6 +3,7 @@ import { useParams, useNavigate, Link } from 'react-router-dom';
 import { useLanguage } from '../contexts/LanguageContext';
 import { useAuth } from '../contexts/AuthContext';
 import { getBlogPost, deleteBlogPost } from '../utils/boardStorage';
+import CommentSection from '../components/CommentSection';
 
 const BlogDetail = () => {
   const { postId } = useParams();
@@ -61,7 +62,7 @@ const BlogDetail = () => {
           <div className="blog-detail">
             <div className="blog-detail-hero">
               {post.imageUrl ? (
-                <img src={post.imageUrl} alt={title} style={{ width: '100%', height: '100%', objectFit: 'cover', borderRadius: 'var(--radius-md)' }} />
+                <img src={post.imageUrl} alt={title} loading="lazy" style={{ width: '100%', height: '100%', objectFit: 'cover', borderRadius: 'var(--radius-md)' }} />
               ) : (
                 <span>{post.icon}</span>
               )}
@@ -82,6 +83,7 @@ const BlogDetail = () => {
                 </div>
               )}
             </div>
+            <CommentSection postId={postId} postType="blog" />
           </div>
         </div>
       </section>

@@ -185,6 +185,25 @@
     border-left: 4px solid #C62828;
 }
 
+/* Form Validation Errors */
+.form-group.has-error input,
+.form-group.has-error textarea {
+    border-color: #DC2626;
+}
+
+.form-group.has-error input:focus,
+.form-group.has-error textarea:focus {
+    box-shadow: 0 0 0 3px rgba(220, 38, 38, 0.1);
+}
+
+.form-error-msg {
+    display: block;
+    margin-top: 6px;
+    font-size: 13px;
+    color: #DC2626;
+    line-height: 1.4;
+}
+
 /* Company Info Section */
 .company-detail-section {
     padding: 60px 0;

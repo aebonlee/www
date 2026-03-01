@@ -371,7 +371,30 @@ export const translations = {
       subject: '제목',
       message: '메시지',
       submit: '문의 보내기',
-      success: '문의가 접수되었습니다. 빠른 시일 내에 연락드리겠습니다.'
+      success: '문의가 접수되었습니다. 빠른 시일 내에 연락드리겠습니다.',
+      errorEmail: '올바른 이메일 형식을 입력해주세요.',
+      errorPhone: '올바른 전화번호 형식을 입력해주세요.',
+      errorSubmit: '문의 전송에 실패했습니다. 다시 시도해주세요.'
+    },
+    search: {
+      placeholder: '검색어를 입력하세요...',
+      searching: '검색 중...',
+      noResults: '검색 결과가 없습니다.',
+      hint: '블로그, 게시판, 갤러리에서 검색합니다.',
+      blog: '블로그',
+      board: '게시판',
+      gallery: '갤러리'
+    },
+    comments: {
+      title: '댓글',
+      loading: '댓글 로딩 중...',
+      empty: '아직 댓글이 없습니다.',
+      placeholder: '댓글을 입력하세요...',
+      submit: '댓글 작성',
+      submitting: '작성 중...',
+      delete: '삭제',
+      deleteConfirm: '댓글을 삭제하시겠습니까?',
+      loginRequired: '댓글을 작성하려면 로그인이 필요합니다.'
     }
   },
   en: {
@@ -745,7 +768,30 @@ export const translations = {
       subject: 'Subject',
       message: 'Message',
       submit: 'Send Message',
-      success: 'Your inquiry has been submitted. We will get back to you shortly.'
+      success: 'Your inquiry has been submitted. We will get back to you shortly.',
+      errorEmail: 'Please enter a valid email address.',
+      errorPhone: 'Please enter a valid phone number.',
+      errorSubmit: 'Failed to send your inquiry. Please try again.'
+    },
+    search: {
+      placeholder: 'Search...',
+      searching: 'Searching...',
+      noResults: 'No results found.',
+      hint: 'Search across blog, board, and gallery.',
+      blog: 'Blog',
+      board: 'Board',
+      gallery: 'Gallery'
+    },
+    comments: {
+      title: 'Comments',
+      loading: 'Loading comments...',
+      empty: 'No comments yet.',
+      placeholder: 'Write a comment...',
+      submit: 'Post Comment',
+      submitting: 'Posting...',
+      delete: 'Delete',
+      deleteConfirm: 'Are you sure you want to delete this comment?',
+      loginRequired: 'Please log in to leave a comment.'
     }
   }
 };

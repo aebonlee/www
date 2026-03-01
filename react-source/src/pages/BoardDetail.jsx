@@ -3,6 +3,7 @@ import { useParams, useNavigate, Link } from 'react-router-dom';
 import { useLanguage } from '../contexts/LanguageContext';
 import { useAuth } from '../contexts/AuthContext';
 import { getBoardPost, deleteBoardPost, incrementBoardViews } from '../utils/boardStorage';
+import CommentSection from '../components/CommentSection';
 
 const BoardDetail = () => {
   const { postId } = useParams();
@@ -92,6 +93,7 @@ const BoardDetail = () => {
                 </div>
               )}
             </div>
+            <CommentSection postId={postId} postType="board" />
           </div>
         </div>
       </section>

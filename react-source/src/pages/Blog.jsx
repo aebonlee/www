@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, memo } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { useLanguage } from '../contexts/LanguageContext';
 import { useAuth } from '../contexts/AuthContext';
@@ -17,6 +17,40 @@ const estimateReadTime = (text) => {
   }
   return Math.max(1, Math.ceil(text.trim().split(/\s+/).length / 200));
 };
+
+const BlogCard = memo(({ post, index, language, isAdmin, handleEdit, handleDelete, t }) => (
+  <Link
+    to={`/community/blog/${post.id}`}
+    className="blog-card"
+    data-aos="fade-up"
+    data-aos-delay={index * 50}
+    style={{ textDecoration: 'none', color: 'inherit' }}
+  >
+    <div className="blog-image">
+      <span className="blog-image-icon">{post.icon}</span>
+    </div>
+    <div className="blog-content">
+      <div className="blog-meta">
+        <span className="blog-category">
+          {language === 'en' ? post.categoryEn : post.category}
+        </span>
+        <span className="blog-date">{post.date}</span>
+        <span className="blog-read-time">
+          {estimateReadTime(language === 'en' ? post.contentEn : post.content)} min read
+        </span>
+      </div>
+      <h3>{language === 'en' ? post.titleEn : post.title}</h3>
+      <p>{language === 'en' ? post.excerptEn : post.excerpt}</p>
+      <span className="blog-link">{t('community.readMore')} →</span>
+      {isAdmin && (
+        <div className="blog-admin-actions" style={{ display: 'flex', gap: '8px', marginTop: '10px' }}>
+          <button className="board-btn" onClick={(e) => handleEdit(e, post.id)} style={{ fontSize: '13px', padding: '5px 12px' }}>{t('community.edit') || '수정'}</button>
+          <button className="board-btn danger" onClick={(e) => handleDelete(e, post.id)} style={{ fontSize: '13px', padding: '5px 12px' }}>{t('community.delete') || '삭제'}</button>
+        </div>
+      )}
+    </div>
+  </Link>
+));
 
 const Blog = () => {
   const { t, language } = useLanguage();
@@ -127,38 +161,16 @@ const Blog = () => {
 
           <div className="blog-grid">
             {gridPosts.map((post, i) => (
-              <Link
-                to={`/community/blog/${post.id}`}
+              <BlogCard
                 key={post.id}
-                className="blog-card"
-                data-aos="fade-up"
-                data-aos-delay={i * 50}
-                style={{ textDecoration: 'none', color: 'inherit' }}
-              >
-                <div className="blog-image">
-                  <span className="blog-image-icon">{post.icon}</span>
-                </div>
-                <div className="blog-content">
-                  <div className="blog-meta">
-                    <span className="blog-category">
-                      {language === 'en' ? post.categoryEn : post.category}
-                    </span>
-                    <span className="blog-date">{post.date}</span>
-                    <span className="blog-read-time">
-                      {estimateReadTime(language === 'en' ? post.contentEn : post.content)} min read
-                    </span>
-                  </div>
-                  <h3>{language === 'en' ? post.titleEn : post.title}</h3>
-                  <p>{language === 'en' ? post.excerptEn : post.excerpt}</p>
-                  <span className="blog-link">{t('community.readMore')} →</span>
-                  {isAdmin && (
-                    <div className="blog-admin-actions" style={{ display: 'flex', gap: '8px', marginTop: '10px' }}>
-                      <button className="board-btn" onClick={(e) => handleEdit(e, post.id)} style={{ fontSize: '13px', padding: '5px 12px' }}>{t('community.edit') || '수정'}</button>
-                      <button className="board-btn danger" onClick={(e) => handleDelete(e, post.id)} style={{ fontSize: '13px', padding: '5px 12px' }}>{t('community.delete') || '삭제'}</button>
-                    </div>
-                  )}
-                </div>
-              </Link>
+                post={post}
+                index={i}
+                language={language}
+                isAdmin={isAdmin}
+                handleEdit={handleEdit}
+                handleDelete={handleDelete}
+                t={t}
+              />
             ))}
           </div>
           <Pagination

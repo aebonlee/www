@@ -5,6 +5,9 @@ import SEOHead from '../components/SEOHead';
 import getSupabase from '../utils/supabase';
 import { useToast } from '../contexts/ToastContext';
 
+const EMAIL_REGEX = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+const PHONE_REGEX = /^[\d\-+() ]{7,20}$/;
+
 const Contact = () => {
   const { t } = useLanguage();
   useAOS();
@@ -14,16 +17,43 @@ const Contact = () => {
     email: '',
     phone: '',
     subject: '',
-    message: ''
+    message: '',
+    website: '' // honeypot
   });
+  const [errors, setErrors] = useState({});
   const [submitStatus, setSubmitStatus] = useState(null);
 
   const handleChange = (e) => {
-    setFormData({ ...formData, [e.target.name]: e.target.value });
+    const { name, value } = e.target;
+    setFormData({ ...formData, [name]: value });
+    if (errors[name]) {
+      setErrors({ ...errors, [name]: '' });
+    }
+  };
+
+  const validate = () => {
+    const newErrors = {};
+
+    if (!EMAIL_REGEX.test(formData.email)) {
+      newErrors.email = t('contactPage.errorEmail');
+    }
+
+    if (formData.phone && !PHONE_REGEX.test(formData.phone)) {
+      newErrors.phone = t('contactPage.errorPhone');
+    }
+
+    setErrors(newErrors);
+    return Object.keys(newErrors).length === 0;
   };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+
+    // Honeypot check
+    if (formData.website) return;
+
+    if (!validate()) return;
+
     const client = getSupabase();
 
     if (client) {
@@ -40,24 +70,25 @@ const Contact = () => {
 
         if (error) throw error;
 
-        showToast('문의가 성공적으로 전송되었습니다.', 'success');
+        showToast(t('contactPage.success'), 'success');
         setSubmitStatus('success');
-        setFormData({ name: '', email: '', phone: '', subject: '', message: '' });
+        setFormData({ name: '', email: '', phone: '', subject: '', message: '', website: '' });
+        setErrors({});
         setTimeout(() => setSubmitStatus(null), 5000);
       } catch (err) {
         console.error('Contact form error:', err);
-        showToast('문의 전송에 실패했습니다. 다시 시도해주세요.', 'error');
+        showToast(t('contactPage.errorSubmit') || '문의 전송에 실패했습니다.', 'error');
       }
     } else {
-      // Fallback to mailto link when Supabase is not available
       const mailtoSubject = encodeURIComponent(formData.subject);
       const mailtoBody = encodeURIComponent(
         `이름: ${formData.name}\n이메일: ${formData.email}\n전화: ${formData.phone}\n\n${formData.message}`
       );
       window.location.href = `mailto:aebon@dreamitbiz.com?subject=${mailtoSubject}&body=${mailtoBody}`;
-      showToast('이메일 클라이언트로 연결합니다.', 'success');
+      showToast(t('contactPage.success'), 'success');
       setSubmitStatus('success');
-      setFormData({ name: '', email: '', phone: '', subject: '', message: '' });
+      setFormData({ name: '', email: '', phone: '', subject: '', message: '', website: '' });
+      setErrors({});
       setTimeout(() => setSubmitStatus(null), 5000);
     }
   };
@@ -144,20 +175,28 @@ const Contact = () => {
           <div className="contact-form-box" data-aos="fade-up">
             <h3 style={{ fontSize: '24px', fontWeight: '700', marginBottom: '32px' }}>{t('contactPage.formTitle')}</h3>
             <form onSubmit={handleSubmit}>
+              {/* Honeypot - hidden from real users */}
+              <div style={{ position: 'absolute', left: '-9999px', opacity: 0, height: 0, overflow: 'hidden' }} aria-hidden="true">
+                <label htmlFor="website">Website</label>
+                <input type="text" id="website" name="website" value={formData.website} onChange={handleChange} tabIndex="-1" autoComplete="off" />
+              </div>
+
               <div className="form-row">
                 <div className="form-group">
                   <label htmlFor="name">{t('contactPage.name')} *</label>
                   <input type="text" id="name" name="name" value={formData.name} onChange={handleChange} required />
                 </div>
-                <div className="form-group">
+                <div className={`form-group ${errors.email ? 'has-error' : ''}`}>
                   <label htmlFor="email">{t('contactPage.emailLabel')} *</label>
                   <input type="email" id="email" name="email" value={formData.email} onChange={handleChange} required />
+                  {errors.email && <span className="form-error-msg">{errors.email}</span>}
                 </div>
               </div>
               <div className="form-row">
-                <div className="form-group">
+                <div className={`form-group ${errors.phone ? 'has-error' : ''}`}>
                   <label htmlFor="phone">{t('contactPage.phoneLabel')}</label>
                   <input type="tel" id="phone" name="phone" value={formData.phone} onChange={handleChange} />
+                  {errors.phone && <span className="form-error-msg">{errors.phone}</span>}
                 </div>
                 <div className="form-group">
                   <label htmlFor="subject">{t('contactPage.subject')} *</label>

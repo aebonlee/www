@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, memo } from 'react';
 import { Link } from 'react-router-dom';
 import { useLanguage } from '../contexts/LanguageContext';
 import { useCart } from '../contexts/CartContext';
@@ -6,6 +6,67 @@ import { useAuth } from '../contexts/AuthContext';
 import { getProducts, toggleSoldOut, deleteProduct } from '../utils/productStorage';
 import useAOS from '../hooks/useAOS';
 import SEOHead from '../components/SEOHead';
+
+const ProductCard = memo(({ product, index, isEn, isAdmin, addedId, getCategoryIcon, formatPrice, handleAddToCart, handleToggleSoldOut, handleDelete, t }) => (
+  <div
+    className={`product-card ${product.isSoldOut ? 'sold-out' : ''}`}
+    data-aos="fade-up"
+    data-aos-delay={index * 60}
+  >
+    <div className="product-thumbnail">
+      {product.imageUrl ? (
+        <img src={product.imageUrl} alt={isEn ? product.titleEn : product.title} loading="lazy" style={{ width: '100%', height: '100%', objectFit: 'cover' }} />
+      ) : (
+        getCategoryIcon(product.category)
+      )}
+      {product.isSoldOut && (
+        <span className="sold-out-badge">{t('auth.soldOut')}</span>
+      )}
+    </div>
+    <div className="product-info">
+      <span className="product-category-badge">{t(`shop.${product.category}`)}</span>
+      <h3 className="product-title">{isEn ? (product.titleEn || product.title) : product.title}</h3>
+      <p className="product-description">
+        {isEn ? (product.descriptionEn || '') : (product.description || '')}
+      </p>
+      <div className="product-bottom">
+        <span className="product-price">{formatPrice(product.price)}</span>
+        <button
+          className={`add-to-cart-btn ${addedId === (product.slug || product.id) ? 'added' : ''}`}
+          onClick={() => handleAddToCart(product)}
+          disabled={product.isSoldOut}
+        >
+          {product.isSoldOut
+            ? t('auth.soldOut')
+            : addedId === (product.slug || product.id)
+              ? t('shop.addedToCart')
+              : t('shop.addToCart')}
+        </button>
+      </div>
+      {isAdmin && (
+        <div className="product-admin-actions">
+          <Link to={`/shop/product/edit/${product.id}`} className="board-btn" style={{ fontSize: '12px', padding: '4px 10px' }}>
+            {t('community.edit')}
+          </Link>
+          <button
+            className="board-btn"
+            style={{ fontSize: '12px', padding: '4px 10px' }}
+            onClick={() => handleToggleSoldOut(product)}
+          >
+            {product.isSoldOut ? '판매재개' : '품절처리'}
+          </button>
+          <button
+            className="board-btn danger"
+            style={{ fontSize: '12px', padding: '4px 10px' }}
+            onClick={() => handleDelete(product)}
+          >
+            {t('community.delete')}
+          </button>
+        </div>
+      )}
+    </div>
+  </div>
+));
 
 const Shop = () => {
   const { language, t } = useLanguage();
@@ -163,65 +224,20 @@ const Shop = () => {
           ) : (
             <div className="shop-grid">
               {filtered.map((product, i) => (
-                <div
+                <ProductCard
                   key={product.slug || product.id}
-                  className={`product-card ${product.isSoldOut ? 'sold-out' : ''}`}
-                  data-aos="fade-up"
-                  data-aos-delay={i * 60}
-                >
-                  <div className="product-thumbnail">
-                    {product.imageUrl ? (
-                      <img src={product.imageUrl} alt={isEn ? product.titleEn : product.title} style={{ width: '100%', height: '100%', objectFit: 'cover' }} />
-                    ) : (
-                      getCategoryIcon(product.category)
-                    )}
-                    {product.isSoldOut && (
-                      <span className="sold-out-badge">{t('auth.soldOut')}</span>
-                    )}
-                  </div>
-                  <div className="product-info">
-                    <span className="product-category-badge">{t(`shop.${product.category}`)}</span>
-                    <h3 className="product-title">{isEn ? (product.titleEn || product.title) : product.title}</h3>
-                    <p className="product-description">
-                      {isEn ? (product.descriptionEn || '') : (product.description || '')}
-                    </p>
-                    <div className="product-bottom">
-                      <span className="product-price">{formatPrice(product.price)}</span>
-                      <button
-                        className={`add-to-cart-btn ${addedId === (product.slug || product.id) ? 'added' : ''}`}
-                        onClick={() => handleAddToCart(product)}
-                        disabled={product.isSoldOut}
-                      >
-                        {product.isSoldOut
-                          ? t('auth.soldOut')
-                          : addedId === (product.slug || product.id)
-                            ? t('shop.addedToCart')
-                            : t('shop.addToCart')}
-                      </button>
-                    </div>
-                    {isAdmin && (
-                      <div className="product-admin-actions">
-                        <Link to={`/shop/product/edit/${product.id}`} className="board-btn" style={{ fontSize: '12px', padding: '4px 10px' }}>
-                          {t('community.edit')}
-                        </Link>
-                        <button
-                          className="board-btn"
-                          style={{ fontSize: '12px', padding: '4px 10px' }}
-                          onClick={() => handleToggleSoldOut(product)}
-                        >
-                          {product.isSoldOut ? '판매재개' : '품절처리'}
-                        </button>
-                        <button
-                          className="board-btn danger"
-                          style={{ fontSize: '12px', padding: '4px 10px' }}
-                          onClick={() => handleDelete(product)}
-                        >
-                          {t('community.delete')}
-                        </button>
-                      </div>
-                    )}
-                  </div>
-                </div>
+                  product={product}
+                  index={i}
+                  isEn={isEn}
+                  isAdmin={isAdmin}
+                  addedId={addedId}
+                  getCategoryIcon={getCategoryIcon}
+                  formatPrice={formatPrice}
+                  handleAddToCart={handleAddToCart}
+                  handleToggleSoldOut={handleToggleSoldOut}
+                  handleDelete={handleDelete}
+                  t={t}
+                />
               ))}
             </div>
           )}

@@ -68,7 +68,7 @@ const Portfolio = () => {
             <div className="project-visual" data-aos="fade-left">
               <div className="project-image-main">
                 <a href="https://cec.sejong.ac.kr" target="_blank" rel="noopener noreferrer">
-                  <img src="./assets/images/portfolio/sejong-cec.png" alt="세종대학교 미래교육원" style={{ objectPosition: 'top' }} />
+                  <img src="./assets/images/portfolio/sejong-cec.png" alt="세종대학교 미래교육원" loading="lazy" style={{ objectPosition: 'top' }} />
                 </a>
               </div>
             </div>
@@ -114,7 +114,7 @@ const Portfolio = () => {
             <div className="project-visual" data-aos="fade-left">
               <div className="project-image-main">
                 <a href="http://cue100th.com/" target="_blank" rel="noopener noreferrer">
-                  <img src="./assets/images/portfolio/chinju-100th.png" alt="진주교육대학교 100주년" />
+                  <img src="./assets/images/portfolio/chinju-100th.png" alt="진주교육대학교 100주년" loading="lazy" />
                 </a>
               </div>
             </div>

@@ -84,7 +84,7 @@ const Home = () => {
           <div className="portfolio-grid">
             <Link to="/portfolio#sejong" className="portfolio-card" data-aos="fade-up">
               <div className="portfolio-image">
-                <img src="./assets/images/portfolio/sejong-cec.png" alt="세종대학교 미래교육원" style={{ objectPosition: 'top' }} />
+                <img src="./assets/images/portfolio/sejong-cec.png" alt="세종대학교 미래교육원" loading="lazy" style={{ objectPosition: 'top' }} />
               </div>
               <div className="portfolio-content">
                 <div className="portfolio-tag">웹개발 · 디자인</div>
@@ -96,7 +96,7 @@ const Home = () => {
 
             <Link to="/portfolio#chinju" className="portfolio-card" data-aos="fade-up" data-aos-delay="100">
               <div className="portfolio-image">
-                <img src="./assets/images/portfolio/chinju-100th.png" alt="진주교육대학교 100주년" />
+                <img src="./assets/images/portfolio/chinju-100th.png" alt="진주교육대학교 100주년" loading="lazy" />
               </div>
               <div className="portfolio-content">
                 <div className="portfolio-tag">웹개발 · 디자인</div>

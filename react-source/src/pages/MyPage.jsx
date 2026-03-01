@@ -62,7 +62,7 @@ const MyPage = () => {
           <div className="mypage-card">
             <div className="mypage-avatar">
               {profile?.avatar_url ? (
-                <img src={profile.avatar_url} alt={profile.display_name} />
+                <img src={profile.avatar_url} alt={profile.display_name} loading="lazy" />
               ) : (
                 <div className="mypage-avatar-placeholder">
                   {(profile?.display_name || user?.email || '?')[0].toUpperCase()}

@@ -4,6 +4,7 @@ import { useTheme } from '../../contexts/ThemeContext';
 import { useLanguage } from '../../contexts/LanguageContext';
 import { useCart } from '../../contexts/CartContext';
 import { useAuth } from '../../contexts/AuthContext';
+import SearchModal from '../SearchModal';
 
 const COLOR_OPTIONS = [
   { name: 'blue', color: '#0046C8' },
@@ -19,6 +20,7 @@ const Navbar = () => {
   const [activeDropdown, setActiveDropdown] = useState(null);
   const [showColorPicker, setShowColorPicker] = useState(false);
   const [showUserMenu, setShowUserMenu] = useState(false);
+  const [showSearch, setShowSearch] = useState(false);
   const userMenuRef = useRef(null);
   const location = useLocation();
   const { mode, toggleTheme, colorTheme, setColorTheme } = useTheme();
@@ -184,6 +186,12 @@ const Navbar = () => {
           </ul>
 
           <div className="nav-actions">
+            <button className="nav-search-btn" onClick={() => setShowSearch(true)} aria-label="Search">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                <circle cx="11" cy="11" r="8" />
+                <line x1="21" y1="21" x2="16.65" y2="16.65" />
+              </svg>
+            </button>
             <Link to="/cart" className="cart-icon-link" aria-label="Cart">
               <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" className="cart-icon-svg">
                 <circle cx="9" cy="21" r="1" />
@@ -309,6 +317,7 @@ const Navbar = () => {
           </div>
         </div>
       </div>
+      <SearchModal isOpen={showSearch} onClose={() => setShowSearch(false)} />
     </nav>
   );
 };
