@@ -56,6 +56,7 @@ const Footer = () => {
                 }}
               >
                 <option value="" disabled>Family Site</option>
+                <option value="https://allthat.dreamitbiz.com">DreamIT 올댓</option>
                 <option value="https://books.dreamitbiz.com">DreamIT Biz 출판사</option>
                 <option value="https://ahp-basic.dreamitbiz.com">AHP 연구 플랫폼</option>
                 <option value="https://competency.dreamitbiz.com">핵심역량 자가측정</option>

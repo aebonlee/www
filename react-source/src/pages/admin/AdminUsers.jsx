@@ -49,7 +49,7 @@ const getSiteName = (domain) => {
 /** 사이트별 뱃지 색상 */
 const getSiteColor = (siteName) => {
   const colorMap = {
-    hohai: 'blue',
+    allthat: 'blue',
     books: 'green',
     competency: 'purple',
     'ahp-basic': 'red',
