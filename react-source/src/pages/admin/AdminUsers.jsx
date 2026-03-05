@@ -592,6 +592,7 @@ const AdminUsers = () => {
         loading={loading}
         searchKeys={['display_name', 'email']}
         actions={renderActions}
+        pageSize={10}
       />
     </>
   );
