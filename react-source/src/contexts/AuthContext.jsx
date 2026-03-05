@@ -17,11 +17,17 @@ export const AuthProvider = ({ children }) => {
       return;
     }
     const p = await getProfile(authUser.id);
-    // signup_domain 또는 role이 미설정이면 자동 초기화
+    // signup_domain, role 자동 초기화 + 현재 도메인 visited_sites 자동 추가
     if (p) {
       const updates = {};
-      if (!p.signup_domain) updates.signup_domain = window.location.hostname;
+      const currentDomain = window.location.hostname;
+      if (!p.signup_domain) updates.signup_domain = currentDomain;
       if (!p.role || p.role === 'user') updates.role = 'member';
+      // 현재 도메인이 visited_sites에 없으면 자동 추가
+      const sites = Array.isArray(p.visited_sites) ? p.visited_sites : [];
+      if (!sites.includes(currentDomain)) {
+        updates.visited_sites = [...sites, currentDomain];
+      }
       if (Object.keys(updates).length > 0) {
         try {
           const updated = await updateProfile(authUser.id, updates);
