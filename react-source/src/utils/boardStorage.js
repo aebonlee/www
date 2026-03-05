@@ -1,6 +1,6 @@
 /**
  * boardStorage.js
- * 게시판/블로그/갤러리 CRUD — Supabase 전용 (localStorage 사용 안 함)
+ * 게시판/블로그/갤러리 CRUD — Supabase 전용
  */
 
 import getSupabase from './supabase';

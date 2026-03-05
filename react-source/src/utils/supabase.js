@@ -22,22 +22,19 @@ const getSupabase = () => {
 
 /**
  * Create an order with order items
- * Falls back to localStorage when Supabase is not configured
+ * Falls back to in-memory store when Supabase is not configured
  */
 export const createOrder = async (orderData) => {
   const client = getSupabase();
 
   if (!client) {
-    // Fallback: store order in localStorage for development/demo
     const order = {
       id: crypto.randomUUID(),
       ...orderData,
       payment_status: 'pending',
       created_at: new Date().toISOString()
     };
-    const orders = JSON.parse(localStorage.getItem('dreamitbiz_orders') || '[]');
-    orders.push(order);
-    localStorage.setItem('dreamitbiz_orders', JSON.stringify(orders));
+    _memoryOrders.push(order);
     return order;
   }
 
@@ -82,15 +79,13 @@ export const createOrder = async (orderData) => {
 
 /**
  * Get order by order number
- * Falls back to localStorage when Supabase is not configured
+ * Falls back to in-memory store when Supabase is not configured
  */
 export const getOrderByNumber = async (orderNumber) => {
   const client = getSupabase();
 
   if (!client) {
-    // Fallback: read from localStorage
-    const orders = JSON.parse(localStorage.getItem('dreamitbiz_orders') || '[]');
-    return orders.find(o => o.order_number === orderNumber) || null;
+    return _memoryOrders.find(o => o.order_number === orderNumber) || null;
   }
 
   const { data: orders, error } = await client
@@ -124,19 +119,17 @@ export const updateOrderStatus = async (orderId, status, paymentId, cancelReason
   const client = getSupabase();
 
   if (!client) {
-    const orders = JSON.parse(localStorage.getItem('dreamitbiz_orders') || '[]');
-    const idx = orders.findIndex(o => o.id === orderId || o.order_number === orderId);
+    const idx = _memoryOrders.findIndex(o => o.id === orderId || o.order_number === orderId);
     if (idx >= 0) {
-      orders[idx].payment_status = status;
-      if (paymentId) orders[idx].portone_payment_id = paymentId;
-      if (status === 'paid') orders[idx].paid_at = new Date().toISOString();
+      _memoryOrders[idx].payment_status = status;
+      if (paymentId) _memoryOrders[idx].portone_payment_id = paymentId;
+      if (status === 'paid') _memoryOrders[idx].paid_at = new Date().toISOString();
       if (status === 'cancelled') {
-        orders[idx].cancelled_at = new Date().toISOString();
-        if (cancelReason) orders[idx].cancel_reason = cancelReason;
+        _memoryOrders[idx].cancelled_at = new Date().toISOString();
+        if (cancelReason) _memoryOrders[idx].cancel_reason = cancelReason;
       }
-      localStorage.setItem('dreamitbiz_orders', JSON.stringify(orders));
     }
-    return orders[idx];
+    return _memoryOrders[idx];
   }
 
   const updatePayload = { payment_status: status };
@@ -218,5 +211,8 @@ export const getOrdersByUser = async (userId) => {
   }
   return data || [];
 };
+
+/** In-memory fallback store (Supabase 미설정 시 dev/demo용) */
+let _memoryOrders = [];
 
 export default getSupabase;

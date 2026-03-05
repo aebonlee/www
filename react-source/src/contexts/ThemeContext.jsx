@@ -9,13 +9,26 @@ const getTimeBasedTheme = () => {
 
 const COLOR_THEMES = ['blue', 'red', 'green', 'purple', 'orange'];
 
+/** cookie 읽기 */
+const getCookie = (name) => {
+  const match = document.cookie.match(new RegExp('(^| )' + name + '=([^;]+)'));
+  return match ? decodeURIComponent(match[2]) : null;
+};
+
+/** cookie 쓰기 (1년 유지) */
+const setCookie = (name, value) => {
+  document.cookie = `${name}=${encodeURIComponent(value)};path=/;max-age=31536000;SameSite=Lax`;
+};
+
+/** cookie 삭제 */
+const removeCookie = (name) => {
+  document.cookie = `${name}=;path=/;max-age=0`;
+};
+
 export const ThemeProvider = ({ children }) => {
   const [mode, setMode] = useState(() => {
-    const saved = localStorage.getItem('themeMode');
+    const saved = getCookie('themeMode');
     if (saved === 'light' || saved === 'dark' || saved === 'auto') return saved;
-    // Migrate from old 'theme' key
-    const legacy = localStorage.getItem('theme');
-    if (legacy === 'light' || legacy === 'dark') return legacy;
     return 'auto';
   });
 
@@ -24,7 +37,7 @@ export const ThemeProvider = ({ children }) => {
   });
 
   const [colorTheme, setColorTheme] = useState(() => {
-    const saved = localStorage.getItem('colorTheme');
+    const saved = getCookie('colorTheme');
     return COLOR_THEMES.includes(saved) ? saved : 'blue';
   });
 
@@ -49,13 +62,13 @@ export const ThemeProvider = ({ children }) => {
   // Apply color theme to DOM
   useEffect(() => {
     document.documentElement.setAttribute('data-color', colorTheme);
-    localStorage.setItem('colorTheme', colorTheme);
+    setCookie('colorTheme', colorTheme);
   }, [colorTheme]);
 
   // Persist mode
   useEffect(() => {
-    localStorage.setItem('themeMode', mode);
-    localStorage.removeItem('theme'); // clean legacy
+    setCookie('themeMode', mode);
+    removeCookie('theme'); // clean legacy
   }, [mode]);
 
   // Cycle: auto → light → dark → auto
