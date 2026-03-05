@@ -67,7 +67,7 @@
 }
 
 .toast-close:hover {
-    background: var(--bg-gray);
+    background: var(--bg-light-gray);
 }
 
 /* ── Type Colors ── */
