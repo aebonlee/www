@@ -20,11 +20,19 @@ const ROLE_OPTIONS = [
 ];
 
 const SITE_OPTIONS = [
+  { value: 'www.dreamitbiz.com', label: 'www', color: 'yellow' },
   { value: 'hohai.dreamitbiz.com', label: 'hohai', color: 'blue' },
   { value: 'books.dreamitbiz.com', label: 'books', color: 'green' },
   { value: 'competency.dreamitbiz.com', label: 'competency', color: 'purple' },
   { value: 'ahp-basic.dreamitbiz.com', label: 'ahp-basic', color: 'red' },
-  { value: 'www.dreamitbiz.com', label: 'www', color: 'yellow' },
+  { value: 'html.dreamitbiz.com', label: 'html', color: 'blue' },
+  { value: 'koreatech.dreamitbiz.com', label: 'koreatech', color: 'purple' },
+  { value: 'allthat.dreamitbiz.com', label: 'allthat', color: 'green' },
+  { value: 'reserve.dreamitbiz.com', label: 'reserve', color: 'red' },
+  { value: 'aebon.dreamitbiz.com', label: 'aebon', color: 'blue' },
+  { value: 'pbi.dreamitbiz.com', label: 'pbi', color: 'yellow' },
+  { value: 'docs.dreamitbiz.com', label: 'docs', color: 'green' },
+  { value: 'papers.dreamitbiz.com', label: 'papers', color: 'purple' },
 ];
 
 const STATUS_OPTIONS = [
@@ -49,11 +57,19 @@ const getSiteName = (domain) => {
 /** 사이트별 뱃지 색상 */
 const getSiteColor = (siteName) => {
   const colorMap = {
-    allthat: 'blue',
+    www: 'yellow',
+    hohai: 'blue',
     books: 'green',
     competency: 'purple',
     'ahp-basic': 'red',
-    www: 'yellow',
+    html: 'blue',
+    koreatech: 'purple',
+    allthat: 'green',
+    reserve: 'red',
+    aebon: 'blue',
+    pbi: 'yellow',
+    docs: 'green',
+    papers: 'purple',
     localhost: 'gray',
   };
   return colorMap[siteName] || 'gray';
