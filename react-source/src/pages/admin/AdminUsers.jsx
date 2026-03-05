@@ -274,7 +274,7 @@ const AdminUsers = () => {
   }, [users, siteFilter, roleFilter, statusFilter]);
 
   const columns = [
-    { key: 'id', label: 'ID', width: '80px' },
+    { key: 'id', label: 'ID', width: '60px' },
     {
       key: 'display_name',
       label: '이름',
@@ -295,7 +295,7 @@ const AdminUsers = () => {
     {
       key: 'provider',
       label: '가입방법',
-      width: '100px',
+      width: '90px',
       render: (val) => {
         const p = val || 'email';
         const colorMap = { google: 'blue', kakao: 'yellow', email: 'gray' };
@@ -373,7 +373,38 @@ const AdminUsers = () => {
     {
       key: 'created_at',
       label: '가입일',
+      width: '110px',
       render: (val) => (val ? val.slice(0, 10) : '-'),
+    },
+    {
+      key: 'last_sign_in_at',
+      label: '최종 로그인',
+      width: '140px',
+      render: (val) => {
+        if (!val) return <span style={{ color: 'var(--text-light)' }}>-</span>;
+        const d = new Date(val);
+        const now = new Date();
+        const diffMs = now - d;
+        const diffDays = Math.floor(diffMs / (1000 * 60 * 60 * 24));
+        const dateStr = val.slice(0, 10);
+        const timeStr = val.slice(11, 16);
+        let ago = '';
+        if (diffDays === 0) ago = '오늘';
+        else if (diffDays === 1) ago = '어제';
+        else if (diffDays < 7) ago = `${diffDays}일 전`;
+        else if (diffDays < 30) ago = `${Math.floor(diffDays / 7)}주 전`;
+        else if (diffDays < 365) ago = `${Math.floor(diffDays / 30)}개월 전`;
+        else ago = `${Math.floor(diffDays / 365)}년 전`;
+        return (
+          <span title={`${dateStr} ${timeStr}`} style={{ fontSize: '12px' }}>
+            {dateStr}
+            <br />
+            <span style={{ color: diffDays > 30 ? '#dc2626' : 'var(--text-light)', fontSize: '11px' }}>
+              {ago}
+            </span>
+          </span>
+        );
+      },
     },
   ];
 

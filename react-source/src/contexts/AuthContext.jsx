@@ -72,6 +72,13 @@ export const AuthProvider = ({ children }) => {
       setUser(u);
       if (u) {
         loadProfile(u);
+        // 실제 로그인 시에만 last_sign_in_at 갱신
+        if (event === 'SIGNED_IN') {
+          client.from('user_profiles')
+            .update({ last_sign_in_at: new Date().toISOString() })
+            .eq('id', u.id)
+            .then(() => {});
+        }
       } else {
         setProfile(null);
       }
