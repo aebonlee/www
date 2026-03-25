@@ -20,19 +20,51 @@ const ROLE_OPTIONS = [
 ];
 
 const SITE_OPTIONS = [
+  // 핵심 사이트
   { value: 'www.dreamitbiz.com', label: 'www', color: 'yellow' },
   { value: 'hohai.dreamitbiz.com', label: 'hohai', color: 'blue' },
   { value: 'books.dreamitbiz.com', label: 'books', color: 'green' },
-  { value: 'competency.dreamitbiz.com', label: 'competency', color: 'purple' },
-  { value: 'ahp-basic.dreamitbiz.com', label: 'ahp-basic', color: 'red' },
-  { value: 'html.dreamitbiz.com', label: 'html', color: 'blue' },
-  { value: 'koreatech.dreamitbiz.com', label: 'koreatech', color: 'purple' },
-  { value: 'allthat.dreamitbiz.com', label: 'allthat', color: 'green' },
-  { value: 'reserve.dreamitbiz.com', label: 'reserve', color: 'red' },
-  { value: 'aebon.dreamitbiz.com', label: 'aebon', color: 'blue' },
-  { value: 'pbi.dreamitbiz.com', label: 'pbi', color: 'yellow' },
   { value: 'docs.dreamitbiz.com', label: 'docs', color: 'green' },
   { value: 'papers.dreamitbiz.com', label: 'papers', color: 'purple' },
+  { value: 'pbi.dreamitbiz.com', label: 'pbi', color: 'yellow' },
+  { value: 'aebon.dreamitbiz.com', label: 'aebon', color: 'blue' },
+  // 교육 플랫폼
+  { value: 'edu-hub.dreamitbiz.com', label: 'edu-hub', color: 'purple' },
+  { value: 'allthat.dreamitbiz.com', label: 'allthat', color: 'green' },
+  { value: 'koreatech.dreamitbiz.com', label: 'koreatech', color: 'purple' },
+  { value: 'koreait.dreamitbiz.com', label: 'koreait', color: 'blue' },
+  { value: 'competency.dreamitbiz.com', label: 'competency', color: 'purple' },
+  { value: 'teaching.dreamitbiz.com', label: 'teaching', color: 'green' },
+  // 프로그래밍 교육
+  { value: 'coding.dreamitbiz.com', label: 'coding', color: 'blue' },
+  { value: 'html.dreamitbiz.com', label: 'html', color: 'blue' },
+  { value: 'python-study.dreamitbiz.com', label: 'python-study', color: 'blue' },
+  { value: 'java-study.dreamitbiz.com', label: 'java-study', color: 'red' },
+  { value: 'c-study.dreamitbiz.com', label: 'c-study', color: 'blue' },
+  { value: 'linux-study.dreamitbiz.com', label: 'linux-study', color: 'yellow' },
+  { value: 'software.dreamitbiz.com', label: 'software', color: 'green' },
+  // IT/자격증
+  { value: 'eip.dreamitbiz.com', label: 'eip', color: 'red' },
+  { value: 'sqld.dreamitbiz.com', label: 'sqld', color: 'purple' },
+  { value: 'ahp-basic.dreamitbiz.com', label: 'ahp-basic', color: 'red' },
+  // AI/데이터
+  { value: 'ai-prompt.dreamitbiz.com', label: 'ai-prompt', color: 'purple' },
+  { value: 'ai-data.dreamitbiz.com', label: 'ai-data', color: 'purple' },
+  // 비즈니스/마케팅
+  { value: 'marketing.dreamitbiz.com', label: 'marketing', color: 'yellow' },
+  { value: 'digitalbiz.dreamitbiz.com', label: 'digitalbiz', color: 'green' },
+  { value: 'self-branding.dreamitbiz.com', label: 'self-branding', color: 'yellow' },
+  { value: 'uxdesign.dreamitbiz.com', label: 'uxdesign', color: 'purple' },
+  { value: 'career.dreamitbiz.com', label: 'career', color: 'green' },
+  // 어학
+  { value: 'english.dreamitbiz.com', label: 'english', color: 'blue' },
+  { value: 'japanese.dreamitbiz.com', label: 'japanese', color: 'red' },
+  { value: 'korean.dreamitbiz.com', label: 'korean', color: 'green' },
+  // 기타
+  { value: 'reserve.dreamitbiz.com', label: 'reserve', color: 'red' },
+  { value: 'algorithm.dreamitbiz.com', label: 'algorithm', color: 'blue' },
+  { value: 'webstudy.dreamitbiz.com', label: 'webstudy', color: 'green' },
+  { value: 'reactstudy.dreamitbiz.com', label: 'reactstudy', color: 'blue' },
 ];
 
 const STATUS_OPTIONS = [
@@ -57,20 +89,19 @@ const getSiteName = (domain) => {
 /** 사이트별 뱃지 색상 */
 const getSiteColor = (siteName) => {
   const colorMap = {
-    www: 'yellow',
-    hohai: 'blue',
-    books: 'green',
-    competency: 'purple',
-    'ahp-basic': 'red',
-    html: 'blue',
-    koreatech: 'purple',
-    allthat: 'green',
-    reserve: 'red',
-    aebon: 'blue',
-    pbi: 'yellow',
-    docs: 'green',
-    papers: 'purple',
-    localhost: 'gray',
+    www: 'yellow', hohai: 'blue', books: 'green', docs: 'green',
+    papers: 'purple', pbi: 'yellow', aebon: 'blue',
+    'edu-hub': 'purple', allthat: 'green', koreatech: 'purple',
+    koreait: 'blue', competency: 'purple', teaching: 'green',
+    coding: 'blue', html: 'blue', 'python-study': 'blue',
+    'java-study': 'red', 'c-study': 'blue', 'linux-study': 'yellow',
+    software: 'green', eip: 'red', sqld: 'purple', 'ahp-basic': 'red',
+    'ai-prompt': 'purple', 'ai-data': 'purple',
+    marketing: 'yellow', digitalbiz: 'green', 'self-branding': 'yellow',
+    uxdesign: 'purple', career: 'green',
+    english: 'blue', japanese: 'red', korean: 'green',
+    reserve: 'red', algorithm: 'blue', webstudy: 'green',
+    reactstudy: 'blue', localhost: 'gray',
   };
   return colorMap[siteName] || 'gray';
 };
@@ -395,6 +426,36 @@ const AdminUsers = () => {
     {
       key: 'last_sign_in_at',
       label: '최종 로그인',
+      width: '140px',
+      render: (val) => {
+        if (!val) return <span style={{ color: 'var(--text-light)' }}>-</span>;
+        const d = new Date(val);
+        const now = new Date();
+        const diffMs = now - d;
+        const diffDays = Math.floor(diffMs / (1000 * 60 * 60 * 24));
+        const dateStr = val.slice(0, 10);
+        const timeStr = val.slice(11, 16);
+        let ago = '';
+        if (diffDays === 0) ago = '오늘';
+        else if (diffDays === 1) ago = '어제';
+        else if (diffDays < 7) ago = `${diffDays}일 전`;
+        else if (diffDays < 30) ago = `${Math.floor(diffDays / 7)}주 전`;
+        else if (diffDays < 365) ago = `${Math.floor(diffDays / 30)}개월 전`;
+        else ago = `${Math.floor(diffDays / 365)}년 전`;
+        return (
+          <span title={`${dateStr} ${timeStr}`} style={{ fontSize: '12px' }}>
+            {dateStr}
+            <br />
+            <span style={{ color: diffDays > 30 ? '#dc2626' : 'var(--text-light)', fontSize: '11px' }}>
+              {ago}
+            </span>
+          </span>
+        );
+      },
+    },
+    {
+      key: 'last_active_at',
+      label: '최종 활동',
       width: '140px',
       render: (val) => {
         if (!val) return <span style={{ color: 'var(--text-light)' }}>-</span>;
