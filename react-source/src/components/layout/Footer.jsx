@@ -42,7 +42,10 @@ const Footer = () => {
           <div className="footer-contact">
             <h4>{t('footer.contact')}</h4>
             <p>경기도 수원시 팔달구 매산로 45, 419호</p>
-            <p>aebon@dreamitbiz.com</p>
+            <p className="footer-email">
+              <span className="footer-email-icon">✉️</span>
+              <a href="mailto:contact@dreamitbiz.com">contact@dreamitbiz.com</a>
+            </p>
             <p>010-3700-0629</p>
             <p>카카오톡: aebon</p>
             <p className="business-hours">평일: 09:00 ~ 18:00</p>

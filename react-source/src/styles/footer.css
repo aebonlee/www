@@ -97,6 +97,28 @@
     line-height: 1.7;
 }
 
+.footer-email {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.footer-email-icon {
+    font-size: 16px;
+}
+
+.footer-email a {
+    color: #93C5FD;
+    text-decoration: none;
+    font-weight: 500;
+    transition: color 0.2s ease;
+}
+
+.footer-email a:hover {
+    color: #BFDBFE;
+    text-decoration: underline;
+}
+
 .business-hours {
     margin-top: 12px;
     font-style: italic;
