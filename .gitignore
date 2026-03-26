@@ -19,6 +19,9 @@ tmp_auth2.json
 # Dependencies
 node_modules/
 
+# Subsite template (개발용, 별도 관리)
+subsite-template/
+
 # Environment
 .env
 .env.local
