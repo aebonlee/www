@@ -91,26 +91,6 @@
     50% { transform: translateY(-100px) translateX(50px); opacity: 0.4; }
 }
 
-/* ── Matrix rain (slide 1 — Red) ── */
-.matrix-col {
-    position: absolute;
-    top: -20%;
-    font-family: 'Courier New', monospace;
-    font-size: 14px;
-    color: rgba(255, 255, 255, 0.25);
-    white-space: pre;
-    line-height: 1.4;
-    animation: matrix-fall 5s linear infinite;
-    text-shadow: 0 0 8px rgba(255, 255, 255, 0.15);
-}
-
-@keyframes matrix-fall {
-    0% { transform: translateY(-20%); opacity: 0; }
-    10% { opacity: 1; }
-    90% { opacity: 1; }
-    100% { transform: translateY(120%); opacity: 0; }
-}
-
 /* ── Network nodes (slide 2) ── */
 .network-node {
     animation: node-drift 10s ease-in-out infinite alternate;
