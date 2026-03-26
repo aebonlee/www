@@ -157,6 +157,13 @@
     font-size: 14px;
 }
 
+.footer-bottom-info {
+    margin-top: 8px;
+    font-size: 12px;
+    color: rgba(255, 255, 255, 0.4);
+    line-height: 1.6;
+}
+
 .footer-info {
     display: grid;
     grid-template-columns: 1fr 1fr 1fr;
