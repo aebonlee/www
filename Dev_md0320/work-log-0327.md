@@ -1,49 +1,61 @@
 # 작업 로그 - 2026-03-27
 
-> www 프로젝트 푸터 영역 개편
+## 작업 개요
+장바구니/결제 시스템 버그 수정 + 히어로 영역 모바일 반응형 CSS 추가 + 배포
 
 ---
 
-## 1. 푸터 구조 개편
+## Phase 1: 장바구니/결제 버그 수정 (3개 프로젝트, 9개 파일)
 
-### 변경 전
-- **1열 (footer-brand)**: 로고 + 태그라인 + 사업자 정보 (company-info)
-- **3열 (footer-contact)**: 주소 + 이메일 + 전화 + 카카오톡 + 영업시간 + Family Site
-- **하단 (footer-bottom)**: `© 2020-{year} DreamIT Biz. All rights reserved.`
+### Fix 1. `_memoryOrders` TDZ 에러 방지 (supabase.js)
+- **문제**: `let _memoryOrders = [];`가 파일 끝(216행)에 선언, 37행에서 사용 → Temporal Dead Zone
+- **수정**: 선언을 파일 상단 (`let supabase = null;` 아래)으로 이동
+- **파일**: edu-hub, papers, templete-ref의 `src/utils/supabase.js`
 
-### 변경 후
-- **1열 (footer-brand)**: 로고 + 태그라인 (company-info 제거 → 하단으로 이동)
-- **3열 (footer-contact)**: 이메일(✉️ 아이콘 + mailto 링크) + 전화 + 카카오톡 + 영업시간 + Family Site (주소 제거)
-- **하단 (footer-bottom)**:
-  - `© 2025 드림아이티비즈(DreamIT Biz). All rights reserved.`
-  - `Designed by Ph.D Aebon Lee | 대표이사: 이애본 | 사업자등록번호: 601-45-20154 | 통신판매신고번호: 제2024-수원팔달-0584호 | 출판사 신고번호: 제2026-000026호`
+### Fix 2. 장바구니 합계 NaN 방어 (CartContext.jsx)
+- **문제**: `item.price`가 undefined이면 cartTotal이 NaN
+- **수정**: `(Number(item.price) || 0) * (Number(item.quantity) || 0)` 가드 추가
+- **파일**: edu-hub, papers, templete-ref의 `src/contexts/CartContext.jsx`
 
-### 수정 파일
-| 파일 | 변경 내용 |
-|------|----------|
-| `react-source/src/components/layout/Footer.jsx` | 구조 개편 (company-info 제거, 주소 제거, 하단 사업자 정보 추가) |
-| `react-source/src/styles/footer.css` | `.footer-email`, `.footer-bottom-info` 스타일 추가 |
-| `subsite-template/src/components/layout/Footer.jsx` | 동일 적용 |
-| `subsite-template/src/styles/footer.css` | 동일 적용 |
+### Fix 3. 수량 + 버튼 max 제한 (Cart.jsx)
+- **문제**: + 버튼에 max 제한 없음 (- 버튼은 min 제한 있음)
+- **수정**: `disabled={item.quantity >= 99}` 추가
+- **파일**: edu-hub, papers, templete-ref의 `src/pages/Cart.jsx`
 
-## 2. 이메일 링크 스타일 개선
+---
 
-- 이메일에 ✉️ 아이콘 추가
-- `mailto:` 링크 적용 (클릭 시 메일 클라이언트 열림)
-- 호버 시 파란색(`#93C5FD` → `#BFDBFE`) 강조 + 밑줄
+## Phase 2: 히어로 CSS 반응형 추가 (20개 프로젝트, 20개 파일)
 
-### CSS 추가
-```css
-.footer-email { display: flex; align-items: center; gap: 8px; }
-.footer-email a { color: #93C5FD; font-weight: 500; }
-.footer-email a:hover { color: #BFDBFE; text-decoration: underline; }
-.footer-bottom-info { font-size: 12px; color: rgba(255,255,255,0.4); }
-```
+### Fix 4. 모바일 반응형 미디어쿼리 추가 (hero.css)
+- **문제**: hero-title 56~60px 고정 → 모바일에서 텍스트 오버플로우
+- **참조**: eip만 유일하게 반응형 구현 → 나머지 20개에 동일 적용
 
-## 3. 커밋 이력
+**브레이크포인트**: 1024px (태블릿), 768px (모바일), 480px (소형 모바일)
 
-| 커밋 | 메시지 |
-|------|--------|
-| `f40247d` | fix: 푸터 연락처 이메일 스타일 개선 |
-| `853c7bf` | fix: 푸터 이메일 aebon@dreamitbiz.com 복원 + 이메일 링크 스타일 개선 |
-| `fc75de1` | refactor: 푸터 구조 개편 - 사업자 정보를 하단으로 이동, 주소 제거 |
+**대상 프로젝트**: koreatech, allthat, reserve, papers, self-branding, marketing, uxdesign, digitalbiz, db-study, edu-hub, data-structure, linux-study, templete-ref, coding, ai-prompt, ai-data, software, docs, teaching, python-study
+
+---
+
+## Phase 3: 기타 정리 및 배포
+
+### .gitignore 정리
+- **software**: `.claude/`, `NUL` 추가 + `public/CNAME` 커밋
+- **python-study**: `.claude/` 추가
+
+### 빌드 & 배포 완료 (전 20개 프로젝트)
+- 커밋 메시지: `fix: 장바구니/결제 버그 수정 및 히어로 반응형 CSS 추가`
+- 전체 `npm run build` → `git push` → `npx gh-pages -d dist` 완료
+
+---
+
+## 트러블슈팅
+
+| 이슈 | 원인 | 해결 |
+|------|------|------|
+| software `git add -A` 실패 | Windows `NUL` 특수 파일 | `git add src/styles/hero.css`로 특정 파일만 추가 |
+| teaching 커밋 실패 | 이미 커밋된 상태 | 배포만 수행 |
+
+---
+
+## 미처리 항목
+- `contact@dreamitbiz.com` → `aebon@dreamitbiz.com` 이메일 변경 요청 (소스코드에서 미발견, DB/환경변수 확인 필요)

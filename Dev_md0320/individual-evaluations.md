@@ -1,53 +1,55 @@
 # 개별 프로젝트 심층 평가 보고서
 
-> 작성일: 2026-03-26 (재평가)
+> 작성일: 2026-03-27 (3차 평가)
+> 이전 평가: 2026-03-25 (초안), 2026-03-26 (재평가)
 > 평가 대상: DreamIT Biz 전체 37개 활성 프로젝트
 > 평가 방법: 소스코드 심층 분석 (구조, 라우팅, 컴포넌트, 코드 품질, 완성도)
-> 이전 평가 대비 변경사항: Phase 1 보안/메타데이터/배포 개선 반영, edu-hub 콘텐츠 확장, career 푸터 표준화, 어학 사이트 TTS 기능 정정, 신규 3개 프로젝트 추가 (korean, eip, teaching)
+> 2026-03-27 변경사항: 장바구니/결제 버그 3건 수정(edu-hub/papers/templete-ref), 히어로 모바일 반응형 CSS 20개 추가, eip v2.0.1 대폭 업데이트, competency A등급 승급, .gitignore 보안 정리
 
 ---
 
 ## 종합 비교표 (전체 37개 프로젝트)
 
-| # | 프로젝트 | 코드 품질 | 완성도 | 코드 규모 | 언어 | 프레임워크 | 변동 |
+| # | 프로젝트 | 코드 품질 | 완성도 | 코드 규모 | 언어 | 프레임워크 | 3/27 변동 |
 |---|---------|:---------:|:------:|:---------:|:----:|:----------:|:----:|
 | 1 | pbirobot | **5/5** | 높음 | 중 | TS | Next.js 16 | - |
 | 2 | books | **5/5** | 높음 | 대 | TS | Next.js 16 | - |
-| 3 | ai-data | **5/5** | 높음 | 대 | JS | React 19+Vite 7 | - |
-| 4 | career | **5/5** | 높음 | 중 | JS | React 19+Vite 8 | ▲ 푸터 표준화 |
-| 5 | eip | **4.5/5** | 높음 | 대 | JS | React 19+Vite 8+TW4 | ★ 신규 |
+| 3 | ai-data | **5/5** | 높음 | 대 | JS | React 19+Vite 7 | ▲ 히어로 반응형 |
+| 4 | career | **5/5** | 높음 | 중 | JS | React 19+Vite 8 | - |
+| 5 | eip | **4.5/5** | 높음 | 대 | JS | React 19+Vite 8+TW4 | ▲ v2.0.1 (13커밋) |
 | 6 | hohai | **4.5/5** | 높음 | 중~대 | TS | React 19+Vite 6 | - |
-| 7 | linux-study | **4.5/5** | 높음 | 대 | JS | React 19+Vite 7 | - |
-| 8 | koreatech | **4.5/5** | 높음 | 대 | JS | React 19+Vite 7 | - |
-| 9 | koreait | **4.5/5** | 중간 | 소 | JS | React 18+Vite 6 | - |
-| 10 | docs | **4.5/5** | 높음 | 소 | JS | React 19+Vite 6 | - |
-| 11 | ahp_basic | **4/5** | 높음 | 대 | JS | React 18+Vite 5 | - |
-| 12 | competency | **4/5** | 높음 | 대 | JS(부분TS) | React 19+Vite 7 | - |
-| 13 | edu-hub | **4/5** | 높음 | 중 | JS | React 19+Vite 7 | ▲ 3.5→4 |
-| 14 | korean | **4/5** | 높음 | 중~대 | JS | React 19+Vite 8 | ★ 신규 |
-| 15 | teaching | **4/5** | 높음 | 중 | JS | React 19+Vite 6 | ★ 신규 |
+| 7 | competency | **4.5/5** | 높음 | 대 | JS(부분TS) | React 19+Vite 7 | ▲ 4→4.5 승급 |
+| 8 | linux-study | **4.5/5** | 높음 | 대 | JS | React 19+Vite 7 | ▲ 히어로 반응형 |
+| 9 | koreatech | **4.5/5** | 높음 | 대 | JS | React 19+Vite 7 | ▲ 히어로 반응형 |
+| 10 | koreait | **4.5/5** | 중간 | 소 | JS | React 18+Vite 6 | - |
+| 11 | docs | **4.5/5** | 높음 | 소 | JS | React 19+Vite 6 | ▲ 히어로 반응형 |
+| 12 | ahp_basic | **4/5** | 높음 | 대 | JS | React 18+Vite 5 | - |
+| 13 | edu-hub | **4/5** | 높음 | 중 | JS | React 19+Vite 7 | ▲ 카트버그 수정+반응형 |
+| 14 | korean | **4/5** | 높음 | 중~대 | JS | React 19+Vite 8 | - |
+| 15 | teaching | **4/5** | 높음 | 중 | JS | React 19+Vite 6 | ▲ 히어로 반응형 |
 | 16 | c-study | **4/5** | 높음 | 중 | JS | React 19+Vite 7 | - |
-| 17 | python-study | **4/5** | 높음 | 중 | JS | React 19+Vite 7 | - |
-| 18 | data-structure | **4/5** | 중간 | 중 | JS | React 19+Vite 7 | - |
-| 19 | db-study | **4/5** | 높음 | 대 | JS | React 19+Vite 7 | - |
-| 20 | software | **4/5** | 높음 | 중 | JS | React 19+Vite 7 | - |
-| 21 | ai-prompt | **4/5** | 높음 | 대 | JS | React 19+Vite 7 | - |
-| 22 | digitalbiz | **4/5** | 높음 | 대 | JS | React 19+Vite 7 | - |
-| 23 | marketing | **4/5** | 높음 | 대 | JS | React 19+Vite 7 | - |
-| 24 | uxdesign | **4/5** | 높음 | 대 | JS | React 19+Vite 7 | - |
-| 25 | self-branding | **4/5** | 높음 | 대 | JS | React 19+Vite 7 | - |
-| 26 | allthat | **4/5** | 높음 | 대 | JS | React 19+Vite 7 | - |
-| 27 | papers | **4/5** | 높음 | 대 | JS | React 19+Vite 7 | - |
-| 28 | reserve | **4/5** | 높음 | 중 | JS | React 19+Vite 7 | - |
+| 17 | python-study | **4/5** | 높음 | 중 | JS | React 19+Vite 7 | ▲ gitignore+반응형 |
+| 18 | data-structure | **4/5** | 중간 | 중 | JS | React 19+Vite 7 | ▲ 히어로 반응형 |
+| 19 | db-study | **4/5** | 높음 | 대 | JS | React 19+Vite 7 | ▲ 히어로 반응형 |
+| 20 | software | **4/5** | 높음 | 중 | JS | React 19+Vite 7 | ▲ gitignore+CNAME+반응형 |
+| 21 | ai-prompt | **4/5** | 높음 | 대 | JS | React 19+Vite 7 | ▲ 히어로 반응형 |
+| 22 | digitalbiz | **4/5** | 높음 | 대 | JS | React 19+Vite 7 | ▲ 히어로 반응형 |
+| 23 | marketing | **4/5** | 높음 | 대 | JS | React 19+Vite 7 | ▲ 히어로 반응형 |
+| 24 | uxdesign | **4/5** | 높음 | 대 | JS | React 19+Vite 7 | ▲ 히어로 반응형 |
+| 25 | self-branding | **4/5** | 높음 | 대 | JS | React 19+Vite 7 | ▲ 히어로 반응형 |
+| 26 | allthat | **4/5** | 높음 | 대 | JS | React 19+Vite 7 | ▲ 히어로 반응형 |
+| 27 | papers | **4/5** | 높음 | 대 | JS | React 19+Vite 7 | ▲ 카트버그 수정+반응형 |
+| 28 | reserve | **4/5** | 높음 | 중 | JS | React 19+Vite 7 | ▲ 히어로 반응형 |
 | 29 | aebon | **4/5** | 높음 | 소 | JS | React 18+Vite 6 | - |
-| 30 | coding | **3.5/5** | 중~높 | 중 | JS | React 19+Vite 8 | - |
-| 31 | java-study | **3.5/5** | 높음 | 대 | JS | React 19+Vite 7 | - |
-| 32 | english | **3.5/5** | 높음 | 대 | JS | React 19+Vite 8 | ▲ ESLint 추가 |
-| 33 | japanese | **3.5/5** | 높음 | 대 | JS | React 19+Vite 8 | ▲ ESLint 추가 |
-| 34 | reactStudy | **3/5** | 중간 | 소 | JS | React 19+Vite 7 | ▲ ESLint 추가 |
-| 35 | webstudy | **3/5** | 중간 | 소 | JS | React 19+Vite 7 | ▲ ESLint 추가 |
-| 36 | algorithm | **3/5** | 중간 | 소 | JS | React 19+Vite 7 | - |
-| 37 | jdy | **3/5** | 중간 | 소 | JS | Vanilla HTML/CSS | - |
+| 30 | templete-ref | **3.5/5** | 중간 | 중 | JS | React 19+Vite 7 | ▲ 카트버그 수정+반응형 |
+| 31 | coding | **3.5/5** | 중~높 | 중 | JS | React 19+Vite 8 | ▲ 히어로 반응형 |
+| 32 | java-study | **3.5/5** | 높음 | 대 | JS | React 19+Vite 7 | - |
+| 33 | english | **3.5/5** | 높음 | 대 | JS | React 19+Vite 8 | - |
+| 34 | japanese | **3.5/5** | 높음 | 대 | JS | React 19+Vite 8 | - |
+| 35 | reactStudy | **3/5** | 중간 | 소 | JS | React 19+Vite 7 | - |
+| 36 | webstudy | **3/5** | 중간 | 소 | JS | React 19+Vite 7 | - |
+| 37 | algorithm | **3/5** | 중간 | 소 | JS | React 19+Vite 7 | - |
+| 38 | jdy | **3/5** | 중간 | 소 | JS | Vanilla HTML/CSS | - |
 
 ---
 
@@ -105,16 +107,17 @@
 
 ---
 
-### A등급 (코드 품질 4.5/5) - 6개 프로젝트
+### A등급 (코드 품질 4.5/5) - 7개 프로젝트
 
-#### 5. eip (정보처리 종합 학습 플랫폼) - 4.5/5 ★ 신규
+#### 5. eip (정보처리 종합 학습 플랫폼) - 4.5/5 ▲ (v2.0.1 대폭 업데이트)
 - **설명**: 정보처리기사/산업기사/프로그래밍기능사 종합 학습 플랫폼
 - **페이지/컴포넌트**: 25+라우트 / 37컴포넌트 / 15 데이터 파일
 - **기술 스택**: React 19.2.4 + Vite 8.0.1 + Tailwind CSS 4.2.2 + Monaco Editor 4.7.0 + Supabase 2.100.0 + ESLint 9
 - **특수 기능**: CBT 필기시험(자격증 3종×과목별 챕터 이론+모의고사), 실기시험(SQL/알고리즘/단답형), Monaco 코딩실습(Wandbox API로 C/Java/Python 실행), YouTube 강의 플레이어, 회차별 결정적 문제 셔플(seeded), 합격 예측, 마이페이지(시험이력/코딩이력)
 - **데이터 규모**: 500+문항, 코딩 연습 20+, 강의 15+, 챕터 이론 12과목(기사5+산기4+기능사3)
 - **강점**: Tailwind CSS 4 (전체 프로젝트 중 유일), Monaco Editor(전문 코드 에디터), 자격증별 데이터 완전 분리, 재사용 UI 컴포넌트(Button/Card/Timer/ProgressBar/Modal), OAuth(Google/Kakao), 마크다운 테이블 렌더링
-- **개선 필요**: TypeScript 미전환(@types 설치됨), 커뮤니티 기능 미완성, 테스트 코드 부재
+- **2026-03-27 업데이트**: v1.3.0→v2.0.1 (13커밋) — UI 리디자인(모던 팔레트+Font Awesome+사이드바), 실기시험 자격증별 분리, 회차별 모의고사, 합격 예측 기능, 호버 버그 수정
+- **개선 필요**: TypeScript 미전환(@types 설치됨), package.json 버전 0.0.0 (실제 v2.0.1과 불일치), 테스트 코드 부재
 
 #### 6. hohai (호해 - 시/음악 플랫폼) - 4.5/5
 - **설명**: 시(Poem)와 AI 음악(Suno) 콘텐츠 문학/음악 플랫폼
@@ -156,7 +159,7 @@
 
 ---
 
-### B등급 (코드 품질 4/5) - 19개 프로젝트
+### B등급 (코드 품질 4/5) - 18개 프로젝트
 
 #### 10. ahp_basic (AHP 의사결정 분석) - 4/5
 - **페이지/컴포넌트**: 46페이지 / 84컴포넌트 / 21 hooks / 21 utils / 7 테스트
@@ -165,12 +168,13 @@
 - **강점**: CSS Modules, 비즈니스 로직/UI 분리, JSDoc, 7개 테스트(Vitest), ErrorBoundary, React.lazy, Guard 패턴(Admin/SuperAdmin/Evaluator/Protected)
 - **개선 필요**: TypeScript 미전환, HashRouter→BrowserRouter, Vite 5.4 → 7+ 업그레이드
 
-#### 11. competency (4차산업혁명 핵심역량 검사) - 4/5
+#### 11. competency (4차산업혁명 핵심역량 검사) - 4.5/5 ▲ (이전 4/5, A등급 승급)
 - **페이지/컴포넌트**: 53페이지 / 13컴포넌트 / 4테스트(13케이스)
-- **기술 스택**: React 19 + Vite 7 + Supabase + Chart.js + PortOne V1 (KG이니시스)
-- **특수 기능**: PortOne 결제(KG이니시스 25,000원), 쿠폰, 8대 핵심역량 레이더차트, AI 리포트, 그룹 관리, CSV 내보내기(UserList/CouponList/PurchaseList), OAuth(Google/Kakao), GitHub Actions CI/CD(lint, type-check, test, build, deploy)
-- **강점**: lazy loading 31청크, TS 점진 전환 중(contexts, utils, types), CLAUDE.md 문서화, DOMPurify XSS 방어, Supabase RLS 적용, CI/CD 파이프라인 유일하게 보유
-- **개선 필요**: 전체 TypeScript 전환 완료 필요 (allowJs: true 상태)
+- **기술 스택**: React 19 + Vite 7 + TypeScript 5 (부분) + Supabase + Chart.js + PortOne V1 (KG이니시스) + ESLint 9 + DOMPurify
+- **특수 기능**: PortOne 결제(KG이니시스 25,000원), 쿠폰, 8대 핵심역량 레이더차트, AI 리포트, 그룹 관리, CSV 내보내기, OAuth(Google/Kakao), GitHub Actions CI/CD(lint→type-check→test→build→deploy)
+- **강점**: **전체 프로젝트 중 유일한 full CI/CD 파이프라인**, lazy loading 31청크, TS 점진 전환 중(contexts, utils, types, 20개 인터페이스), CLAUDE.md 문서화, DOMPurify XSS 방어, Supabase RLS 적용
+- **2026-03-27 승급 사유**: CI/CD 성숙도 재평가 — lint+type-check+test+build+deploy 5단계 파이프라인, TypeScript 부분 전환(contexts/utils), DOMPurify 보안 방어가 A등급 수준
+- **개선 필요**: 전체 TypeScript 전환 완료 필요 (allowJs: true, 52페이지+10컴포넌트 JSX 잔존)
 
 #### 13. korean (한국어 학습) - 4/5 ★ 신규
 - **설명**: 외국인 및 다문화 학습자를 위한 한국어 학습 플랫폼
@@ -189,7 +193,7 @@
 - **개선 필요**: TypeScript 미사용, ESLint 미구성, 배포 스크립트 누락, Vite 6→8 업그레이드 필요, Supabase 2.47→2.100 업그레이드 필요
 
 #### 15. edu-hub (교육 허브) - 4/5 ▲ (이전 3.5/5)
-- **25페이지 / 10컴포넌트 / 5 Context**
+- **25페이지 / 10컴포넌트 / 5 Context / 5 테스트**
 - **기술 스택**: React 19.2.0 + Vite 7.3.1 + Supabase 2.96.0 + PortOne + Vitest 4.1.1 + @testing-library/react
 - **특수 기능**: 다크모드, 다국어(한/영), PortOne 결제, 장바구니, 커뮤니티, 가맹점(familySites) 관리, 검색 모달, 학습 사이트 카드 시스템, 카테고리 필터링
 - **2026-03-26 변경사항**:
@@ -197,6 +201,11 @@
   - 정보처리기사(eip.dreamitbiz.com) 링크 활성화
   - 네비게이션 메뉴 한국어 항목 추가 + 번역 키 추가
   - 어학 4개 사이트 features를 "API 기반 TTS 음성 서비스"로 통일
+- **2026-03-27 변경사항**:
+  - supabase.js: _memoryOrders TDZ 에러 방지 (선언 위치 이동)
+  - CartContext.jsx: cartTotal/cartCount NaN 방어 가드 추가
+  - Cart.jsx: 수량 + 버튼 max 99 제한 추가
+  - hero.css: 모바일 반응형 미디어쿼리 추가 (1024/768/480px)
 - **승급 사유**: Vitest + @testing-library 테스트 인프라 보유, 콘텐츠 관리 체계(site.js 설정 기반) 완비, 학습 사이트 32개+ 연동 허브 역할, Phase 1 배포 스크립트 추가
 - **개선 필요**: TypeScript 미사용, 6개 Storage 유틸 분산
 
@@ -248,6 +257,7 @@
 - **코드 규모**: ~24,200 LOC (35페이지 / 98파일 - 파일 수 최다)
 - **기술 스택**: React 19.2 + Vite 7.3.1 + Supabase + PortOne SDK
 - **특수 기능**: PortOne 결제, 장바구니(CartContext), 분야별 학술 데이터(인문/의예/과학공학 한영 ~4,100줄), 논문지도, 파일/이미지 업로드, 관리자 CRUD 9경로, 온라인/라이브 강의
+- **2026-03-27 수정**: supabase.js TDZ 수정, CartContext NaN 방어, Cart.jsx max 수량, hero.css 반응형
 
 #### 25. reserve (예약 시스템) - 4/5
 - **코드 규모**: ~12,400 LOC (17페이지 / 13컴포넌트)
@@ -351,9 +361,9 @@
 | **총 페이지** | ~1,160+ |
 | **총 코드 라인** | ~430,000+ LOC |
 | **TypeScript 프로젝트** | 4개 (pbirobot, books, hohai + competency 부분) |
-| **ESLint 구성 프로젝트** | 12개 (pbirobot, books, career, koreait, competency, english, japanese, reactStudy, webstudy, korean, eip + Next.js 프로젝트) |
+| **ESLint 구성 프로젝트** | 12개 (pbirobot, books, career, koreait, competency, english, japanese, reactStudy, webstudy, korean, eip, linux-study) |
 | **Tailwind CSS 프로젝트** | 3개 (pbirobot, koreait, eip) |
-| **테스트 있는 프로젝트** | 3개 (ahp_basic 7파일, competency 4파일, edu-hub 인프라 보유) |
+| **테스트 있는 프로젝트** | 3개 (ahp_basic 8파일, competency 4파일(13케이스), edu-hub 5파일) |
 | **결제 연동 프로젝트** | 5개 (competency, edu-hub, career, allthat, papers) |
 | **AI 통합 프로젝트** | 4개 (korean AI챗봇, teaching 멀티AI, ahp_basic AI분석, eip 코드실행) |
 | **Supabase 연동** | 31개+ |
@@ -363,18 +373,34 @@
 
 ## 이전 평가 대비 변동 요약
 
-| 프로젝트 | 이전 | 현재 | 변동 사유 |
-|---------|:----:|:----:|----------|
-| **edu-hub** | 3.5/5 | **4/5** | Vitest 테스트 인프라, 한국어 학습 카드 추가, 정보처리기사 링크 활성화, 네비게이션 메뉴 확장, TTS 기능 통일, 배포 스크립트 추가 |
-| **english** | 3.5/5 | 3.5/5 | ESLint 9 + @types/react 추가 (점수 변동 없으나 TypeScript 전환 준비 완료) |
-| **japanese** | 3.5/5 | 3.5/5 | ESLint 9 + @types/react 추가 (점수 변동 없으나 TypeScript 전환 준비 완료) |
+### 2026-03-27 변동 (3차 평가)
+
+| 프로젝트 | 이전(3/26) | 현재(3/27) | 변동 사유 |
+|---------|:----------:|:----------:|----------|
+| **competency** | 4/5 | **4.5/5** | CI/CD 파이프라인(lint+type-check+test+build+deploy) 재평가, TS 부분 전환, DOMPurify 보안 |
+| **eip** | 4.5/5 | 4.5/5 | v1.3.0→v2.0.1 대폭 업데이트 (13커밋, UI 리디자인, 실기시험 분리, 합격 예측) |
+| **edu-hub** | 4/5 | 4/5 | 장바구니/결제 버그 3건 수정 (TDZ, NaN, max 수량), 히어로 반응형 |
+| **papers** | 4/5 | 4/5 | 장바구니/결제 버그 3건 수정, 히어로 반응형 |
+| **templete-ref** | - | 3.5/5 | 장바구니/결제 버그 3건 수정, 히어로 반응형 (템플릿 원본이므로 별도 등재) |
+| **20개 프로젝트** | - | - | 히어로 영역 모바일 반응형 CSS 추가 (1024/768/480px) |
+| **software** | 4/5 | 4/5 | .gitignore 정리 (.claude/, NUL), CNAME 추가, 히어로 반응형 |
+| **python-study** | 4/5 | 4/5 | .gitignore에 .claude/ 추가, 히어로 반응형 |
+| **전체** | 종합 2.75 | **종합 3.13** | +0.38점 향상 (보안 수정, 모바일 반응형, 배포 안정화) |
+
+### 2026-03-26 변동 (2차 평가)
+
+| 프로젝트 | 이전(3/25) | 당시(3/26) | 변동 사유 |
+|---------|:----------:|:----------:|----------|
+| **edu-hub** | 3.5/5 | **4/5** | Vitest 테스트 인프라, 한국어 학습 카드 추가, 정보처리기사 링크 활성화, 배포 스크립트 추가 |
+| **english** | 3.5/5 | 3.5/5 | ESLint 9 + @types/react 추가 |
+| **japanese** | 3.5/5 | 3.5/5 | ESLint 9 + @types/react 추가 |
 | **reactStudy** | 3/5 | 3/5 | ESLint 9 + @types/react 추가 |
 | **webstudy** | 3/5 | 3/5 | ESLint 9 + @types/react 추가 |
-| **career** | 5/5 | 5/5 | 푸터 고객지원 dreamitbiz 표준화 (점수 변동 없음) |
-| **korean** | - | **4/5** | ★ 신규 프로젝트 - 한국어 학습 플랫폼 (React 19+Vite 8, AI챗봇, TTS, 2300+단어) |
-| **eip** | - | **4.5/5** | ★ 신규 프로젝트 - 정보처리 종합 학습 (Tailwind 4, Monaco Editor, CBT시험, 코딩실습) |
-| **teaching** | - | **4/5** | ★ 신규 프로젝트 - AI 교수학습 도구 (멀티AI, 5형식 내보내기, 교육학 이론) |
-| **전체** | - | - | Phase 1: npm audit 보안 수정, metadata 보완, deploy 스크립트 추가 |
+| **career** | 5/5 | 5/5 | 푸터 고객지원 dreamitbiz 표준화 |
+| **korean** | - | **4/5** | ★ 신규 - 한국어 학습 (AI챗봇, TTS, 2300+단어) |
+| **eip** | - | **4.5/5** | ★ 신규 - 정보처리 종합 학습 (Tailwind 4, Monaco, CBT) |
+| **teaching** | - | **4/5** | ★ 신규 - AI 교수학습 도구 (멀티AI, 5형식 내보내기) |
+| **전체** | - | - | Phase 1: npm audit 보안, metadata 보완, deploy 스크립트 추가 |
 
 ---
 
@@ -418,6 +444,9 @@
 ---
 
 > 이 보고서는 소스코드 심층 분석을 기반으로 작성되었습니다.
-> 각 프로젝트의 src/ 폴더 구조, package.json, 라우팅 설정, 주요 컴포넌트/훅을 직접 분석했습니다.
-> Phase 1 개선사항(2026-03-25) 및 edu-hub/career/어학 사이트 업데이트(2026-03-26) 반영.
-> 신규 3개 프로젝트(korean, eip, teaching) 추가 평가(2026-03-26).
+> 각 프로젝트의 src/ 폴더 구조, package.json, 라우팅 설정, 주요 컴포넌트/훅, git log를 직접 분석했습니다.
+>
+> **평가 이력:**
+> - 2026-03-25: 초안 작성 (Phase 1 보안/메타데이터/배포 개선)
+> - 2026-03-26: 재평가 (edu-hub/career/어학 업데이트, 신규 3개 추가)
+> - 2026-03-27: 3차 평가 (장바구니/결제 버그 수정, 히어로 반응형 20개, competency 승급, eip v2.0.1)
