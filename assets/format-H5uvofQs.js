@@ -1,0 +1,1 @@
+const i=t=>t?new Date(t).toLocaleString("ko-KR",{year:"2-digit",month:"2-digit",day:"2-digit",hour:"2-digit",minute:"2-digit"}):"-",r=t=>t==null?"-":`${Number(t).toLocaleString()}원`;export{i as a,r as f};

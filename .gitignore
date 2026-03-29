@@ -1,0 +1,28 @@
+# Claude
+.claude/
+
+# Windows
+NUL
+nul
+Thumbs.db
+Desktop.ini
+
+# Temp files
+*.tmp
+diff_output.txt
+diff_results.txt
+full_diff_report.txt
+tmp_result.txt
+tmp_auth.json
+tmp_auth2.json
+
+# Dependencies
+node_modules/
+
+# Subsite template (개발용, 별도 관리)
+subsite-template/
+
+# Environment
+.env
+.env.local
+.env.*.local
