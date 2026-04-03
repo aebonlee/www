@@ -156,7 +156,7 @@ npx gh-pages -d dist
 | digitalbiz | 78 files (619+/336-) | **완료** | 커밋 dea1d9a, 배포 완료 |
 | eip | 58 files (450+/210-) | **완료** | 커밋 18cebc9, 배포 완료 |
 | self-branding | ~158 files | **완료** | 커밋 fe49ce7, 빌드 성공, 배포 중 |
-| teaching | ~167 files | **진행중** | 120개 에러 수정 중 (3개 파일) |
+| teaching | ~167 files (84 changed) | **완료** | 커밋 983de07, 배포 완료 |
 
 **eip 주요 작업**:
 - CodeEditor, PassPrediction에 Props interface 추가
@@ -170,10 +170,11 @@ npx gh-pages -d dist
 - supabase.ts의 `.catch()` → `try/catch` 패턴 변환
 - 40+ 페이지 파일의 implicit any/unused vars 수정
 
-**teaching 잔여 작업** (진행중):
-- `PromptPractice.tsx`: 90개 에러 (대규모 인터랙티브 페이지)
-- `Resources.tsx`: 28개 에러 (인덱스 시그니처 이슈)
-- `AIChecklist.tsx`: 2개 에러 (거의 완료)
+**teaching 완료** (2026-04-01):
+- `AIChecklist.tsx`: unknown→ReactNode 에러 → ternary null 패턴
+- `PromptPractice.tsx`: String() 캐스트, OverviewPanel group 타입 적용
+- `Resources.tsx`: 모든 함수/배열/state에 타입 어노테이션 추가
+- tsc --noEmit 0 에러, vite build 성공 (628 모듈)
 
 ---
 
@@ -255,12 +256,10 @@ const handleClick = (e: React.MouseEvent<HTMLButtonElement>) => { ... }
 
 | 구분 | 완료 | 진행중 | 대기 | 합계 |
 |------|------|--------|------|------|
-| 프로젝트 | 18 | 1 | 19 | 38 |
-| 배치 | 4.8/10 | 0.2/10 | 5/10 | 10 |
+| 프로젝트 | 19 | 0 | 19 | 38 |
+| 배치 | 5/10 | 0/10 | 5/10 | 10 |
 
-**완료 프로젝트 (18개)**:
-competency, aebon, reactStudy, webstudy, docs, templete-ref, reserve, algorithm, data-structure, db-study, linux-study, english, japanese, korean, presentation, digitalbiz, eip, self-branding
-
-**진행중 (1개)**: teaching (120 에러 → 수정중)
+**완료 프로젝트 (19개)**:
+competency, aebon, reactStudy, webstudy, docs, templete-ref, reserve, algorithm, data-structure, db-study, linux-study, english, japanese, korean, presentation, digitalbiz, eip, self-branding, teaching
 
 **대기 (19개)**: coding, python-study, c-study, java-study, ai-prompt, ai-data, ai-media, software, marketing, koreatech, openclaw, autowork, uxdesign, edu-hub, allthat, papers, career, koreait, ahp_basic

@@ -41,12 +41,13 @@
 | 16 | digitalbiz | digitalbiz.dreamitbiz.com | strict TS | 2026-04-01 |
 | 17 | eip | eip.dreamitbiz.com | strict TS | 2026-04-01 |
 | 18 | self-branding | selfbranding.dreamitbiz.com | strict TS | 2026-04-01 |
+| 19 | teaching | teaching.dreamitbiz.com | strict TS | 2026-04-01 |
 
 ### TypeScript 마이그레이션 진행 중
 
 | # | 프로젝트 | 남은 에러 | 상태 |
 |---|----------|-----------|------|
-| 19 | teaching | 120 | 수정 중 |
+| (없음) | | | |
 
 ### 마이그레이션 대기 (JavaScript)
 
