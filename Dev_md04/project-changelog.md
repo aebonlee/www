@@ -1,6 +1,6 @@
-# 프로젝트별 변경 이력 (2026-03-30 ~ 2026-04-01)
+# 프로젝트별 변경 이력 (2026-03-30 ~ 2026-04-05)
 
-**작성일**: 2026-04-01
+**작성일**: 2026-04-05 (최종 갱신)
 **작업자**: Claude Opus 4.6
 
 ---
@@ -112,6 +112,63 @@ GitHub Pages 커스텀 도메인 미작동 문제 해결:
 - **python-study**: strict TS 마이그레이션 완료
 - **c-study**: strict TS 마이그레이션 완료
 - **java-study**: strict TS 마이그레이션 완료
+
+### 2026-04-05: 인증 시스템 점검 + OG 이미지 통일 + 파비콘 생성
+
+#### 인증 시스템 전체 점검 및 수정 (9개 프로젝트)
+36개 인증 프로젝트 전수 조사 후 P0/P1/P2 이슈 일괄 수정:
+
+**P0 (치명적 — 기능 미작동):**
+- **career**: OAuth redirectTo 누락, `career_profiles` → `user_profiles` 테이블명 수정, 프로필 생성 로직 추가
+- **software, ai-data, ai-prompt**: signUp 후 user_profiles 프로필 생성 누락 수정
+- **koreait**: signUp 후 user_profiles 프로필 생성 누락 수정
+- **ahp_basic**: signUp 후 user_profiles 프로필 생성 누락 수정
+
+**P1 (중요 — 일관성/보안):**
+- **software, ai-data, ai-prompt**: signUp 메타데이터 `display_name` → `full_name` 통일
+- **koreait, teaching, digitalbiz**: AuthContext에 OAuth 메서드(signInWithGoogle/signInWithKakao) 미노출 → 노출
+- **digitalbiz**: Register 페이지에 Google/Kakao OAuth 버튼 추가
+- **competency**: 비밀번호 정책 6자 → 8자+영문+숫자 강화 (Register, InviteRegister)
+
+**P2 (개선 — 도메인 추적):**
+- **career, software, ai-data, ai-prompt, koreait, ahp_basic**: onAuthStateChange SIGNED_IN 이벤트에서 visited_sites 배열 자동 추적
+- Supabase `user_profiles` 테이블에 `signup_domain`, `visited_sites`, `last_sign_in_at` 컬럼 추가 (수동 SQL 실행 완료)
+
+전체 9개 프로젝트 빌드/커밋/푸시/배포 완료.
+
+#### OG 이미지 생성 및 메타 태그 통일 (49개 프로젝트)
+sharp 0.34.5로 1200×630 PNG OG 이미지 일괄 생성 + 배포:
+
+**5가지 컬러 테마:**
+- **Dark Blue** (#0A1628): www, competency, career, koreatech, koreait, teaching, edu-hub, self-branding (8개)
+- **Deep Navy** (#0F172A): ai-prompt, ai-data, ai-media, ai-agents, chatgpt, claude, gemini, genspark, fine-tuning (9개)
+- **Midnight Teal** (#042F2E): python-study, java-study, c-study, db-study, linux-study, english, japanese, korean, algorithm, data-structure, coding (11개)
+- **Dark Indigo** (#1E1B4B): digitalbiz, marketing, uxdesign, presentation, eip, planning, planning-extract (7개)
+- **Dark Slate** (#0C0A09): docs, reserve, allthat, papers, software, openclaw, autowork, ahp_basic, aebon, reactStudy, webstudy, templete-ref, hohai, html, jdy, vibe (16개)
+
+**OG 태그 수정 내역:**
+- 누락 og:image 추가 (4개): koreait, papers, linux-study, planning-extract
+- SVG → PNG 교체 (3개): data-structure, docs, allthat
+- 비표준 경로 통일 (12개): teaching, autowork, openclaw, chatgpt, claude, fine-tuning, gemini, genspark, ai-media, edu-hub, competency, www
+- 전체 OG 태그 신규 추가 (2개): templete-ref, vibe
+- og:site_name 추가 (1개): hohai
+
+49개 프로젝트 빌드/커밋/푸시/배포 완료 (vibe, planning-extract 제외).
+
+#### 파비콘 생성 (7개 프로젝트)
+sharp로 SVG + PNG(32×32, 192×192) + ICO(48×48) 일괄 생성:
+
+| 프로젝트 | 라벨 | 배경색 | 액센트 | 조치 |
+|----------|------|--------|--------|------|
+| koreait | KIT | #0A1628 | #3B82F6 | 파일 생성 + 태그 추가 |
+| genspark | GS | #0F172A | #F59E0B | 파일 생성 + 태그 추가 |
+| chatgpt | GPT | #10A37F | #FFFFFF | 파일 생성 + 태그 신규 |
+| english | EN | #042F2E | #2DD4BF | 재생성 + 태그 추가 |
+| eip | EIP | #1E1B4B | #A78BFA | 파일 생성 + 태그 수정 |
+| aebon | AB | #0C0A09 | #F97316 | 파일 생성 + 태그 신규 |
+| html | HTML | #E44D26 | #FFFFFF | 파일 생성 + 태그 신규 |
+
+7개 프로젝트 빌드/커밋/푸시/배포 완료.
 
 ---
 
