@@ -43,8 +43,75 @@
 - 마지막 6개 에러 수정 (Lectures.tsx, WebsiteWrite.tsx)
 - 빌드/커밋/푸시/배포
 
-#### teaching 진행중
-- 120개 에러 (3개 파일) 수정 중
+#### teaching 완료
+- 120개 에러 (3개 파일: PromptPractice.tsx, Resources.tsx, AIChecklist.tsx) 전부 수정
+- 빌드/커밋/푸시/배포
+
+### 2026-04-04: Supabase 접두어 마이그레이션 + 긴급 수정
+
+#### Supabase 테이블 접두어 마이그레이션 (14개 프로젝트)
+공유 Supabase 인스턴스에서 프로젝트 간 테이블 충돌 방지를 위해 고유 접두어 적용:
+- **koreatech** (kt_): posts, comments, members, quiz_results, attendance
+- **digitalbiz** (digb_): posts, comments, members
+- **marketing** (mkt_): posts, comments, members
+- **self-branding** (brand_): posts, comments, members, lectures, resources, websites, portfolios 등
+- **uxdesign** (ux_): posts, comments, members, projects
+- **gemini** (gemini_): posts, comments
+- **coding** (coding_): posts, comments
+- **docs** (docs_): documents, members
+- **koreait** (ki_): posts, comments, members, quiz_results
+- **edu-hub** (eh_): posts, comments, members, courses
+- **reserve** (rsv_): reservations, services, settings, schedules
+- **allthat** (at_): posts, comments, members
+- **papers** (pp_): posts, comments, members
+- **competency** (comp_): posts, comments, members, assessments
+- SQL 마이그레이션 스크립트: `07_Supabase_접두어_마이그레이션.md` 참조
+- 전체 14개 프로젝트 빌드 성공 후 gh-pages 배포 완료
+
+#### CNAME 누락 수정 (4개 프로젝트)
+GitHub Pages 커스텀 도메인 미작동 문제 해결:
+- **korean**: `public/CNAME` → `korean.dreamitbiz.com`
+- **english**: `public/CNAME` → `english.dreamitbiz.com`
+- **japanese**: `public/CNAME` → `japanese.dreamitbiz.com`
+- **gemini**: `public/CNAME` → `gemini.dreamitbiz.com`
+- 4개 모두 빌드 + 배포 완료
+
+#### CSS/UI 긴급 개선 (3개 프로젝트)
+
+**docs** (평가 UI/UX 4/10 → 개선):
+- glassmorphism 디자인 시스템 전면 적용
+- 14개 CSS 파일 수정/생성 (+664줄)
+- base.css, hero.css, category.css, document.css, navbar.css, footer.css
+- animations.css, dark-mode.css, responsive.css, site.css
+- auth.css, toast.css, viewer.css
+- index.html: Pretendard 폰트 추가
+- 배포 완료
+
+**reserve** (평가 UI/UX 4/10 → 개선):
+- admin.css: +470줄 (관리자 대시보드, 예약 관리, dark mode, responsive)
+- site.css: +358줄 (캘린더 UI, 예약 카드, 그라데이션, 접근성)
+- 배포 완료
+
+**digitalbiz** (SPA 라우팅 문제):
+- CSS는 이미 koreatech과 동일 수준 (템플릿 기반)
+- 실제 문제: GitHub Pages SPA redirect handler 누락
+- index.html에 `/?/path` 쿼리스트링 디코딩 스크립트 추가
+- 배포 완료
+
+#### genspark Supabase 통합 (신규 기능)
+- 인증 시스템: Google OAuth, Kakao OAuth, 이메일 로그인/회원가입
+- AuthContext, Login.jsx, Register.jsx 생성
+- 커뮤니티 게시판: CRUD (목록, 상세, 작성, 수정, 삭제)
+- Supabase 클라이언트: supabase.js, auth.js, posts.js
+- `genspark-supabase-setup.sql` 수동 실행 (Supabase Dashboard)
+  - genspark_posts, genspark_comments 테이블
+  - RLS 정책, 인덱스, updated_at 트리거, view_count RPC
+- 배포 완료
+
+#### TypeScript 마이그레이션 (별도 VS Code)
+- **python-study**: strict TS 마이그레이션 완료
+- **c-study**: strict TS 마이그레이션 완료
+- **java-study**: strict TS 마이그레이션 완료
 
 ---
 
@@ -125,5 +192,60 @@
 
 ### teaching (Batch 4)
 - **변경**: ~170 files
-- **주요 작업**: Context, utils, hooks, config 완료. 3개 대형 페이지 파일 수정 중
-- **상태**: 진행중 (120 에러 → 수정 중)
+- **주요 작업**: Context, utils, hooks, config 완료. 3개 대형 페이지 파일 (PromptPractice, Resources, AIChecklist) 수정
+- **상태**: 완료 (120 에러 → 0 에러)
+- **커밋/배포**: 완료
+
+### koreatech (Supabase 접두어)
+- **변경**: Supabase 테이블명 kt_ 접두어 적용
+- **배포**: 2026-04-04
+
+### digitalbiz (Supabase 접두어 + SPA fix)
+- **변경**: Supabase 테이블명 digb_ 접두어 + SPA redirect handler
+- **배포**: 2026-04-04
+
+### marketing (Supabase 접두어)
+- **변경**: Supabase 테이블명 mkt_ 접두어 적용
+- **배포**: 2026-04-04
+
+### uxdesign (Supabase 접두어)
+- **변경**: Supabase 테이블명 ux_ 접두어 적용
+- **배포**: 2026-04-04
+
+### gemini (Supabase 접두어 + CNAME)
+- **변경**: Supabase 테이블명 gemini_ 접두어 + CNAME 추가
+- **배포**: 2026-04-04
+
+### coding (Supabase 접두어)
+- **변경**: Supabase 테이블명 coding_ 접두어 적용
+- **배포**: 2026-04-04
+
+### koreait (Supabase 접두어)
+- **변경**: Supabase 테이블명 ki_ 접두어 적용
+- **배포**: 2026-04-04
+
+### edu-hub (Supabase 접두어)
+- **변경**: Supabase 테이블명 eh_ 접두어 적용
+- **배포**: 2026-04-04
+
+### allthat (Supabase 접두어)
+- **변경**: Supabase 테이블명 at_ 접두어 적용
+- **배포**: 2026-04-04
+
+### papers (Supabase 접두어)
+- **변경**: Supabase 테이블명 pp_ 접두어 적용
+- **배포**: 2026-04-04
+
+### docs (CSS 개선)
+- **변경**: 14개 CSS 파일 (+664줄), glassmorphism, dark mode, responsive
+- **배포**: 2026-04-04
+
+### reserve (CSS 개선)
+- **변경**: admin.css (+470줄), site.css (+358줄), dark mode, responsive
+- **배포**: 2026-04-04
+
+### genspark (Supabase 통합)
+- **변경**: 인증 시스템 + 커뮤니티 게시판 전체 구현
+- **신규 파일**: supabase.js, auth.js, posts.js, AuthContext.jsx, Login.jsx, Register.jsx, auth.css, admin.js
+- **SQL**: genspark-supabase-setup.sql (수동 실행 완료)
+- **배포**: 2026-04-04
