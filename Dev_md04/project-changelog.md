@@ -170,6 +170,13 @@ sharp로 SVG + PNG(32×32, 192×192) + ICO(48×48) 일괄 생성:
 
 7개 프로젝트 빌드/커밋/푸시/배포 완료.
 
+#### ai-agents 브랜딩 변경
+- "AI Agent Work Lab" → "AI Agents Work Lab" 전체 교체
+- 26개 파일, 35개 위치 일괄 변경
+- 대상: index.html, site.js, translations.js, LoginPage.jsx, 12개 CSS, 404.html, README, docs, Dev_md, SQL
+- OG 이미지 재생성 (Deep Navy 테마)
+- 커밋: `19b8ac1`, gh-pages 배포 완료
+
 ---
 
 ## 프로젝트별 상세 변경 내역
