@@ -19,6 +19,7 @@
 | 6 | [github-repos.md](./github-repos.md) | GitHub 리포지토리 전체 목록 (748개) |
 | 7 | [work-log-0325.md](./work-log-0325.md) | 작업 로그 - P0/P1 실행 결과 (2026-03-25) |
 | 8 | [individual-evaluations.md](./individual-evaluations.md) | 개별 프로젝트 심층 평가 보고서 (34개 프로젝트) |
+| 9 | [07_Supabase_접두어_마이그레이션.md](./07_Supabase_접두어_마이그레이션.md) | Supabase 테이블 접두어 마이그레이션 (14개 프로젝트, 2026-04-04) |
 
 ---
 
