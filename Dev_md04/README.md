@@ -22,6 +22,7 @@
 | 9 | [genspark-supabase-setup.sql](./genspark-supabase-setup.sql) | Genspark Supabase 테이블 설정 SQL |
 | 10 | [10_장원준_개인홍보웹_개발.md](./10_장원준_개인홍보웹_개발.md) | 장원준 개인 홍보 웹사이트 개발 (wonjunjang.dreamitbiz.com) |
 | 11 | [11_forjob_필기_기출_및_실기빈출.md](./11_forjob_필기_기출_및_실기빈출.md) | ForJob 필기 3,900문항 PDF 추출 + 실기 빈출 177문항 + 버그 수정 |
+| 12 | [12_forjob_디스플레이_설정.md](./12_forjob_디스플레이_설정.md) | ForJob 필기시험 2열 보기 + 크기 조절 + 여백 개선 |
 
 ---
 
@@ -51,3 +52,9 @@
 - 해설집 PDF 8개에서 721개 해설 병합
 - 실기 5개년 빈출 기출 177문항 데이터 + 전용 페이지 (`/silgi/frequent`)
 - 필기시험 시간 오류(150분→100분), 레이아웃 버그, 푸터 고정 수정
+
+### 6. ForJob 필기시험 디스플레이 설정
+- 데스크탑 2열 보기 (좌우 2문항 동시 표시, 2개씩 페이지 이동)
+- 크기 조절 3단계 (작게/보통/크게 — 폰트, 패딩, 간격 비례 조정)
+- 좌우 여백 개선 (padding 40px → 56px)
+- 설정 localStorage 저장 (세션 간 유지)
