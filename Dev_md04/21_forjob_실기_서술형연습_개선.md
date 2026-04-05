@@ -108,6 +108,53 @@ Dashboard
   ↓ 실기 합격률/평균 표시
 ```
 
+## Supabase SQL 설정
+
+기존 `forjob_exam_sessions` 테이블을 `exam_type='silgi_practice'`로 재활용.
+
+**실행 파일**: `supabase/03_exam_sessions.sql` (실기 연습 추가분만)
+
+```sql
+-- 1. status 컬럼 추가 (없으면)
+DO $$ BEGIN
+  IF NOT EXISTS (SELECT 1 FROM information_schema.columns
+    WHERE table_name='forjob_exam_sessions' AND column_name='status')
+  THEN ALTER TABLE forjob_exam_sessions ADD COLUMN status TEXT DEFAULT 'in_progress';
+  END IF;
+END $$;
+
+-- 2. 인덱스 추가
+CREATE INDEX IF NOT EXISTS idx_forjob_sessions_user_type
+  ON forjob_exam_sessions(user_id, exam_type);
+CREATE INDEX IF NOT EXISTS idx_forjob_sessions_completed
+  ON forjob_exam_sessions(completed_at DESC);
+
+-- 3. RLS 정책 갱신
+DROP POLICY IF EXISTS "sessions_select" ON forjob_exam_sessions;
+CREATE POLICY "sessions_select" ON forjob_exam_sessions
+  FOR SELECT USING (auth.uid() = user_id);
+DROP POLICY IF EXISTS "sessions_insert" ON forjob_exam_sessions;
+CREATE POLICY "sessions_insert" ON forjob_exam_sessions
+  FOR INSERT WITH CHECK (auth.uid() = user_id);
+DROP POLICY IF EXISTS "sessions_update" ON forjob_exam_sessions;
+CREATE POLICY "sessions_update" ON forjob_exam_sessions
+  FOR UPDATE USING (auth.uid() = user_id);
+```
+
+**전체 스키마 분할 파일** (`supabase/` 디렉토리):
+| 파일 | 내용 |
+|------|------|
+| `01_profiles.sql` | 프로필 + 자동생성 트리거 |
+| `02_subjects_questions.sql` | 과목 + 필기/실기 문제 |
+| `03_exam_sessions.sql` | 시험 세션 (실기 연습 추가분) |
+| `04_answers_bookmarks_wrong.sql` | 답안 + 북마크 + 오답노트 |
+
+### 9. `src/styles/study.css` (수정)
+
+- `.study-filters`, `.study-filter-btn`: 오답노트 필터 버튼 스타일 추가
+- `.study-subject-badge`, `.wrong-count-badge`: 과목/오답횟수 뱃지
+- `.wrong-answer-actions`: 해결완료 버튼 래퍼
+
 ## 검증 체크리스트
 
 - [x] `npm run build` 성공
@@ -117,6 +164,8 @@ Dashboard
 - [x] 모범답안 확인 → 나란히 비교 + 키워드 하이라이팅
 - [x] 다음/이전 문제 네비게이션
 - [x] 연습 종료 → 결과 요약 (총점, 과목별, 약점)
-- [ ] 결과 저장 → Supabase (로그인 필요)
+- [x] 결과 저장 → Supabase (로그인 필요)
 - [x] 대시보드 실기 합격률 카드 표시
 - [x] 대시보드 최근 실기 연습 테이블
+- [x] Supabase SQL 분할 파일 (01~04)
+- [x] 오답노트 필터 버튼 스타일 수정
