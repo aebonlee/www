@@ -21,6 +21,7 @@
 | 8 | [typescript-migration-report.md](./typescript-migration-report.md) | TypeScript 마이그레이션 보고서 |
 | 9 | [genspark-supabase-setup.sql](./genspark-supabase-setup.sql) | Genspark Supabase 테이블 설정 SQL |
 | 10 | [10_장원준_개인홍보웹_개발.md](./10_장원준_개인홍보웹_개발.md) | 장원준 개인 홍보 웹사이트 개발 (wonjunjang.dreamitbiz.com) |
+| 11 | [11_forjob_필기_기출_및_실기빈출.md](./11_forjob_필기_기출_및_실기빈출.md) | ForJob 필기 3,900문항 PDF 추출 + 실기 빈출 177문항 + 버그 수정 |
 
 ---
 
@@ -44,3 +45,9 @@
 - HTML + CSS + JS 정적 사이트, GitHub Pages 배포
 - 7개 섹션: Hero, 자기소개, 경력, 강점, 스킬·자격, 활동·수상, 연락하기
 - 다크/라이트 모드, 한/영 전환, 반응형 디자인
+
+### 5. ForJob 필기 기출 추출 + 실기 빈출 구현
+- 교사용 PDF 39개에서 필기 기출 3,900문항 자동 추출 (2010~2022)
+- 해설집 PDF 8개에서 721개 해설 병합
+- 실기 5개년 빈출 기출 177문항 데이터 + 전용 페이지 (`/silgi/frequent`)
+- 필기시험 시간 오류(150분→100분), 레이아웃 버그, 푸터 고정 수정
