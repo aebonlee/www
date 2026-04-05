@@ -20,6 +20,7 @@
 | 7 | [deployment-status.md](./deployment-status.md) | 전체 프로젝트 배포 현황 |
 | 8 | [typescript-migration-report.md](./typescript-migration-report.md) | TypeScript 마이그레이션 보고서 |
 | 9 | [genspark-supabase-setup.sql](./genspark-supabase-setup.sql) | Genspark Supabase 테이블 설정 SQL |
+| 10 | [10_장원준_개인홍보웹_개발.md](./10_장원준_개인홍보웹_개발.md) | 장원준 개인 홍보 웹사이트 개발 (wonjunjang.dreamitbiz.com) |
 
 ---
 
@@ -37,3 +38,9 @@
 ### 3. 파비콘 생성 (7개 프로젝트)
 - SVG + PNG(32/192) + ICO 일괄 생성
 - koreait, genspark, chatgpt, english, eip, aebon, html
+
+### 4. 장원준 개인 홍보 웹사이트 개발 (wonjunjang)
+- jdy 사이트 디자인 기반으로 취업용 포트폴리오 사이트 제작
+- HTML + CSS + JS 정적 사이트, GitHub Pages 배포
+- 7개 섹션: Hero, 자기소개, 경력, 강점, 스킬·자격, 활동·수상, 연락하기
+- 다크/라이트 모드, 한/영 전환, 반응형 디자인
