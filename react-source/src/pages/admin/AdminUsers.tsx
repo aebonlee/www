@@ -14,9 +14,9 @@ const PROVIDER_LABELS = { google: 'Google', kakao: 'Kakao', email: 'Email' };
 
 const ROLE_OPTIONS = [
   { value: 'admin', label: '관리자', color: 'red' },
-  { value: 'vip', label: 'VIP회원', color: 'purple' },
-  { value: 'member', label: '정회원', color: 'blue' },
-  { value: 'associate', label: '준회원', color: 'gray' },
+  { value: 'superadmin', label: '최고관리자', color: 'red' },
+  { value: 'evaluator', label: '평가자', color: 'purple' },
+  { value: 'user', label: '일반회원', color: 'blue' },
 ];
 
 const SITE_OPTIONS = [
@@ -28,6 +28,20 @@ const SITE_OPTIONS = [
   { value: 'papers.dreamitbiz.com', label: 'papers', color: 'purple' },
   { value: 'pbi.dreamitbiz.com', label: 'pbi', color: 'yellow' },
   { value: 'aebon.dreamitbiz.com', label: 'aebon', color: 'blue' },
+  // AI Hub & AI 학습 사이트 (11개)
+  { value: 'ai-hub.dreamitbiz.com', label: 'ai-hub', color: 'red' },
+  { value: 'chatgpt.dreamitbiz.com', label: 'chatgpt', color: 'green' },
+  { value: 'gemini.dreamitbiz.com', label: 'gemini', color: 'blue' },
+  { value: 'genspark.dreamitbiz.com', label: 'genspark', color: 'purple' },
+  { value: 'claude.dreamitbiz.com', label: 'claude', color: 'yellow' },
+  { value: 'openclaw.dreamitbiz.com', label: 'openclaw', color: 'green' },
+  { value: 'aI-agents.dreamitbiz.com', label: 'aI-agents', color: 'red' },
+  { value: 'ai-media.dreamitbiz.com', label: 'ai-media', color: 'purple' },
+  { value: 'autowork.dreamitbiz.com', label: 'autowork', color: 'blue' },
+  { value: 'fine-tuning.dreamitbiz.com', label: 'fine-tuning', color: 'green' },
+  // AI/데이터
+  { value: 'ai-prompt.dreamitbiz.com', label: 'ai-prompt', color: 'purple' },
+  { value: 'ai-data.dreamitbiz.com', label: 'ai-data', color: 'purple' },
   // 교육 플랫폼
   { value: 'edu-hub.dreamitbiz.com', label: 'edu-hub', color: 'purple' },
   { value: 'allthat.dreamitbiz.com', label: 'allthat', color: 'green' },
@@ -47,9 +61,8 @@ const SITE_OPTIONS = [
   { value: 'eip.dreamitbiz.com', label: 'eip', color: 'red' },
   { value: 'sqld.dreamitbiz.com', label: 'sqld', color: 'purple' },
   { value: 'ahp-basic.dreamitbiz.com', label: 'ahp-basic', color: 'red' },
-  // AI/데이터
-  { value: 'ai-prompt.dreamitbiz.com', label: 'ai-prompt', color: 'purple' },
-  { value: 'ai-data.dreamitbiz.com', label: 'ai-data', color: 'purple' },
+  { value: 'jobpath.dreamitbiz.com', label: 'jobpath', color: 'red' },
+  { value: 'planning.dreamitbiz.com', label: 'planning', color: 'green' },
   // 비즈니스/마케팅
   { value: 'marketing.dreamitbiz.com', label: 'marketing', color: 'yellow' },
   { value: 'digitalbiz.dreamitbiz.com', label: 'digitalbiz', color: 'green' },
@@ -91,12 +104,16 @@ const getSiteColor = (siteName) => {
   const colorMap = {
     www: 'yellow', hohai: 'blue', books: 'green', docs: 'green',
     papers: 'purple', pbi: 'yellow', aebon: 'blue',
+    'ai-hub': 'red', chatgpt: 'green', gemini: 'blue', genspark: 'purple',
+    claude: 'yellow', openclaw: 'green', 'aI-agents': 'red',
+    'ai-media': 'purple', autowork: 'blue', 'fine-tuning': 'green',
+    'ai-prompt': 'purple', 'ai-data': 'purple',
     'edu-hub': 'purple', allthat: 'green', koreatech: 'purple',
     koreait: 'blue', competency: 'purple', teaching: 'green',
     coding: 'blue', html: 'blue', 'python-study': 'blue',
     'java-study': 'red', 'c-study': 'blue', 'linux-study': 'yellow',
     software: 'green', eip: 'red', sqld: 'purple', 'ahp-basic': 'red',
-    'ai-prompt': 'purple', 'ai-data': 'purple',
+    jobpath: 'red', planning: 'green',
     marketing: 'yellow', digitalbiz: 'green', 'self-branding': 'yellow',
     uxdesign: 'purple', career: 'green',
     english: 'blue', japanese: 'red', korean: 'green',
@@ -109,7 +126,7 @@ const getSiteColor = (siteName) => {
 /** 유저의 실제 role 결정 (ADMIN_EMAILS이면 admin 강제) */
 const resolveRole = (user) => {
   if (ADMIN_EMAILS.includes((user.email || '').toLowerCase())) return 'admin';
-  return user.role || 'member';
+  return user.role || 'user';
 };
 
 /** 유저가 최고관리자(ADMIN_EMAILS)인지 */
