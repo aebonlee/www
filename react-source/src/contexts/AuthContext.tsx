@@ -1,5 +1,5 @@
 import { createContext, useContext, useState, useEffect, useCallback, ReactNode } from 'react';
-import getSupabase from '../utils/supabase';
+import getSupabase, { setSharedSession, getSharedSession, clearSharedSession } from '../utils/supabase';
 import { getProfile, updateProfile, signOut as authSignOut } from '../utils/auth';
 import { ADMIN_EMAILS } from '../config/admin';
 
@@ -81,7 +81,7 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
       return;
     }
 
-    const { data: { subscription } } = client.auth.onAuthStateChange((event, session) => {
+    const { data: { subscription } } = client.auth.onAuthStateChange(async (event, session) => {
       const u = session?.user ?? null;
       setUser(u);
       if (u) {
@@ -95,9 +95,31 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
       } else {
         setProfile(null);
       }
+      // SSO: INITIAL_SESSION에서 세션 없으면 공유 쿠키로 복원
       if (event === 'INITIAL_SESSION') {
+        if (!session) {
+          const rt = getSharedSession();
+          if (rt) {
+            try {
+              const { data } = await client.auth.refreshSession({ refresh_token: rt });
+              if (!data.session) {
+                clearSharedSession();
+              } else {
+                // refreshSession 성공 → TOKEN_REFRESHED 이벤트에서 loading 해제
+                return;
+              }
+            } catch { clearSharedSession(); }
+          }
+        }
         setLoading(false);
       }
+      if (event === 'TOKEN_REFRESHED') {
+        setLoading(false);
+      }
+
+      // SSO: 쿠키 동기화
+      if (session?.refresh_token) setSharedSession(session.refresh_token);
+      if (event === 'SIGNED_OUT') clearSharedSession();
     });
 
     const fallbackTimer = setTimeout(() => {
