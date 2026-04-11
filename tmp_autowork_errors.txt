@@ -1,0 +1,100 @@
+src/components/AdminGuard.tsx(5,11): error TS2339: Property 'isLoggedIn' does not exist on type '{}'.
+src/components/AdminGuard.tsx(5,23): error TS2339: Property 'isAdmin' does not exist on type '{}'.
+src/components/AdminGuard.tsx(5,32): error TS2339: Property 'loading' does not exist on type '{}'.
+src/components/AuthGuard.tsx(5,11): error TS2339: Property 'isLoggedIn' does not exist on type '{}'.
+src/components/AuthGuard.tsx(5,23): error TS2339: Property 'loading' does not exist on type '{}'.
+src/components/HeroBackground.tsx(31,13): error TS2353: Object literal may only specify known properties, and ''--duration'' does not exist in type 'Properties<string | number, string & {}>'.
+src/components/HeroBackground.tsx(67,13): error TS2353: Object literal may only specify known properties, and ''--dx'' does not exist in type 'Properties<string | number, string & {}>'.
+src/components/HeroBackground.tsx(98,13): error TS2353: Object literal may only specify known properties, and ''--delay'' does not exist in type 'Properties<string | number, string & {}>'.
+src/components/HeroBackground.tsx(131,13): error TS2353: Object literal may only specify known properties, and ''--delay'' does not exist in type 'Properties<string | number, string & {}>'.
+src/components/HeroCarousel.tsx(15,11): error TS2339: Property 't' does not exist on type '{}'.
+src/components/layout/Footer.tsx(5,11): error TS2339: Property 'language' does not exist on type '{}'.
+src/components/layout/Footer.tsx(5,21): error TS2339: Property 't' does not exist on type '{}'.
+src/components/layout/LessonsSidebar.tsx(15,11): error TS2339: Property 'language' does not exist on type '{}'.
+src/components/layout/Navbar.tsx(16,11): error TS2339: Property 'mode' does not exist on type '{}'.
+src/components/layout/Navbar.tsx(16,17): error TS2339: Property 'toggleTheme' does not exist on type '{}'.
+src/components/layout/Navbar.tsx(16,30): error TS2339: Property 'colorTheme' does not exist on type '{}'.
+src/components/layout/Navbar.tsx(16,42): error TS2339: Property 'setColorTheme' does not exist on type '{}'.
+src/components/layout/Navbar.tsx(16,57): error TS2339: Property 'COLOR_OPTIONS' does not exist on type '{}'.
+src/components/layout/Navbar.tsx(17,11): error TS2339: Property 'language' does not exist on type '{}'.
+src/components/layout/Navbar.tsx(17,21): error TS2339: Property 'toggleLanguage' does not exist on type '{}'.
+src/components/layout/Navbar.tsx(17,37): error TS2339: Property 't' does not exist on type '{}'.
+src/components/layout/Navbar.tsx(18,11): error TS2339: Property 'isLoggedIn' does not exist on type '{}'.
+src/components/layout/Navbar.tsx(18,23): error TS2339: Property 'isAdmin' does not exist on type '{}'.
+src/components/layout/Navbar.tsx(18,32): error TS2339: Property 'user' does not exist on type '{}'.
+src/components/layout/Navbar.tsx(18,38): error TS2339: Property 'profile' does not exist on type '{}'.
+src/components/layout/Navbar.tsx(18,47): error TS2339: Property 'signOut' does not exist on type '{}'.
+src/contexts/AuthContext.tsx(5,21): error TS2554: Expected 1 arguments, but got 0.
+src/contexts/AuthContext.tsx(54,49): error TS2339: Property 'signup_domain' does not exist on type '{}'.
+src/contexts/AuthContext.tsx(57,19): error TS2339: Property 'visited_sites' does not exist on type '{}'.
+src/contexts/LanguageContext.tsx(4,25): error TS2554: Expected 1 arguments, but got 0.
+src/contexts/ThemeContext.tsx(3,22): error TS2554: Expected 1 arguments, but got 0.
+src/contexts/ToastContext.tsx(3,22): error TS2554: Expected 1 arguments, but got 0.
+src/layouts/PublicLayout.tsx(41,11): error TS2339: Property 'language' does not exist on type '{}'.
+src/pages/admin/AdminDashboard.tsx(6,11): error TS2339: Property 'language' does not exist on type '{}'.
+src/pages/admin/AdminDashboard.tsx(72,21): error TS2322: Type 'string' is not assignable to type 'number'.
+src/pages/community/Board.tsx(20,11): error TS2339: Property 'isLoggedIn' does not exist on type '{}'.
+src/pages/community/Board.tsx(21,11): error TS2339: Property 'language' does not exist on type '{}'.
+src/pages/community/Board.tsx(21,21): error TS2339: Property 't' does not exist on type '{}'.
+src/pages/community/Board.tsx(59,8): error TS2739: Type '{ title: string; description: string; path: string; }' is missing the following properties from type '{ title: any; description: any; path: any; ogImage: any; type?: string; noindex?: boolean; jsonLd: any; }': ogImage, jsonLd
+src/pages/community/BoardDetail.tsx(19,11): error TS2339: Property 'user' does not exist on type '{}'.
+src/pages/community/BoardDetail.tsx(20,11): error TS2339: Property 'language' does not exist on type '{}'.
+src/pages/community/BoardDetail.tsx(20,21): error TS2339: Property 't' does not exist on type '{}'.
+src/pages/community/BoardDetail.tsx(99,24): error TS2339: Property 'error' does not exist on type 'unknown'.
+src/pages/community/BoardDetail.tsx(100,11): error TS2339: Property 'success' does not exist on type 'unknown'.
+src/pages/community/BoardDetail.tsx(106,24): error TS2339: Property 'error' does not exist on type 'unknown'.
+src/pages/community/BoardDetail.tsx(120,8): error TS2739: Type '{ title: any; description: any; path: string; type: string; noindex: true; }' is missing the following properties from type '{ title: any; description: any; path: any; ogImage: any; type?: string; noindex?: boolean; jsonLd: any; }': ogImage, jsonLd
+src/pages/community/BoardWrite.tsx(11,11): error TS2339: Property 'user' does not exist on type '{}'.
+src/pages/community/BoardWrite.tsx(12,11): error TS2339: Property 'language' does not exist on type '{}'.
+src/pages/community/BoardWrite.tsx(12,21): error TS2339: Property 't' does not exist on type '{}'.
+src/pages/community/BoardWrite.tsx(45,13): error TS2339: Property 'warning' does not exist on type 'unknown'.
+src/pages/community/BoardWrite.tsx(57,26): error TS2339: Property 'error' does not exist on type 'unknown'.
+src/pages/community/BoardWrite.tsx(58,13): error TS2339: Property 'success' does not exist on type 'unknown'.
+src/pages/community/BoardWrite.tsx(69,26): error TS2339: Property 'error' does not exist on type 'unknown'.
+src/pages/community/BoardWrite.tsx(70,13): error TS2339: Property 'success' does not exist on type 'unknown'.
+src/pages/community/BoardWrite.tsx(104,49): error TS2322: Type 'string' is not assignable to type 'number'.
+src/pages/Dashboard.tsx(8,11): error TS2339: Property 'user' does not exist on type '{}'.
+src/pages/Dashboard.tsx(8,17): error TS2339: Property 'profile' does not exist on type '{}'.
+src/pages/Dashboard.tsx(9,11): error TS2339: Property 'language' does not exist on type '{}'.
+src/pages/Dashboard.tsx(9,21): error TS2339: Property 't' does not exist on type '{}'.
+src/pages/Dashboard.tsx(15,8): error TS2739: Type '{ title: any; path: string; noindex: true; }' is missing the following properties from type '{ title: any; description: any; path: any; ogImage: any; type?: string; noindex?: boolean; jsonLd: any; }': description, ogImage, jsonLd
+src/pages/ForgotPassword.tsx(8,11): error TS2339: Property 't' does not exist on type '{}'.
+src/pages/ForgotPassword.tsx(8,14): error TS2339: Property 'language' does not exist on type '{}'.
+src/pages/ForgotPassword.tsx(19,24): error TS2339: Property 'error' does not exist on type 'unknown'.
+src/pages/ForgotPassword.tsx(21,11): error TS2339: Property 'success' does not exist on type 'unknown'.
+src/pages/Home.tsx(51,11): error TS2339: Property 'language' does not exist on type '{}'.
+src/pages/Home.tsx(51,21): error TS2339: Property 't' does not exist on type '{}'.
+src/pages/Home.tsx(72,8): error TS2739: Type '{ path: string; description: string; jsonLd: { '@context': string; '@type': string; name: string; url: string; description: string; publisher: { '@type': string; name: string; url: string; }; }; }' is missing the following properties from type '{ title: any; description: any; path: any; ogImage: any; type?: string; noindex?: boolean; jsonLd: any; }': title, ogImage
+src/pages/intro/IntroPage.tsx(185,102): error TS2353: Object literal may only specify known properties, and ''--roadmap-color'' does not exist in type 'Properties<string | number, string & {}>'.
+src/pages/intro/IntroPage.tsx(250,11): error TS2339: Property 'language' does not exist on type '{}'.
+src/pages/intro/IntroPage.tsx(250,21): error TS2339: Property 't' does not exist on type '{}'.
+src/pages/intro/IntroPage.tsx(289,8): error TS2739: Type '{ title: string; description: string; path: string; }' is missing the following properties from type '{ title: any; description: any; path: any; ogImage: any; type?: string; noindex?: boolean; jsonLd: any; }': ogImage, jsonLd
+src/pages/lessons/LessonCategories.tsx(20,11): error TS2339: Property 'language' does not exist on type '{}'.
+src/pages/lessons/LessonCategories.tsx(20,21): error TS2339: Property 't' does not exist on type '{}'.
+src/pages/lessons/LessonCategories.tsx(31,8): error TS2739: Type '{ title: string; description: string; path: string; }' is missing the following properties from type '{ title: any; description: any; path: any; ogImage: any; type?: string; noindex?: boolean; jsonLd: any; }': ogImage, jsonLd
+src/pages/lessons/LessonDetail.tsx(11,11): error TS2339: Property 'language' does not exist on type '{}'.
+src/pages/lessons/LessonDetail.tsx(11,21): error TS2339: Property 't' does not exist on type '{}'.
+src/pages/lessons/LessonDetail.tsx(12,11): error TS2339: Property 'setToc' does not exist on type '{}'.
+src/pages/lessons/LessonDetail.tsx(105,8): error TS2741: Property 'ogImage' is missing in type '{ title: string; description: any; path: string; type: string; jsonLd: { '@context': string; '@type': string; itemListElement: ({ '@type': string; position: number; name: any; item: string; } | { '@type': string; position: number; name: any; item?: undefined; })[]; }; }' but required in type '{ title: any; description: any; path: any; ogImage: any; type?: string; noindex?: boolean; jsonLd: any; }'.
+src/pages/lessons/LessonDetail.tsx(154,50): error TS2339: Property 'props' does not exist on type 'ReactNode'.
+  Property 'props' does not exist on type 'string'.
+src/pages/lessons/LessonList.tsx(14,11): error TS2339: Property 'language' does not exist on type '{}'.
+src/pages/lessons/LessonList.tsx(14,21): error TS2339: Property 't' does not exist on type '{}'.
+src/pages/lessons/LessonList.tsx(35,8): error TS2739: Type '{ title: any; description: any; path: string; }' is missing the following properties from type '{ title: any; description: any; path: any; ogImage: any; type?: string; noindex?: boolean; jsonLd: any; }': ogImage, jsonLd
+src/pages/Login.tsx(9,11): error TS2339: Property 't' does not exist on type '{}'.
+src/pages/Login.tsx(24,24): error TS2339: Property 'error' does not exist on type 'unknown'.
+src/pages/Login.tsx(30,8): error TS2739: Type '{ title: any; path: string; noindex: true; }' is missing the following properties from type '{ title: any; description: any; path: any; ogImage: any; type?: string; noindex?: boolean; jsonLd: any; }': description, ogImage, jsonLd
+src/pages/NotFound.tsx(6,11): error TS2339: Property 'language' does not exist on type '{}'.
+src/pages/NotFound.tsx(10,8): error TS2739: Type '{ title: string; noindex: true; }' is missing the following properties from type '{ title: any; description: any; path: any; ogImage: any; type?: string; noindex?: boolean; jsonLd: any; }': description, path, ogImage, jsonLd
+src/pages/Register.tsx(8,11): error TS2339: Property 't' does not exist on type '{}'.
+src/pages/Register.tsx(20,13): error TS2339: Property 'error' does not exist on type 'unknown'.
+src/pages/Register.tsx(24,13): error TS2339: Property 'error' does not exist on type 'unknown'.
+src/pages/Register.tsx(30,24): error TS2339: Property 'error' does not exist on type 'unknown'.
+src/pages/Register.tsx(31,11): error TS2339: Property 'success' does not exist on type 'unknown'.
+src/pages/Settings.tsx(7,11): error TS2339: Property 'user' does not exist on type '{}'.
+src/pages/Settings.tsx(7,17): error TS2339: Property 'profile' does not exist on type '{}'.
+src/pages/Settings.tsx(7,26): error TS2339: Property 'updateProfile' does not exist on type '{}'.
+src/pages/Settings.tsx(8,11): error TS2339: Property 'language' does not exist on type '{}'.
+src/pages/Settings.tsx(8,21): error TS2339: Property 't' does not exist on type '{}'.
+src/pages/Settings.tsx(19,24): error TS2339: Property 'error' does not exist on type 'unknown'.
+src/pages/Settings.tsx(20,11): error TS2339: Property 'success' does not exist on type 'unknown'.

@@ -1,0 +1,102 @@
+src/components/AdminGuard.tsx(5,11): error TS2339: Property 'isAuthenticated' does not exist on type '{}'.
+src/components/AdminGuard.tsx(5,28): error TS2339: Property 'isAdmin' does not exist on type '{}'.
+src/components/AdminGuard.tsx(5,37): error TS2339: Property 'loading' does not exist on type '{}'.
+src/components/AuthGuard.tsx(5,11): error TS2339: Property 'isAuthenticated' does not exist on type '{}'.
+src/components/AuthGuard.tsx(5,28): error TS2339: Property 'loading' does not exist on type '{}'.
+src/components/layout/Footer.tsx(5,11): error TS2339: Property 'language' does not exist on type '{}'.
+src/components/layout/Footer.tsx(5,21): error TS2339: Property 't' does not exist on type '{}'.
+src/components/layout/Navbar.tsx(9,11): error TS2339: Property 'mode' does not exist on type '{}'.
+src/components/layout/Navbar.tsx(9,17): error TS2339: Property 'toggleTheme' does not exist on type '{}'.
+src/components/layout/Navbar.tsx(9,30): error TS2339: Property 'colorTheme' does not exist on type '{}'.
+src/components/layout/Navbar.tsx(9,42): error TS2339: Property 'setColorTheme' does not exist on type '{}'.
+src/components/layout/Navbar.tsx(9,57): error TS2339: Property 'COLOR_OPTIONS' does not exist on type '{}'.
+src/components/layout/Navbar.tsx(10,11): error TS2339: Property 'language' does not exist on type '{}'.
+src/components/layout/Navbar.tsx(10,21): error TS2339: Property 'toggleLanguage' does not exist on type '{}'.
+src/components/layout/Navbar.tsx(10,37): error TS2339: Property 't' does not exist on type '{}'.
+src/components/layout/Navbar.tsx(11,11): error TS2339: Property 'user' does not exist on type '{}'.
+src/components/layout/Navbar.tsx(11,17): error TS2339: Property 'isAuthenticated' does not exist on type '{}'.
+src/components/layout/Navbar.tsx(11,34): error TS2339: Property 'isAdmin' does not exist on type '{}'.
+src/contexts/AuthContext.tsx(5,21): error TS2554: Expected 1 arguments, but got 0.
+src/contexts/LanguageContext.tsx(4,25): error TS2554: Expected 1 arguments, but got 0.
+src/contexts/ThemeContext.tsx(3,22): error TS2554: Expected 1 arguments, but got 0.
+src/contexts/ToastContext.tsx(3,22): error TS2554: Expected 1 arguments, but got 0.
+src/pages/about/AboutPage.tsx(18,11): error TS2339: Property 'language' does not exist on type '{}'.
+src/pages/about/AboutPage.tsx(333,8): error TS2741: Property 'description' is missing in type '{ title: string; path: string; }' but required in type '{ title: any; description: any; path?: string; }'.
+src/pages/admin/AdminDashboard.tsx(8,11): error TS2339: Property 't' does not exist on type '{}'.
+src/pages/admin/AdminDashboard.tsx(37,8): error TS2741: Property 'description' is missing in type '{ title: any; path: string; }' but required in type '{ title: any; description: any; path?: string; }'.
+src/pages/ai-news/AINews.tsx(114,11): error TS2339: Property 'language' does not exist on type '{}'.
+src/pages/ai-news/AINews.tsx(122,33): error TS2362: The left-hand side of an arithmetic operation must be of type 'any', 'number', 'bigint' or an enum type.
+src/pages/ai-news/AINews.tsx(122,52): error TS2363: The right-hand side of an arithmetic operation must be of type 'any', 'number', 'bigint' or an enum type.
+src/pages/ai-news/AINews.tsx(135,8): error TS2741: Property 'description' is missing in type '{ title: string; path: string; }' but required in type '{ title: any; description: any; path?: string; }'.
+src/pages/community/Board.tsx(13,11): error TS2339: Property 'language' does not exist on type '{}'.
+src/pages/community/Board.tsx(13,21): error TS2339: Property 't' does not exist on type '{}'.
+src/pages/community/Board.tsx(14,11): error TS2339: Property 'isAuthenticated' does not exist on type '{}'.
+src/pages/community/Board.tsx(47,8): error TS2741: Property 'description' is missing in type '{ title: any; path: string; }' but required in type '{ title: any; description: any; path?: string; }'.
+src/pages/community/BoardDetail.tsx(11,11): error TS2339: Property 't' does not exist on type '{}'.
+src/pages/community/BoardDetail.tsx(12,11): error TS2339: Property 'user' does not exist on type '{}'.
+src/pages/community/BoardDetail.tsx(12,17): error TS2339: Property 'isAuthenticated' does not exist on type '{}'.
+src/pages/community/BoardDetail.tsx(85,8): error TS2741: Property 'description' is missing in type '{ title: any; path: string; }' but required in type '{ title: any; description: any; path?: string; }'.
+src/pages/community/BoardWrite.tsx(12,11): error TS2339: Property 't' does not exist on type '{}'.
+src/pages/community/BoardWrite.tsx(13,11): error TS2339: Property 'user' does not exist on type '{}'.
+src/pages/community/BoardWrite.tsx(40,8): error TS2741: Property 'description' is missing in type '{ title: any; path: string; }' but required in type '{ title: any; description: any; path?: string; }'.
+src/pages/ForgotPassword.tsx(8,11): error TS2339: Property 't' does not exist on type '{}'.
+src/pages/ForgotPassword.tsx(37,8): error TS2741: Property 'description' is missing in type '{ title: any; path: string; }' but required in type '{ title: any; description: any; path?: string; }'.
+src/pages/gemini-api/GeminiAPIGuide.tsx(19,11): error TS2339: Property 'language' does not exist on type '{}'.
+src/pages/gemini-api/GeminiAPIGuide.tsx(714,8): error TS2741: Property 'description' is missing in type '{ title: string; path: string; }' but required in type '{ title: any; description: any; path?: string; }'.
+src/pages/gemini-learn/GeminiLearnGuide.tsx(19,11): error TS2339: Property 'language' does not exist on type '{}'.
+src/pages/gemini-learn/GeminiLearnGuide.tsx(1175,8): error TS2741: Property 'description' is missing in type '{ title: string; path: string; }' but required in type '{ title: any; description: any; path?: string; }'.
+src/pages/gemini-models/GeminiModelsGuide.tsx(17,11): error TS2339: Property 'language' does not exist on type '{}'.
+src/pages/gemini-models/GeminiModelsGuide.tsx(425,8): error TS2741: Property 'description' is missing in type '{ title: string; path: string; }' but required in type '{ title: any; description: any; path?: string; }'.
+src/pages/glossary/Glossary.tsx(156,11): error TS2339: Property 'language' does not exist on type '{}'.
+src/pages/glossary/Glossary.tsx(156,21): error TS2339: Property 't' does not exist on type '{}'.
+src/pages/glossary/Glossary.tsx(173,8): error TS2741: Property 'description' is missing in type '{ title: any; path: string; }' but required in type '{ title: any; description: any; path?: string; }'.
+src/pages/google-ai-studio/GoogleAIStudioGuide.tsx(17,11): error TS2339: Property 'language' does not exist on type '{}'.
+src/pages/google-ai-studio/GoogleAIStudioGuide.tsx(487,8): error TS2741: Property 'description' is missing in type '{ title: string; path: string; }' but required in type '{ title: any; description: any; path?: string; }'.
+src/pages/Home.tsx(10,11): error TS2339: Property 'language' does not exist on type '{}'.
+src/pages/Home.tsx(10,21): error TS2339: Property 't' does not exist on type '{}'.
+src/pages/Home.tsx(36,8): error TS2739: Type '{ path: string; }' is missing the following properties from type '{ title: any; description: any; path?: string; }': title, description
+src/pages/Login.tsx(10,11): error TS2339: Property 't' does not exist on type '{}'.
+src/pages/Login.tsx(11,11): error TS2339: Property 'isAuthenticated' does not exist on type '{}'.
+src/pages/Login.tsx(25,13): error TS2339: Property 'error' does not exist on type 'unknown'.
+src/pages/Login.tsx(44,15): error TS2339: Property 'error' does not exist on type 'unknown'.
+src/pages/Login.tsx(46,15): error TS2339: Property 'success' does not exist on type 'unknown'.
+src/pages/Login.tsx(51,13): error TS2339: Property 'error' does not exist on type 'unknown'.
+src/pages/Login.tsx(63,15): error TS2339: Property 'error' does not exist on type 'unknown'.
+src/pages/Login.tsx(67,13): error TS2339: Property 'error' does not exist on type 'unknown'.
+src/pages/Login.tsx(77,15): error TS2339: Property 'error' does not exist on type 'unknown'.
+src/pages/Login.tsx(81,13): error TS2339: Property 'error' does not exist on type 'unknown'.
+src/pages/Login.tsx(87,8): error TS2741: Property 'description' is missing in type '{ title: any; path: string; }' but required in type '{ title: any; description: any; path?: string; }'.
+src/pages/model-comparison/ModelComparison.tsx(73,11): error TS2339: Property 'language' does not exist on type '{}'.
+src/pages/model-comparison/ModelComparison.tsx(97,8): error TS2741: Property 'description' is missing in type '{ title: string; path: string; }' but required in type '{ title: any; description: any; path?: string; }'.
+src/pages/multimodal/MultimodalGuide.tsx(17,11): error TS2339: Property 'language' does not exist on type '{}'.
+src/pages/multimodal/MultimodalGuide.tsx(586,8): error TS2741: Property 'description' is missing in type '{ title: string; path: string; }' but required in type '{ title: any; description: any; path?: string; }'.
+src/pages/notebooklm/NotebookLMGuide.tsx(19,11): error TS2339: Property 'language' does not exist on type '{}'.
+src/pages/notebooklm/NotebookLMGuide.tsx(618,8): error TS2741: Property 'description' is missing in type '{ title: string; path: string; }' but required in type '{ title: any; description: any; path?: string; }'.
+src/pages/NotFound.tsx(5,11): error TS2339: Property 'language' does not exist on type '{}'.
+src/pages/prompt-engineering/PromptEngineering.tsx(17,11): error TS2339: Property 'language' does not exist on type '{}'.
+src/pages/prompt-engineering/PromptEngineering.tsx(550,8): error TS2741: Property 'description' is missing in type '{ title: string; path: string; }' but required in type '{ title: any; description: any; path?: string; }'.
+src/pages/prompt-gallery/PromptGallery.tsx(108,11): error TS2339: Property 'language' does not exist on type '{}'.
+src/pages/prompt-gallery/PromptGallery.tsx(129,8): error TS2741: Property 'description' is missing in type '{ title: string; path: string; }' but required in type '{ title: any; description: any; path?: string; }'.
+src/pages/prompt-practice/PromptPractice.tsx(51,11): error TS2339: Property 'language' does not exist on type '{}'.
+src/pages/prompt-practice/PromptPractice.tsx(51,21): error TS2339: Property 't' does not exist on type '{}'.
+src/pages/prompt-practice/PromptPractice.tsx(76,8): error TS2741: Property 'description' is missing in type '{ title: string; path: string; }' but required in type '{ title: any; description: any; path?: string; }'.
+src/pages/Register.tsx(10,11): error TS2339: Property 't' does not exist on type '{}'.
+src/pages/Register.tsx(11,11): error TS2339: Property 'isAuthenticated' does not exist on type '{}'.
+src/pages/Register.tsx(37,13): error TS2339: Property 'error' does not exist on type 'unknown'.
+src/pages/Register.tsx(46,13): error TS2339: Property 'error' does not exist on type 'unknown'.
+src/pages/Register.tsx(59,15): error TS2339: Property 'error' does not exist on type 'unknown'.
+src/pages/Register.tsx(61,15): error TS2339: Property 'success' does not exist on type 'unknown'.
+src/pages/Register.tsx(70,13): error TS2339: Property 'error' does not exist on type 'unknown'.
+src/pages/Register.tsx(82,15): error TS2339: Property 'error' does not exist on type 'unknown'.
+src/pages/Register.tsx(86,13): error TS2339: Property 'error' does not exist on type 'unknown'.
+src/pages/Register.tsx(96,15): error TS2339: Property 'error' does not exist on type 'unknown'.
+src/pages/Register.tsx(100,13): error TS2339: Property 'error' does not exist on type 'unknown'.
+src/pages/Register.tsx(106,8): error TS2741: Property 'description' is missing in type '{ title: any; path: string; }' but required in type '{ title: any; description: any; path?: string; }'.
+src/pages/resources/Resources.tsx(89,11): error TS2339: Property 'language' does not exist on type '{}'.
+src/pages/resources/Resources.tsx(89,21): error TS2339: Property 't' does not exist on type '{}'.
+src/pages/resources/Resources.tsx(99,8): error TS2741: Property 'description' is missing in type '{ title: any; path: string; }' but required in type '{ title: any; description: any; path?: string; }'.
+src/pages/roadmap/Roadmap.tsx(81,11): error TS2339: Property 'language' does not exist on type '{}'.
+src/pages/roadmap/Roadmap.tsx(81,21): error TS2339: Property 't' does not exist on type '{}'.
+src/pages/roadmap/Roadmap.tsx(86,8): error TS2741: Property 'description' is missing in type '{ title: any; path: string; }' but required in type '{ title: any; description: any; path?: string; }'.
+src/pages/vertex-ai/VertexAIGuide.tsx(17,11): error TS2339: Property 'language' does not exist on type '{}'.
+src/pages/vertex-ai/VertexAIGuide.tsx(515,8): error TS2741: Property 'description' is missing in type '{ title: string; path: string; }' but required in type '{ title: any; description: any; path?: string; }'.

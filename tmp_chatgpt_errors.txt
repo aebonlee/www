@@ -1,0 +1,81 @@
+src/components/layout/Footer.tsx(5,11): error TS2339: Property 'language' does not exist on type '{}'.
+src/components/layout/Footer.tsx(5,21): error TS2339: Property 't' does not exist on type '{}'.
+src/components/layout/Navbar.tsx(9,11): error TS2339: Property 'mode' does not exist on type '{}'.
+src/components/layout/Navbar.tsx(9,17): error TS2339: Property 'toggleTheme' does not exist on type '{}'.
+src/components/layout/Navbar.tsx(9,30): error TS2339: Property 'colorTheme' does not exist on type '{}'.
+src/components/layout/Navbar.tsx(9,42): error TS2339: Property 'setColorTheme' does not exist on type '{}'.
+src/components/layout/Navbar.tsx(9,57): error TS2339: Property 'COLOR_OPTIONS' does not exist on type '{}'.
+src/components/layout/Navbar.tsx(10,11): error TS2339: Property 'language' does not exist on type '{}'.
+src/components/layout/Navbar.tsx(10,21): error TS2339: Property 'toggleLanguage' does not exist on type '{}'.
+src/components/layout/Navbar.tsx(11,11): error TS2339: Property 'user' does not exist on type '{}'.
+src/components/layout/Navbar.tsx(11,17): error TS2339: Property 'isAuthenticated' does not exist on type '{}'.
+src/contexts/AuthContext.tsx(5,21): error TS2554: Expected 1 arguments, but got 0.
+src/contexts/LanguageContext.tsx(4,25): error TS2554: Expected 1 arguments, but got 0.
+src/contexts/ThemeContext.tsx(3,22): error TS2554: Expected 1 arguments, but got 0.
+src/contexts/ToastContext.tsx(3,22): error TS2554: Expected 1 arguments, but got 0.
+src/pages/advanced-features/AdvancedFeatures.tsx(18,11): error TS2339: Property 'language' does not exist on type '{}'.
+src/pages/api-usage/APIUsage.tsx(18,11): error TS2339: Property 'language' does not exist on type '{}'.
+src/pages/api-usage/APIUsage.tsx(103,16): error TS2741: Property 'title' is missing in type '{ children: string; type: string; }' but required in type '{ type?: string; title: any; children: any; }'.
+src/pages/api-usage/APIUsage.tsx(183,16): error TS2741: Property 'title' is missing in type '{ children: string; type: string; }' but required in type '{ type?: string; title: any; children: any; }'.
+src/pages/api-usage/APIUsage.tsx(285,16): error TS2741: Property 'title' is missing in type '{ children: string; type: string; }' but required in type '{ type?: string; title: any; children: any; }'.
+src/pages/api-usage/APIUsage.tsx(363,16): error TS2741: Property 'title' is missing in type '{ children: string; type: string; }' but required in type '{ type?: string; title: any; children: any; }'.
+src/pages/api-usage/APIUsage.tsx(369,16): error TS2741: Property 'title' is missing in type '{ children: string; type: string; }' but required in type '{ type?: string; title: any; children: any; }'.
+src/pages/api-usage/APIUsage.tsx(479,16): error TS2741: Property 'title' is missing in type '{ children: string; type: string; }' but required in type '{ type?: string; title: any; children: any; }'.
+src/pages/api-usage/APIUsage.tsx(485,16): error TS2741: Property 'title' is missing in type '{ children: string; type: string; }' but required in type '{ type?: string; title: any; children: any; }'.
+src/pages/api-usage/APIUsage.tsx(570,16): error TS2741: Property 'title' is missing in type '{ children: string; type: string; }' but required in type '{ type?: string; title: any; children: any; }'.
+src/pages/api-usage/APIUsage.tsx(585,16): error TS2741: Property 'title' is missing in type '{ children: string; type: string; }' but required in type '{ type?: string; title: any; children: any; }'.
+src/pages/api-usage/APIUsage.tsx(709,16): error TS2741: Property 'title' is missing in type '{ children: string; type: string; }' but required in type '{ type?: string; title: any; children: any; }'.
+src/pages/api-usage/APIUsage.tsx(852,16): error TS2741: Property 'title' is missing in type '{ children: string; type: string; }' but required in type '{ type?: string; title: any; children: any; }'.
+src/pages/api-usage/APIUsage.tsx(940,16): error TS2741: Property 'title' is missing in type '{ children: string; type: string; }' but required in type '{ type?: string; title: any; children: any; }'.
+src/pages/chatgpt-basics/ChatGPTBasics.tsx(18,11): error TS2339: Property 'language' does not exist on type '{}'.
+src/pages/chatgpt-basics/ChatGPTBasics.tsx(176,8): error TS2741: Property 'title' is missing in type '{ children: string; type: string; }' but required in type '{ type?: string; title: any; children: any; }'.
+src/pages/chatgpt-basics/ChatGPTBasics.tsx(249,8): error TS2741: Property 'title' is missing in type '{ children: string; type: string; }' but required in type '{ type?: string; title: any; children: any; }'.
+src/pages/chatgpt-basics/ChatGPTBasics.tsx(305,8): error TS2741: Property 'title' is missing in type '{ children: string; type: string; }' but required in type '{ type?: string; title: any; children: any; }'.
+src/pages/chatgpt-basics/ChatGPTBasics.tsx(369,8): error TS2741: Property 'title' is missing in type '{ children: string; type: string; }' but required in type '{ type?: string; title: any; children: any; }'.
+src/pages/chatgpt-basics/ChatGPTBasics.tsx(493,8): error TS2741: Property 'title' is missing in type '{ children: string; type: string; }' but required in type '{ type?: string; title: any; children: any; }'.
+src/pages/chatgpt-basics/ChatGPTBasics.tsx(554,8): error TS2741: Property 'title' is missing in type '{ children: string; type: string; }' but required in type '{ type?: string; title: any; children: any; }'.
+src/pages/chatgpt-basics/ChatGPTBasics.tsx(640,8): error TS2741: Property 'title' is missing in type '{ children: string; type: string; }' but required in type '{ type?: string; title: any; children: any; }'.
+src/pages/chatgpt-basics/ChatGPTBasics.tsx(706,8): error TS2741: Property 'title' is missing in type '{ children: string; type: string; }' but required in type '{ type?: string; title: any; children: any; }'.
+src/pages/chatgpt-basics/ChatGPTBasics.tsx(798,8): error TS2741: Property 'title' is missing in type '{ children: string; type: string; }' but required in type '{ type?: string; title: any; children: any; }'.
+src/pages/chatgpt-basics/ChatGPTBasics.tsx(870,8): error TS2741: Property 'title' is missing in type '{ children: string; type: string; }' but required in type '{ type?: string; title: any; children: any; }'.
+src/pages/chatgpt-basics/ChatGPTBasics.tsx(932,8): error TS2741: Property 'title' is missing in type '{ children: string; type: string; }' but required in type '{ type?: string; title: any; children: any; }'.
+src/pages/chatgpt-basics/ChatGPTBasics.tsx(1024,8): error TS2741: Property 'title' is missing in type '{ children: string; type: string; }' but required in type '{ type?: string; title: any; children: any; }'.
+src/pages/chatgpt-basics/ChatGPTBasics.tsx(1249,8): error TS2741: Property 'title' is missing in type '{ children: string; type: string; }' but required in type '{ type?: string; title: any; children: any; }'.
+src/pages/chatgpt-basics/ChatGPTBasics.tsx(1255,8): error TS2741: Property 'title' is missing in type '{ children: string; type: string; }' but required in type '{ type?: string; title: any; children: any; }'.
+src/pages/community/Board.tsx(17,11): error TS2339: Property 'language' does not exist on type '{}'.
+src/pages/community/Board.tsx(18,11): error TS2339: Property 'isAuthenticated' does not exist on type '{}'.
+src/pages/community/Board.tsx(56,8): error TS2741: Property 'description' is missing in type '{ title: string; path: string; }' but required in type '{ title: any; description: any; path?: string; }'.
+src/pages/community/BoardDetail.tsx(11,11): error TS2339: Property 'language' does not exist on type '{}'.
+src/pages/community/BoardDetail.tsx(13,11): error TS2339: Property 'user' does not exist on type '{}'.
+src/pages/community/BoardDetail.tsx(13,17): error TS2339: Property 'isAdmin' does not exist on type '{}'.
+src/pages/community/BoardDetail.tsx(47,13): error TS2339: Property 'success' does not exist on type 'unknown'.
+src/pages/community/BoardDetail.tsx(49,13): error TS2339: Property 'error' does not exist on type 'unknown'.
+src/pages/community/BoardDetail.tsx(60,13): error TS2339: Property 'success' does not exist on type 'unknown'.
+src/pages/community/BoardDetail.tsx(62,13): error TS2339: Property 'error' does not exist on type 'unknown'.
+src/pages/community/BoardDetail.tsx(70,13): error TS2339: Property 'success' does not exist on type 'unknown'.
+src/pages/community/BoardDetail.tsx(73,13): error TS2339: Property 'error' does not exist on type 'unknown'.
+src/pages/community/BoardDetail.tsx(89,8): error TS2741: Property 'description' is missing in type '{ title: any; path: string; }' but required in type '{ title: any; description: any; path?: string; }'.
+src/pages/community/BoardWrite.tsx(16,11): error TS2339: Property 'language' does not exist on type '{}'.
+src/pages/community/BoardWrite.tsx(19,11): error TS2339: Property 'user' does not exist on type '{}'.
+src/pages/community/BoardWrite.tsx(33,13): error TS2339: Property 'success' does not exist on type 'unknown'.
+src/pages/community/BoardWrite.tsx(36,13): error TS2339: Property 'error' does not exist on type 'unknown'.
+src/pages/community/BoardWrite.tsx(44,8): error TS2741: Property 'description' is missing in type '{ title: string; path: string; }' but required in type '{ title: any; description: any; path?: string; }'.
+src/pages/gpts-store/GPTsStore.tsx(18,11): error TS2339: Property 'language' does not exist on type '{}'.
+src/pages/gpts-store/GPTsStore.tsx(145,18): error TS2741: Property 'title' is missing in type '{ children: string; type: string; }' but required in type '{ type?: string; title: any; children: any; }'.
+src/pages/gpts-store/GPTsStore.tsx(227,18): error TS2741: Property 'title' is missing in type '{ children: string; type: string; }' but required in type '{ type?: string; title: any; children: any; }'.
+src/pages/gpts-store/GPTsStore.tsx(311,18): error TS2741: Property 'title' is missing in type '{ children: string; type: string; }' but required in type '{ type?: string; title: any; children: any; }'.
+src/pages/gpts-store/GPTsStore.tsx(362,18): error TS2741: Property 'title' is missing in type '{ children: string; type: string; }' but required in type '{ type?: string; title: any; children: any; }'.
+src/pages/gpts-store/GPTsStore.tsx(498,18): error TS2741: Property 'title' is missing in type '{ children: string; type: string; }' but required in type '{ type?: string; title: any; children: any; }'.
+src/pages/gpts-store/GPTsStore.tsx(559,18): error TS2741: Property 'title' is missing in type '{ children: string; type: string; }' but required in type '{ type?: string; title: any; children: any; }'.
+src/pages/gpts-store/GPTsStore.tsx(657,18): error TS2741: Property 'title' is missing in type '{ children: string; type: string; }' but required in type '{ type?: string; title: any; children: any; }'.
+src/pages/gpts-store/GPTsStore.tsx(663,18): error TS2741: Property 'title' is missing in type '{ children: string; type: string; }' but required in type '{ type?: string; title: any; children: any; }'.
+src/pages/Home.tsx(10,11): error TS2339: Property 'language' does not exist on type '{}'.
+src/pages/Home.tsx(10,21): error TS2339: Property 't' does not exist on type '{}'.
+src/pages/Home.tsx(36,8): error TS2739: Type '{ path: string; }' is missing the following properties from type '{ title: any; description: any; path?: string; }': title, description
+src/pages/Login.tsx(8,11): error TS2339: Property 'language' does not exist on type '{}'.
+src/pages/Login.tsx(31,8): error TS2741: Property 'description' is missing in type '{ title: string; path: string; }' but required in type '{ title: any; description: any; path?: string; }'.
+src/pages/model-comparison/ModelComparison.tsx(17,11): error TS2339: Property 'language' does not exist on type '{}'.
+src/pages/NotFound.tsx(5,11): error TS2339: Property 'language' does not exist on type '{}'.
+src/pages/prompt-engineering/PromptEngineering.tsx(18,11): error TS2339: Property 'language' does not exist on type '{}'.
+src/pages/Register.tsx(8,11): error TS2339: Property 'language' does not exist on type '{}'.
+src/pages/Register.tsx(36,8): error TS2741: Property 'description' is missing in type '{ title: string; path: string; }' but required in type '{ title: any; description: any; path?: string; }'.

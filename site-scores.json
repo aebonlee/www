@@ -1,0 +1,884 @@
+[
+  {
+    "name": "digitalbiz",
+    "domain": "digitalbiz.dreamitbiz.com",
+    "tsRatio": "100",
+    "tscErrors": 0,
+    "totalSrc": 73,
+    "pageCount": 50,
+    "componentCount": 6,
+    "scores": {
+      "typescript": 25,
+      "codeStructure": 15,
+      "techStack": 20,
+      "deployment": 20,
+      "seoQuality": 11,
+      "total": 91
+    },
+    "grade": "S"
+  },
+  {
+    "name": "linux-study",
+    "domain": "linux-study.dreamitbiz.com",
+    "tsRatio": "100",
+    "tscErrors": 0,
+    "totalSrc": 66,
+    "pageCount": 41,
+    "componentCount": 7,
+    "scores": {
+      "typescript": 25,
+      "codeStructure": 15,
+      "techStack": 20,
+      "deployment": 20,
+      "seoQuality": 11,
+      "total": 91
+    },
+    "grade": "S"
+  },
+  {
+    "name": "papers",
+    "domain": "papers.dreamitbiz.com",
+    "tsRatio": "74",
+    "tscErrors": 0,
+    "totalSrc": 84,
+    "pageCount": 33,
+    "componentCount": 11,
+    "scores": {
+      "typescript": 22,
+      "codeStructure": 17,
+      "techStack": 20,
+      "deployment": 20,
+      "seoQuality": 12,
+      "total": 91
+    },
+    "grade": "S"
+  },
+  {
+    "name": "reserve",
+    "domain": "reserve.dreamitbiz.com",
+    "tsRatio": "100",
+    "tscErrors": 0,
+    "totalSrc": 53,
+    "pageCount": 12,
+    "componentCount": 15,
+    "scores": {
+      "typescript": 25,
+      "codeStructure": 14,
+      "techStack": 20,
+      "deployment": 20,
+      "seoQuality": 12,
+      "total": 91
+    },
+    "grade": "S"
+  },
+  {
+    "name": "self-branding",
+    "domain": "self-branding.dreamitbiz.com",
+    "tsRatio": "100",
+    "tscErrors": 0,
+    "totalSrc": 76,
+    "pageCount": 52,
+    "componentCount": 7,
+    "scores": {
+      "typescript": 25,
+      "codeStructure": 15,
+      "techStack": 20,
+      "deployment": 20,
+      "seoQuality": 11,
+      "total": 91
+    },
+    "grade": "S"
+  },
+  {
+    "name": "teaching",
+    "domain": "teaching.dreamitbiz.com",
+    "tsRatio": "100",
+    "tscErrors": 0,
+    "totalSrc": 74,
+    "pageCount": 8,
+    "componentCount": 15,
+    "scores": {
+      "typescript": 25,
+      "codeStructure": 14,
+      "techStack": 20,
+      "deployment": 20,
+      "seoQuality": 12,
+      "total": 91
+    },
+    "grade": "S"
+  },
+  {
+    "name": "allthat",
+    "domain": "allthat.dreamitbiz.com",
+    "tsRatio": "85",
+    "tscErrors": 0,
+    "totalSrc": 66,
+    "pageCount": 6,
+    "componentCount": 17,
+    "scores": {
+      "typescript": 24,
+      "codeStructure": 14,
+      "techStack": 20,
+      "deployment": 20,
+      "seoQuality": 12,
+      "total": 90
+    },
+    "grade": "S"
+  },
+  {
+    "name": "english",
+    "domain": "english.dreamitbiz.com",
+    "tsRatio": "100",
+    "tscErrors": 0,
+    "totalSrc": 66,
+    "pageCount": 5,
+    "componentCount": 12,
+    "scores": {
+      "typescript": 25,
+      "codeStructure": 14,
+      "techStack": 20,
+      "deployment": 20,
+      "seoQuality": 11,
+      "total": 90
+    },
+    "grade": "S"
+  },
+  {
+    "name": "korean",
+    "domain": "korean.dreamitbiz.com",
+    "tsRatio": "100",
+    "tscErrors": 0,
+    "totalSrc": 76,
+    "pageCount": 5,
+    "componentCount": 14,
+    "scores": {
+      "typescript": 25,
+      "codeStructure": 14,
+      "techStack": 20,
+      "deployment": 20,
+      "seoQuality": 11,
+      "total": 90
+    },
+    "grade": "S"
+  },
+  {
+    "name": "marketing",
+    "domain": "marketing.dreamitbiz.com",
+    "tsRatio": "88",
+    "tscErrors": 0,
+    "totalSrc": 75,
+    "pageCount": 52,
+    "componentCount": 6,
+    "scores": {
+      "typescript": 24,
+      "codeStructure": 15,
+      "techStack": 20,
+      "deployment": 20,
+      "seoQuality": 11,
+      "total": 90
+    },
+    "grade": "S"
+  },
+  {
+    "name": "sqld",
+    "domain": "sqld.dreamitbiz.com",
+    "tsRatio": "100",
+    "tscErrors": 0,
+    "totalSrc": 59,
+    "pageCount": 26,
+    "componentCount": 10,
+    "scores": {
+      "typescript": 25,
+      "codeStructure": 14,
+      "techStack": 20,
+      "deployment": 20,
+      "seoQuality": 11,
+      "total": 90
+    },
+    "grade": "S"
+  },
+  {
+    "name": "uxdesign",
+    "domain": "uxdesign.dreamitbiz.com",
+    "tsRatio": "88",
+    "tscErrors": 0,
+    "totalSrc": 73,
+    "pageCount": 50,
+    "componentCount": 6,
+    "scores": {
+      "typescript": 24,
+      "codeStructure": 15,
+      "techStack": 20,
+      "deployment": 20,
+      "seoQuality": 11,
+      "total": 90
+    },
+    "grade": "S"
+  },
+  {
+    "name": "gemini",
+    "domain": "gemini.dreamitbiz.com",
+    "tsRatio": "88",
+    "tscErrors": 0,
+    "totalSrc": 50,
+    "pageCount": 5,
+    "componentCount": 11,
+    "scores": {
+      "typescript": 24,
+      "codeStructure": 12,
+      "techStack": 20,
+      "deployment": 20,
+      "seoQuality": 12,
+      "total": 88
+    },
+    "grade": "A"
+  },
+  {
+    "name": "japanese",
+    "domain": "japanese.dreamitbiz.com",
+    "tsRatio": "100",
+    "tscErrors": 0,
+    "totalSrc": 62,
+    "pageCount": 5,
+    "componentCount": 9,
+    "scores": {
+      "typescript": 25,
+      "codeStructure": 12,
+      "techStack": 20,
+      "deployment": 20,
+      "seoQuality": 11,
+      "total": 88
+    },
+    "grade": "A"
+  },
+  {
+    "name": "koreatech",
+    "domain": "koreatech.dreamitbiz.com",
+    "tsRatio": "73",
+    "tscErrors": 0,
+    "totalSrc": 93,
+    "pageCount": 53,
+    "componentCount": 7,
+    "scores": {
+      "typescript": 22,
+      "codeStructure": 15,
+      "techStack": 20,
+      "deployment": 20,
+      "seoQuality": 11,
+      "total": 88
+    },
+    "grade": "A"
+  },
+  {
+    "name": "templete-ref",
+    "domain": "templete.dreamitbiz.com",
+    "tsRatio": "100",
+    "tscErrors": 0,
+    "totalSrc": 40,
+    "pageCount": 10,
+    "componentCount": 8,
+    "scores": {
+      "typescript": 25,
+      "codeStructure": 12,
+      "techStack": 20,
+      "deployment": 20,
+      "seoQuality": 11,
+      "total": 88
+    },
+    "grade": "A"
+  },
+  {
+    "name": "ai-data",
+    "domain": "ai-data.dreamitbiz.com",
+    "tsRatio": "87",
+    "tscErrors": 0,
+    "totalSrc": 76,
+    "pageCount": 10,
+    "componentCount": 7,
+    "scores": {
+      "typescript": 24,
+      "codeStructure": 14,
+      "techStack": 17,
+      "deployment": 20,
+      "seoQuality": 12,
+      "total": 87
+    },
+    "grade": "A"
+  },
+  {
+    "name": "ai-media",
+    "domain": "ai-media.dreamitbiz.com",
+    "tsRatio": "79",
+    "tscErrors": 0,
+    "totalSrc": 58,
+    "pageCount": 5,
+    "componentCount": 12,
+    "scores": {
+      "typescript": 23,
+      "codeStructure": 12,
+      "techStack": 20,
+      "deployment": 20,
+      "seoQuality": 12,
+      "total": 87
+    },
+    "grade": "A"
+  },
+  {
+    "name": "ai-prompt",
+    "domain": "ai-prompt.dreamitbiz.com",
+    "tsRatio": "92",
+    "tscErrors": 0,
+    "totalSrc": 79,
+    "pageCount": 9,
+    "componentCount": 5,
+    "scores": {
+      "typescript": 24,
+      "codeStructure": 12,
+      "techStack": 20,
+      "deployment": 20,
+      "seoQuality": 11,
+      "total": 87
+    },
+    "grade": "A"
+  },
+  {
+    "name": "coding",
+    "domain": "coding.dreamitbiz.com",
+    "tsRatio": "100",
+    "tscErrors": 0,
+    "totalSrc": 126,
+    "pageCount": 15,
+    "componentCount": 10,
+    "scores": {
+      "typescript": 25,
+      "codeStructure": 18,
+      "techStack": 20,
+      "deployment": 20,
+      "seoQuality": 4,
+      "total": 87
+    },
+    "grade": "A"
+  },
+  {
+    "name": "openclaw",
+    "domain": "openclaw.dreamitbiz.com",
+    "tsRatio": "88",
+    "tscErrors": 0,
+    "totalSrc": 41,
+    "pageCount": 5,
+    "componentCount": 9,
+    "scores": {
+      "typescript": 24,
+      "codeStructure": 10,
+      "techStack": 20,
+      "deployment": 20,
+      "seoQuality": 12,
+      "total": 86
+    },
+    "grade": "A"
+  },
+  {
+    "name": "c-study",
+    "domain": "c-study.dreamitbiz.com",
+    "tsRatio": "96",
+    "tscErrors": 0,
+    "totalSrc": 73,
+    "pageCount": 12,
+    "componentCount": 10,
+    "scores": {
+      "typescript": 25,
+      "codeStructure": 16,
+      "techStack": 20,
+      "deployment": 20,
+      "seoQuality": 4,
+      "total": 85
+    },
+    "grade": "A"
+  },
+  {
+    "name": "claude",
+    "domain": "claude.dreamitbiz.com",
+    "tsRatio": "44",
+    "tscErrors": 0,
+    "totalSrc": 97,
+    "pageCount": 5,
+    "componentCount": 11,
+    "scores": {
+      "typescript": 19,
+      "codeStructure": 14,
+      "techStack": 20,
+      "deployment": 20,
+      "seoQuality": 12,
+      "total": 85
+    },
+    "grade": "A"
+  },
+  {
+    "name": "presentation",
+    "domain": "presentation.dreamitbiz.com",
+    "tsRatio": "100",
+    "tscErrors": 0,
+    "totalSrc": 42,
+    "pageCount": 10,
+    "componentCount": 4,
+    "scores": {
+      "typescript": 25,
+      "codeStructure": 11,
+      "techStack": 17,
+      "deployment": 20,
+      "seoQuality": 12,
+      "total": 85
+    },
+    "grade": "A"
+  },
+  {
+    "name": "python-study",
+    "domain": "python-study.dreamitbiz.comj",
+    "tsRatio": "99",
+    "tscErrors": 0,
+    "totalSrc": 71,
+    "pageCount": 14,
+    "componentCount": 11,
+    "scores": {
+      "typescript": 25,
+      "codeStructure": 16,
+      "techStack": 20,
+      "deployment": 20,
+      "seoQuality": 4,
+      "total": 85
+    },
+    "grade": "A"
+  },
+  {
+    "name": "planning",
+    "domain": "planning.dreamitbiz.com",
+    "tsRatio": "90",
+    "tscErrors": 0,
+    "totalSrc": 30,
+    "pageCount": 2,
+    "componentCount": 5,
+    "scores": {
+      "typescript": 24,
+      "codeStructure": 9,
+      "techStack": 20,
+      "deployment": 20,
+      "seoQuality": 11,
+      "total": 84
+    },
+    "grade": "A"
+  },
+  {
+    "name": "software",
+    "domain": "software.dreamitbiz.com",
+    "tsRatio": "91",
+    "tscErrors": 0,
+    "totalSrc": 67,
+    "pageCount": 9,
+    "componentCount": 5,
+    "scores": {
+      "typescript": 24,
+      "codeStructure": 12,
+      "techStack": 17,
+      "deployment": 20,
+      "seoQuality": 11,
+      "total": 84
+    },
+    "grade": "A"
+  },
+  {
+    "name": "ahp_basic",
+    "domain": "ahp-basic.dreamitbiz.com",
+    "tsRatio": "68",
+    "tscErrors": 0,
+    "totalSrc": 210,
+    "pageCount": 47,
+    "componentCount": 84,
+    "scores": {
+      "typescript": 22,
+      "codeStructure": 20,
+      "techStack": 17,
+      "deployment": 20,
+      "seoQuality": 4,
+      "total": 83
+    },
+    "grade": "A"
+  },
+  {
+    "name": "db-study",
+    "domain": "db-study.dreamitbiz.com",
+    "tsRatio": "100",
+    "tscErrors": 0,
+    "totalSrc": 60,
+    "pageCount": 46,
+    "componentCount": 3,
+    "scores": {
+      "typescript": 25,
+      "codeStructure": 14,
+      "techStack": 16,
+      "deployment": 17,
+      "seoQuality": 11,
+      "total": 83
+    },
+    "grade": "A"
+  },
+  {
+    "name": "docs",
+    "domain": "docs.dreamitbiz.com",
+    "tsRatio": "100",
+    "tscErrors": 0,
+    "totalSrc": 33,
+    "pageCount": 4,
+    "componentCount": 8,
+    "scores": {
+      "typescript": 25,
+      "codeStructure": 9,
+      "techStack": 17,
+      "deployment": 20,
+      "seoQuality": 12,
+      "total": 83
+    },
+    "grade": "A"
+  },
+  {
+    "name": "genspark",
+    "domain": "genspark.dreamitbiz.com",
+    "tsRatio": "46",
+    "tscErrors": 0,
+    "totalSrc": 78,
+    "pageCount": 4,
+    "componentCount": 9,
+    "scores": {
+      "typescript": 20,
+      "codeStructure": 11,
+      "techStack": 20,
+      "deployment": 20,
+      "seoQuality": 12,
+      "total": 83
+    },
+    "grade": "A"
+  },
+  {
+    "name": "hohai",
+    "domain": "hohai.dreamitbiz.com",
+    "tsRatio": "100",
+    "tscErrors": 0,
+    "totalSrc": 87,
+    "pageCount": 23,
+    "componentCount": 23,
+    "scores": {
+      "typescript": 25,
+      "codeStructure": 17,
+      "techStack": 17,
+      "deployment": 20,
+      "seoQuality": 4,
+      "total": 83
+    },
+    "grade": "A"
+  },
+  {
+    "name": "aI-agents",
+    "domain": "ai-agents.dreamitbiz.com",
+    "tsRatio": "90",
+    "tscErrors": 0,
+    "totalSrc": 29,
+    "pageCount": 2,
+    "componentCount": 6,
+    "scores": {
+      "typescript": 24,
+      "codeStructure": 7,
+      "techStack": 20,
+      "deployment": 20,
+      "seoQuality": 11,
+      "total": 82
+    },
+    "grade": "A"
+  },
+  {
+    "name": "data-structure",
+    "domain": "data-structure.dreamitbiz.com",
+    "tsRatio": "100",
+    "tscErrors": 0,
+    "totalSrc": 50,
+    "pageCount": 36,
+    "componentCount": 3,
+    "scores": {
+      "typescript": 25,
+      "codeStructure": 12,
+      "techStack": 16,
+      "deployment": 17,
+      "seoQuality": 11,
+      "total": 81
+    },
+    "grade": "A"
+  },
+  {
+    "name": "chatgpt",
+    "domain": "chatgpt.dreamitbiz.com",
+    "tsRatio": "83",
+    "tscErrors": 0,
+    "totalSrc": 35,
+    "pageCount": 4,
+    "componentCount": 8,
+    "scores": {
+      "typescript": 23,
+      "codeStructure": 9,
+      "techStack": 20,
+      "deployment": 17,
+      "seoQuality": 11,
+      "total": 80
+    },
+    "grade": "A"
+  },
+  {
+    "name": "koreait",
+    "domain": "koreait.dreamitbiz.com",
+    "tsRatio": "78",
+    "tscErrors": 0,
+    "totalSrc": 55,
+    "pageCount": 15,
+    "componentCount": 24,
+    "scores": {
+      "typescript": 23,
+      "codeStructure": 15,
+      "techStack": 17,
+      "deployment": 20,
+      "seoQuality": 5,
+      "total": 80
+    },
+    "grade": "A"
+  },
+  {
+    "name": "career",
+    "domain": "career.dreamitbiz.com",
+    "tsRatio": "86",
+    "tscErrors": 0,
+    "totalSrc": 58,
+    "pageCount": 19,
+    "componentCount": 25,
+    "scores": {
+      "typescript": 24,
+      "codeStructure": 15,
+      "techStack": 17,
+      "deployment": 20,
+      "seoQuality": 3,
+      "total": 79
+    },
+    "grade": "B"
+  },
+  {
+    "name": "java-study",
+    "domain": "java-study.dreamitbiz.com",
+    "tsRatio": "91",
+    "tscErrors": 0,
+    "totalSrc": 94,
+    "pageCount": 11,
+    "componentCount": 7,
+    "scores": {
+      "typescript": 24,
+      "codeStructure": 14,
+      "techStack": 17,
+      "deployment": 20,
+      "seoQuality": 4,
+      "total": 79
+    },
+    "grade": "B"
+  },
+  {
+    "name": "eip",
+    "domain": "eip.dreamitbiz.com",
+    "tsRatio": "100",
+    "tscErrors": 0,
+    "totalSrc": 53,
+    "pageCount": 0,
+    "componentCount": 34,
+    "scores": {
+      "typescript": 25,
+      "codeStructure": 10,
+      "techStack": 17,
+      "deployment": 20,
+      "seoQuality": 6,
+      "total": 78
+    },
+    "grade": "B"
+  },
+  {
+    "name": "autowork",
+    "domain": "autowork.dreamitbiz.com",
+    "tsRatio": "31",
+    "tscErrors": 0,
+    "totalSrc": 100,
+    "pageCount": 7,
+    "componentCount": 8,
+    "scores": {
+      "typescript": 18,
+      "codeStructure": 14,
+      "techStack": 20,
+      "deployment": 20,
+      "seoQuality": 4,
+      "total": 76
+    },
+    "grade": "B"
+  },
+  {
+    "name": "competency",
+    "domain": "competency.dreamitbiz.com",
+    "tsRatio": "100",
+    "tscErrors": 0,
+    "totalSrc": 83,
+    "pageCount": 0,
+    "componentCount": 13,
+    "scores": {
+      "typescript": 25,
+      "codeStructure": 11,
+      "techStack": 17,
+      "deployment": 20,
+      "seoQuality": 3,
+      "total": 76
+    },
+    "grade": "B"
+  },
+  {
+    "name": "fine-tuning",
+    "domain": "fine-tuning.dreamitbiz.com",
+    "tsRatio": "34",
+    "tscErrors": 0,
+    "totalSrc": 94,
+    "pageCount": 7,
+    "componentCount": 10,
+    "scores": {
+      "typescript": 18,
+      "codeStructure": 14,
+      "techStack": 20,
+      "deployment": 20,
+      "seoQuality": 4,
+      "total": 76
+    },
+    "grade": "B"
+  },
+  {
+    "name": "books",
+    "domain": "books.dreamitbiz.com",
+    "tsRatio": "100",
+    "tscErrors": 0,
+    "totalSrc": 100,
+    "pageCount": 0,
+    "componentCount": 37,
+    "scores": {
+      "typescript": 25,
+      "codeStructure": 14,
+      "techStack": 12,
+      "deployment": 14,
+      "seoQuality": 5,
+      "total": 70
+    },
+    "grade": "B"
+  },
+  {
+    "name": "algorithm",
+    "domain": "algorithm.dreamitbiz.com",
+    "tsRatio": "100",
+    "tscErrors": 0,
+    "totalSrc": 26,
+    "pageCount": 14,
+    "componentCount": 7,
+    "scores": {
+      "typescript": 25,
+      "codeStructure": 10,
+      "techStack": 13,
+      "deployment": 17,
+      "seoQuality": 2,
+      "total": 67
+    },
+    "grade": "C"
+  },
+  {
+    "name": "aebon",
+    "domain": "aebon.dreamitbiz.com",
+    "tsRatio": "100",
+    "tscErrors": 0,
+    "totalSrc": 31,
+    "pageCount": 0,
+    "componentCount": 23,
+    "scores": {
+      "typescript": 25,
+      "codeStructure": 10,
+      "techStack": 10,
+      "deployment": 17,
+      "seoQuality": 4,
+      "total": 66
+    },
+    "grade": "C"
+  },
+  {
+    "name": "reactStudy",
+    "domain": "reactstudy.dreamitbiz.com",
+    "tsRatio": "100",
+    "tscErrors": 0,
+    "totalSrc": 21,
+    "pageCount": 9,
+    "componentCount": 7,
+    "scores": {
+      "typescript": 25,
+      "codeStructure": 8,
+      "techStack": 13,
+      "deployment": 17,
+      "seoQuality": 2,
+      "total": 65
+    },
+    "grade": "C"
+  },
+  {
+    "name": "webstudy",
+    "domain": "webstudy.dreamitbiz.com",
+    "tsRatio": "100",
+    "tscErrors": 0,
+    "totalSrc": 20,
+    "pageCount": 8,
+    "componentCount": 7,
+    "scores": {
+      "typescript": 25,
+      "codeStructure": 8,
+      "techStack": 13,
+      "deployment": 17,
+      "seoQuality": 2,
+      "total": 65
+    },
+    "grade": "C"
+  },
+  {
+    "name": "pbi",
+    "domain": "pbi.dreamitbiz.com",
+    "tsRatio": "100",
+    "tscErrors": 0,
+    "totalSrc": 62,
+    "pageCount": 0,
+    "componentCount": 34,
+    "scores": {
+      "typescript": 25,
+      "codeStructure": 12,
+      "techStack": 8,
+      "deployment": 11,
+      "seoQuality": 5,
+      "total": 61
+    },
+    "grade": "C"
+  },
+  {
+    "name": "pbirobot",
+    "domain": "pbirobot.dreamitbiz.com",
+    "tsRatio": "100",
+    "tscErrors": 0,
+    "totalSrc": 58,
+    "pageCount": 0,
+    "componentCount": 30,
+    "scores": {
+      "typescript": 25,
+      "codeStructure": 10,
+      "techStack": 8,
+      "deployment": 11,
+      "seoQuality": 5,
+      "total": 59
+    },
+    "grade": "D"
+  }
+]

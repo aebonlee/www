@@ -1,0 +1,67 @@
+src/components/Navbar.tsx(13,11): error TS2339: Property 'mode' does not exist on type '{}'.
+src/components/Navbar.tsx(13,17): error TS2339: Property 'cycleMode' does not exist on type '{}'.
+src/components/Navbar.tsx(13,28): error TS2339: Property 'colorTheme' does not exist on type '{}'.
+src/components/Navbar.tsx(13,40): error TS2339: Property 'setColorTheme' does not exist on type '{}'.
+src/components/Navbar.tsx(14,11): error TS2339: Property 'user' does not exist on type '{}'.
+src/components/Navbar.tsx(14,17): error TS2339: Property 'signOut' does not exist on type '{}'.
+src/components/ProtectedRoute.tsx(5,11): error TS2339: Property 'user' does not exist on type '{}'.
+src/components/ProtectedRoute.tsx(5,17): error TS2339: Property 'loading' does not exist on type '{}'.
+src/contexts/AuthContext.tsx(4,21): error TS2554: Expected 1 arguments, but got 0.
+src/contexts/AuthContext.tsx(31,49): error TS2339: Property 'signup_domain' does not exist on type '{}'.
+src/contexts/AuthContext.tsx(34,19): error TS2339: Property 'visited_sites' does not exist on type '{}'.
+src/contexts/ThemeContext.tsx(3,22): error TS2554: Expected 1 arguments, but got 0.
+src/pages/ai-tips/AiTipsChatGPT.tsx(7,36): error TS2322: Type '{ title: string; path: string; }' is not assignable to type 'IntrinsicAttributes & { title: any; description: any; }'.
+  Property 'path' does not exist on type 'IntrinsicAttributes & { title: any; description: any; }'.
+src/pages/ai-tips/AiTipsClaude.tsx(7,35): error TS2322: Type '{ title: string; path: string; }' is not assignable to type 'IntrinsicAttributes & { title: any; description: any; }'.
+  Property 'path' does not exist on type 'IntrinsicAttributes & { title: any; description: any; }'.
+src/pages/ai-tips/AiTipsCoding.tsx(7,33): error TS2322: Type '{ title: string; path: string; }' is not assignable to type 'IntrinsicAttributes & { title: any; description: any; }'.
+  Property 'path' does not exist on type 'IntrinsicAttributes & { title: any; description: any; }'.
+src/pages/ai-tips/AiTipsCopilot.tsx(7,36): error TS2322: Type '{ title: string; path: string; }' is not assignable to type 'IntrinsicAttributes & { title: any; description: any; }'.
+  Property 'path' does not exist on type 'IntrinsicAttributes & { title: any; description: any; }'.
+src/pages/ai-tips/AiTipsGemini.tsx(7,35): error TS2322: Type '{ title: string; path: string; }' is not assignable to type 'IntrinsicAttributes & { title: any; description: any; }'.
+  Property 'path' does not exist on type 'IntrinsicAttributes & { title: any; description: any; }'.
+src/pages/ai-tips/AiTipsLearning.tsx(7,33): error TS2322: Type '{ title: string; path: string; }' is not assignable to type 'IntrinsicAttributes & { title: any; description: any; }'.
+  Property 'path' does not exist on type 'IntrinsicAttributes & { title: any; description: any; }'.
+src/pages/ai-tips/AiTipsPrompt.tsx(7,33): error TS2322: Type '{ title: string; path: string; }' is not assignable to type 'IntrinsicAttributes & { title: any; description: any; }'.
+  Property 'path' does not exist on type 'IntrinsicAttributes & { title: any; description: any; }'.
+src/pages/ai-tips/AiTipsWriting.tsx(7,33): error TS2322: Type '{ title: string; path: string; }' is not assignable to type 'IntrinsicAttributes & { title: any; description: any; }'.
+  Property 'path' does not exist on type 'IntrinsicAttributes & { title: any; description: any; }'.
+src/pages/community/CommunityList.tsx(11,11): error TS2339: Property 'user' does not exist on type '{}'.
+src/pages/community/CommunityList.tsx(41,18): error TS2362: The left-hand side of an arithmetic operation must be of type 'any', 'number', 'bigint' or an enum type.
+src/pages/community/CommunityList.tsx(41,24): error TS2363: The right-hand side of an arithmetic operation must be of type 'any', 'number', 'bigint' or an enum type.
+src/pages/community/CommunityView.tsx(9,11): error TS2339: Property 'user' does not exist on type '{}'.
+src/pages/community/CommunityWrite.tsx(10,11): error TS2339: Property 'user' does not exist on type '{}'.
+src/pages/ForgotPassword.tsx(7,11): error TS2339: Property 'resetPassword' does not exist on type '{}'.
+src/pages/ForgotPassword.tsx(31,8): error TS2741: Property 'description' is missing in type '{ title: string; }' but required in type '{ title: any; description: any; }'.
+src/pages/Home.tsx(33,8): error TS2739: Type '{}' is missing the following properties from type '{ title: any; description: any; }': title, description
+src/pages/Home.tsx(45,17): error TS2353: Object literal may only specify known properties, and ''--duration'' does not exist in type 'Properties<string | number, string & {}>'.
+src/pages/lectures/LectureDetail.tsx(10,11): error TS2339: Property 'user' does not exist on type '{}'.
+src/pages/lectures/LectureDetail.tsx(67,8): error TS2741: Property 'description' is missing in type '{ title: any; }' but required in type '{ title: any; description: any; }'.
+src/pages/lectures/LecturesHome.tsx(23,11): error TS2339: Property 'user' does not exist on type '{}'.
+src/pages/lectures/LecturesHome.tsx(184,37): error TS2322: Type 'string' is not assignable to type 'number'.
+src/pages/lectures/LectureWrite.tsx(10,11): error TS2339: Property 'user' does not exist on type '{}'.
+src/pages/lectures/LectureWrite.tsx(122,8): error TS2741: Property 'description' is missing in type '{ title: string; }' but required in type '{ title: any; description: any; }'.
+src/pages/Login.tsx(7,11): error TS2339: Property 'user' does not exist on type '{}'.
+src/pages/Login.tsx(7,17): error TS2339: Property 'signIn' does not exist on type '{}'.
+src/pages/Login.tsx(7,25): error TS2339: Property 'signInWithGoogle' does not exist on type '{}'.
+src/pages/Login.tsx(7,43): error TS2339: Property 'signInWithKakao' does not exist on type '{}'.
+src/pages/Login.tsx(59,8): error TS2741: Property 'description' is missing in type '{ title: string; }' but required in type '{ title: any; description: any; }'.
+src/pages/NotFound.tsx(7,8): error TS2741: Property 'description' is missing in type '{ title: string; }' but required in type '{ title: any; description: any; }'.
+src/pages/Profile.tsx(6,11): error TS2339: Property 'user' does not exist on type '{}'.
+src/pages/Profile.tsx(6,17): error TS2339: Property 'signOut' does not exist on type '{}'.
+src/pages/Profile.tsx(24,8): error TS2741: Property 'description' is missing in type '{ title: string; }' but required in type '{ title: any; description: any; }'.
+src/pages/Register.tsx(14,11): error TS2339: Property 'signUp' does not exist on type '{}'.
+src/pages/Register.tsx(50,8): error TS2741: Property 'description' is missing in type '{ title: string; }' but required in type '{ title: any; description: any; }'.
+src/pages/workbook/WorkbookAiModels.tsx(43,53): error TS2322: Type 'string' is not assignable to type 'number'.
+src/pages/workbook/WorkbookChainOfThought.tsx(44,53): error TS2322: Type 'string' is not assignable to type 'number'.
+src/pages/workbook/WorkbookDetail.tsx(10,11): error TS2339: Property 'user' does not exist on type '{}'.
+src/pages/workbook/WorkbookDetail.tsx(67,8): error TS2741: Property 'description' is missing in type '{ title: any; }' but required in type '{ title: any; description: any; }'.
+src/pages/workbook/WorkbookFewShot.tsx(44,53): error TS2322: Type 'string' is not assignable to type 'number'.
+src/pages/workbook/WorkbookHome.tsx(23,11): error TS2339: Property 'user' does not exist on type '{}'.
+src/pages/workbook/WorkbookHome.tsx(184,37): error TS2322: Type 'string' is not assignable to type 'number'.
+src/pages/workbook/WorkbookRoleSystem.tsx(46,53): error TS2322: Type 'string' is not assignable to type 'number'.
+src/pages/workbook/WorkbookRoleSystem.tsx(48,53): error TS2322: Type 'string' is not assignable to type 'number'.
+src/pages/workbook/WorkbookStructure.tsx(47,53): error TS2322: Type 'string' is not assignable to type 'number'.
+src/pages/workbook/WorkbookWhatIsPrompt.tsx(39,53): error TS2322: Type 'string' is not assignable to type 'number'.
+src/pages/workbook/WorkbookWrite.tsx(10,11): error TS2339: Property 'user' does not exist on type '{}'.
+src/pages/workbook/WorkbookWrite.tsx(122,8): error TS2741: Property 'description' is missing in type '{ title: string; }' but required in type '{ title: any; description: any; }'.

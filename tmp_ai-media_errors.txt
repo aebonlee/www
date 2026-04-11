@@ -1,0 +1,49 @@
+src/components/HeroBackground.tsx(32,13): error TS2353: Object literal may only specify known properties, and ''--duration'' does not exist in type 'Properties<string | number, string & {}>'.
+src/components/HeroBackground.tsx(69,13): error TS2353: Object literal may only specify known properties, and ''--dx'' does not exist in type 'Properties<string | number, string & {}>'.
+src/components/HeroBackground.tsx(101,13): error TS2353: Object literal may only specify known properties, and ''--delay'' does not exist in type 'Properties<string | number, string & {}>'.
+src/components/HeroBackground.tsx(134,13): error TS2353: Object literal may only specify known properties, and ''--delay'' does not exist in type 'Properties<string | number, string & {}>'.
+src/pages/admin/AdminDashboard.tsx(50,8): error TS2739: Type '{ title: any; }' is missing the following properties from type '{ title: any; description: any; image: any; url: any; }': description, image, url
+src/pages/admin/AdminDashboard.tsx(81,52): error TS2322: Type 'string' is not assignable to type 'number'.
+src/pages/admin/AdminDashboard.tsx(94,52): error TS2322: Type 'string' is not assignable to type 'number'.
+src/pages/ai-images/ImageTechniques.tsx(61,8): error TS2739: Type '{ title: string; }' is missing the following properties from type '{ title: any; description: any; image: any; url: any; }': description, image, url
+src/pages/ai-images/StyleGuide.tsx(47,8): error TS2739: Type '{ title: string; }' is missing the following properties from type '{ title: any; description: any; image: any; url: any; }': description, image, url
+src/pages/ai-media/ToolGuide.tsx(153,8): error TS2739: Type '{ title: any; }' is missing the following properties from type '{ title: any; description: any; image: any; url: any; }': description, image, url
+src/pages/ai-news/AINews.tsx(27,8): error TS2739: Type '{ title: string; }' is missing the following properties from type '{ title: any; description: any; image: any; url: any; }': description, image, url
+src/pages/ai-tools/AITools.tsx(38,8): error TS2739: Type '{ title: string; }' is missing the following properties from type '{ title: any; description: any; image: any; url: any; }': description, image, url
+src/pages/community/Board.tsx(65,8): error TS2739: Type '{ title: any; }' is missing the following properties from type '{ title: any; description: any; image: any; url: any; }': description, image, url
+src/pages/community/BoardDetail.tsx(102,8): error TS2739: Type '{ title: any; }' is missing the following properties from type '{ title: any; description: any; image: any; url: any; }': description, image, url
+src/pages/community/BoardWrite.tsx(49,8): error TS2739: Type '{ title: any; }' is missing the following properties from type '{ title: any; description: any; image: any; url: any; }': description, image, url
+src/pages/community/Gallery.tsx(92,8): error TS2739: Type '{ title: any; }' is missing the following properties from type '{ title: any; description: any; image: any; url: any; }': description, image, url
+src/pages/favorites/Favorites.tsx(12,8): error TS2739: Type '{ title: string; }' is missing the following properties from type '{ title: any; description: any; image: any; url: any; }': description, image, url
+src/pages/ForgotPassword.tsx(31,8): error TS2739: Type '{ title: any; }' is missing the following properties from type '{ title: any; description: any; image: any; url: any; }': description, image, url
+src/pages/glossary/Glossary.tsx(68,8): error TS2739: Type '{ title: string; }' is missing the following properties from type '{ title: any; description: any; image: any; url: any; }': description, image, url
+src/pages/Home.tsx(13,8): error TS2739: Type '{}' is missing the following properties from type '{ title: any; description: any; image: any; url: any; }': title, description, image, url
+src/pages/Home.tsx(39,98): error TS2353: Object literal may only specify known properties, and ''--card-color'' does not exist in type 'Properties<string | number, string & {}>'.
+src/pages/intro/IntroPage.tsx(18,8): error TS2739: Type '{ title: string; }' is missing the following properties from type '{ title: any; description: any; image: any; url: any; }': description, image, url
+src/pages/learning-guide/LearningGuide.tsx(24,8): error TS2739: Type '{ title: string; }' is missing the following properties from type '{ title: any; description: any; image: any; url: any; }': description, image, url
+src/pages/lecture-slides/LectureSlides.tsx(47,8): error TS2739: Type '{ title: string; }' is missing the following properties from type '{ title: any; description: any; image: any; url: any; }': description, image, url
+src/pages/lectures/Lectures.tsx(69,8): error TS2739: Type '{ title: string; }' is missing the following properties from type '{ title: any; description: any; image: any; url: any; }': description, image, url
+src/pages/Login.tsx(34,8): error TS2739: Type '{ title: any; }' is missing the following properties from type '{ title: any; description: any; image: any; url: any; }': description, image, url
+src/pages/NotFound.tsx(7,8): error TS2739: Type '{ title: string; }' is missing the following properties from type '{ title: any; description: any; image: any; url: any; }': description, image, url
+src/pages/prompt-evaluation/PromptEvaluation.tsx(27,29): error TS2339: Property 'specificity' does not exist on type '{}'.
+src/pages/prompt-evaluation/PromptEvaluation.tsx(28,34): error TS2339: Property 'specificity' does not exist on type '{}'.
+src/pages/prompt-evaluation/PromptEvaluation.tsx(29,33): error TS2339: Property 'specificity' does not exist on type '{}'.
+src/pages/prompt-evaluation/PromptEvaluation.tsx(30,33): error TS2339: Property 'specificity' does not exist on type '{}'.
+src/pages/prompt-evaluation/PromptEvaluation.tsx(31,15): error TS2339: Property 'specificity' does not exist on type '{}'.
+src/pages/prompt-evaluation/PromptEvaluation.tsx(42,10): error TS2339: Property 'structure' does not exist on type '{}'.
+src/pages/prompt-evaluation/PromptEvaluation.tsx(49,47): error TS2339: Property 'length' does not exist on type '{}'.
+src/pages/prompt-evaluation/PromptEvaluation.tsx(50,52): error TS2339: Property 'length' does not exist on type '{}'.
+src/pages/prompt-evaluation/PromptEvaluation.tsx(51,34): error TS2339: Property 'length' does not exist on type '{}'.
+src/pages/prompt-evaluation/PromptEvaluation.tsx(52,15): error TS2339: Property 'length' does not exist on type '{}'.
+src/pages/prompt-evaluation/PromptEvaluation.tsx(58,10): error TS2339: Property 'negative' does not exist on type '{}'.
+src/pages/prompt-evaluation/PromptEvaluation.tsx(63,33): error TS2339: Property 'technical' does not exist on type '{}'.
+src/pages/prompt-evaluation/PromptEvaluation.tsx(64,38): error TS2339: Property 'technical' does not exist on type '{}'.
+src/pages/prompt-evaluation/PromptEvaluation.tsx(65,38): error TS2339: Property 'technical' does not exist on type '{}'.
+src/pages/prompt-evaluation/PromptEvaluation.tsx(66,15): error TS2339: Property 'technical' does not exist on type '{}'.
+src/pages/prompt-evaluation/PromptEvaluation.tsx(69,56): error TS2365: Operator '+' cannot be applied to types 'unknown' and 'unknown'.
+src/pages/prompt-evaluation/PromptEvaluation.tsx(93,8): error TS2739: Type '{ title: string; }' is missing the following properties from type '{ title: any; description: any; image: any; url: any; }': description, image, url
+src/pages/prompt-gallery/PromptGallery.tsx(54,8): error TS2739: Type '{ title: string; }' is missing the following properties from type '{ title: any; description: any; image: any; url: any; }': description, image, url
+src/pages/prompt-practice/PromptPractice.tsx(36,8): error TS2739: Type '{ title: string; }' is missing the following properties from type '{ title: any; description: any; image: any; url: any; }': description, image, url
+src/pages/Register.tsx(35,8): error TS2739: Type '{ title: any; }' is missing the following properties from type '{ title: any; description: any; image: any; url: any; }': description, image, url
+src/pages/resources/Resources.tsx(29,8): error TS2739: Type '{ title: string; }' is missing the following properties from type '{ title: any; description: any; image: any; url: any; }': description, image, url
+src/pages/roadmap/Roadmap.tsx(56,8): error TS2739: Type '{ title: string; }' is missing the following properties from type '{ title: any; description: any; image: any; url: any; }': description, image, url

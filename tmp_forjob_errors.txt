@@ -1,0 +1,57 @@
+src/components/AuthGuard.tsx(5,11): error TS2339: Property 'user' does not exist on type '{}'.
+src/components/AuthGuard.tsx(5,17): error TS2339: Property 'loading' does not exist on type '{}'.
+src/components/layout/Navbar.tsx(8,11): error TS2339: Property 'mode' does not exist on type '{}'.
+src/components/layout/Navbar.tsx(8,17): error TS2339: Property 'toggleTheme' does not exist on type '{}'.
+src/components/layout/Navbar.tsx(8,30): error TS2339: Property 'colorTheme' does not exist on type '{}'.
+src/components/layout/Navbar.tsx(8,42): error TS2339: Property 'setColorTheme' does not exist on type '{}'.
+src/components/layout/Navbar.tsx(8,57): error TS2339: Property 'COLOR_OPTIONS' does not exist on type '{}'.
+src/components/layout/Navbar.tsx(9,11): error TS2339: Property 'user' does not exist on type '{}'.
+src/components/layout/Navbar.tsx(9,17): error TS2339: Property 'signOut' does not exist on type '{}'.
+src/components/ScoreChart.tsx(45,33): error TS2322: Type '"600"' is not assignable to type 'Scriptable<number | "bold" | "normal" | "lighter" | "bolder", ScriptableScalePointLabelContext>'.
+src/contexts/AuthContext.tsx(12,11): error TS2339: Property 'showToast' does not exist on type '{}'.
+src/contexts/ThemeContext.tsx(3,22): error TS2554: Expected 1 arguments, but got 0.
+src/pages/auth/LoginPage.tsx(6,11): error TS2339: Property 'user' does not exist on type '{}'.
+src/pages/auth/LoginPage.tsx(6,17): error TS2339: Property 'signInWithGoogle' does not exist on type '{}'.
+src/pages/auth/LoginPage.tsx(6,35): error TS2339: Property 'signInWithKakao' does not exist on type '{}'.
+src/pages/auth/LoginPage.tsx(12,8): error TS2741: Property 'description' is missing in type '{ title: string; }' but required in type '{ title: any; description: any; }'.
+src/pages/dashboard/Dashboard.tsx(12,11): error TS2339: Property 'user' does not exist on type '{}'.
+src/pages/dashboard/Dashboard.tsx(87,8): error TS2741: Property 'description' is missing in type '{ title: string; }' but required in type '{ title: any; description: any; }'.
+src/pages/dashboard/StudyHistory.tsx(9,11): error TS2339: Property 'user' does not exist on type '{}'.
+src/pages/dashboard/StudyHistory.tsx(29,8): error TS2741: Property 'description' is missing in type '{ title: string; }' but required in type '{ title: any; description: any; }'.
+src/pages/Home.tsx(8,8): error TS2739: Type '{}' is missing the following properties from type '{ title: any; description: any; }': title, description
+src/pages/Home.tsx(19,15): error TS2353: Object literal may only specify known properties, and ''--duration'' does not exist in type 'Properties<string | number, string & {}>'.
+src/pages/info/ExamInfo.tsx(106,78): error TS2353: Object literal may only specify known properties, and ''--accent'' does not exist in type 'Properties<string | number, string & {}>'.
+src/pages/learn/LearnHome.tsx(24,86): error TS2353: Object literal may only specify known properties, and ''--card-color'' does not exist in type 'Properties<string | number, string & {}>'.
+src/pages/learn/SubjectStudy.tsx(50,45): error TS2353: Object literal may only specify known properties, and ''--subject-color'' does not exist in type 'Properties<string | number, string & {}>'.
+src/pages/learn/SubjectStudy.tsx(87,15): error TS2322: Type '(el: HTMLDivElement) => HTMLDivElement' is not assignable to type 'Ref<HTMLDivElement>'.
+  Type '(el: HTMLDivElement) => HTMLDivElement' is not assignable to type '(instance: HTMLDivElement) => void | (() => VoidOrUndefinedOnly)'.
+    Type 'HTMLDivElement' is not assignable to type 'void | (() => VoidOrUndefinedOnly)'.
+src/pages/learn/SubjectStudy.tsx(92,26): error TS2353: Object literal may only specify known properties, and ''--chapter-color'' does not exist in type 'Properties<string | number, string & {}>'.
+src/pages/learn/SubjectStudy.tsx(123,38): error TS2353: Object literal may only specify known properties, and ''--topic-accent'' does not exist in type 'Properties<string | number, string & {}>'.
+src/pages/NotFound.tsx(7,8): error TS2741: Property 'description' is missing in type '{ title: string; }' but required in type '{ title: any; description: any; }'.
+src/pages/pilgi/ExamMode.tsx(18,11): error TS2339: Property 'user' does not exist on type '{}'.
+src/pages/pilgi/ExamMode.tsx(19,11): error TS2339: Property 'showToast' does not exist on type '{}'.
+src/pages/pilgi/ExamMode.tsx(131,8): error TS2741: Property 'description' is missing in type '{ title: string; }' but required in type '{ title: any; description: any; }'.
+src/pages/pilgi/ExamResult.tsx(28,8): error TS2741: Property 'description' is missing in type '{ title: string; }' but required in type '{ title: any; description: any; }'.
+src/pages/pilgi/ExamSelect.tsx(13,11): error TS2339: Property 'user' does not exist on type '{}'.
+src/pages/pilgi/ExamSelect.tsx(14,11): error TS2339: Property 'showToast' does not exist on type '{}'.
+src/pages/pilgi/ExamSelect.tsx(103,8): error TS2741: Property 'description' is missing in type '{ title: string; }' but required in type '{ title: any; description: any; }'.
+src/pages/pilgi/QuestionReview.tsx(36,8): error TS2741: Property 'description' is missing in type '{ title: string; }' but required in type '{ title: any; description: any; }'.
+src/pages/pilgi/QuestionReview.tsx(79,14): error TS2739: Type '{ question: any; selectedAnswer: any; showResult: true; showExplanation: true; questionIndex: any; }' is missing the following properties from type '{ question: any; selectedAnswer: any; onSelectAnswer: any; showResult?: boolean; showExplanation?: boolean; questionIndex: any; isBookmarked: any; onToggleBookmark: any; }': onSelectAnswer, isBookmarked, onToggleBookmark
+src/pages/pilgi/StudyMode.tsx(18,11): error TS2339: Property 'user' does not exist on type '{}'.
+src/pages/pilgi/StudyMode.tsx(19,11): error TS2339: Property 'showToast' does not exist on type '{}'.
+src/pages/pilgi/StudyMode.tsx(90,8): error TS2741: Property 'description' is missing in type '{ title: string; }' but required in type '{ title: any; description: any; }'.
+src/pages/practice/PracticeHome.tsx(18,64): error TS2353: Object literal may only specify known properties, and ''--card-color'' does not exist in type 'Properties<string | number, string & {}>'.
+src/pages/practice/PracticeHome.tsx(36,64): error TS2353: Object literal may only specify known properties, and ''--card-color'' does not exist in type 'Properties<string | number, string & {}>'.
+src/pages/silgi/KeyTerms.tsx(38,8): error TS2741: Property 'description' is missing in type '{ title: string; }' but required in type '{ title: any; description: any; }'.
+src/pages/silgi/PracticeMode.tsx(13,11): error TS2339: Property 'showToast' does not exist on type '{}'.
+src/pages/silgi/PracticeMode.tsx(39,10): error TS2741: Property 'description' is missing in type '{ title: string; }' but required in type '{ title: any; description: any; }'.
+src/pages/silgi/PracticeMode.tsx(71,8): error TS2741: Property 'description' is missing in type '{ title: string; }' but required in type '{ title: any; description: any; }'.
+src/pages/silgi/PracticeResult.tsx(7,8): error TS2741: Property 'description' is missing in type '{ title: string; }' but required in type '{ title: any; description: any; }'.
+src/pages/study/Bookmarks.tsx(11,11): error TS2339: Property 'user' does not exist on type '{}'.
+src/pages/study/Bookmarks.tsx(12,11): error TS2339: Property 'showToast' does not exist on type '{}'.
+src/pages/study/Bookmarks.tsx(69,8): error TS2741: Property 'description' is missing in type '{ title: string; }' but required in type '{ title: any; description: any; }'.
+src/pages/study/WrongAnswers.tsx(11,11): error TS2339: Property 'user' does not exist on type '{}'.
+src/pages/study/WrongAnswers.tsx(12,11): error TS2339: Property 'showToast' does not exist on type '{}'.
+src/pages/study/WrongAnswers.tsx(83,8): error TS2741: Property 'description' is missing in type '{ title: string; }' but required in type '{ title: any; description: any; }'.
+src/pages/study/WrongAnswers.tsx(136,14): error TS2739: Type '{ question: any; selectedAnswer: any; onSelectAnswer: (answer: any) => void; showResult: boolean; showExplanation: boolean; questionIndex: number; }' is missing the following properties from type '{ question: any; selectedAnswer: any; onSelectAnswer: any; showResult?: boolean; showExplanation?: boolean; questionIndex: any; isBookmarked: any; onToggleBookmark: any; }': isBookmarked, onToggleBookmark

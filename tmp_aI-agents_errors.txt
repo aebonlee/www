@@ -1,0 +1,65 @@
+src/components/HeroBackground.tsx(31,13): error TS2353: Object literal may only specify known properties, and ''--duration'' does not exist in type 'Properties<string | number, string & {}>'.
+src/components/HeroBackground.tsx(67,13): error TS2353: Object literal may only specify known properties, and ''--dx'' does not exist in type 'Properties<string | number, string & {}>'.
+src/components/HeroBackground.tsx(98,13): error TS2353: Object literal may only specify known properties, and ''--delay'' does not exist in type 'Properties<string | number, string & {}>'.
+src/components/HeroBackground.tsx(131,13): error TS2353: Object literal may only specify known properties, and ''--delay'' does not exist in type 'Properties<string | number, string & {}>'.
+src/components/HeroCarousel.tsx(15,11): error TS2339: Property 't' does not exist on type '{}'.
+src/components/layout/Footer.tsx(5,11): error TS2339: Property 'language' does not exist on type '{}'.
+src/components/layout/Footer.tsx(5,21): error TS2339: Property 't' does not exist on type '{}'.
+src/components/layout/Navbar.tsx(8,11): error TS2339: Property 'mode' does not exist on type '{}'.
+src/components/layout/Navbar.tsx(8,17): error TS2339: Property 'toggleTheme' does not exist on type '{}'.
+src/components/layout/Navbar.tsx(8,30): error TS2339: Property 'colorTheme' does not exist on type '{}'.
+src/components/layout/Navbar.tsx(8,42): error TS2339: Property 'setColorTheme' does not exist on type '{}'.
+src/components/layout/Navbar.tsx(8,57): error TS2339: Property 'COLOR_OPTIONS' does not exist on type '{}'.
+src/components/layout/Navbar.tsx(9,11): error TS2339: Property 'language' does not exist on type '{}'.
+src/components/layout/Navbar.tsx(9,21): error TS2339: Property 'toggleLanguage' does not exist on type '{}'.
+src/components/layout/Navbar.tsx(9,37): error TS2339: Property 't' does not exist on type '{}'.
+src/components/layout/Navbar.tsx(10,11): error TS2339: Property 'user' does not exist on type '{}'.
+src/components/layout/Navbar.tsx(10,17): error TS2339: Property 'signOut' does not exist on type '{}'.
+src/components/SEOHead.tsx(6,11): error TS2339: Property 'language' does not exist on type '{}'.
+src/components/SidebarNav.tsx(5,11): error TS2339: Property 'language' does not exist on type '{}'.
+src/contexts/AuthContext.tsx(11,11): error TS2339: Property 'showToast' does not exist on type '{}'.
+src/contexts/AuthContext.tsx(12,11): error TS2339: Property 't' does not exist on type '{}'.
+src/contexts/LanguageContext.tsx(4,25): error TS2554: Expected 1 arguments, but got 0.
+src/contexts/ThemeContext.tsx(3,22): error TS2554: Expected 1 arguments, but got 0.
+src/pages/auth/LoginPage.tsx(8,11): error TS2339: Property 'user' does not exist on type '{}'.
+src/pages/auth/LoginPage.tsx(8,17): error TS2339: Property 'signInWithGoogle' does not exist on type '{}'.
+src/pages/auth/LoginPage.tsx(8,35): error TS2339: Property 'signInWithKakao' does not exist on type '{}'.
+src/pages/auth/LoginPage.tsx(9,11): error TS2339: Property 'language' does not exist on type '{}'.
+src/pages/auth/LoginPage.tsx(9,21): error TS2339: Property 't' does not exist on type '{}'.
+src/pages/auth/LoginPage.tsx(19,8): error TS2741: Property 'image' is missing in type '{ title: any; description: any; path: string; }' but required in type '{ title: any; description: any; path?: string; image: any; }'.
+src/pages/cases/CasesPage.tsx(444,11): error TS2339: Property 'language' does not exist on type '{}'.
+src/pages/cases/CasesPage.tsx(444,21): error TS2339: Property 't' does not exist on type '{}'.
+src/pages/cases/CasesPage.tsx(452,8): error TS2741: Property 'image' is missing in type '{ title: any; description: any; path: string; }' but required in type '{ title: any; description: any; path?: string; image: any; }'.
+src/pages/community/CommunityPage.tsx(36,11): error TS2339: Property 'language' does not exist on type '{}'.
+src/pages/community/CommunityPage.tsx(36,21): error TS2339: Property 't' does not exist on type '{}'.
+src/pages/community/CommunityPage.tsx(37,11): error TS2339: Property 'user' does not exist on type '{}'.
+src/pages/community/CommunityPage.tsx(38,11): error TS2339: Property 'showToast' does not exist on type '{}'.
+src/pages/community/CommunityPage.tsx(316,10): error TS2741: Property 'image' is missing in type '{ title: any; description: any; path: string; }' but required in type '{ title: any; description: any; path?: string; image: any; }'.
+src/pages/community/CommunityPage.tsx(420,10): error TS2741: Property 'image' is missing in type '{ title: any; description: any; path: string; }' but required in type '{ title: any; description: any; path?: string; image: any; }'.
+src/pages/community/CommunityPage.tsx(558,8): error TS2741: Property 'image' is missing in type '{ title: any; description: any; path: string; }' but required in type '{ title: any; description: any; path?: string; image: any; }'.
+src/pages/course/CoursePage.tsx(128,11): error TS2339: Property 'language' does not exist on type '{}'.
+src/pages/course/CoursePage.tsx(128,21): error TS2339: Property 't' does not exist on type '{}'.
+src/pages/course/CoursePage.tsx(134,8): error TS2741: Property 'image' is missing in type '{ title: any; description: any; path: string; }' but required in type '{ title: any; description: any; path?: string; image: any; }'.
+src/pages/faq/FaqPage.tsx(65,11): error TS2339: Property 'language' does not exist on type '{}'.
+src/pages/faq/FaqPage.tsx(65,21): error TS2339: Property 't' does not exist on type '{}'.
+src/pages/faq/FaqPage.tsx(75,8): error TS2741: Property 'image' is missing in type '{ title: any; description: any; path: string; }' but required in type '{ title: any; description: any; path?: string; image: any; }'.
+src/pages/Home.tsx(7,11): error TS2339: Property 'language' does not exist on type '{}'.
+src/pages/Home.tsx(7,21): error TS2339: Property 't' does not exist on type '{}'.
+src/pages/Home.tsx(34,8): error TS2739: Type '{ path: string; }' is missing the following properties from type '{ title: any; description: any; path?: string; image: any; }': title, description, image
+src/pages/learning/LearningPage.tsx(170,11): error TS2339: Property 'language' does not exist on type '{}'.
+src/pages/learning/LearningPage.tsx(170,21): error TS2339: Property 't' does not exist on type '{}'.
+src/pages/learning/LearningPage.tsx(178,8): error TS2741: Property 'image' is missing in type '{ title: any; description: any; path: string; }' but required in type '{ title: any; description: any; path?: string; image: any; }'.
+src/pages/materials/MaterialsPage.tsx(94,11): error TS2339: Property 'language' does not exist on type '{}'.
+src/pages/materials/MaterialsPage.tsx(94,21): error TS2339: Property 't' does not exist on type '{}'.
+src/pages/materials/MaterialsPage.tsx(104,8): error TS2741: Property 'image' is missing in type '{ title: any; description: any; path: string; }' but required in type '{ title: any; description: any; path?: string; image: any; }'.
+src/pages/NotFound.tsx(6,11): error TS2339: Property 't' does not exist on type '{}'.
+src/pages/NotFound.tsx(11,8): error TS2739: Type '{ title: any; path: string; }' is missing the following properties from type '{ title: any; description: any; path?: string; image: any; }': description, image
+src/pages/prompts/PromptsPage.tsx(584,11): error TS2339: Property 'language' does not exist on type '{}'.
+src/pages/prompts/PromptsPage.tsx(584,21): error TS2339: Property 't' does not exist on type '{}'.
+src/pages/prompts/PromptsPage.tsx(599,8): error TS2741: Property 'image' is missing in type '{ title: any; description: any; path: string; }' but required in type '{ title: any; description: any; path?: string; image: any; }'.
+src/pages/results/ResultsPage.tsx(557,11): error TS2339: Property 'language' does not exist on type '{}'.
+src/pages/results/ResultsPage.tsx(557,21): error TS2339: Property 't' does not exist on type '{}'.
+src/pages/results/ResultsPage.tsx(564,8): error TS2741: Property 'image' is missing in type '{ title: any; description: any; path: string; }' but required in type '{ title: any; description: any; path?: string; image: any; }'.
+src/pages/tools/ToolsPage.tsx(329,11): error TS2339: Property 'language' does not exist on type '{}'.
+src/pages/tools/ToolsPage.tsx(329,21): error TS2339: Property 't' does not exist on type '{}'.
+src/pages/tools/ToolsPage.tsx(337,8): error TS2741: Property 'image' is missing in type '{ title: any; description: any; path: string; }' but required in type '{ title: any; description: any; path?: string; image: any; }'.

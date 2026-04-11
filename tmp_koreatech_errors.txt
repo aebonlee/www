@@ -1,0 +1,145 @@
+src/components/AuthGuard.tsx(5,11): error TS2339: Property 'isLoggedIn' does not exist on type '{}'.
+src/components/AuthGuard.tsx(5,23): error TS2339: Property 'loading' does not exist on type '{}'.
+src/components/CodeEditor.tsx(5,25): error TS2339: Property 'default' does not exist on type 'ForwardRefExoticComponent<HTMLAttributes<HTMLDivElement> & { highlight: (value: string) => ReactNode; ignoreTabKey?: boolean; insertSpaces?: boolean; onValueChange: (value: string) => void; ... 20 more ...; preClassName?: string; } & RefAttributes<...>>'.
+src/components/CodeEditor.tsx(8,43): error TS2339: Property 'Prism' does not exist on type 'Window & typeof globalThis'.
+src/components/layout/Footer.tsx(6,11): error TS2339: Property 't' does not exist on type '{}'.
+src/components/layout/Navbar.tsx(26,11): error TS2339: Property 'mode' does not exist on type '{}'.
+src/components/layout/Navbar.tsx(26,17): error TS2339: Property 'toggleTheme' does not exist on type '{}'.
+src/components/layout/Navbar.tsx(26,30): error TS2339: Property 'colorTheme' does not exist on type '{}'.
+src/components/layout/Navbar.tsx(26,42): error TS2339: Property 'setColorTheme' does not exist on type '{}'.
+src/components/layout/Navbar.tsx(27,11): error TS2339: Property 'language' does not exist on type '{}'.
+src/components/layout/Navbar.tsx(27,21): error TS2339: Property 'toggleLanguage' does not exist on type '{}'.
+src/components/layout/Navbar.tsx(27,37): error TS2339: Property 't' does not exist on type '{}'.
+src/components/layout/Navbar.tsx(28,11): error TS2339: Property 'isLoggedIn' does not exist on type '{}'.
+src/components/layout/Navbar.tsx(28,23): error TS2339: Property 'isAdmin' does not exist on type '{}'.
+src/components/layout/Navbar.tsx(28,32): error TS2339: Property 'profile' does not exist on type '{}'.
+src/components/layout/Navbar.tsx(28,41): error TS2339: Property 'signOut' does not exist on type '{}'.
+src/components/SearchModal.tsx(7,11): error TS2339: Property 't' does not exist on type '{}'.
+src/components/SEOHead.tsx(11,11): error TS2339: Property 'language' does not exist on type '{}'.
+src/contexts/AuthContext.tsx(6,21): error TS2554: Expected 1 arguments, but got 0.
+src/contexts/AuthContext.tsx(23,37): error TS2339: Property 'signup_domain' does not exist on type '{}'.
+src/contexts/AuthContext.tsx(27,17): error TS2339: Property 'visited_sites' does not exist on type '{}'.
+src/contexts/AuthContext.tsx(29,49): error TS2339: Property 'role' does not exist on type '{}'.
+src/contexts/LanguageContext.tsx(4,25): error TS2554: Expected 1 arguments, but got 0.
+src/contexts/ThemeContext.tsx(3,22): error TS2554: Expected 1 arguments, but got 0.
+src/pages/Admin.tsx(7,11): error TS2339: Property 'isAdmin' does not exist on type '{}'.
+src/pages/Admin.tsx(8,11): error TS2339: Property 't' does not exist on type '{}'.
+src/pages/Admin.tsx(140,23): error TS2322: Type 'string' is not assignable to type 'number'.
+src/pages/AiTipsChatGPT.tsx(6,11): error TS2339: Property 't' does not exist on type '{}'.
+src/pages/AiTipsChatGPT.tsx(10,8): error TS2739: Type '{ title: any; path: string; }' is missing the following properties from type '{ title: any; description: any; path?: string; ogImage: any; noindex?: boolean; }': description, ogImage
+src/pages/AiTipsClaude.tsx(6,11): error TS2339: Property 't' does not exist on type '{}'.
+src/pages/AiTipsClaude.tsx(10,8): error TS2739: Type '{ title: any; path: string; }' is missing the following properties from type '{ title: any; description: any; path?: string; ogImage: any; noindex?: boolean; }': description, ogImage
+src/pages/AiTipsCoding.tsx(6,11): error TS2339: Property 't' does not exist on type '{}'.
+src/pages/AiTipsCoding.tsx(10,8): error TS2739: Type '{ title: any; path: string; }' is missing the following properties from type '{ title: any; description: any; path?: string; ogImage: any; noindex?: boolean; }': description, ogImage
+src/pages/AiTipsCopilot.tsx(6,11): error TS2339: Property 't' does not exist on type '{}'.
+src/pages/AiTipsCopilot.tsx(10,8): error TS2739: Type '{ title: any; path: string; }' is missing the following properties from type '{ title: any; description: any; path?: string; ogImage: any; noindex?: boolean; }': description, ogImage
+src/pages/AiTipsGemini.tsx(6,11): error TS2339: Property 't' does not exist on type '{}'.
+src/pages/AiTipsGemini.tsx(10,8): error TS2739: Type '{ title: any; path: string; }' is missing the following properties from type '{ title: any; description: any; path?: string; ogImage: any; noindex?: boolean; }': description, ogImage
+src/pages/AiTipsHome.tsx(21,11): error TS2339: Property 't' does not exist on type '{}'.
+src/pages/AiTipsHome.tsx(26,8): error TS2739: Type '{ title: any; path: string; }' is missing the following properties from type '{ title: any; description: any; path?: string; ogImage: any; noindex?: boolean; }': description, ogImage
+src/pages/AiTipsLearning.tsx(6,11): error TS2339: Property 't' does not exist on type '{}'.
+src/pages/AiTipsLearning.tsx(10,8): error TS2739: Type '{ title: any; path: string; }' is missing the following properties from type '{ title: any; description: any; path?: string; ogImage: any; noindex?: boolean; }': description, ogImage
+src/pages/AiTipsPrompt.tsx(6,11): error TS2339: Property 't' does not exist on type '{}'.
+src/pages/AiTipsPrompt.tsx(10,8): error TS2739: Type '{ title: any; path: string; }' is missing the following properties from type '{ title: any; description: any; path?: string; ogImage: any; noindex?: boolean; }': description, ogImage
+src/pages/AiTipsWriting.tsx(6,11): error TS2339: Property 't' does not exist on type '{}'.
+src/pages/AiTipsWriting.tsx(10,8): error TS2739: Type '{ title: any; path: string; }' is missing the following properties from type '{ title: any; description: any; path?: string; ogImage: any; noindex?: boolean; }': description, ogImage
+src/pages/Board.tsx(13,11): error TS2339: Property 't' does not exist on type '{}'.
+src/pages/Board.tsx(14,11): error TS2339: Property 'isLoggedIn' does not exist on type '{}'.
+src/pages/Board.tsx(54,8): error TS2739: Type '{ title: any; path: string; }' is missing the following properties from type '{ title: any; description: any; path?: string; ogImage: any; noindex?: boolean; }': description, ogImage
+src/pages/BoardDetail.tsx(12,11): error TS2339: Property 't' does not exist on type '{}'.
+src/pages/BoardDetail.tsx(13,11): error TS2339: Property 'user' does not exist on type '{}'.
+src/pages/BoardDetail.tsx(13,17): error TS2339: Property 'isAdmin' does not exist on type '{}'.
+src/pages/BoardDetail.tsx(114,8): error TS2739: Type '{ title: any; path: string; }' is missing the following properties from type '{ title: any; description: any; path?: string; ogImage: any; noindex?: boolean; }': description, ogImage
+src/pages/BoardWrite.tsx(11,11): error TS2339: Property 't' does not exist on type '{}'.
+src/pages/BoardWrite.tsx(12,11): error TS2339: Property 'user' does not exist on type '{}'.
+src/pages/BoardWrite.tsx(46,8): error TS2739: Type '{ title: any; path: string; noindex: true; }' is missing the following properties from type '{ title: any; description: any; path?: string; ogImage: any; noindex?: boolean; }': description, ogImage
+src/pages/ForgotPassword.tsx(8,11): error TS2339: Property 't' does not exist on type '{}'.
+src/pages/ForgotPassword.tsx(31,6): error TS2739: Type '{ title: string; path: string; noindex: true; }' is missing the following properties from type '{ title: any; description: any; path?: string; ogImage: any; noindex?: boolean; }': description, ogImage
+src/pages/Gallery.tsx(12,11): error TS2339: Property 't' does not exist on type '{}'.
+src/pages/Gallery.tsx(13,11): error TS2339: Property 'isLoggedIn' does not exist on type '{}'.
+src/pages/Gallery.tsx(49,8): error TS2739: Type '{ title: any; path: string; }' is missing the following properties from type '{ title: any; description: any; path?: string; ogImage: any; noindex?: boolean; }': description, ogImage
+src/pages/GalleryDetail.tsx(19,11): error TS2339: Property 't' does not exist on type '{}'.
+src/pages/GalleryDetail.tsx(20,11): error TS2339: Property 'user' does not exist on type '{}'.
+src/pages/GalleryDetail.tsx(20,17): error TS2339: Property 'isAdmin' does not exist on type '{}'.
+src/pages/GalleryDetail.tsx(112,8): error TS2739: Type '{ title: any; path: string; }' is missing the following properties from type '{ title: any; description: any; path?: string; ogImage: any; noindex?: boolean; }': description, ogImage
+src/pages/GalleryWrite.tsx(12,11): error TS2339: Property 't' does not exist on type '{}'.
+src/pages/GalleryWrite.tsx(13,11): error TS2339: Property 'user' does not exist on type '{}'.
+src/pages/GalleryWrite.tsx(97,8): error TS2739: Type '{ title: any; path: string; noindex: true; }' is missing the following properties from type '{ title: any; description: any; path?: string; ogImage: any; noindex?: boolean; }': description, ogImage
+src/pages/Home.tsx(8,11): error TS2339: Property 't' does not exist on type '{}'.
+src/pages/Home.tsx(38,8): error TS2741: Property 'ogImage' is missing in type '{ title: string; description: any; }' but required in type '{ title: any; description: any; path?: string; ogImage: any; noindex?: boolean; }'.
+src/pages/LectureDetail.tsx(12,11): error TS2339: Property 't' does not exist on type '{}'.
+src/pages/LectureDetail.tsx(13,11): error TS2339: Property 'isAdmin' does not exist on type '{}'.
+src/pages/LectureDetail.tsx(13,20): error TS2339: Property 'isLoggedIn' does not exist on type '{}'.
+src/pages/LectureDetail.tsx(67,8): error TS2739: Type '{ title: any; path: string; }' is missing the following properties from type '{ title: any; description: any; path?: string; ogImage: any; noindex?: boolean; }': description, ogImage
+src/pages/LectureMaterials.tsx(38,11): error TS2339: Property 't' does not exist on type '{}'.
+src/pages/LectureMaterials.tsx(38,14): error TS2339: Property 'language' does not exist on type '{}'.
+src/pages/LectureMaterials.tsx(39,11): error TS2339: Property 'isLoggedIn' does not exist on type '{}'.
+src/pages/LectureMaterials.tsx(54,8): error TS2739: Type '{ title: any; path: string; }' is missing the following properties from type '{ title: any; description: any; path?: string; ogImage: any; noindex?: boolean; }': description, ogImage
+src/pages/Lectures.tsx(12,11): error TS2339: Property 't' does not exist on type '{}'.
+src/pages/Lectures.tsx(13,11): error TS2339: Property 'isAdmin' does not exist on type '{}'.
+src/pages/Lectures.tsx(13,20): error TS2339: Property 'isLoggedIn' does not exist on type '{}'.
+src/pages/Lectures.tsx(64,8): error TS2739: Type '{ title: any; path: string; }' is missing the following properties from type '{ title: any; description: any; path?: string; ogImage: any; noindex?: boolean; }': description, ogImage
+src/pages/Lectures.tsx(176,37): error TS2322: Type 'string' is not assignable to type 'number'.
+src/pages/LectureWrite.tsx(12,11): error TS2339: Property 't' does not exist on type '{}'.
+src/pages/LectureWrite.tsx(13,11): error TS2339: Property 'user' does not exist on type '{}'.
+src/pages/LectureWrite.tsx(13,17): error TS2339: Property 'isAdmin' does not exist on type '{}'.
+src/pages/LectureWrite.tsx(111,8): error TS2739: Type '{ title: any; path: string; noindex: true; }' is missing the following properties from type '{ title: any; description: any; path?: string; ogImage: any; noindex?: boolean; }': description, ogImage
+src/pages/Login.tsx(9,11): error TS2339: Property 't' does not exist on type '{}'.
+src/pages/Login.tsx(10,11): error TS2339: Property 'isLoggedIn' does not exist on type '{}'.
+src/pages/Login.tsx(10,23): error TS2339: Property 'accountBlock' does not exist on type '{}'.
+src/pages/Login.tsx(10,37): error TS2339: Property 'clearAccountBlock' does not exist on type '{}'.
+src/pages/Login.tsx(62,6): error TS2739: Type '{ title: string; path: string; noindex: true; }' is missing the following properties from type '{ title: any; description: any; path?: string; ogImage: any; noindex?: boolean; }': description, ogImage
+src/pages/MyPage.tsx(9,11): error TS2339: Property 't' does not exist on type '{}'.
+src/pages/MyPage.tsx(10,11): error TS2339: Property 'user' does not exist on type '{}'.
+src/pages/MyPage.tsx(10,17): error TS2339: Property 'profile' does not exist on type '{}'.
+src/pages/MyPage.tsx(10,26): error TS2339: Property 'signOut' does not exist on type '{}'.
+src/pages/MyPage.tsx(10,35): error TS2339: Property 'refreshProfile' does not exist on type '{}'.
+src/pages/MyPage.tsx(46,8): error TS2739: Type '{ title: string; path: string; noindex: true; }' is missing the following properties from type '{ title: any; description: any; path?: string; ogImage: any; noindex?: boolean; }': description, ogImage
+src/pages/NotFound.tsx(7,8): error TS2739: Type '{ title: string; }' is missing the following properties from type '{ title: any; description: any; path?: string; ogImage: any; noindex?: boolean; }': description, ogImage
+src/pages/Portfolio.tsx(10,11): error TS2339: Property 't' does not exist on type '{}'.
+src/pages/Portfolio.tsx(11,11): error TS2339: Property 'isLoggedIn' does not exist on type '{}'.
+src/pages/Portfolio.tsx(34,8): error TS2739: Type '{ title: any; path: string; }' is missing the following properties from type '{ title: any; description: any; path?: string; ogImage: any; noindex?: boolean; }': description, ogImage
+src/pages/PortfolioDetail.tsx(19,11): error TS2339: Property 't' does not exist on type '{}'.
+src/pages/PortfolioDetail.tsx(20,11): error TS2339: Property 'user' does not exist on type '{}'.
+src/pages/PortfolioDetail.tsx(20,17): error TS2339: Property 'isAdmin' does not exist on type '{}'.
+src/pages/PortfolioDetail.tsx(112,8): error TS2739: Type '{ title: any; path: string; }' is missing the following properties from type '{ title: any; description: any; path?: string; ogImage: any; noindex?: boolean; }': description, ogImage
+src/pages/PortfolioWrite.tsx(12,11): error TS2339: Property 't' does not exist on type '{}'.
+src/pages/PortfolioWrite.tsx(13,11): error TS2339: Property 'user' does not exist on type '{}'.
+src/pages/PortfolioWrite.tsx(97,8): error TS2739: Type '{ title: any; path: string; noindex: true; }' is missing the following properties from type '{ title: any; description: any; path?: string; ogImage: any; noindex?: boolean; }': description, ogImage
+src/pages/PracticeGuide.tsx(98,11): error TS2339: Property 't' does not exist on type '{}'.
+src/pages/PracticeGuide.tsx(102,8): error TS2739: Type '{ title: any; path: string; }' is missing the following properties from type '{ title: any; description: any; path?: string; ogImage: any; noindex?: boolean; }': description, ogImage
+src/pages/PythonBasics.tsx(6,11): error TS2339: Property 't' does not exist on type '{}'.
+src/pages/PythonBasics.tsx(10,8): error TS2739: Type '{ title: any; path: string; }' is missing the following properties from type '{ title: any; description: any; path?: string; ogImage: any; noindex?: boolean; }': description, ogImage
+src/pages/PythonControl.tsx(6,11): error TS2339: Property 't' does not exist on type '{}'.
+src/pages/PythonControl.tsx(10,8): error TS2739: Type '{ title: any; path: string; }' is missing the following properties from type '{ title: any; description: any; path?: string; ogImage: any; noindex?: boolean; }': description, ogImage
+src/pages/PythonData.tsx(6,11): error TS2339: Property 't' does not exist on type '{}'.
+src/pages/PythonData.tsx(10,8): error TS2739: Type '{ title: any; path: string; }' is missing the following properties from type '{ title: any; description: any; path?: string; ogImage: any; noindex?: boolean; }': description, ogImage
+src/pages/PythonFunctions.tsx(6,11): error TS2339: Property 't' does not exist on type '{}'.
+src/pages/PythonFunctions.tsx(10,8): error TS2739: Type '{ title: any; path: string; }' is missing the following properties from type '{ title: any; description: any; path?: string; ogImage: any; noindex?: boolean; }': description, ogImage
+src/pages/PythonLesson.tsx(21,11): error TS2339: Property 't' does not exist on type '{}'.
+src/pages/PythonLesson.tsx(26,8): error TS2739: Type '{ title: any; path: string; }' is missing the following properties from type '{ title: any; description: any; path?: string; ogImage: any; noindex?: boolean; }': description, ogImage
+src/pages/PythonPractice.tsx(259,42): error TS2339: Property 'closest' does not exist on type 'EventTarget'.
+src/pages/PythonPractice.tsx(405,11): error TS2339: Property 't' does not exist on type '{}'.
+src/pages/PythonPractice.tsx(405,14): error TS2339: Property 'language' does not exist on type '{}'.
+src/pages/PythonPractice.tsx(411,8): error TS2739: Type '{ title: any; path: string; }' is missing the following properties from type '{ title: any; description: any; path?: string; ogImage: any; noindex?: boolean; }': description, ogImage
+src/pages/PythonWeek3.tsx(57,23): error TS2322: Type 'string' is not assignable to type 'number'.
+src/pages/PythonWeek3.tsx(60,23): error TS2322: Type 'string' is not assignable to type 'number'.
+src/pages/Register.tsx(9,11): error TS2339: Property 't' does not exist on type '{}'.
+src/pages/Register.tsx(10,11): error TS2339: Property 'isLoggedIn' does not exist on type '{}'.
+src/pages/Register.tsx(69,6): error TS2739: Type '{ title: string; path: string; noindex: true; }' is missing the following properties from type '{ title: any; description: any; path?: string; ogImage: any; noindex?: boolean; }': description, ogImage
+src/pages/Syllabus.tsx(5,11): error TS2339: Property 't' does not exist on type '{}'.
+src/pages/Syllabus.tsx(9,8): error TS2739: Type '{ title: any; path: string; }' is missing the following properties from type '{ title: any; description: any; path?: string; ogImage: any; noindex?: boolean; }': description, ogImage
+src/pages/WebsiteDetail.tsx(19,11): error TS2339: Property 't' does not exist on type '{}'.
+src/pages/WebsiteDetail.tsx(20,11): error TS2339: Property 'user' does not exist on type '{}'.
+src/pages/WebsiteDetail.tsx(20,17): error TS2339: Property 'isAdmin' does not exist on type '{}'.
+src/pages/WebsiteDetail.tsx(112,8): error TS2739: Type '{ title: any; path: string; }' is missing the following properties from type '{ title: any; description: any; path?: string; ogImage: any; noindex?: boolean; }': description, ogImage
+src/pages/Websites.tsx(12,11): error TS2339: Property 't' does not exist on type '{}'.
+src/pages/Websites.tsx(13,11): error TS2339: Property 'isLoggedIn' does not exist on type '{}'.
+src/pages/Websites.tsx(50,8): error TS2739: Type '{ title: any; path: string; }' is missing the following properties from type '{ title: any; description: any; path?: string; ogImage: any; noindex?: boolean; }': description, ogImage
+src/pages/WebsiteWrite.tsx(12,11): error TS2339: Property 't' does not exist on type '{}'.
+src/pages/WebsiteWrite.tsx(13,11): error TS2339: Property 'user' does not exist on type '{}'.
+src/pages/WebsiteWrite.tsx(97,8): error TS2739: Type '{ title: any; path: string; noindex: true; }' is missing the following properties from type '{ title: any; description: any; path?: string; ogImage: any; noindex?: boolean; }': description, ogImage
+src/pages/WeeklyPlan.tsx(23,11): error TS2339: Property 't' does not exist on type '{}'.
+src/pages/WeeklyPlan.tsx(27,8): error TS2739: Type '{ title: any; path: string; }' is missing the following properties from type '{ title: any; description: any; path?: string; ogImage: any; noindex?: boolean; }': description, ogImage
+src/pages/WhatIsCT.tsx(5,6): error TS2739: Type '{ title: string; path: string; }' is missing the following properties from type '{ title: any; description: any; path?: string; ogImage: any; noindex?: boolean; }': description, ogImage
+src/pages/WhatIsCT.tsx(242,51): error TS2322: Type 'string' is not assignable to type 'number'.

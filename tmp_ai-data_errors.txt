@@ -1,0 +1,65 @@
+src/components/Navbar.tsx(13,11): error TS2339: Property 'theme' does not exist on type '{}'.
+src/components/Navbar.tsx(13,18): error TS2339: Property 'toggleTheme' does not exist on type '{}'.
+src/components/Navbar.tsx(13,31): error TS2339: Property 'colorTheme' does not exist on type '{}'.
+src/components/Navbar.tsx(13,43): error TS2339: Property 'setColorTheme' does not exist on type '{}'.
+src/components/Navbar.tsx(14,11): error TS2339: Property 'user' does not exist on type '{}'.
+src/components/Navbar.tsx(14,17): error TS2339: Property 'signOut' does not exist on type '{}'.
+src/components/ProtectedRoute.tsx(5,11): error TS2339: Property 'user' does not exist on type '{}'.
+src/components/ProtectedRoute.tsx(5,17): error TS2339: Property 'loading' does not exist on type '{}'.
+src/components/QuizComponent.tsx(35,11): error TS2304: Cannot find name 'handleFinish'.
+src/contexts/AuthContext.tsx(28,40): error TS2339: Property 'signup_domain' does not exist on type '{}'.
+src/contexts/AuthContext.tsx(31,17): error TS2339: Property 'visited_sites' does not exist on type '{}'.
+src/contexts/BadgeContext.tsx(6,22): error TS2554: Expected 1 arguments, but got 0.
+src/contexts/BadgeContext.tsx(20,11): error TS2339: Property 'quizScores' does not exist on type '{}'.
+src/contexts/BadgeContext.tsx(20,23): error TS2339: Property 'codeRuns' does not exist on type '{}'.
+src/contexts/BadgeContext.tsx(20,33): error TS2339: Property 'streak' does not exist on type '{}'.
+src/contexts/BadgeContext.tsx(20,41): error TS2339: Property 'getQuizBestScore' does not exist on type '{}'.
+src/contexts/BadgeContext.tsx(29,73): error TS2339: Property 'attempts' does not exist on type 'unknown'.
+src/contexts/ProgressContext.tsx(5,25): error TS2554: Expected 1 arguments, but got 0.
+src/contexts/ProgressContext.tsx(25,11): error TS2339: Property 'user' does not exist on type '{}'.
+src/pages/BadgeCollection.tsx(15,11): error TS2339: Property 'earnedBadges' does not exist on type '{}'.
+src/pages/BadgeCollection.tsx(16,11): error TS2339: Property 'codeRuns' does not exist on type '{}'.
+src/pages/BadgeCollection.tsx(16,21): error TS2339: Property 'streak' does not exist on type '{}'.
+src/pages/BadgeCollection.tsx(16,29): error TS2339: Property 'quizScores' does not exist on type '{}'.
+src/pages/community/CommunityList.tsx(11,11): error TS2339: Property 'user' does not exist on type '{}'.
+src/pages/community/CommunityList.tsx(34,18): error TS2362: The left-hand side of an arithmetic operation must be of type 'any', 'number', 'bigint' or an enum type.
+src/pages/community/CommunityList.tsx(34,24): error TS2363: The right-hand side of an arithmetic operation must be of type 'any', 'number', 'bigint' or an enum type.
+src/pages/community/CommunityView.tsx(9,11): error TS2339: Property 'user' does not exist on type '{}'.
+src/pages/community/CommunityWrite.tsx(10,11): error TS2339: Property 'user' does not exist on type '{}'.
+src/pages/community/CommunityWrite.tsx(31,8): error TS2741: Property 'description' is missing in type '{ title: string; }' but required in type '{ title: any; description: any; }'.
+src/pages/ForgotPassword.tsx(7,11): error TS2339: Property 'resetPassword' does not exist on type '{}'.
+src/pages/ForgotPassword.tsx(31,8): error TS2741: Property 'description' is missing in type '{ title: string; }' but required in type '{ title: any; description: any; }'.
+src/pages/Home.tsx(45,8): error TS2739: Type '{}' is missing the following properties from type '{ title: any; description: any; }': title, description
+src/pages/Home.tsx(55,52): error TS2353: Object literal may only specify known properties, and ''--duration'' does not exist in type 'Properties<string | number, string & {}>'.
+src/pages/lectures/LecturesHome.tsx(23,11): error TS2339: Property 'user' does not exist on type '{}'.
+src/pages/lectures/LecturesHome.tsx(85,85): error TS2322: Type 'string' is not assignable to type 'number'.
+src/pages/lectures/LectureWrite.tsx(8,11): error TS2339: Property 'user' does not exist on type '{}'.
+src/pages/lectures/LectureWrite.tsx(31,8): error TS2741: Property 'description' is missing in type '{ title: string; }' but required in type '{ title: any; description: any; }'.
+src/pages/Login.tsx(12,11): error TS2339: Property 'user' does not exist on type '{}'.
+src/pages/Login.tsx(12,17): error TS2339: Property 'signIn' does not exist on type '{}'.
+src/pages/Login.tsx(12,25): error TS2339: Property 'signInWithGoogle' does not exist on type '{}'.
+src/pages/Login.tsx(12,43): error TS2339: Property 'signInWithKakao' does not exist on type '{}'.
+src/pages/Login.tsx(48,8): error TS2741: Property 'description' is missing in type '{ title: string; }' but required in type '{ title: any; description: any; }'.
+src/pages/NotFound.tsx(7,8): error TS2741: Property 'description' is missing in type '{ title: string; }' but required in type '{ title: any; description: any; }'.
+src/pages/Playground.tsx(130,11): error TS2339: Property 'incrementCodeRuns' does not exist on type '{}'.
+src/pages/Profile.tsx(6,11): error TS2339: Property 'user' does not exist on type '{}'.
+src/pages/Profile.tsx(6,17): error TS2339: Property 'signOut' does not exist on type '{}'.
+src/pages/Profile.tsx(24,8): error TS2741: Property 'description' is missing in type '{ title: string; }' but required in type '{ title: any; description: any; }'.
+src/pages/quiz/QuizDetail.tsx(10,11): error TS2339: Property 'saveQuizScore' does not exist on type '{}'.
+src/pages/quiz/QuizDetail.tsx(10,26): error TS2339: Property 'getQuizBestScore' does not exist on type '{}'.
+src/pages/quiz/QuizDetail.tsx(10,44): error TS2339: Property 'getQuizAttempts' does not exist on type '{}'.
+src/pages/quiz/QuizHome.tsx(7,11): error TS2339: Property 'getQuizBestScore' does not exist on type '{}'.
+src/pages/quiz/QuizHome.tsx(7,29): error TS2339: Property 'getQuizAttempts' does not exist on type '{}'.
+src/pages/quiz/QuizHome.tsx(27,75): error TS2339: Property 'passingScore' does not exist on type 'unknown'.
+src/pages/quiz/QuizHome.tsx(31,106): error TS2339: Property 'color' does not exist on type 'unknown'.
+src/pages/quiz/QuizHome.tsx(31,121): error TS2339: Property 'color' does not exist on type 'unknown'.
+src/pages/quiz/QuizHome.tsx(32,73): error TS2339: Property 'icon' does not exist on type 'unknown'.
+src/pages/quiz/QuizHome.tsx(33,31): error TS2339: Property 'title' does not exist on type 'unknown'.
+src/pages/quiz/QuizHome.tsx(36,30): error TS2339: Property 'description' does not exist on type 'unknown'.
+src/pages/quiz/QuizHome.tsx(38,73): error TS2339: Property 'questions' does not exist on type 'unknown'.
+src/pages/quiz/QuizHome.tsx(39,82): error TS2339: Property 'timeLimit' does not exist on type 'unknown'.
+src/pages/quiz/QuizHome.tsx(40,74): error TS2339: Property 'passingScore' does not exist on type 'unknown'.
+src/pages/Register.tsx(14,11): error TS2339: Property 'signUp' does not exist on type '{}'.
+src/pages/Register.tsx(46,8): error TS2741: Property 'description' is missing in type '{ title: string; }' but required in type '{ title: any; description: any; }'.
+src/pages/workbook/WorkbookHome.tsx(9,11): error TS2339: Property 'user' does not exist on type '{}'.
+src/pages/workbook/WorkbookHome.tsx(60,85): error TS2322: Type 'string' is not assignable to type 'number'.

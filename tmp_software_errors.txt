@@ -1,0 +1,69 @@
+src/components/Navbar.tsx(13,11): error TS2339: Property 'mode' does not exist on type '{}'.
+src/components/Navbar.tsx(13,17): error TS2339: Property 'cycleMode' does not exist on type '{}'.
+src/components/Navbar.tsx(13,28): error TS2339: Property 'colorTheme' does not exist on type '{}'.
+src/components/Navbar.tsx(13,40): error TS2339: Property 'setColorTheme' does not exist on type '{}'.
+src/components/Navbar.tsx(14,11): error TS2339: Property 'user' does not exist on type '{}'.
+src/components/Navbar.tsx(14,17): error TS2339: Property 'signOut' does not exist on type '{}'.
+src/components/ProtectedRoute.tsx(5,11): error TS2339: Property 'user' does not exist on type '{}'.
+src/components/ProtectedRoute.tsx(5,17): error TS2339: Property 'loading' does not exist on type '{}'.
+src/contexts/AuthContext.tsx(4,21): error TS2554: Expected 1 arguments, but got 0.
+src/contexts/AuthContext.tsx(30,40): error TS2339: Property 'signup_domain' does not exist on type '{}'.
+src/contexts/AuthContext.tsx(33,17): error TS2339: Property 'visited_sites' does not exist on type '{}'.
+src/contexts/ThemeContext.tsx(3,22): error TS2554: Expected 1 arguments, but got 0.
+src/pages/community/CommunityList.tsx(11,11): error TS2339: Property 'user' does not exist on type '{}'.
+src/pages/community/CommunityList.tsx(32,59): error TS2362: The left-hand side of an arithmetic operation must be of type 'any', 'number', 'bigint' or an enum type.
+src/pages/community/CommunityList.tsx(32,65): error TS2363: The right-hand side of an arithmetic operation must be of type 'any', 'number', 'bigint' or an enum type.
+src/pages/community/CommunityView.tsx(9,11): error TS2339: Property 'user' does not exist on type '{}'.
+src/pages/community/CommunityWrite.tsx(10,11): error TS2339: Property 'user' does not exist on type '{}'.
+src/pages/ForgotPassword.tsx(7,11): error TS2339: Property 'resetPassword' does not exist on type '{}'.
+src/pages/ForgotPassword.tsx(31,8): error TS2741: Property 'description' is missing in type '{ title: string; }' but required in type '{ title: any; description: any; }'.
+src/pages/Home.tsx(33,8): error TS2739: Type '{}' is missing the following properties from type '{ title: any; description: any; }': title, description
+src/pages/Home.tsx(38,198): error TS2353: Object literal may only specify known properties, and ''--duration'' does not exist in type 'Properties<string | number, string & {}>'.
+src/pages/lectures/LectureDetail.tsx(10,11): error TS2339: Property 'user' does not exist on type '{}'.
+src/pages/lectures/LectureDetail.tsx(32,8): error TS2741: Property 'description' is missing in type '{ title: any; }' but required in type '{ title: any; description: any; }'.
+src/pages/lectures/LecturesHome.tsx(23,11): error TS2339: Property 'user' does not exist on type '{}'.
+src/pages/lectures/LecturesHome.tsx(71,75): error TS2322: Type 'string' is not assignable to type 'number'.
+src/pages/lectures/LectureWrite.tsx(10,11): error TS2339: Property 'user' does not exist on type '{}'.
+src/pages/lectures/LectureWrite.tsx(47,8): error TS2741: Property 'description' is missing in type '{ title: string; }' but required in type '{ title: any; description: any; }'.
+src/pages/Login.tsx(7,11): error TS2339: Property 'user' does not exist on type '{}'.
+src/pages/Login.tsx(7,17): error TS2339: Property 'signIn' does not exist on type '{}'.
+src/pages/Login.tsx(7,25): error TS2339: Property 'signInWithGoogle' does not exist on type '{}'.
+src/pages/Login.tsx(7,43): error TS2339: Property 'signInWithKakao' does not exist on type '{}'.
+src/pages/Login.tsx(41,8): error TS2741: Property 'description' is missing in type '{ title: string; }' but required in type '{ title: any; description: any; }'.
+src/pages/NotFound.tsx(7,8): error TS2741: Property 'description' is missing in type '{ title: string; }' but required in type '{ title: any; description: any; }'.
+src/pages/Playground.tsx(27,42): error TS2339: Property 'test' does not exist on type 'string | RegExp'.
+  Property 'test' does not exist on type 'string'.
+src/pages/Profile.tsx(6,11): error TS2339: Property 'user' does not exist on type '{}'.
+src/pages/Profile.tsx(6,17): error TS2339: Property 'signOut' does not exist on type '{}'.
+src/pages/Profile.tsx(24,8): error TS2741: Property 'description' is missing in type '{ title: string; }' but required in type '{ title: any; description: any; }'.
+src/pages/Register.tsx(14,11): error TS2339: Property 'signUp' does not exist on type '{}'.
+src/pages/Register.tsx(31,8): error TS2741: Property 'description' is missing in type '{ title: string; }' but required in type '{ title: any; description: any; }'.
+src/pages/workbook/WorkbookBehavioral.tsx(11,178): error TS2322: Type 'string' is not assignable to type 'number'.
+src/pages/workbook/WorkbookBehavioral.tsx(12,174): error TS2322: Type 'string' is not assignable to type 'number'.
+src/pages/workbook/WorkbookBehavioral.tsx(13,153): error TS2322: Type 'string' is not assignable to type 'number'.
+src/pages/workbook/WorkbookCreational.tsx(11,156): error TS2322: Type 'string' is not assignable to type 'number'.
+src/pages/workbook/WorkbookCreational.tsx(12,167): error TS2322: Type 'string' is not assignable to type 'number'.
+src/pages/workbook/WorkbookCreational.tsx(13,156): error TS2322: Type 'string' is not assignable to type 'number'.
+src/pages/workbook/WorkbookDetail.tsx(10,11): error TS2339: Property 'user' does not exist on type '{}'.
+src/pages/workbook/WorkbookDetail.tsx(32,8): error TS2741: Property 'description' is missing in type '{ title: any; }' but required in type '{ title: any; description: any; }'.
+src/pages/workbook/WorkbookHome.tsx(23,11): error TS2339: Property 'user' does not exist on type '{}'.
+src/pages/workbook/WorkbookHome.tsx(64,75): error TS2322: Type 'string' is not assignable to type 'number'.
+src/pages/workbook/WorkbookOop.tsx(11,213): error TS2322: Type 'string' is not assignable to type 'number'.
+src/pages/workbook/WorkbookOop.tsx(12,199): error TS2322: Type 'string' is not assignable to type 'number'.
+src/pages/workbook/WorkbookOop.tsx(13,183): error TS2322: Type 'string' is not assignable to type 'number'.
+src/pages/workbook/WorkbookPatternOverview.tsx(12,345): error TS2322: Type 'string' is not assignable to type 'number'.
+src/pages/workbook/WorkbookRefactoring.tsx(24,57): error TS2322: Type 'string' is not assignable to type 'number'.
+src/pages/workbook/WorkbookRefactoring.tsx(32,57): error TS2322: Type 'string' is not assignable to type 'number'.
+src/pages/workbook/WorkbookRequirements.tsx(12,145): error TS2322: Type 'string' is not assignable to type 'number'.
+src/pages/workbook/WorkbookRequirements.tsx(13,136): error TS2322: Type 'string' is not assignable to type 'number'.
+src/pages/workbook/WorkbookSdlc.tsx(12,258): error TS2322: Type 'string' is not assignable to type 'number'.
+src/pages/workbook/WorkbookSolid.tsx(17,57): error TS2322: Type 'string' is not assignable to type 'number'.
+src/pages/workbook/WorkbookSolid.tsx(18,144): error TS2322: Type 'string' is not assignable to type 'number'.
+src/pages/workbook/WorkbookStructural.tsx(11,183): error TS2322: Type 'string' is not assignable to type 'number'.
+src/pages/workbook/WorkbookStructural.tsx(12,175): error TS2322: Type 'string' is not assignable to type 'number'.
+src/pages/workbook/WorkbookStructural.tsx(13,190): error TS2322: Type 'string' is not assignable to type 'number'.
+src/pages/workbook/WorkbookTdd.tsx(11,287): error TS2322: Type 'string' is not assignable to type 'number'.
+src/pages/workbook/WorkbookTdd.tsx(12,149): error TS2322: Type 'string' is not assignable to type 'number'.
+src/pages/workbook/WorkbookUml.tsx(12,280): error TS2322: Type 'string' is not assignable to type 'number'.
+src/pages/workbook/WorkbookWrite.tsx(10,11): error TS2339: Property 'user' does not exist on type '{}'.
+src/pages/workbook/WorkbookWrite.tsx(47,8): error TS2741: Property 'description' is missing in type '{ title: string; }' but required in type '{ title: any; description: any; }'.
