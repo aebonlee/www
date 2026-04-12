@@ -1201,7 +1201,17 @@
   color: #fff;
 }
 
-/* ── Related Sites — Franchise / Pricing / Coupon Dark Mode ── */
+/* ── Related Sites — Site Cards & Franchise / Pricing / Coupon Dark Mode ── */
+[data-theme="dark"] .rs-site-card {
+    background: var(--bg-light-gray);
+    border-color: var(--border-medium);
+}
+
+[data-theme="dark"] .rs-site-card:hover {
+    border-color: var(--primary-blue);
+    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.3);
+}
+
 [data-theme="dark"] .rs-info-section {
     border-top-color: var(--border-medium);
 }
