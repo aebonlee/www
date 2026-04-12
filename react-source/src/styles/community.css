@@ -791,3 +791,287 @@
     border: 1px dashed var(--border-light);
     border-radius: var(--radius-sm);
 }
+
+/* ============================================
+   Related Sites — Franchise / Pricing / Coupon
+   ============================================ */
+
+/* ── Info Section (common) ── */
+.rs-info-section {
+    padding: 48px 0;
+    border-top: 1px solid var(--border-light);
+}
+
+.rs-info-section h2 {
+    font-size: 26px;
+    font-weight: 700;
+    color: var(--text-primary);
+    margin-bottom: 16px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.rs-info-section h2 .rs-icon {
+    font-size: 28px;
+}
+
+.rs-info-desc {
+    font-size: 16px;
+    color: var(--text-secondary);
+    line-height: 1.7;
+    margin-bottom: 28px;
+    max-width: 720px;
+}
+
+/* ── Info Features (bullet list) ── */
+.rs-info-features {
+    margin-bottom: 28px;
+}
+
+.rs-info-features h3 {
+    font-size: 16px;
+    font-weight: 600;
+    color: var(--text-primary);
+    margin-bottom: 10px;
+}
+
+.rs-info-features ul {
+    list-style: none;
+    padding: 0;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+}
+
+.rs-info-features ul li {
+    padding: 6px 16px;
+    border-radius: 20px;
+    font-size: 14px;
+    background: rgba(0, 70, 200, 0.06);
+    color: var(--primary-blue);
+    font-weight: 500;
+}
+
+/* ── Process Steps ── */
+.rs-process-steps {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    flex-wrap: wrap;
+    margin-bottom: 32px;
+}
+
+.rs-step {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.rs-step-num {
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+    background: var(--primary-blue);
+    color: #fff;
+    font-size: 14px;
+    font-weight: 700;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+}
+
+.rs-step-text {
+    font-size: 14px;
+    font-weight: 500;
+    color: var(--text-primary);
+}
+
+.rs-step-arrow {
+    color: var(--text-light);
+    font-size: 16px;
+}
+
+/* ── CTA Button ── */
+.rs-cta-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 14px 32px;
+    border-radius: 50px;
+    background: var(--primary-gradient);
+    color: #fff;
+    font-size: 16px;
+    font-weight: 600;
+    text-decoration: none;
+    border: none;
+    cursor: pointer;
+    transition: transform 0.2s, box-shadow 0.2s;
+    box-shadow: 0 4px 14px rgba(0, 70, 200, 0.3);
+}
+
+.rs-cta-btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(0, 70, 200, 0.4);
+}
+
+/* ── Pricing Grid ── */
+.rs-pricing-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 24px;
+    margin-bottom: 20px;
+}
+
+.rs-pricing-card {
+    background: var(--bg-white);
+    border: 1px solid var(--border-light);
+    border-radius: var(--radius-lg);
+    padding: 32px 24px;
+    text-align: center;
+    position: relative;
+    transition: transform 0.3s, box-shadow 0.3s;
+}
+
+.rs-pricing-card:hover {
+    transform: translateY(-4px);
+    box-shadow: var(--shadow-xl);
+}
+
+.rs-pricing-card.recommended {
+    border-color: var(--primary-blue);
+    border-width: 2px;
+    transform: scale(1.03);
+}
+
+.rs-pricing-card.recommended:hover {
+    transform: scale(1.03) translateY(-4px);
+}
+
+.rs-pricing-badge {
+    position: absolute;
+    top: -12px;
+    left: 50%;
+    transform: translateX(-50%);
+    padding: 4px 20px;
+    border-radius: 20px;
+    background: var(--primary-blue);
+    color: #fff;
+    font-size: 13px;
+    font-weight: 700;
+    white-space: nowrap;
+}
+
+.rs-pricing-name {
+    font-size: 20px;
+    font-weight: 700;
+    color: var(--text-primary);
+    margin-bottom: 8px;
+    margin-top: 8px;
+}
+
+.rs-pricing-price {
+    font-size: 28px;
+    font-weight: 800;
+    color: var(--primary-blue);
+    margin-bottom: 4px;
+}
+
+.rs-pricing-sites {
+    font-size: 14px;
+    color: var(--text-light);
+    margin-bottom: 20px;
+}
+
+.rs-pricing-features {
+    list-style: none;
+    padding: 0;
+    margin-bottom: 24px;
+}
+
+.rs-pricing-features li {
+    padding: 8px 0;
+    font-size: 14px;
+    color: var(--text-secondary);
+    border-bottom: 1px solid var(--border-light);
+}
+
+.rs-pricing-features li:last-child {
+    border-bottom: none;
+}
+
+.rs-pricing-annual {
+    text-align: center;
+    font-size: 14px;
+    color: var(--text-light);
+    margin-bottom: 32px;
+    font-style: italic;
+}
+
+/* ── Coupon Grid ── */
+.rs-coupon-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 24px;
+    margin-bottom: 28px;
+}
+
+.rs-coupon-card {
+    background: var(--bg-white);
+    border: 1px solid var(--border-light);
+    border-radius: var(--radius-lg);
+    padding: 28px 24px;
+    transition: transform 0.3s, box-shadow 0.3s;
+}
+
+.rs-coupon-card:hover {
+    transform: translateY(-4px);
+    box-shadow: var(--shadow-xl);
+}
+
+.rs-coupon-icon {
+    font-size: 36px;
+    margin-bottom: 12px;
+}
+
+.rs-coupon-name {
+    font-size: 18px;
+    font-weight: 700;
+    color: var(--text-primary);
+    margin-bottom: 8px;
+}
+
+.rs-coupon-desc {
+    font-size: 14px;
+    color: var(--text-secondary);
+    line-height: 1.6;
+}
+
+/* ── Responsive ── */
+@media (max-width: 1024px) {
+    .rs-pricing-grid {
+        grid-template-columns: 1fr;
+        max-width: 400px;
+        margin-left: auto;
+        margin-right: auto;
+    }
+    .rs-pricing-card.recommended {
+        transform: scale(1);
+    }
+    .rs-pricing-card.recommended:hover {
+        transform: translateY(-4px);
+    }
+}
+
+@media (max-width: 768px) {
+    .rs-coupon-grid {
+        grid-template-columns: 1fr;
+    }
+    .rs-process-steps {
+        gap: 6px;
+    }
+    .rs-info-section h2 {
+        font-size: 22px;
+    }
+}

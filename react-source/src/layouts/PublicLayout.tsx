@@ -47,6 +47,7 @@ const OrderHistory = lazy(() => import('../pages/OrderHistory'));
 const Syllabus = lazy(() => import('../pages/Syllabus'));
 const SyllabusWrite = lazy(() => import('../pages/SyllabusWrite'));
 const SyllabusDetail = lazy(() => import('../pages/SyllabusDetail'));
+const RelatedSitesPage = lazy(() => import('../pages/RelatedSitesPage'));
 const NotFound = lazy(() => import('../pages/NotFound'));
 
 const Loading = () => (
@@ -100,6 +101,7 @@ const PublicLayout = () => {
             <Route path="/community/gallery/edit/:id" element={<AdminGuard><GalleryWrite /></AdminGuard>} />
             <Route path="/blog" element={<Navigate to="/community/blog" replace />} />
             <Route path="/contact" element={<Contact />} />
+            <Route path="/related-sites" element={<RelatedSitesPage />} />
             {/* Shop */}
             <Route path="/shop" element={<Shop />} />
             <Route path="/shop/product/new" element={<AdminGuard><ProductWrite /></AdminGuard>} />

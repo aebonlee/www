@@ -1200,3 +1200,38 @@
   border-color: var(--primary-blue);
   color: #fff;
 }
+
+/* ── Related Sites — Franchise / Pricing / Coupon Dark Mode ── */
+[data-theme="dark"] .rs-info-section {
+    border-top-color: var(--border-medium);
+}
+
+[data-theme="dark"] .rs-info-features ul li {
+    background: rgba(74, 143, 231, 0.12);
+}
+
+[data-theme="dark"] .rs-pricing-card {
+    background: var(--bg-light-gray);
+    border-color: var(--border-medium);
+}
+
+[data-theme="dark"] .rs-pricing-card.recommended {
+    border-color: var(--primary-blue);
+}
+
+[data-theme="dark"] .rs-pricing-features li {
+    border-bottom-color: var(--border-medium);
+}
+
+[data-theme="dark"] .rs-coupon-card {
+    background: var(--bg-light-gray);
+    border-color: var(--border-medium);
+}
+
+[data-theme="dark"] .rs-cta-btn {
+    box-shadow: 0 4px 14px rgba(74, 143, 231, 0.3);
+}
+
+[data-theme="dark"] .rs-cta-btn:hover {
+    box-shadow: 0 6px 20px rgba(74, 143, 231, 0.4);
+}

@@ -395,6 +395,36 @@ export const translations = {
       delete: '삭제',
       deleteConfirm: '댓글을 삭제하시겠습니까?',
       loginRequired: '댓글을 작성하려면 로그인이 필요합니다.'
+    },
+    relatedSites: {
+      pageTitle: 'DreamIT 관련 사이트',
+      pageSubtitle: 'DreamIT Biz가 운영하는 교육·AI·비즈니스 사이트를 만나보세요',
+      franchiseTitle: '사이트 분양 안내',
+      franchiseDesc: 'DreamIT 교육 사이트를 나만의 브랜드로 운영하세요. 교육 기관, 기업 교육 담당자, 개인 강사를 위한 맞춤형 사이트 분양 서비스입니다.',
+      franchiseTarget: '분양 대상',
+      franchiseTargetList: ['교육 기관', '기업 교육 담당자', '개인 강사'],
+      franchiseIncludes: '포함 내역',
+      franchiseIncludesList: ['사이트 구축', '*.dreamitbiz.com 도메인', '콘텐츠 초기 셋업', '기술 지원'],
+      franchiseProcess: '분양 절차',
+      franchiseSteps: ['문의', '상담', '계약', '구축', '오픈'],
+      franchiseApply: '분양 신청하기',
+      pricingTitle: '비용 안내',
+      pricingAnnual: '연간 결제 시 2개월 무료 (약 17% 할인)',
+      pricingApply: '신청하기',
+      plans: [
+        { name: '기본형', nameEn: 'Basic', price: '월 50,000원', sites: '사이트 1개', features: ['기본 템플릿', '이메일 지원'] },
+        { name: '표준형', nameEn: 'Standard', price: '월 100,000원', sites: '사이트 3개', features: ['커스텀 디자인', '우선 지원'], recommended: true },
+        { name: '프리미엄형', nameEn: 'Premium', price: '월 200,000원', sites: '무제한', features: ['맞춤 개발', '전담 매니저'] }
+      ],
+      recommended: '추천',
+      couponTitle: '쿠폰 발행 안내',
+      coupons: [
+        { name: '할인 쿠폰', desc: '분양 비용 10~30% 할인 — 신규 가입 및 프로모션 기간 발행' },
+        { name: '7일 무료 체험 쿠폰', desc: '수강 과정 혜택 — 사이트 전체 기능 7일 무료 이용' }
+      ],
+      couponProcess: '발행 절차',
+      couponSteps: ['회원가입', '쿠폰 신청', '자동 발행', '결제 시 적용'],
+      couponApply: '쿠폰 받기'
     }
   },
   en: {
@@ -792,6 +822,36 @@ export const translations = {
       delete: 'Delete',
       deleteConfirm: 'Are you sure you want to delete this comment?',
       loginRequired: 'Please log in to leave a comment.'
+    },
+    relatedSites: {
+      pageTitle: 'DreamIT Related Sites',
+      pageSubtitle: 'Explore education, AI, and business sites operated by DreamIT Biz',
+      franchiseTitle: 'Site Franchise',
+      franchiseDesc: 'Run a DreamIT education site under your own brand. A tailored site franchise service for educational institutions, corporate trainers, and individual instructors.',
+      franchiseTarget: 'Target Audience',
+      franchiseTargetList: ['Educational Institutions', 'Corporate Training Managers', 'Individual Instructors'],
+      franchiseIncludes: 'What\'s Included',
+      franchiseIncludesList: ['Site Development', '*.dreamitbiz.com Domain', 'Initial Content Setup', 'Technical Support'],
+      franchiseProcess: 'Process',
+      franchiseSteps: ['Inquiry', 'Consultation', 'Contract', 'Build', 'Launch'],
+      franchiseApply: 'Apply for Franchise',
+      pricingTitle: 'Pricing',
+      pricingAnnual: '2 months free with annual billing (~17% off)',
+      pricingApply: 'Apply',
+      plans: [
+        { name: 'Basic', nameEn: 'Basic', price: '₩50,000/mo', sites: '1 Site', features: ['Basic Template', 'Email Support'] },
+        { name: 'Standard', nameEn: 'Standard', price: '₩100,000/mo', sites: '3 Sites', features: ['Custom Design', 'Priority Support'], recommended: true },
+        { name: 'Premium', nameEn: 'Premium', price: '₩200,000/mo', sites: 'Unlimited', features: ['Custom Development', 'Dedicated Manager'] }
+      ],
+      recommended: 'Recommended',
+      couponTitle: 'Coupon Information',
+      coupons: [
+        { name: 'Discount Coupon', desc: '10~30% off franchise fees — Issued during sign-up and promotion periods' },
+        { name: '7-Day Free Trial', desc: 'Course benefits — Free access to all site features for 7 days' }
+      ],
+      couponProcess: 'How to Get',
+      couponSteps: ['Sign Up', 'Request Coupon', 'Auto-Issued', 'Apply at Checkout'],
+      couponApply: 'Get Coupon'
     }
   }
 };
