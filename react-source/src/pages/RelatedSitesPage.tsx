@@ -170,6 +170,24 @@ const RelatedSitesPage = () => {
       {/* Site Groups */}
       <section style={{ padding: '60px 0' }}>
         <div className="container">
+
+          {/* Paid Service Notice */}
+          <div className="rs-paid-notice" data-aos="fade-up">
+            <div className="rs-paid-notice-header">
+              <span className="rs-paid-notice-icon">💳</span>
+              <h2>{rs.paidNoticeTitle}</h2>
+            </div>
+            <p className="rs-paid-notice-desc">{rs.paidNoticeDesc}</p>
+            <ul className="rs-paid-notice-list">
+              {rs.paidNoticeItems?.map((item: string, i: number) => (
+                <li key={i}>{item}</li>
+              ))}
+            </ul>
+            <a href="#pricing-section" className="rs-paid-notice-link">
+              {rs.viewPricing} ↓
+            </a>
+          </div>
+
           {siteGroups.map((group, gi) => (
             <div key={gi} style={{ marginBottom: 56 }} data-aos="fade-up" data-aos-delay={gi * 60}>
               <h2 style={{ fontSize: 22, fontWeight: 700, color: 'var(--text-primary)', marginBottom: 6 }}>
@@ -189,7 +207,10 @@ const RelatedSitesPage = () => {
                   >
                     <div className="rs-site-emoji">{site.emoji}</div>
                     <div className="rs-site-info">
-                      <div className="rs-site-name">{site.name}</div>
+                      <div className="rs-site-name">
+                        {site.name}
+                        <span className="rs-paid-badge">{rs.paidBadge}</span>
+                      </div>
                       <div className="rs-site-desc">{language === 'ko' ? site.ko : site.en}</div>
                     </div>
                   </a>
@@ -246,7 +267,7 @@ const RelatedSitesPage = () => {
           </div>
 
           {/* B. 비용 안내 */}
-          <div className="rs-info-section" data-aos="fade-up">
+          <div id="pricing-section" className="rs-info-section" data-aos="fade-up">
             <h2>
               <span className="rs-icon">💰</span>
               {rs.pricingTitle}

@@ -399,6 +399,11 @@ export const translations = {
     relatedSites: {
       pageTitle: 'DreamIT 관련 사이트',
       pageSubtitle: 'DreamIT Biz가 운영하는 교육·AI·비즈니스 사이트를 만나보세요',
+      paidNoticeTitle: '유료 교육 서비스 안내',
+      paidNoticeDesc: '아래 사이트들은 DreamIT Biz에서 운영하는 유료 교육 플랫폼입니다. 각 사이트별 강좌 수강, 콘텐츠 이용, 자료 다운로드 시 이용료가 발생합니다. 요금제 및 결제 방법은 하단의 비용 안내를 참고하시거나, edu-hub에서 통합 결제하실 수 있습니다.',
+      paidNoticeItems: ['사이트별 월 구독 또는 개별 강좌 결제', '통합 결제는 edu-hub.dreamitbiz.com에서 가능', '신규 가입 시 7일 무료 체험 쿠폰 제공', '연간 결제 시 약 17% 할인 혜택'],
+      paidBadge: '유료',
+      viewPricing: '요금제 보기',
       franchiseTitle: '사이트 분양 안내',
       franchiseDesc: 'DreamIT 교육 사이트를 나만의 브랜드로 운영하세요. 교육 기관, 기업 교육 담당자, 개인 강사를 위한 맞춤형 사이트 분양 서비스입니다.',
       franchiseTarget: '분양 대상',
@@ -826,6 +831,11 @@ export const translations = {
     relatedSites: {
       pageTitle: 'DreamIT Related Sites',
       pageSubtitle: 'Explore education, AI, and business sites operated by DreamIT Biz',
+      paidNoticeTitle: 'Paid Education Services',
+      paidNoticeDesc: 'The sites listed below are paid educational platforms operated by DreamIT Biz. Fees apply for course enrollment, content access, and material downloads. Please refer to the pricing section below or use edu-hub for unified payment.',
+      paidNoticeItems: ['Monthly subscription or per-course payment', 'Unified payment available at edu-hub.dreamitbiz.com', '7-day free trial coupon for new sign-ups', '~17% discount with annual billing'],
+      paidBadge: 'Paid',
+      viewPricing: 'View Pricing',
       franchiseTitle: 'Site Franchise',
       franchiseDesc: 'Run a DreamIT education site under your own brand. A tailored site franchise service for educational institutions, corporate trainers, and individual instructors.',
       franchiseTarget: 'Target Audience',

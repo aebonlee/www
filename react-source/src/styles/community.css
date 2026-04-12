@@ -796,6 +796,93 @@
    Related Sites — Franchise / Pricing / Coupon
    ============================================ */
 
+/* ── Paid Service Notice ── */
+.rs-paid-notice {
+    background: linear-gradient(135deg, rgba(0, 70, 200, 0.04) 0%, rgba(0, 70, 200, 0.08) 100%);
+    border: 1px solid rgba(0, 70, 200, 0.15);
+    border-radius: var(--radius-lg);
+    padding: 32px;
+    margin-bottom: 48px;
+}
+
+.rs-paid-notice-header {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 12px;
+}
+
+.rs-paid-notice-header h2 {
+    font-size: 20px;
+    font-weight: 700;
+    color: var(--primary-blue);
+    margin: 0;
+}
+
+.rs-paid-notice-icon {
+    font-size: 24px;
+}
+
+.rs-paid-notice-desc {
+    font-size: 15px;
+    color: var(--text-secondary);
+    line-height: 1.7;
+    margin-bottom: 16px;
+}
+
+.rs-paid-notice-list {
+    list-style: none;
+    padding: 0;
+    margin: 0 0 20px 0;
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 8px;
+}
+
+.rs-paid-notice-list li {
+    font-size: 14px;
+    color: var(--text-secondary);
+    padding-left: 20px;
+    position: relative;
+}
+
+.rs-paid-notice-list li::before {
+    content: '✓';
+    position: absolute;
+    left: 0;
+    color: var(--primary-blue);
+    font-weight: 700;
+}
+
+.rs-paid-notice-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    font-size: 15px;
+    font-weight: 600;
+    color: var(--primary-blue);
+    text-decoration: none;
+    transition: opacity 0.2s;
+}
+
+.rs-paid-notice-link:hover {
+    opacity: 0.8;
+}
+
+/* ── Paid Badge ── */
+.rs-paid-badge {
+    display: inline-block;
+    margin-left: 8px;
+    padding: 1px 8px;
+    border-radius: 10px;
+    font-size: 11px;
+    font-weight: 700;
+    background: rgba(234, 88, 12, 0.1);
+    color: #EA580C;
+    vertical-align: middle;
+    line-height: 18px;
+}
+
 /* ── Site Card Grid ── */
 .rs-site-grid {
     display: grid;
@@ -855,6 +942,9 @@
 
 @media (max-width: 768px) {
     .rs-site-grid {
+        grid-template-columns: 1fr;
+    }
+    .rs-paid-notice-list {
         grid-template-columns: 1fr;
     }
 }
