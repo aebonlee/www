@@ -15,18 +15,22 @@ function toSnakeKey(key: string): string {
   return key.replace(/[A-Z]/g, (c) => '_' + c.toLowerCase());
 }
 
-function toCamel(row: Record<string, unknown> | null): Record<string, unknown> | null {
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+function toCamel(row: Record<string, any> | null): Record<string, any> | null {
   if (!row) return null;
-  const out: Record<string, unknown> = {};
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  const out: Record<string, any> = {};
   for (const [k, v] of Object.entries(row)) {
     out[toCamelKey(k)] = v;
   }
   return out;
 }
 
-function toSnake(obj: Record<string, unknown> | null): Record<string, unknown> | null {
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+function toSnake(obj: Record<string, any> | null): Record<string, any> | null {
   if (!obj) return null;
-  const out: Record<string, unknown> = {};
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  const out: Record<string, any> = {};
   for (const [k, v] of Object.entries(obj)) {
     out[toSnakeKey(k)] = v;
   }
@@ -46,7 +50,7 @@ export async function getBoardPosts() {
     console.error('getBoardPosts error:', error);
     return [];
   }
-  return (data || []).map(toCamel);
+  return (data || []).map(toCamel).filter(Boolean);
 }
 
 export async function getBoardPost(id: number | string) {
@@ -97,7 +101,8 @@ export async function createBoardPost({ category, title, content, author, author
   return toCamel(data);
 }
 
-export async function updateBoardPost(id: number | string, updates: Record<string, unknown>) {
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+export async function updateBoardPost(id: number | string, updates: Record<string, any>) {
   const client = getSupabase();
   if (!client) return null;
   const snaked = toSnake(updates)!;
@@ -157,7 +162,7 @@ export async function getBlogPosts() {
     console.error('getBlogPosts error:', error);
     return [];
   }
-  return (data || []).map(toCamel);
+  return (data || []).map(toCamel).filter(Boolean);
 }
 
 export async function getBlogPost(id: number | string) {
@@ -286,7 +291,7 @@ export async function getGalleryItems() {
     console.error('getGalleryItems error:', error);
     return [];
   }
-  return (data || []).map(toCamel);
+  return (data || []).map(toCamel).filter(Boolean);
 }
 
 export async function getGalleryItem(id: number | string) {
@@ -399,7 +404,7 @@ export async function getSyllabusPosts() {
     console.error('getSyllabusPosts error:', error);
     return [];
   }
-  return (data || []).map(toCamel);
+  return (data || []).map(toCamel).filter(Boolean);
 }
 
 export async function getSyllabusPost(id: number | string) {
@@ -454,7 +459,8 @@ export async function createSyllabusPost({ category, title, content, author, aut
   return toCamel(data);
 }
 
-export async function updateSyllabusPost(id: number | string, updates: Record<string, unknown>) {
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+export async function updateSyllabusPost(id: number | string, updates: Record<string, any>) {
   const client = getSupabase();
   if (!client) return null;
   const snaked = toSnake(updates)!;

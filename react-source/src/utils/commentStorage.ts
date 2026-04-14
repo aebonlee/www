@@ -9,9 +9,11 @@ function toCamelKey(key: string): string {
   return key.replace(/_([a-z])/g, (_, c: string) => c.toUpperCase());
 }
 
-function toCamel(row: Record<string, unknown> | null): Record<string, unknown> | null {
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+function toCamel(row: Record<string, any> | null): Record<string, any> | null {
   if (!row) return null;
-  const out: Record<string, unknown> = {};
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  const out: Record<string, any> = {};
   for (const [k, v] of Object.entries(row)) {
     out[toCamelKey(k)] = v;
   }

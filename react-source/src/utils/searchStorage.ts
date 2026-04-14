@@ -9,9 +9,11 @@ function toCamelKey(key: string): string {
   return key.replace(/_([a-z])/g, (_, c: string) => c.toUpperCase());
 }
 
-function toCamel(row: Record<string, unknown> | null): Record<string, unknown> | null {
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+function toCamel(row: Record<string, any> | null): Record<string, any> | null {
   if (!row) return null;
-  const out: Record<string, unknown> = {};
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  const out: Record<string, any> = {};
   for (const [k, v] of Object.entries(row)) {
     out[toCamelKey(k)] = v;
   }
@@ -19,9 +21,12 @@ function toCamel(row: Record<string, unknown> | null): Record<string, unknown> |
 }
 
 interface SearchResults {
-  blog: Record<string, unknown>[];
-  board: Record<string, unknown>[];
-  gallery: Record<string, unknown>[];
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  blog: Record<string, any>[];
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  board: Record<string, any>[];
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  gallery: Record<string, any>[];
 }
 
 /**
@@ -57,8 +62,8 @@ export async function searchAll(query: string): Promise<SearchResults> {
   ]);
 
   return {
-    blog: (blogRes.data || []).map(toCamel).filter(Boolean) as Record<string, unknown>[],
-    board: (boardRes.data || []).map(toCamel).filter(Boolean) as Record<string, unknown>[],
-    gallery: (galleryRes.data || []).map(toCamel).filter(Boolean) as Record<string, unknown>[]
+    blog: (blogRes.data || []).map(toCamel).filter(Boolean) as Record<string, any>[],
+    board: (boardRes.data || []).map(toCamel).filter(Boolean) as Record<string, any>[],
+    gallery: (galleryRes.data || []).map(toCamel).filter(Boolean) as Record<string, any>[]
   };
 }

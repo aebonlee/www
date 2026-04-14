@@ -4,6 +4,7 @@ import { LanguageProvider } from './contexts/LanguageContext';
 import { CartProvider } from './contexts/CartContext';
 import { AuthProvider } from './contexts/AuthContext';
 import { ToastProvider } from './contexts/ToastContext';
+import ErrorBoundary from './components/ErrorBoundary';
 import AdminGuard from './components/AdminGuard';
 import AdminLayout from './components/admin/AdminLayout';
 import PublicLayout from './layouts/PublicLayout';
@@ -17,6 +18,7 @@ const PageTracker = () => {
 
 function App() {
   return (
+    <ErrorBoundary>
     <ThemeProvider>
       <LanguageProvider>
         <AuthProvider>
@@ -36,6 +38,7 @@ function App() {
         </AuthProvider>
       </LanguageProvider>
     </ThemeProvider>
+    </ErrorBoundary>
   );
 }
 
