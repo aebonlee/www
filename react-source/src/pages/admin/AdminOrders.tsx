@@ -72,12 +72,15 @@ const AdminOrders = () => {
   const summary = useMemo(() => {
     const paid = orders.filter(o => o.payment_status === 'paid');
     const cancelled = orders.filter(o => o.payment_status === 'cancelled');
+    const refunded = orders.filter(o => o.payment_status === 'refunded');
     return {
       totalOrders: orders.length,
       paidCount: paid.length,
       paidAmount: paid.reduce((s, o) => s + (Number(o.total_amount) || 0), 0),
       cancelledCount: cancelled.length,
       cancelledAmount: cancelled.reduce((s, o) => s + (Number(o.total_amount) || 0), 0),
+      refundedCount: refunded.length,
+      refundedAmount: refunded.reduce((s, o) => s + (Number(o.total_amount) || 0), 0),
     };
   }, [orders]);
 
@@ -235,6 +238,10 @@ const AdminOrders = () => {
         <div className="admin-order-summary-card cancelled">
           <span className="admin-order-summary-label">취소</span>
           <span className="admin-order-summary-value">{summary.cancelledCount}건 / {summary.cancelledAmount.toLocaleString()}원</span>
+        </div>
+        <div className="admin-order-summary-card refunded">
+          <span className="admin-order-summary-label">환불</span>
+          <span className="admin-order-summary-value">{summary.refundedCount}건 / {summary.refundedAmount.toLocaleString()}원</span>
         </div>
       </div>
 

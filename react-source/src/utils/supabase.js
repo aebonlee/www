@@ -62,7 +62,8 @@ export const createOrder = async (orderData) => {
     user_name: orderData.user_name,
     user_phone: orderData.user_phone,
     total_amount: orderData.total_amount,
-    payment_method: orderData.payment_method
+    payment_method: orderData.payment_method,
+    site_domain: typeof window !== 'undefined' ? window.location.hostname : null
   };
   if (orderData.user_id) orderPayload.user_id = orderData.user_id;
 
@@ -155,33 +156,19 @@ export const updateOrderStatus = async (orderId, status, paymentId, cancelReason
     updatePayload.cancelled_at = new Date().toISOString();
     if (cancelReason) updatePayload.cancel_reason = cancelReason;
   }
-
-  // Build full payload with optional columns (may not exist in DB yet)
-  const extras = {};
-  if (paymentId) extras.portone_payment_id = paymentId;
-
-  let result = null;
-
-  try {
-    const { data, error } = await client
-      .from('orders')
-      .update({ ...updatePayload, ...extras })
-      .eq('id', orderId)
-      .select();
-
-    if (error) throw error;
-    result = data;
-  } catch {
-    // Fallback: update without optional columns
-    const { data, error } = await client
-      .from('orders')
-      .update(updatePayload)
-      .eq('id', orderId)
-      .select();
-
-    if (error) throw error;
-    result = data;
+  if (status === 'refunded') {
+    updatePayload.cancelled_at = new Date().toISOString();
+    if (cancelReason) updatePayload.cancel_reason = cancelReason;
   }
+  if (paymentId) updatePayload.portone_payment_id = paymentId;
+
+  const { data: result, error } = await client
+    .from('orders')
+    .update(updatePayload)
+    .eq('id', orderId)
+    .select();
+
+  if (error) throw error;
 
   if (!result || result.length === 0) {
     throw new Error('UPDATE_NO_ROWS: 주문 업데이트 권한이 없거나 해당 주문을 찾을 수 없습니다. Supabase orders 테이블의 UPDATE RLS 정책을 확인하세요.');
