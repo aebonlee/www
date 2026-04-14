@@ -65,7 +65,8 @@ const Navbar = () => {
         { path: '/services/web-development', label: t('services.webDev') },
         { path: '/services/web-hosting', label: t('services.webHosting') },
         { path: '/services/design', label: t('services.design') },
-        { path: '/portfolio', label: t('services.portfolio') }
+        { path: '/portfolio', label: t('services.portfolio') },
+        { path: '/related-sites', label: t('nav.relatedSites') }
       ]
     },
     { path: '/rnd', label: t('nav.rnd'), activePath: '/rnd' },

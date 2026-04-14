@@ -117,30 +117,11 @@ const siteGroups = [
     ],
   },
   {
-    label: { ko: '로봇/IoT/BI', en: 'Robot/IoT/BI' },
-    desc: { ko: '로봇 공학, IoT, 비즈니스 인텔리전스', en: 'Robotics, IoT, and business intelligence' },
-    sites: [
-      { name: 'pbirobot', url: 'https://pbirobot.dreamitbiz.com', emoji: '🦾', ko: 'PBI 로봇 — Power BI 기반 로봇·IoT 데이터 시각화 및 분석 교육', en: 'PBI Robot — Power BI based robot/IoT data visualization and analytics' },
-      { name: 'pbi', url: 'https://pbi.dreamitbiz.com', emoji: '📈', ko: 'Power BI — Microsoft Power BI 대시보드 제작, DAX, 데이터 분석 교육', en: 'Power BI — Microsoft Power BI dashboards, DAX, and data analytics' },
-      { name: 'koreait', url: 'https://koreait.dreamitbiz.com', emoji: '🏢', ko: 'Korea IT — 국내 IT 기업·산업 동향, 채용 정보, 기술 트렌드 소개', en: 'Korea IT — Korean IT industry trends, hiring info, and tech trends' },
-    ],
-  },
-  {
     label: { ko: '커리어/취업', en: 'Career/Jobs' },
     desc: { ko: 'IT 취업 및 경력 개발 지원', en: 'IT career and job development support' },
     sites: [
       { name: 'jobpath', url: 'https://jobpath.dreamitbiz.com', emoji: '🛤️', ko: '잡패스 — IT 직무별 커리어 로드맵, 필요 역량, 학습 경로 안내', en: 'JobPath — IT career roadmaps by role, required skills, and learning paths' },
       { name: 'instructor', url: 'https://instructor.dreamitbiz.com', emoji: '🎓', ko: '강사 — DreamIT 강사 프로필, 전문 분야, 강의 이력 소개', en: 'Instructor — DreamIT instructor profiles, expertise, and lecture history' },
-    ],
-  },
-  {
-    label: { ko: '포트폴리오/개인', en: 'Portfolio/Personal' },
-    desc: { ko: '개인 포트폴리오 사이트', en: 'Personal portfolio sites' },
-    sites: [
-      { name: 'aebon', url: 'https://aebon.dreamitbiz.com', emoji: '👤', ko: 'Aebon — 대표 이에본 박사 개인 포트폴리오 및 연구 활동 소개', en: 'Aebon — Dr. Aebon Lee\'s personal portfolio and research activities' },
-      { name: 'jdy', url: 'https://jdy.dreamitbiz.com', emoji: '👤', ko: 'JDY — 개인 포트폴리오 사이트', en: 'JDY — Personal portfolio site' },
-      { name: 'wonjunjang', url: 'https://wonjunjang.dreamitbiz.com', emoji: '👤', ko: '원준장 — 개인 포트폴리오 사이트', en: 'Wonjunjang — Personal portfolio site' },
-      { name: 'hohai', url: 'https://hohai.dreamitbiz.com', emoji: '👤', ko: '호하이 — 개인 포트폴리오 사이트', en: 'Hohai — Personal portfolio site' },
     ],
   },
 ];

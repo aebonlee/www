@@ -11,6 +11,7 @@ export const translations = {
       about: '회사소개',
       contact: '연락처',
       rnd: '연구개발',
+      relatedSites: '관련 사이트',
       // legacy
       services: 'IT서비스',
       blog: '블로그'
@@ -444,6 +445,7 @@ export const translations = {
       about: 'About',
       contact: 'Contact',
       rnd: 'R&D',
+      relatedSites: 'Related Sites',
       // legacy
       services: 'IT Services',
       blog: 'Blog'
