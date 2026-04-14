@@ -59,33 +59,33 @@ export async function getAllUsers() {
   return data || [];
 }
 
-/** 전체 주문 목록 (order_items 포함) */
+/** 전체 주문 목록 (www orders + jobpath forjob_orders 통합) */
 export async function getAllOrders() {
   const client = getSupabase();
   if (!client) return [];
-  const { data, error } = await client
-    .from('orders')
-    .select('*, order_items(*)')
-    .order('created_at', { ascending: false });
-  if (error) {
-    console.error('getAllOrders error:', error);
-    return [];
-  }
-  return data || [];
+  const [wwwRes, jobpathRes] = await Promise.all([
+    client.from('orders').select('*, order_items(*)').order('created_at', { ascending: false }),
+    client.from('forjob_orders').select('*').order('created_at', { ascending: false }),
+  ]);
+  if (wwwRes.error) console.error('getAllOrders(www) error:', wwwRes.error);
+  if (jobpathRes.error) console.error('getAllOrders(jobpath) error:', jobpathRes.error);
+  const wwwOrders = (wwwRes.data || []).map(o => ({ ...o, site: 'www' }));
+  const jobpathOrders = (jobpathRes.data || []).map(o => ({ ...o, site: 'jobpath' }));
+  return [...wwwOrders, ...jobpathOrders].sort((a, b) => new Date(b.created_at).getTime() - new Date(a.created_at).getTime());
 }
 
-/** 결제 통계 (결제완료/취소/환불 건수 + 금액) */
+/** 결제 통계 (www + jobpath 통합, 결제완료/취소/환불 건수 + 금액) */
 export async function getPaymentStats() {
   const client = getSupabase();
-  if (!client) return { paidCount: 0, totalAmount: 0, cancelledCount: 0, cancelledAmount: 0, refundedCount: 0, refundedAmount: 0 };
-  const { data, error } = await client
-    .from('orders')
-    .select('total_amount, payment_status');
-  if (error) {
-    console.error('getPaymentStats error:', error);
-    return { paidCount: 0, totalAmount: 0, cancelledCount: 0, cancelledAmount: 0, refundedCount: 0, refundedAmount: 0 };
-  }
-  const rows = data || [];
+  const empty = { paidCount: 0, totalAmount: 0, cancelledCount: 0, cancelledAmount: 0, refundedCount: 0, refundedAmount: 0 };
+  if (!client) return empty;
+  const [wwwRes, jobpathRes] = await Promise.all([
+    client.from('orders').select('total_amount, payment_status'),
+    client.from('forjob_orders').select('total_amount, payment_status'),
+  ]);
+  if (wwwRes.error) console.error('getPaymentStats(www) error:', wwwRes.error);
+  if (jobpathRes.error) console.error('getPaymentStats(jobpath) error:', jobpathRes.error);
+  const rows = [...(wwwRes.data || []), ...(jobpathRes.data || [])];
   const paid = rows.filter(r => r.payment_status === 'paid');
   const cancelled = rows.filter(r => r.payment_status === 'cancelled');
   const refunded = rows.filter(r => r.payment_status === 'refunded');

@@ -133,7 +133,7 @@ export const getOrderByNumber = async (orderNumber) => {
  * @param {string} [paymentId] - portone payment ID
  * @param {string} [cancelReason] - reason for cancellation
  */
-export const updateOrderStatus = async (orderId, status, paymentId, cancelReason) => {
+export const updateOrderStatus = async (orderId, status, paymentId, cancelReason, tableName = 'orders') => {
   const client = getSupabase();
 
   if (!client) {
@@ -163,7 +163,7 @@ export const updateOrderStatus = async (orderId, status, paymentId, cancelReason
   if (paymentId) updatePayload.portone_payment_id = paymentId;
 
   const { data: result, error } = await client
-    .from('orders')
+    .from(tableName)
     .update(updatePayload)
     .eq('id', orderId)
     .select();

@@ -27,10 +27,11 @@ const AdminOrders = () => {
 
   useEffect(() => { load(); }, []);
 
-  const handleStatusChange = async (orderId, newStatus, memo = '') => {
+  const handleStatusChange = async (orderId, newStatus, memo = '', site = 'www') => {
     setUpdating(true);
     try {
-      await updateOrderStatus(orderId, newStatus, null, memo);
+      const table = site === 'jobpath' ? 'forjob_orders' : 'orders';
+      await updateOrderStatus(orderId, newStatus, null, memo, table);
       showToast('주문 상태가 변경되었습니다.', 'success');
       setDetail(null);
       await load();
@@ -51,7 +52,7 @@ const AdminOrders = () => {
       showToast('취소 사유를 입력해주세요.', 'error');
       return;
     }
-    await handleStatusChange(order.id, 'cancelled', cancelMemo.trim());
+    await handleStatusChange(order.id, 'cancelled', cancelMemo.trim(), order.site);
     setCancelMemo('');
   };
 
@@ -85,6 +86,7 @@ const AdminOrders = () => {
   }, [orders]);
 
   const columns = [
+    { key: 'site', label: '사이트', width: '80px', render: (val) => <span className={`td-badge ${val === 'jobpath' ? 'blue' : 'gray'}`}>{val === 'jobpath' ? 'JobPath' : 'WWW'}</span> },
     { key: 'order_number', label: '주문번호', className: 'td-title' },
     { key: 'user_name', label: '주문자', width: '100px', render: (val, row) => val || row.user_email?.split('@')[0] || '-' },
     {
@@ -173,7 +175,7 @@ const AdminOrders = () => {
                   if (s === 'cancelled') {
                     setDetail(row);
                   } else {
-                    handleStatusChange(row.id, s);
+                    handleStatusChange(row.id, s, '', row.site);
                   }
                 }}
               >
