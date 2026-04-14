@@ -6,7 +6,7 @@ const useAOS = () => {
       (entries) => {
         entries.forEach((entry) => {
           if (entry.isIntersecting) {
-            const delay = entry.target.getAttribute('data-aos-delay') || 0;
+            const delay = entry.target.getAttribute('data-aos-delay') || '0';
             setTimeout(() => {
               entry.target.classList.add('aos-animate');
             }, parseInt(delay));
