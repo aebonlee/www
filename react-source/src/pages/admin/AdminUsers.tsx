@@ -143,6 +143,7 @@ const AdminUsers = () => {
   const [siteFilter, setSiteFilter] = useState('all');
   const [roleFilter, setRoleFilter] = useState('all');
   const [statusFilter, setStatusFilter] = useState('all');
+  const [paymentFilter, setPaymentFilter] = useState('all'); // all | paid | coupon
 
   // ID 보기 토글 (행별)
   const [visibleIds, setVisibleIds] = useState<Set<string>>(new Set());
@@ -362,8 +363,13 @@ const AdminUsers = () => {
     if (statusFilter !== 'all') {
       list = list.filter((u) => (u.status || 'active') === statusFilter);
     }
+    if (paymentFilter === 'paid') {
+      list = list.filter((u) => paidIds.has(u.id));
+    } else if (paymentFilter === 'coupon') {
+      list = list.filter((u) => couponIds.has(u.id));
+    }
     return list;
-  }, [users, siteFilter, roleFilter, statusFilter]);
+  }, [users, siteFilter, roleFilter, statusFilter, paymentFilter, paidIds, couponIds]);
 
   const columns = [
     {
@@ -828,11 +834,23 @@ const AdminUsers = () => {
           })}
         </select>
 
+        {/* 결제/쿠폰 */}
+        <select
+          className="role-select"
+          value={paymentFilter}
+          onChange={(e) => setPaymentFilter(e.target.value)}
+          style={{ minWidth: '130px' }}
+        >
+          <option value="all">결제 전체 ({users.length})</option>
+          <option value="paid">유료 회원 ({users.filter((u) => paidIds.has(u.id)).length})</option>
+          <option value="coupon">쿠폰 사용 ({users.filter((u) => couponIds.has(u.id)).length})</option>
+        </select>
+
         {/* 리셋 */}
-        {(statusFilter !== 'all' || roleFilter !== 'all' || siteFilter !== 'all') && (
+        {(statusFilter !== 'all' || roleFilter !== 'all' || siteFilter !== 'all' || paymentFilter !== 'all') && (
           <button
             className="admin-row-btn"
-            onClick={() => { setStatusFilter('all'); setRoleFilter('all'); setSiteFilter('all'); }}
+            onClick={() => { setStatusFilter('all'); setRoleFilter('all'); setSiteFilter('all'); setPaymentFilter('all'); }}
           >
             필터 초기화
           </button>
