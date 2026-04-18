@@ -3,6 +3,7 @@ import AdminDataTable from '../../components/admin/AdminDataTable';
 import {
   getAllUsers,
   getPaidUserIds,
+  getCouponUserIds,
   updateUserRole,
   addVisitedSite,
   updateUserStatus,
@@ -137,6 +138,7 @@ const isProtectedAdmin = (user) =>
 const AdminUsers = () => {
   const [users, setUsers] = useState([]);
   const [paidIds, setPaidIds] = useState<Set<string>>(new Set());
+  const [couponIds, setCouponIds] = useState<Set<string>>(new Set());
   const [loading, setLoading] = useState(true);
   const [siteFilter, setSiteFilter] = useState('all');
   const [roleFilter, setRoleFilter] = useState('all');
@@ -162,9 +164,20 @@ const AdminUsers = () => {
   const [banReason, setBanReason] = useState('');
 
   useEffect(() => {
-    Promise.all([getAllUsers(), getPaidUserIds()]).then(([data, paid]) => {
+    Promise.all([getAllUsers(), getPaidUserIds(), getCouponUserIds()]).then(([data, paid, coupon]) => {
       setUsers(data);
       setPaidIds(paid);
+      setCouponIds(coupon);
+      setLoading(false);
+    });
+  }, []);
+
+  const handleRefreshData = useCallback(() => {
+    setLoading(true);
+    Promise.all([getAllUsers(), getPaidUserIds(), getCouponUserIds()]).then(([data, paid, coupon]) => {
+      setUsers(data);
+      setPaidIds(paid);
+      setCouponIds(coupon);
       setLoading(false);
     });
   }, []);
@@ -356,22 +369,15 @@ const AdminUsers = () => {
     {
       key: 'id',
       label: 'ID',
-      width: '72px',
+      width: '100px',
       render: (val) => (
         <div style={{ display: 'flex', flexDirection: 'column', gap: '3px', alignItems: 'flex-start' }}>
-          {paidIds.has(val) && (
-            <span style={{
-              fontSize: '10px', fontWeight: 700, padding: '1px 5px',
-              background: '#fef3c7', color: '#92400e', borderRadius: '4px',
-              border: '1px solid #fbbf24',
-            }}>유료</span>
-          )}
           {visibleIds.has(val) && (
             <span style={{
               fontSize: '9px', color: 'var(--text-light)', wordBreak: 'break-all',
-              fontFamily: 'monospace', maxWidth: '68px',
+              fontFamily: 'monospace', lineHeight: 1.4,
             }}>
-              {val?.slice(0, 8)}…
+              {val}
             </span>
           )}
           <button
@@ -412,10 +418,21 @@ const AdminUsers = () => {
       key: 'status',
       label: '상태',
       width: '80px',
-      render: (val) => {
+      render: (val, row) => {
         const s = val || 'active';
         const opt = STATUS_OPTIONS.find((o) => o.value === s) || STATUS_OPTIONS[0];
-        return <span className={`td-badge ${opt.color}`}>{opt.label}</span>;
+        return (
+          <div style={{ display: 'flex', flexDirection: 'column', gap: '3px', alignItems: 'flex-start' }}>
+            <span className={`td-badge ${opt.color}`}>{opt.label}</span>
+            {paidIds.has(row.id) && (
+              <span style={{
+                fontSize: '10px', fontWeight: 700, padding: '1px 5px',
+                background: '#fef3c7', color: '#92400e', borderRadius: '4px',
+                border: '1px solid #fbbf24',
+              }}>유료</span>
+            )}
+          </div>
+        );
       },
     },
     {
@@ -684,14 +701,6 @@ const AdminUsers = () => {
     );
   };
 
-  const handleRefresh = useCallback(() => {
-    setLoading(true);
-    Promise.all([getAllUsers(), getPaidUserIds()]).then(([data, paid]) => {
-      setUsers(data);
-      setPaidIds(paid);
-      setLoading(false);
-    });
-  }, []);
 
   // 기간별 통계 계산
   const stats = useMemo(() => {
@@ -705,15 +714,17 @@ const AdminUsers = () => {
       month: users.filter((u) => u.created_at && new Date(u.created_at) >= monthStart).length,
       total: users.length,
       active: users.filter((u) => (u.status || 'active') === 'active').length,
+      paid: users.filter((u) => paidIds.has(u.id)).length,
+      coupon: users.filter((u) => couponIds.has(u.id)).length,
     };
-  }, [users]);
+  }, [users, paidIds, couponIds]);
 
   return (
     <>
       {/* ── 헤더 ── */}
       <div className="admin-page-header">
         <h2>회원 관리</h2>
-        <button className="admin-row-btn" onClick={handleRefresh} disabled={loading}>
+        <button className="admin-row-btn" onClick={handleRefreshData} disabled={loading}>
           {loading ? '로딩 중...' : '새로고침'}
         </button>
       </div>
@@ -721,7 +732,7 @@ const AdminUsers = () => {
       {/* ── 통계 박스 ── */}
       <div style={{
         display: 'grid',
-        gridTemplateColumns: 'repeat(5, 1fr)',
+        gridTemplateColumns: 'repeat(7, 1fr)',
         gap: '12px',
         marginBottom: '20px',
       }}>
@@ -730,6 +741,8 @@ const AdminUsers = () => {
           { label: '이번 주', value: stats.week, color: '#0ea5e9', bg: '#f0f9ff' },
           { label: '이번 달', value: stats.month, color: '#10b981', bg: '#f0fdf4' },
           { label: '정상 회원', value: stats.active, color: '#f59e0b', bg: '#fffbeb' },
+          { label: '유료 회원', value: stats.paid, color: '#92400e', bg: '#fef3c7' },
+          { label: '쿠폰 사용', value: stats.coupon, color: '#047857', bg: '#d1fae5' },
           { label: '전체 회원', value: stats.total, color: '#8b5cf6', bg: '#f5f3ff' },
         ].map(({ label, value, color, bg }) => (
           <div key={label} style={{

@@ -257,6 +257,22 @@ export async function getPaidUserIds(): Promise<Set<string>> {
   return ids;
 }
 
+/** 쿠폰 사용 회원 ID 목록 (forjob_coupon_redemptions) */
+export async function getCouponUserIds(): Promise<Set<string>> {
+  const client = getSupabase();
+  if (!client) return new Set();
+  const { data, error } = await client
+    .from('forjob_coupon_redemptions')
+    .select('user_id');
+  if (error) {
+    console.warn('getCouponUserIds error:', error.message);
+    return new Set();
+  }
+  const ids = new Set<string>();
+  (data || []).forEach((r: any) => { if (r.user_id) ids.add(r.user_id); });
+  return ids;
+}
+
 /** 최근 주문 N건 */
 export async function getRecentOrders(limit = 5) {
   const client = getSupabase();
