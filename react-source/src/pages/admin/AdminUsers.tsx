@@ -780,6 +780,55 @@ const AdminUsers = () => {
         ))}
       </div>
 
+      {/* ── 사이트별 빠른 필터 버튼 ── */}
+      {!loading && siteNames.length > 0 && (
+        <div style={{
+          display: 'flex', flexWrap: 'wrap', gap: '6px',
+          marginBottom: '12px',
+          padding: '12px 16px',
+          background: 'var(--bg-card, #fff)',
+          border: '1px solid var(--border-color, #e5e7eb)',
+          borderRadius: '10px',
+        }}>
+          <span style={{ fontSize: '12px', fontWeight: 600, color: 'var(--text-light)', alignSelf: 'center', marginRight: '4px', whiteSpace: 'nowrap' }}>
+            사이트
+          </span>
+          <button
+            className={`admin-row-btn${siteFilter === 'all' ? ' active' : ''}`}
+            style={{ fontSize: '11px', padding: '2px 8px' }}
+            onClick={() => setSiteFilter('all')}
+          >
+            전체 ({users.length})
+          </button>
+          {siteNames.filter((n) => n !== '-').map((name) => {
+            const count = users.filter((u) => getUserSiteNames(u).includes(name)).length;
+            const isActive = siteFilter === name;
+            const color = getSiteColor(name);
+            const colorMap: Record<string, string> = {
+              red: '#dc2626', blue: '#2563eb', green: '#16a34a',
+              purple: '#7c3aed', yellow: '#d97706', gray: '#6b7280',
+            };
+            const c = colorMap[color] || '#6b7280';
+            return (
+              <button
+                key={name}
+                onClick={() => setSiteFilter(isActive ? 'all' : name)}
+                style={{
+                  fontSize: '11px', padding: '2px 8px',
+                  borderRadius: '5px', border: `1px solid ${isActive ? c : 'var(--border-color, #e5e7eb)'}`,
+                  background: isActive ? c : 'transparent',
+                  color: isActive ? '#fff' : c,
+                  fontWeight: isActive ? 700 : 500,
+                  cursor: 'pointer', whiteSpace: 'nowrap',
+                }}
+              >
+                {name} ({count})
+              </button>
+            );
+          })}
+        </div>
+      )}
+
       {/* ── 필터 바 ── */}
       <div style={{
         display: 'flex', gap: '10px', flexWrap: 'wrap',
