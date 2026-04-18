@@ -243,17 +243,17 @@ export async function deleteUser(userId: string) {
   return { success: true };
 }
 
-/** 유료 결제 완료 회원 ID 목록 (www + jobpath) */
+/** 실제 유료 결제 완료 회원 ID 목록 (www + jobpath, total_amount > 0) */
 export async function getPaidUserIds(): Promise<Set<string>> {
   const client = getSupabase();
   if (!client) return new Set();
   const [wwwRes, jobpathRes] = await Promise.all([
-    client.from('orders').select('user_id').eq('payment_status', 'paid'),
-    client.from('forjob_orders').select('user_id').eq('payment_status', 'paid'),
+    client.from('orders').select('user_id, total_amount').eq('payment_status', 'paid'),
+    client.from('forjob_orders').select('user_id, total_amount').eq('payment_status', 'paid'),
   ]);
   const ids = new Set<string>();
-  (wwwRes.data || []).forEach((o: any) => { if (o.user_id) ids.add(o.user_id); });
-  (jobpathRes.data || []).forEach((o: any) => { if (o.user_id) ids.add(o.user_id); });
+  (wwwRes.data || []).forEach((o: any) => { if (o.user_id && Number(o.total_amount) > 0) ids.add(o.user_id); });
+  (jobpathRes.data || []).forEach((o: any) => { if (o.user_id && Number(o.total_amount) > 0) ids.add(o.user_id); });
   return ids;
 }
 

@@ -423,19 +423,28 @@ const AdminUsers = () => {
     {
       key: 'status',
       label: '상태',
-      width: '80px',
+      width: '90px',
       render: (val, row) => {
         const s = val || 'active';
         const opt = STATUS_OPTIONS.find((o) => o.value === s) || STATUS_OPTIONS[0];
+        const isPaid = paidIds.has(row.id);
+        const isCoupon = couponIds.has(row.id);
         return (
           <div style={{ display: 'flex', flexDirection: 'column', gap: '3px', alignItems: 'flex-start' }}>
             <span className={`td-badge ${opt.color}`}>{opt.label}</span>
-            {paidIds.has(row.id) && (
+            {isPaid && (
               <span style={{
                 fontSize: '10px', fontWeight: 700, padding: '1px 5px',
                 background: '#fef3c7', color: '#92400e', borderRadius: '4px',
                 border: '1px solid #fbbf24',
-              }}>유료</span>
+              }}>유료결제</span>
+            )}
+            {isCoupon && (
+              <span style={{
+                fontSize: '10px', fontWeight: 700, padding: '1px 5px',
+                background: '#d1fae5', color: '#065f46', borderRadius: '4px',
+                border: '1px solid #6ee7b7',
+              }}>쿠폰</span>
             )}
           </div>
         );
