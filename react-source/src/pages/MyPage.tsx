@@ -12,7 +12,7 @@ const MyPage = () => {
   const navigate = useNavigate();
 
   const [editing, setEditing] = useState(false);
-  const [form, setForm] = useState({ displayName: '', avatarUrl: '' });
+  const [form, setForm] = useState({ displayName: '', phone: '', avatarUrl: '' });
   const [saving, setSaving] = useState(false);
   const [message, setMessage] = useState('');
 
@@ -20,6 +20,7 @@ const MyPage = () => {
     if (profile) {
       setForm({
         displayName: profile.display_name || '',
+        phone: profile.phone || '',
         avatarUrl: profile.avatar_url || ''
       });
     }
@@ -31,6 +32,7 @@ const MyPage = () => {
     try {
       await updateProfile(user.id, {
         display_name: form.displayName,
+        phone: form.phone,
         avatar_url: form.avatarUrl
       });
       await refreshProfile();
@@ -81,6 +83,15 @@ const MyPage = () => {
                       onChange={e => setForm({ ...form, displayName: e.target.value })}
                     />
                   </div>
+                  <div className="auth-form-group">
+                    <label>전화번호</label>
+                    <input
+                      type="tel"
+                      value={form.phone}
+                      onChange={e => setForm({ ...form, phone: e.target.value })}
+                      placeholder="010-0000-0000"
+                    />
+                  </div>
                   <div className="mypage-edit-actions">
                     <button className="board-btn primary" onClick={handleSave} disabled={saving}>
                       {saving ? t('auth.saving') : t('auth.save')}
@@ -94,6 +105,7 @@ const MyPage = () => {
                 <>
                   <h2 className="mypage-name">{profile?.display_name || t('auth.noName')}</h2>
                   <p className="mypage-email">{user?.email}</p>
+                  <p className="mypage-email">{profile?.phone || <span style={{ color: '#aaa' }}>전화번호 미등록</span>}</p>
                   <p className="mypage-provider">
                     {profile?.provider ? `${t('auth.loginWith')} ${profile.provider}` : t('auth.emailAccount')}
                   </p>

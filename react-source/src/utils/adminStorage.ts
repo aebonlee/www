@@ -54,16 +54,25 @@ export async function getDashboardCounts(): Promise<DashboardCounts> {
   return counts;
 }
 
-/** 전체 회원 목록 */
+/** 전체 회원 목록 — admin_get_all_users RPC로 RLS 우회 */
 export async function getAllUsers() {
   const client = getSupabase();
   if (!client) return [];
+
+  // 1차: SECURITY DEFINER RPC로 RLS 우회
+  const { data: rpcData, error: rpcError } = await client.rpc('admin_get_all_users');
+  if (!rpcError) return rpcData || [];
+
+  console.warn('getAllUsers(rpc) failed, fallback to direct SELECT:', rpcError.message);
+
+  // 2차 fallback: 직접 SELECT (RLS 정책에 따라 일부만 반환될 수 있음)
   const { data, error } = await client
     .from('user_profiles')
     .select('*')
-    .order('created_at', { ascending: false });
+    .order('created_at', { ascending: false })
+    .limit(2000);
   if (error) {
-    console.error('getAllUsers error:', error);
+    console.error('getAllUsers(fallback) error:', error);
     return [];
   }
   return data || [];
@@ -196,13 +205,14 @@ export async function updateUserStatus(userId: string, status: string, reason: s
   return { success: true };
 }
 
-/** 관리자 프로필 수정 (display_name) — rpc() 사용 */
-export async function adminUpdateUserProfile(userId: string, displayName: string) {
+/** 관리자 프로필 수정 (display_name + phone) — rpc() 사용 */
+export async function adminUpdateUserProfile(userId: string, displayName: string, phone?: string) {
   const client = getSupabase();
   if (!client) return { error: 'Supabase client not available' };
   const { data, error } = await client.rpc('admin_update_user_profile', {
     target_user_id: userId,
     new_display_name: displayName,
+    new_phone: phone ?? null,
   });
   if (error) {
     console.error('adminUpdateUserProfile error:', error);
@@ -231,6 +241,20 @@ export async function deleteUser(userId: string) {
     return { error: data.error };
   }
   return { success: true };
+}
+
+/** 유료 결제 완료 회원 ID 목록 (www + jobpath) */
+export async function getPaidUserIds(): Promise<Set<string>> {
+  const client = getSupabase();
+  if (!client) return new Set();
+  const [wwwRes, jobpathRes] = await Promise.all([
+    client.from('orders').select('user_id').eq('payment_status', 'paid'),
+    client.from('forjob_orders').select('user_id').eq('payment_status', 'paid'),
+  ]);
+  const ids = new Set<string>();
+  (wwwRes.data || []).forEach((o: any) => { if (o.user_id) ids.add(o.user_id); });
+  (jobpathRes.data || []).forEach((o: any) => { if (o.user_id) ids.add(o.user_id); });
+  return ids;
 }
 
 /** 최근 주문 N건 */

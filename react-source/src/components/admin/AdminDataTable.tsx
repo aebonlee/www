@@ -8,7 +8,8 @@ const AdminDataTable = ({
   actions,
   pageSize = 20,
   toolbarExtra,
-  expandRow
+  expandRow,
+  showRowNumbers = false,
 }: any) => {
   const [search, setSearch] = useState('');
   const [sortKey, setSortKey] = useState(null);
@@ -65,6 +66,28 @@ const AdminDataTable = ({
     return pages;
   };
 
+  // 공통 페이지네이션 UI
+  const PaginationBar = () => (
+    <div style={{ display: 'flex', alignItems: 'center', gap: '6px' }}>
+      <span style={{ fontSize: '12px', color: 'var(--text-light)', whiteSpace: 'nowrap' }}>
+        {(safePage - 1) * pageSize + 1}–{Math.min(safePage * pageSize, sorted.length)} / {sorted.length}건
+      </span>
+      <div className="admin-table-pagination">
+        <button className="admin-page-btn" onClick={() => setPage(safePage - 1)} disabled={safePage === 1}>‹</button>
+        {getPageNumbers().map((n) => (
+          <button
+            key={n}
+            className={`admin-page-btn ${safePage === n ? 'active' : ''}`}
+            onClick={() => setPage(n)}
+          >
+            {n}
+          </button>
+        ))}
+        <button className="admin-page-btn" onClick={() => setPage(safePage + 1)} disabled={safePage === totalPages}>›</button>
+      </div>
+    </div>
+  );
+
   if (loading) {
     return (
       <div className="admin-table-wrapper">
@@ -75,30 +98,35 @@ const AdminDataTable = ({
 
   return (
     <div className="admin-table-wrapper">
-      <div className="admin-table-toolbar">
-        {searchKeys.length > 0 && (
-          <div className="admin-table-search">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-              <circle cx="11" cy="11" r="8" /><line x1="21" y1="21" x2="16.65" y2="16.65" />
-            </svg>
-            <input
-              type="text"
-              placeholder="검색..."
-              value={search}
-              onChange={(e) => { setSearch(e.target.value); setPage(1); }}
-            />
-          </div>
-        )}
-        {toolbarExtra && <div className="admin-table-actions">{toolbarExtra}</div>}
+      {/* 툴바 — 검색 + 상단 페이지네이션 */}
+      <div className="admin-table-toolbar" style={{ justifyContent: 'space-between', flexWrap: 'wrap', gap: '8px' }}>
+        <div style={{ display: 'flex', alignItems: 'center', gap: '8px', flex: 1 }}>
+          {searchKeys.length > 0 && (
+            <div className="admin-table-search">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                <circle cx="11" cy="11" r="8" /><line x1="21" y1="21" x2="16.65" y2="16.65" />
+              </svg>
+              <input
+                type="text"
+                placeholder="검색..."
+                value={search}
+                onChange={(e) => { setSearch(e.target.value); setPage(1); }}
+              />
+            </div>
+          )}
+          {toolbarExtra && <div className="admin-table-actions">{toolbarExtra}</div>}
+        </div>
+        {totalPages > 1 && <PaginationBar />}
       </div>
 
       <div className="admin-table-scroll">
         <table className="admin-table">
           <thead>
             <tr>
+              {showRowNumbers && <th style={{ width: '46px', textAlign: 'center' }}>No.</th>}
               {columns.map((col) => (
                 <th
-                  key={col.key}
+                  key={col.key + col.label}
                   style={col.width ? { width: col.width } : undefined}
                   onClick={() => handleSort(col.key)}
                 >
@@ -108,13 +136,13 @@ const AdminDataTable = ({
                   </span>
                 </th>
               ))}
-              {actions && <th style={{ width: '120px' }}>관리</th>}
+              {actions && <th style={{ width: '80px' }}>관리</th>}
             </tr>
           </thead>
           <tbody>
             {paged.length === 0 ? (
               <tr>
-                <td colSpan={columns.length + (actions ? 1 : 0)}>
+                <td colSpan={columns.length + (actions ? 1 : 0) + (showRowNumbers ? 1 : 0)}>
                   <div className="admin-empty">
                     <p>데이터가 없습니다.</p>
                   </div>
@@ -122,38 +150,34 @@ const AdminDataTable = ({
               </tr>
             ) : (
               paged.map((row, idx) => (
-                <TableRow key={row.id || idx} row={row} columns={columns} actions={actions} expandRow={expandRow} />
+                <TableRow
+                  key={row.id || idx}
+                  row={row}
+                  columns={columns}
+                  actions={actions}
+                  expandRow={expandRow}
+                  rowNumber={showRowNumbers ? (safePage - 1) * pageSize + idx + 1 : null}
+                />
               ))
             )}
           </tbody>
         </table>
       </div>
 
+      {/* 하단 페이지네이션 */}
       {totalPages > 1 && (
         <div className="admin-table-footer">
           <span>
-            총 {sorted.length}건 중 {(safePage - 1) * pageSize + 1}-{Math.min(safePage * pageSize, sorted.length)}
+            총 {sorted.length}건 중 {(safePage - 1) * pageSize + 1}–{Math.min(safePage * pageSize, sorted.length)}
           </span>
-          <div className="admin-table-pagination">
-            <button className="admin-page-btn" onClick={() => setPage(safePage - 1)} disabled={safePage === 1}>‹</button>
-            {getPageNumbers().map((n) => (
-              <button
-                key={n}
-                className={`admin-page-btn ${safePage === n ? 'active' : ''}`}
-                onClick={() => setPage(n)}
-              >
-                {n}
-              </button>
-            ))}
-            <button className="admin-page-btn" onClick={() => setPage(safePage + 1)} disabled={safePage === totalPages}>›</button>
-          </div>
+          <PaginationBar />
         </div>
       )}
     </div>
   );
 };
 
-function TableRow({ row, columns, actions, expandRow }: any) {
+function TableRow({ row, columns, actions, expandRow, rowNumber }: any) {
   const [expanded, setExpanded] = useState(false);
 
   return (
@@ -162,8 +186,13 @@ function TableRow({ row, columns, actions, expandRow }: any) {
         onClick={expandRow ? () => setExpanded(!expanded) : undefined}
         style={expandRow ? { cursor: 'pointer' } : undefined}
       >
+        {rowNumber !== null && (
+          <td style={{ textAlign: 'center', fontSize: '12px', color: 'var(--text-light)', fontWeight: 500 }}>
+            {rowNumber}
+          </td>
+        )}
         {columns.map((col) => (
-          <td key={col.key} className={col.className || ''}>
+          <td key={col.key + col.label} className={col.className || ''}>
             {col.render ? col.render(row[col.key], row) : (row[col.key] ?? '-')}
           </td>
         ))}
@@ -175,7 +204,7 @@ function TableRow({ row, columns, actions, expandRow }: any) {
       </tr>
       {expandRow && expanded && (
         <tr>
-          <td colSpan={columns.length + (actions ? 1 : 0)} style={{ padding: 0 }}>
+          <td colSpan={columns.length + (actions ? 1 : 0) + (rowNumber !== null ? 1 : 0)} style={{ padding: 0 }}>
             {expandRow(row)}
           </td>
         </tr>

@@ -40,7 +40,7 @@ export async function signInWithEmail(email: string, password: string) {
 }
 
 /** 이메일 회원가입 */
-export async function signUp(email: string, password: string, displayName: string) {
+export async function signUp(email: string, password: string, displayName: string, phone?: string) {
   const client = getSupabase();
   if (!client) throw new Error('Supabase not configured');
   const { data, error } = await client.auth.signUp({
@@ -49,6 +49,7 @@ export async function signUp(email: string, password: string, displayName: strin
     options: {
       data: {
         full_name: displayName,
+        phone: phone || '',
         signup_domain: window.location.hostname,
       }
     }

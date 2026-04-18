@@ -38,6 +38,13 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
       if (!sites.includes(currentDomain)) {
         updates.visited_sites = [...sites, currentDomain];
       }
+      // user_metadata에서 phone/display_name 동기화 (최초 1회)
+      if (!p.phone && authUser.user_metadata?.phone) {
+        updates.phone = authUser.user_metadata.phone;
+      }
+      if (!p.display_name && authUser.user_metadata?.full_name) {
+        updates.display_name = authUser.user_metadata.full_name;
+      }
       if (Object.keys(updates).length > 0) {
         try {
           const updated = await updateProfile(authUser.id, updates);

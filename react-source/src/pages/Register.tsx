@@ -11,7 +11,7 @@ const Register = () => {
   const { isLoggedIn } = useAuth();
   const navigate = useNavigate();
 
-  const [form, setForm] = useState({ email: '', password: '', passwordConfirm: '', displayName: '' });
+  const [form, setForm] = useState({ email: '', password: '', passwordConfirm: '', displayName: '', phone: '' });
   const [error, setError] = useState('');
   const [loading, setLoading] = useState(false);
   const [success, setSuccess] = useState(false);
@@ -34,7 +34,7 @@ const Register = () => {
     setLoading(true);
     setError('');
     try {
-      await signUp(form.email, form.password, form.displayName);
+      await signUp(form.email, form.password, form.displayName, form.phone);
       setSuccess(true);
     } catch (err: any) {
       setError(err.message || t('auth.signUpError'));
@@ -88,6 +88,14 @@ const Register = () => {
                 placeholder={t('auth.displayNamePlaceholder')}
                 required
                 autoFocus
+              />
+            </div>
+            <div className="auth-input-group">
+              <input
+                type="tel"
+                value={form.phone}
+                onChange={e => setForm({ ...form, phone: e.target.value })}
+                placeholder="전화번호 (예: 010-0000-0000)"
               />
             </div>
             <div className="auth-input-group">

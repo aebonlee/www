@@ -2,6 +2,7 @@ import { useState, useEffect, useMemo, useCallback } from 'react';
 import AdminDataTable from '../../components/admin/AdminDataTable';
 import {
   getAllUsers,
+  getPaidUserIds,
   updateUserRole,
   addVisitedSite,
   updateUserStatus,
@@ -135,10 +136,19 @@ const isProtectedAdmin = (user) =>
 
 const AdminUsers = () => {
   const [users, setUsers] = useState([]);
+  const [paidIds, setPaidIds] = useState<Set<string>>(new Set());
   const [loading, setLoading] = useState(true);
   const [siteFilter, setSiteFilter] = useState('all');
   const [roleFilter, setRoleFilter] = useState('all');
   const [statusFilter, setStatusFilter] = useState('all');
+
+  // ID 보기 토글 (행별)
+  const [visibleIds, setVisibleIds] = useState<Set<string>>(new Set());
+  const toggleId = (id: string) => setVisibleIds((prev) => {
+    const next = new Set(prev);
+    next.has(id) ? next.delete(id) : next.add(id);
+    return next;
+  });
 
   // 액션 패널 상태
   const [actionTarget, setActionTarget] = useState(null); // { user, type }
@@ -146,13 +156,15 @@ const AdminUsers = () => {
 
   // 수정 폼
   const [editName, setEditName] = useState('');
+  const [editPhone, setEditPhone] = useState('');
 
   // 차단 폼
   const [banReason, setBanReason] = useState('');
 
   useEffect(() => {
-    getAllUsers().then((data) => {
+    Promise.all([getAllUsers(), getPaidUserIds()]).then(([data, paid]) => {
       setUsers(data);
+      setPaidIds(paid);
       setLoading(false);
     });
   }, []);
@@ -198,7 +210,10 @@ const AdminUsers = () => {
   const openAction = (user, type) => {
     setActionTarget({ user, type });
     setActionLoading(false);
-    if (type === 'edit') setEditName(user.display_name || '');
+    if (type === 'edit') {
+      setEditName(user.display_name || '');
+      setEditPhone(user.phone || '');
+    }
     if (type === 'ban') setBanReason('');
   };
 
@@ -211,12 +226,12 @@ const AdminUsers = () => {
   const handleEdit = async () => {
     if (!actionTarget) return;
     setActionLoading(true);
-    const result = await adminUpdateUserProfile(actionTarget.user.id, editName);
+    const result = await adminUpdateUserProfile(actionTarget.user.id, editName, editPhone);
     if (result.error) {
       alert('프로필 수정 실패: ' + result.error);
     } else {
       setUsers((prev) =>
-        prev.map((u) => u.id === actionTarget.user.id ? { ...u, display_name: editName } : u)
+        prev.map((u) => u.id === actionTarget.user.id ? { ...u, display_name: editName, phone: editPhone } : u)
       );
       closeAction();
     }
@@ -338,12 +353,42 @@ const AdminUsers = () => {
   }, [users, siteFilter, roleFilter, statusFilter]);
 
   const columns = [
-    { key: 'id', label: 'ID', width: '60px' },
     {
-      key: 'name',
-      label: '실명',
+      key: 'id',
+      label: 'ID',
+      width: '72px',
+      render: (val) => (
+        <div style={{ display: 'flex', flexDirection: 'column', gap: '3px', alignItems: 'flex-start' }}>
+          {paidIds.has(val) && (
+            <span style={{
+              fontSize: '10px', fontWeight: 700, padding: '1px 5px',
+              background: '#fef3c7', color: '#92400e', borderRadius: '4px',
+              border: '1px solid #fbbf24',
+            }}>유료</span>
+          )}
+          {visibleIds.has(val) && (
+            <span style={{
+              fontSize: '9px', color: 'var(--text-light)', wordBreak: 'break-all',
+              fontFamily: 'monospace', maxWidth: '68px',
+            }}>
+              {val?.slice(0, 8)}…
+            </span>
+          )}
+          <button
+            className="admin-row-btn"
+            style={{ fontSize: '10px', padding: '1px 5px', height: 'auto', minWidth: 'unset' }}
+            onClick={() => toggleId(val)}
+          >
+            {visibleIds.has(val) ? '숨김' : '보기'}
+          </button>
+        </div>
+      ),
+    },
+    {
+      key: 'display_name',
+      label: '이름',
       width: '100px',
-      render: (val, row) => val || row.display_name || '-',
+      render: (val, row) => val || row.name || '-',
     },
     { key: 'email', label: '이메일' },
     {
@@ -353,11 +398,11 @@ const AdminUsers = () => {
       render: (val) => val || <span style={{ color: 'var(--text-light)' }}>-</span>,
     },
     {
-      key: 'name',
+      key: 'display_name',
       label: '프로필',
       width: '70px',
       render: (val, row) => {
-        const hasName = !!(val || row.display_name);
+        const hasName = !!(val || row.name);
         const hasPhone = !!row.phone;
         if (hasName && hasPhone) return <span className="td-badge green">완료</span>;
         return <span className="td-badge yellow">미완성</span>;
@@ -388,8 +433,19 @@ const AdminUsers = () => {
       },
     },
     {
+      key: 'signup_domain',
+      label: '가입처',
+      width: '80px',
+      render: (val) => {
+        if (!val) return <span style={{ color: 'var(--text-light)' }}>-</span>;
+        const name = getSiteName(val);
+        const color = getSiteColor(name);
+        return <span className={`td-badge ${color}`}>{name}</span>;
+      },
+    },
+    {
       key: 'visited_sites',
-      label: '가입 사이트',
+      label: '방문 사이트',
       width: '200px',
       render: (val, row) => {
         const sites = Array.isArray(val) && val.length > 0
@@ -401,8 +457,16 @@ const AdminUsers = () => {
             {sites.map((domain) => {
               const name = getSiteName(domain);
               const color = getSiteColor(name);
+              const isSignupSite = domain === row.signup_domain;
               return (
-                <span key={domain} className={`td-badge ${color}`}>{name}</span>
+                <span
+                  key={domain}
+                  className={`td-badge ${color}`}
+                  title={isSignupSite ? '최초 가입 사이트' : domain}
+                  style={isSignupSite ? { fontWeight: 700, outline: '1px solid currentColor' } : undefined}
+                >
+                  {name}{isSignupSite ? '*' : ''}
+                </span>
               );
             })}
             {remaining.length > 0 && (
@@ -526,7 +590,7 @@ const AdminUsers = () => {
 
     if (status === 'banned') {
       return (
-        <div className="admin-row-actions">
+        <div className="admin-row-actions" style={{ flexDirection: 'column', gap: '4px' }}>
           <button className="admin-row-btn" onClick={() => handleRestore(row)}>해제</button>
           <button className="admin-row-btn danger" onClick={() => handleDelete(row)}>삭제</button>
         </div>
@@ -535,7 +599,7 @@ const AdminUsers = () => {
 
     if (status === 'deleted') {
       return (
-        <div className="admin-row-actions">
+        <div className="admin-row-actions" style={{ flexDirection: 'column', gap: '4px' }}>
           <button className="admin-row-btn" onClick={() => handleRestore(row)}>복구</button>
           <button className="admin-row-btn danger" onClick={() => handleDelete(row)}>완전삭제</button>
         </div>
@@ -543,7 +607,7 @@ const AdminUsers = () => {
     }
 
     return (
-      <div className="admin-row-actions">
+      <div className="admin-row-actions" style={{ flexDirection: 'column', gap: '4px' }}>
         <button className="admin-row-btn" onClick={() => openAction(row, 'edit')}>수정</button>
         <button className="admin-row-btn danger" onClick={() => openAction(row, 'ban')}>차단</button>
         <button className="admin-row-btn danger" onClick={() => handleDelete(row)}>삭제</button>
@@ -579,6 +643,14 @@ const AdminUsers = () => {
               onChange={(e) => setEditName(e.target.value)}
               placeholder="표시 이름"
             />
+            <label style={{ marginTop: '8px', display: 'block' }}>전화번호</label>
+            <input
+              type="tel"
+              className="admin-action-input"
+              value={editPhone}
+              onChange={(e) => setEditPhone(e.target.value)}
+              placeholder="010-0000-0000"
+            />
             <button
               className="admin-row-btn"
               onClick={handleEdit}
@@ -612,67 +684,122 @@ const AdminUsers = () => {
     );
   };
 
+  const handleRefresh = useCallback(() => {
+    setLoading(true);
+    Promise.all([getAllUsers(), getPaidUserIds()]).then(([data, paid]) => {
+      setUsers(data);
+      setPaidIds(paid);
+      setLoading(false);
+    });
+  }, []);
+
+  // 기간별 통계 계산
+  const stats = useMemo(() => {
+    const now = new Date();
+    const todayStr = now.toISOString().slice(0, 10);
+    const weekAgo = new Date(now.getTime() - 7 * 24 * 60 * 60 * 1000);
+    const monthStart = new Date(now.getFullYear(), now.getMonth(), 1);
+    return {
+      today: users.filter((u) => u.created_at?.slice(0, 10) === todayStr).length,
+      week: users.filter((u) => u.created_at && new Date(u.created_at) >= weekAgo).length,
+      month: users.filter((u) => u.created_at && new Date(u.created_at) >= monthStart).length,
+      total: users.length,
+      active: users.filter((u) => (u.status || 'active') === 'active').length,
+    };
+  }, [users]);
+
   return (
     <>
+      {/* ── 헤더 ── */}
       <div className="admin-page-header">
         <h2>회원 관리</h2>
-      </div>
-
-      {/* 등급 필터 */}
-      <div className="admin-filter-tabs">
-        <button
-          className={`admin-filter-tab ${roleFilter === 'all' ? 'active' : ''}`}
-          onClick={() => setRoleFilter('all')}
-        >
-          전체 등급<span className="admin-filter-count">({users.length})</span>
+        <button className="admin-row-btn" onClick={handleRefresh} disabled={loading}>
+          {loading ? '로딩 중...' : '새로고침'}
         </button>
-        {ROLE_OPTIONS.map((opt) => {
-          const count = users.filter((u) => resolveRole(u) === opt.value).length;
-          if (count === 0) return null;
-          return (
-            <button
-              key={opt.value}
-              className={`admin-filter-tab ${roleFilter === opt.value ? 'active' : ''}`}
-              onClick={() => setRoleFilter(opt.value)}
-            >
-              {opt.label}<span className="admin-filter-count">({count})</span>
-            </button>
-          );
-        })}
       </div>
 
-      {/* 상태 필터 */}
-      <div className="admin-filter-tabs">
-        <button
-          className={`admin-filter-tab ${statusFilter === 'all' ? 'active' : ''}`}
-          onClick={() => setStatusFilter('all')}
+      {/* ── 통계 박스 ── */}
+      <div style={{
+        display: 'grid',
+        gridTemplateColumns: 'repeat(5, 1fr)',
+        gap: '12px',
+        marginBottom: '20px',
+      }}>
+        {[
+          { label: '오늘 가입', value: stats.today, color: '#6366f1', bg: '#eef2ff' },
+          { label: '이번 주', value: stats.week, color: '#0ea5e9', bg: '#f0f9ff' },
+          { label: '이번 달', value: stats.month, color: '#10b981', bg: '#f0fdf4' },
+          { label: '정상 회원', value: stats.active, color: '#f59e0b', bg: '#fffbeb' },
+          { label: '전체 회원', value: stats.total, color: '#8b5cf6', bg: '#f5f3ff' },
+        ].map(({ label, value, color, bg }) => (
+          <div key={label} style={{
+            background: 'var(--bg-card, #fff)',
+            border: '1px solid var(--border-color, #e5e7eb)',
+            borderRadius: '10px',
+            padding: '16px 20px',
+            display: 'flex',
+            flexDirection: 'column',
+            gap: '4px',
+          }}>
+            <span style={{ fontSize: '12px', color: 'var(--text-light, #6b7280)', fontWeight: 500 }}>{label}</span>
+            <span style={{ fontSize: '28px', fontWeight: 700, color, lineHeight: 1 }}>{value}</span>
+            <span style={{
+              display: 'inline-block', marginTop: '4px',
+              fontSize: '11px', background: bg, color, borderRadius: '4px',
+              padding: '1px 6px', alignSelf: 'flex-start',
+            }}>명</span>
+          </div>
+        ))}
+      </div>
+
+      {/* ── 필터 바 ── */}
+      <div style={{
+        display: 'flex', gap: '10px', flexWrap: 'wrap',
+        alignItems: 'center', marginBottom: '14px',
+        padding: '12px 16px',
+        background: 'var(--bg-card, #fff)',
+        border: '1px solid var(--border-color, #e5e7eb)',
+        borderRadius: '10px',
+      }}>
+        <span style={{ fontSize: '13px', fontWeight: 600, color: 'var(--text-secondary)', marginRight: '4px' }}>필터</span>
+
+        {/* 상태 */}
+        <select
+          className="role-select"
+          value={statusFilter}
+          onChange={(e) => setStatusFilter(e.target.value)}
+          style={{ minWidth: '110px' }}
         >
-          전체 상태<span className="admin-filter-count">({users.length})</span>
-        </button>
-        {STATUS_OPTIONS.map((opt) => {
-          const count = users.filter((u) => (u.status || 'active') === opt.value).length;
-          if (count === 0) return null;
-          return (
-            <button
-              key={opt.value}
-              className={`admin-filter-tab ${statusFilter === opt.value ? 'active' : ''}`}
-              onClick={() => setStatusFilter(opt.value)}
-            >
-              {opt.label}<span className="admin-filter-count">({count})</span>
-            </button>
-          );
-        })}
-      </div>
+          <option value="all">전체 상태 ({users.length})</option>
+          {STATUS_OPTIONS.map((opt) => {
+            const count = users.filter((u) => (u.status || 'active') === opt.value).length;
+            return <option key={opt.value} value={opt.value}>{opt.label} ({count})</option>;
+          })}
+        </select>
 
-      {/* 가입 사이트 필터 */}
-      {siteNames.length > 1 && (
-        <div className="admin-filter-tabs">
-          <button
-            className={`admin-filter-tab ${siteFilter === 'all' ? 'active' : ''}`}
-            onClick={() => setSiteFilter('all')}
-          >
-            전체 사이트<span className="admin-filter-count">({filtered.length})</span>
-          </button>
+        {/* 등급 */}
+        <select
+          className="role-select"
+          value={roleFilter}
+          onChange={(e) => setRoleFilter(e.target.value)}
+          style={{ minWidth: '120px' }}
+        >
+          <option value="all">전체 등급 ({users.length})</option>
+          {ROLE_OPTIONS.map((opt) => {
+            const count = users.filter((u) => resolveRole(u) === opt.value).length;
+            if (count === 0) return null;
+            return <option key={opt.value} value={opt.value}>{opt.label} ({count})</option>;
+          })}
+        </select>
+
+        {/* 사이트 */}
+        <select
+          className="role-select"
+          value={siteFilter}
+          onChange={(e) => setSiteFilter(e.target.value)}
+          style={{ minWidth: '140px' }}
+        >
+          <option value="all">전체 사이트 ({users.length})</option>
           {siteNames.map((name) => {
             const count = users.filter((u) => {
               const names = getUserSiteNames(u);
@@ -681,18 +808,30 @@ const AdminUsers = () => {
             }).length;
             if (count === 0) return null;
             return (
-              <button
-                key={name}
-                className={`admin-filter-tab ${siteFilter === name ? 'active' : ''}`}
-                onClick={() => setSiteFilter(name)}
-              >
-                {name === '-' ? '미설정' : name}
-                <span className="admin-filter-count">({count})</span>
-              </button>
+              <option key={name} value={name}>
+                {name === '-' ? '미설정' : name} ({count})
+              </option>
             );
           })}
-        </div>
-      )}
+        </select>
+
+        {/* 리셋 */}
+        {(statusFilter !== 'all' || roleFilter !== 'all' || siteFilter !== 'all') && (
+          <button
+            className="admin-row-btn"
+            onClick={() => { setStatusFilter('all'); setRoleFilter('all'); setSiteFilter('all'); }}
+          >
+            필터 초기화
+          </button>
+        )}
+
+        <span style={{ marginLeft: 'auto', fontSize: '13px', color: 'var(--text-light)' }}>
+          {filtered.length !== users.length
+            ? <><strong style={{ color: 'var(--text-primary)' }}>{filtered.length}</strong> / {users.length}명</>
+            : <><strong style={{ color: 'var(--text-primary)' }}>{users.length}</strong>명</>
+          }
+        </span>
+      </div>
 
       {/* 액션 패널 */}
       {renderActionPanel()}
@@ -701,9 +840,10 @@ const AdminUsers = () => {
         columns={columns}
         data={filtered}
         loading={loading}
-        searchKeys={['name', 'display_name', 'email', 'phone']}
+        searchKeys={['display_name', 'name', 'email', 'phone', 'signup_domain']}
         actions={renderActions}
-        pageSize={10}
+        pageSize={20}
+        showRowNumbers={true}
       />
     </>
   );
