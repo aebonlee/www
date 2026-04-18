@@ -783,19 +783,19 @@ const AdminUsers = () => {
       {/* ── 사이트별 빠른 필터 버튼 ── */}
       {!loading && siteNames.length > 0 && (
         <div style={{
-          display: 'flex', flexWrap: 'wrap', gap: '6px',
+          display: 'flex', flexWrap: 'wrap', gap: '12px',
           marginBottom: '12px',
-          padding: '12px 16px',
+          padding: '24px 32px',
           background: 'var(--bg-card, #fff)',
           border: '1px solid var(--border-color, #e5e7eb)',
           borderRadius: '10px',
         }}>
-          <span style={{ fontSize: '12px', fontWeight: 600, color: 'var(--text-light)', alignSelf: 'center', marginRight: '4px', whiteSpace: 'nowrap' }}>
+          <span style={{ fontSize: '24px', fontWeight: 600, color: 'var(--text-light)', alignSelf: 'center', marginRight: '8px', whiteSpace: 'nowrap' }}>
             사이트
           </span>
           <button
             className={`admin-row-btn${siteFilter === 'all' ? ' active' : ''}`}
-            style={{ fontSize: '11px', padding: '2px 8px' }}
+            style={{ fontSize: '22px', padding: '4px 16px' }}
             onClick={() => setSiteFilter('all')}
           >
             전체 ({users.length})
@@ -814,8 +814,8 @@ const AdminUsers = () => {
                 key={name}
                 onClick={() => setSiteFilter(isActive ? 'all' : name)}
                 style={{
-                  fontSize: '11px', padding: '2px 8px',
-                  borderRadius: '5px', border: `1px solid ${isActive ? c : 'var(--border-color, #e5e7eb)'}`,
+                  fontSize: '22px', padding: '4px 16px',
+                  borderRadius: '8px', border: `1px solid ${isActive ? c : 'var(--border-color, #e5e7eb)'}`,
                   background: isActive ? c : 'transparent',
                   color: isActive ? '#fff' : c,
                   fontWeight: isActive ? 700 : 500,
