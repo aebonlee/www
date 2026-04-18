@@ -340,12 +340,29 @@ const AdminUsers = () => {
   const columns = [
     { key: 'id', label: 'ID', width: '60px' },
     {
-      key: 'display_name',
-      label: '이름',
-      className: 'td-title',
-      render: (val) => val || '-',
+      key: 'name',
+      label: '실명',
+      width: '100px',
+      render: (val, row) => val || row.display_name || '-',
     },
     { key: 'email', label: '이메일' },
+    {
+      key: 'phone',
+      label: '전화번호',
+      width: '130px',
+      render: (val) => val || <span style={{ color: 'var(--text-light)' }}>-</span>,
+    },
+    {
+      key: 'name',
+      label: '프로필',
+      width: '70px',
+      render: (val, row) => {
+        const hasName = !!(val || row.display_name);
+        const hasPhone = !!row.phone;
+        if (hasName && hasPhone) return <span className="td-badge green">완료</span>;
+        return <span className="td-badge yellow">미완성</span>;
+      },
+    },
     {
       key: 'status',
       label: '상태',
@@ -684,7 +701,7 @@ const AdminUsers = () => {
         columns={columns}
         data={filtered}
         loading={loading}
-        searchKeys={['display_name', 'email']}
+        searchKeys={['name', 'display_name', 'email', 'phone']}
         actions={renderActions}
         pageSize={10}
       />
