@@ -29,10 +29,10 @@ function downloadCSV(rows: Record<string, any>[], filename: string) {
 }
 
 const ROLE_OPTIONS = [
+  { value: 'member', label: '일반회원', color: 'blue' },
   { value: 'admin', label: '관리자', color: 'red' },
   { value: 'superadmin', label: '최고관리자', color: 'red' },
   { value: 'evaluator', label: '평가자', color: 'purple' },
-  { value: 'user', label: '일반회원', color: 'blue' },
 ];
 
 const SITE_OPTIONS = [
@@ -169,7 +169,7 @@ const AdminUsers = () => {
 
   // Bulk selection
   const [selectedIds, setSelectedIds] = useState<Set<string>>(new Set());
-  const [bulkRole, setBulkRole] = useState('user');
+  const [bulkRole, setBulkRole] = useState('member');
   const [bulkLoading, setBulkLoading] = useState(false);
 
   const toggleSelect = (id: string) => setSelectedIds(prev => {
@@ -1138,7 +1138,7 @@ const AdminUsers = () => {
             style={{ padding: '4px 8px', borderRadius: '6px', fontSize: '13px', border: 'none', background: '#334155', color: '#fff' }}
           >
             {[
-              { value: 'user', label: '일반회원' },
+              { value: 'member', label: '일반회원' },
               { value: 'evaluator', label: '평가자' },
               { value: 'admin', label: '관리자' },
             ].map(opt => (
