@@ -1,9 +1,12 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 import { getAllUsers, getAllOrders } from '../../utils/adminStorage';
 import { getCouponUserIds } from '../../utils/adminStorage';
 import { formatDate, formatPrice } from '../../utils/format';
 import { ADMIN_EMAILS } from '../../config/admin';
+
+type AdminMemo = { id: string; text: string; createdAt: string };
+const MEMO_KEY = (uid: string) => `admin_memo_${uid}`;
 
 const getSiteName = (domain: string) => {
   if (!domain) return '-';
@@ -27,6 +30,11 @@ const AdminUserDetail = () => {
   const [couponIds, setCouponIds] = useState<Set<string>>(new Set());
   const [loading, setLoading] = useState(true);
 
+  // 관리자 메모
+  const [memos, setMemos] = useState<AdminMemo[]>([]);
+  const [memoText, setMemoText] = useState('');
+  const memoEndRef = useRef<HTMLDivElement>(null);
+
   useEffect(() => {
     if (!id) return;
     Promise.all([getAllUsers(), getAllOrders(), getCouponUserIds()]).then(([users, allOrders, coupons]) => {
@@ -37,7 +45,31 @@ const AdminUserDetail = () => {
       setCouponIds(coupons);
       setLoading(false);
     });
+    // 메모 로드 (localStorage)
+    try {
+      const raw = localStorage.getItem(MEMO_KEY(id));
+      setMemos(raw ? JSON.parse(raw) : []);
+    } catch { setMemos([]); }
   }, [id]);
+
+  const saveMemo = () => {
+    if (!memoText.trim() || !id) return;
+    const next: AdminMemo[] = [
+      ...memos,
+      { id: Date.now().toString(), text: memoText.trim(), createdAt: new Date().toISOString() },
+    ];
+    setMemos(next);
+    localStorage.setItem(MEMO_KEY(id), JSON.stringify(next));
+    setMemoText('');
+    setTimeout(() => memoEndRef.current?.scrollIntoView({ behavior: 'smooth' }), 50);
+  };
+
+  const deleteMemo = (memoId: string) => {
+    if (!id) return;
+    const next = memos.filter(m => m.id !== memoId);
+    setMemos(next);
+    localStorage.setItem(MEMO_KEY(id), JSON.stringify(next));
+  };
 
   if (loading) {
     return <div className="admin-loading"><div className="loading-spinner"></div></div>;
@@ -225,6 +257,86 @@ const AdminUserDetail = () => {
               </tbody>
             </table>
           )}
+        </div>
+      </div>
+
+      {/* ── 관리자 메모 (상담 내용) ── */}
+      <div className="dash-panel" style={{ marginTop: '16px' }}>
+        <div className="dash-panel-header">
+          <h3>관리자 메모</h3>
+          <span className="dash-panel-sub">{memos.length}건 · 브라우저 저장</span>
+        </div>
+        <div className="dash-panel-body">
+          {/* 메모 목록 */}
+          {memos.length === 0 ? (
+            <div style={{ fontSize: '13px', color: 'var(--text-light)', padding: '8px 0' }}>
+              아직 메모가 없습니다. 상담 내용이나 특이사항을 기록해 두세요.
+            </div>
+          ) : (
+            <div style={{ display: 'flex', flexDirection: 'column', gap: '10px', marginBottom: '16px' }}>
+              {memos.map((memo) => (
+                <div key={memo.id} style={{
+                  background: '#fffbeb',
+                  border: '1px solid #fde68a',
+                  borderLeft: '3px solid #f59e0b',
+                  borderRadius: '8px',
+                  padding: '10px 14px',
+                  position: 'relative',
+                }}>
+                  <div style={{ fontSize: '13px', color: 'var(--text-primary)', lineHeight: 1.6, whiteSpace: 'pre-wrap', paddingRight: '24px' }}>
+                    {memo.text}
+                  </div>
+                  <div style={{ fontSize: '11px', color: 'var(--text-light)', marginTop: '6px' }}>
+                    {new Date(memo.createdAt).toLocaleString('ko-KR')}
+                  </div>
+                  <button
+                    onClick={() => deleteMemo(memo.id)}
+                    title="메모 삭제"
+                    style={{
+                      position: 'absolute', top: '8px', right: '10px',
+                      background: 'none', border: 'none', cursor: 'pointer',
+                      fontSize: '15px', color: '#9ca3af', lineHeight: 1,
+                      padding: '2px',
+                    }}
+                  >×</button>
+                </div>
+              ))}
+              <div ref={memoEndRef} />
+            </div>
+          )}
+
+          {/* 메모 입력 폼 */}
+          <div style={{ display: 'flex', gap: '8px', alignItems: 'flex-end' }}>
+            <textarea
+              value={memoText}
+              onChange={e => setMemoText(e.target.value)}
+              onKeyDown={e => { if (e.key === 'Enter' && (e.ctrlKey || e.metaKey)) saveMemo(); }}
+              placeholder="상담 내용, 특이사항 등을 입력하세요… (Ctrl+Enter로 저장)"
+              style={{
+                flex: 1, minHeight: '72px', padding: '10px 12px',
+                border: '1px solid var(--border-medium, #d1d5db)',
+                borderRadius: '8px', fontSize: '13px',
+                resize: 'vertical', outline: 'none',
+                fontFamily: 'inherit', lineHeight: 1.6,
+                background: 'var(--bg-white, #fff)',
+                color: 'var(--text-primary)',
+              }}
+            />
+            <button
+              onClick={saveMemo}
+              disabled={!memoText.trim()}
+              style={{
+                padding: '10px 18px', borderRadius: '8px',
+                background: memoText.trim() ? '#f59e0b' : 'var(--bg-hover)',
+                color: memoText.trim() ? '#fff' : 'var(--text-light)',
+                border: 'none', cursor: memoText.trim() ? 'pointer' : 'default',
+                fontSize: '13px', fontWeight: 700, whiteSpace: 'nowrap',
+                transition: 'background 0.15s',
+              }}
+            >
+              저장
+            </button>
+          </div>
         </div>
       </div>
     </>
