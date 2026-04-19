@@ -13,6 +13,8 @@ const AdminProducts = lazy(() => import('../../pages/admin/AdminProducts'));
 const AdminOrders = lazy(() => import('../../pages/admin/AdminOrders'));
 const AdminSites = lazy(() => import('../../pages/admin/AdminSites'));
 const AdminUserDetail = lazy(() => import('../../pages/admin/AdminUserDetail'));
+const AdminLinks = lazy(() => import('../../pages/admin/AdminLinks'));
+const AdminTrends = lazy(() => import('../../pages/admin/AdminTrends'));
 
 const Loading = () => (
   <div className="admin-loading">
@@ -47,6 +49,8 @@ const AdminLayout = () => {
               <Route path="products" element={<AdminProducts />} />
               <Route path="orders" element={<AdminOrders />} />
               <Route path="sites" element={<AdminSites />} />
+              <Route path="links" element={<AdminLinks />} />
+              <Route path="trends" element={<AdminTrends />} />
             </Routes>
           </Suspense>
         </div>

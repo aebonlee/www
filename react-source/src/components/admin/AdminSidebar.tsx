@@ -17,14 +17,6 @@ const GROUP_COLORS: Record<string, string> = {
   '바로가기': '#f43f5e',
 };
 
-const EXT_LINKS = [
-  { href: 'https://www.dreamitbiz.com',        label: '메인 사이트' },
-  { href: 'https://edu-hub.dreamitbiz.com',    label: 'edu-hub' },
-  { href: 'https://ai-hub.dreamitbiz.com',     label: 'ai-hub' },
-  { href: 'https://biz-hub.dreamitbiz.com',    label: 'biz-hub' },
-  { href: 'https://coding-hub.dreamitbiz.com', label: 'coding-hub' },
-  { href: 'https://cs-hub.dreamitbiz.com',     label: 'cs-hub' },
-];
 
 /* ── SVG 아이콘 ── */
 const IconDashboard = () => (
@@ -96,6 +88,18 @@ const IconExternal = () => (
     <line x1="10" y1="14" x2="21" y2="3" />
   </svg>
 );
+const IconLink = () => (
+  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+    <path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71" />
+    <path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71" />
+  </svg>
+);
+const IconTrending = () => (
+  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+    <polyline points="23 6 13.5 15.5 8.5 10.5 1 18" />
+    <polyline points="17 6 23 6 23 12" />
+  </svg>
+);
 const IconArrowLeft = () => (
   <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
     <line x1="19" y1="12" x2="5" y2="12" />
@@ -146,8 +150,10 @@ const AdminSidebar = ({ collapsed, onToggle, mobileOpen, onMobileClose }: {
     {
       label: '개요',
       items: [
-        { path: '/admin',       label: '대시보드',   icon: <IconDashboard /> },
-        { path: '/admin/sites', label: '사이트 현황', icon: <IconGlobe /> },
+        { path: '/admin',         label: '대시보드',     icon: <IconDashboard /> },
+        { path: '/admin/sites',   label: '사이트 현황',  icon: <IconGlobe /> },
+        { path: '/admin/links',   label: '사이트 바로가기', icon: <IconLink /> },
+        { path: '/admin/trends',  label: '트렌드 분석',  icon: <IconTrending /> },
       ],
     },
     {
@@ -282,42 +288,6 @@ const AdminSidebar = ({ collapsed, onToggle, mobileOpen, onMobileClose }: {
             );
           })}
 
-          {/* ── 사이트 바로가기 ── */}
-          <div className="sidebar-group">
-            <div
-              className="sidebar-group-label"
-              style={{
-                color: GROUP_COLORS['바로가기'],
-                borderLeft: `2px solid ${GROUP_COLORS['바로가기']}`,
-                paddingLeft: '16px',
-              }}
-            >
-              사이트 바로가기
-            </div>
-            {EXT_LINKS.map(({ href, label }) => (
-              <a
-                key={href}
-                href={href}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="sidebar-link"
-                title={collapsed ? label : undefined}
-                style={{ fontSize: '12.5px' }}
-              >
-                <div style={{
-                  width: '30px', height: '30px', flexShrink: 0,
-                  display: 'flex', alignItems: 'center', justifyContent: 'center',
-                  borderRadius: '7px',
-                  background: `rgba(${hexToRgb(GROUP_COLORS['바로가기'])},0.12)`,
-                  color: GROUP_COLORS['바로가기'],
-                  transition: 'all 0.2s ease',
-                }}>
-                  <IconExternal />
-                </div>
-                <span>{label}</span>
-              </a>
-            ))}
-          </div>
         </nav>
 
         {/* ── 푸터 ── */}
