@@ -106,19 +106,21 @@ const AdminOrders = () => {
     return list;
   }, [orders, filter, siteFilter]);
 
-  // Summary stats
+  // Summary stats — 쿠폰(total_amount=0) 은 결제완료에서 분리
   const summary = useMemo(() => {
-    const paid = orders.filter(o => o.payment_status === 'paid');
+    const paid      = orders.filter(o => o.payment_status === 'paid' && Number(o.total_amount || 0) > 0);
+    const coupon    = orders.filter(o => o.payment_status === 'paid' && Number(o.total_amount || 0) === 0);
     const cancelled = orders.filter(o => o.payment_status === 'cancelled');
-    const refunded = orders.filter(o => o.payment_status === 'refunded');
+    const refunded  = orders.filter(o => o.payment_status === 'refunded');
     return {
-      totalOrders: orders.length,
-      paidCount: paid.length,
-      paidAmount: paid.reduce((s, o) => s + (Number(o.total_amount) || 0), 0),
-      cancelledCount: cancelled.length,
-      cancelledAmount: cancelled.reduce((s, o) => s + (Number(o.total_amount) || 0), 0),
-      refundedCount: refunded.length,
-      refundedAmount: refunded.reduce((s, o) => s + (Number(o.total_amount) || 0), 0),
+      totalOrders:      orders.length,
+      paidCount:        paid.length,
+      paidAmount:       paid.reduce((s, o) => s + (Number(o.total_amount) || 0), 0),
+      couponCount:      coupon.length,
+      cancelledCount:   cancelled.length,
+      cancelledAmount:  cancelled.reduce((s, o) => s + (Number(o.total_amount) || 0), 0),
+      refundedCount:    refunded.length,
+      refundedAmount:   refunded.reduce((s, o) => s + (Number(o.total_amount) || 0), 0),
     };
   }, [orders]);
 
@@ -295,6 +297,10 @@ const AdminOrders = () => {
         <div className="admin-order-summary-card paid">
           <span className="admin-order-summary-label">결제완료</span>
           <span className="admin-order-summary-value">{summary.paidCount}건 / {summary.paidAmount.toLocaleString()}원</span>
+        </div>
+        <div className="admin-order-summary-card coupon">
+          <span className="admin-order-summary-label">쿠폰/무료</span>
+          <span className="admin-order-summary-value">{summary.couponCount}건</span>
         </div>
         <div className="admin-order-summary-card cancelled">
           <span className="admin-order-summary-label">취소</span>

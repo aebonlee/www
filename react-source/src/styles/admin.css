@@ -782,6 +782,10 @@
   border-left: 3px solid #059669;
 }
 
+.admin-order-summary-card.coupon {
+  border-left: 3px solid #8b5cf6;
+}
+
 .admin-order-summary-card.cancelled {
   border-left: 3px solid #dc2626;
 }

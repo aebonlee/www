@@ -204,7 +204,7 @@ const AdminLinks = () => {
       <div className="admin-page-header">
         <div>
           <h2>사이트 바로가기</h2>
-          <p style={{ fontSize: '13px', color: 'var(--text-light)', marginTop: '2px' }}>
+          <p style={{ fontSize: '16px', color: 'var(--text-light)', marginTop: '2px' }}>
             전체 {TOTAL}개 사이트 · dreamitbiz.com
           </p>
         </div>
@@ -215,8 +215,8 @@ const AdminLinks = () => {
           value={search}
           onChange={(e) => setSearch(e.target.value)}
           style={{
-            padding: '8px 14px', borderRadius: '8px', fontSize: '13px',
-            border: '1px solid var(--border-color)', width: '200px',
+            padding: '10px 17px', borderRadius: '8px', fontSize: '16px',
+            border: '1px solid var(--border-color)', width: '240px',
             background: 'var(--bg-card)', color: 'var(--text-primary)',
           }}
         />
@@ -224,15 +224,15 @@ const AdminLinks = () => {
 
       {/* 카테고리 탭 */}
       <div style={{
-        display: 'flex', flexWrap: 'wrap', gap: '6px',
-        marginBottom: '20px',
+        display: 'flex', flexWrap: 'wrap', gap: '8px',
+        marginBottom: '24px',
       }}>
         {['전체', ...SITE_CATEGORIES.map((c) => c.label)].map((cat) => (
           <button
             key={cat}
             onClick={() => setActiveCategory(cat)}
             style={{
-              padding: '4px 12px', borderRadius: '20px', fontSize: '12px',
+              padding: '5px 14px', borderRadius: '20px', fontSize: '14px',
               fontWeight: activeCategory === cat ? 700 : 500,
               border: '1px solid',
               borderColor: activeCategory === cat
@@ -252,25 +252,25 @@ const AdminLinks = () => {
 
       {/* 카테고리별 사이트 목록 */}
       {filtered.map((cat) => (
-        <div key={cat.label} style={{ marginBottom: '24px' }}>
+        <div key={cat.label} style={{ marginBottom: '29px' }}>
           {/* 카테고리 헤더 */}
           <div style={{
-            display: 'flex', alignItems: 'center', gap: '8px',
-            marginBottom: '10px',
-            paddingBottom: '8px',
+            display: 'flex', alignItems: 'center', gap: '10px',
+            marginBottom: '12px',
+            paddingBottom: '10px',
             borderBottom: `2px solid ${cat.color}`,
           }}>
             <span style={{
-              width: '8px', height: '8px', borderRadius: '50%',
+              width: '10px', height: '10px', borderRadius: '50%',
               background: cat.color, flexShrink: 0,
             }} />
-            <span style={{ fontSize: '13px', fontWeight: 700, color: cat.color }}>
+            <span style={{ fontSize: '16px', fontWeight: 700, color: cat.color }}>
               {cat.label}
             </span>
             <span style={{
-              fontSize: '11px', color: '#fff',
+              fontSize: '13px', color: '#fff',
               background: cat.color, borderRadius: '10px',
-              padding: '1px 7px', fontWeight: 600,
+              padding: '1px 8px', fontWeight: 600,
             }}>
               {cat.sites.length}
             </span>
@@ -279,8 +279,8 @@ const AdminLinks = () => {
           {/* 사이트 카드 그리드 */}
           <div style={{
             display: 'grid',
-            gridTemplateColumns: 'repeat(auto-fill, minmax(220px, 1fr))',
-            gap: '8px',
+            gridTemplateColumns: 'repeat(auto-fill, minmax(264px, 1fr))',
+            gap: '10px',
           }}>
             {cat.sites.map((site) => (
               <a
@@ -289,11 +289,11 @@ const AdminLinks = () => {
                 target="_blank"
                 rel="noopener noreferrer"
                 style={{
-                  display: 'flex', alignItems: 'center', gap: '10px',
-                  padding: '10px 14px',
+                  display: 'flex', alignItems: 'center', gap: '12px',
+                  padding: '12px 17px',
                   background: 'var(--bg-card)',
                   border: '1px solid var(--border-color)',
-                  borderRadius: '8px',
+                  borderRadius: '10px',
                   textDecoration: 'none',
                   transition: 'border-color 0.15s, box-shadow 0.15s',
                   cursor: 'pointer',
@@ -309,34 +309,34 @@ const AdminLinks = () => {
               >
                 {/* 파비콘 영역 */}
                 <div style={{
-                  width: '28px', height: '28px', borderRadius: '6px', flexShrink: 0,
+                  width: '34px', height: '34px', borderRadius: '8px', flexShrink: 0,
                   background: `${cat.color}18`,
                   display: 'flex', alignItems: 'center', justifyContent: 'center',
-                  fontSize: '13px', fontWeight: 700, color: cat.color,
+                  fontSize: '16px', fontWeight: 700, color: cat.color,
                 }}>
                   {site.name.charAt(0).toUpperCase()}
                 </div>
 
                 {/* 텍스트 */}
                 <div style={{ flex: 1, overflow: 'hidden' }}>
-                  <div style={{ fontSize: '13px', fontWeight: 600, color: 'var(--text-primary)', display: 'flex', alignItems: 'center', gap: '5px' }}>
+                  <div style={{ fontSize: '16px', fontWeight: 600, color: 'var(--text-primary)', display: 'flex', alignItems: 'center', gap: '6px' }}>
                     {site.name}
                     {site.pay && (
                       <span style={{
-                        fontSize: '9px', background: '#fef3c7', color: '#92400e',
-                        border: '1px solid #fde68a', borderRadius: '4px', padding: '0 4px',
+                        fontSize: '11px', background: '#fef3c7', color: '#92400e',
+                        border: '1px solid #fde68a', borderRadius: '4px', padding: '0 5px',
                         fontWeight: 700,
                       }}>결제</span>
                     )}
                   </div>
-                  <div style={{ fontSize: '11px', color: 'var(--text-light)', marginTop: '1px', overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap' }}>
+                  <div style={{ fontSize: '13px', color: 'var(--text-light)', marginTop: '2px', overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap' }}>
                     {site.domain}
                   </div>
                 </div>
 
                 {/* 외부링크 아이콘 */}
                 <svg viewBox="0 0 24 24" fill="none" stroke={cat.color} strokeWidth="2"
-                  style={{ width: '14px', height: '14px', flexShrink: 0, opacity: 0.7 }}>
+                  style={{ width: '17px', height: '17px', flexShrink: 0, opacity: 0.7 }}>
                   <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6" />
                   <polyline points="15 3 21 3 21 9" />
                   <line x1="10" y1="14" x2="21" y2="3" />
