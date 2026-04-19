@@ -944,12 +944,12 @@ const AdminUsers = () => {
           border: '1px solid var(--border-color, #e5e7eb)',
           borderRadius: '10px',
         }}>
-          <span style={{ fontSize: '24px', fontWeight: 600, color: 'var(--text-light)', alignSelf: 'center', marginRight: '8px', whiteSpace: 'nowrap' }}>
+          <span style={{ fontSize: '19px', fontWeight: 600, color: 'var(--text-light)', alignSelf: 'center', marginRight: '8px', whiteSpace: 'nowrap' }}>
             사이트
           </span>
           <button
             className={`admin-row-btn${siteFilter === 'all' ? ' active' : ''}`}
-            style={{ fontSize: '22px', padding: '4px 16px' }}
+            style={{ fontSize: '18px', padding: '3px 13px' }}
             onClick={() => setSiteFilter('all')}
           >
             전체 ({users.length})
@@ -968,7 +968,7 @@ const AdminUsers = () => {
                 key={name}
                 onClick={() => setSiteFilter(isActive ? 'all' : name)}
                 style={{
-                  fontSize: '22px', padding: '4px 16px',
+                  fontSize: '18px', padding: '3px 13px',
                   borderRadius: '8px', border: `1px solid ${isActive ? c : 'var(--border-color, #e5e7eb)'}`,
                   background: isActive ? c : 'transparent',
                   color: isActive ? '#fff' : c,
