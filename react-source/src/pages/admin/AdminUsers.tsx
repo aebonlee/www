@@ -1138,15 +1138,17 @@ const AdminUsers = () => {
         </div>
       )}
 
-      <AdminDataTable
-        columns={columns}
-        data={filtered}
-        loading={loading}
-        searchKeys={['display_name', 'name', 'email', 'phone', 'signup_domain']}
-        actions={renderActions}
-        pageSize={20}
-        showRowNumbers={true}
-      />
+      <div style={{ margin: '0 -70px' }}>
+        <AdminDataTable
+          columns={columns}
+          data={filtered}
+          loading={loading}
+          searchKeys={['display_name', 'name', 'email', 'phone', 'signup_domain']}
+          actions={renderActions}
+          pageSize={20}
+          showRowNumbers={true}
+        />
+      </div>
     </>
   );
 };
