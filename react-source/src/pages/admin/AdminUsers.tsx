@@ -904,6 +904,7 @@ const AdminUsers = () => {
         gridTemplateColumns: 'repeat(7, 1fr)',
         gap: '12px',
         marginBottom: '20px',
+        margin: '0 -70px 20px',
       }}>
         {[
           { label: '오늘 가입', value: stats.today, color: '#6366f1', bg: '#eef2ff' },
@@ -939,17 +940,18 @@ const AdminUsers = () => {
         <div style={{
           display: 'flex', flexWrap: 'wrap', gap: '12px',
           marginBottom: '12px',
+          margin: '0 -70px 12px',
           padding: '24px 32px',
           background: 'var(--bg-card, #fff)',
           border: '1px solid var(--border-color, #e5e7eb)',
           borderRadius: '10px',
         }}>
-          <span style={{ fontSize: '19px', fontWeight: 600, color: 'var(--text-light)', alignSelf: 'center', marginRight: '8px', whiteSpace: 'nowrap' }}>
+          <span style={{ fontSize: '15px', fontWeight: 600, color: 'var(--text-light)', alignSelf: 'center', marginRight: '8px', whiteSpace: 'nowrap' }}>
             사이트
           </span>
           <button
             className={`admin-row-btn${siteFilter === 'all' ? ' active' : ''}`}
-            style={{ fontSize: '18px', padding: '3px 13px' }}
+            style={{ fontSize: '14px', padding: '3px 13px' }}
             onClick={() => setSiteFilter('all')}
           >
             전체 ({users.length})
@@ -968,7 +970,7 @@ const AdminUsers = () => {
                 key={name}
                 onClick={() => setSiteFilter(isActive ? 'all' : name)}
                 style={{
-                  fontSize: '18px', padding: '3px 13px',
+                  fontSize: '14px', padding: '3px 13px',
                   borderRadius: '8px', border: `1px solid ${isActive ? c : 'var(--border-color, #e5e7eb)'}`,
                   background: isActive ? c : 'transparent',
                   color: isActive ? '#fff' : c,
@@ -987,7 +989,8 @@ const AdminUsers = () => {
       <div style={{
         display: 'flex', gap: '10px', flexWrap: 'wrap',
         alignItems: 'center', marginBottom: '14px',
-        padding: '12px 16px',
+        margin: '0 -70px 14px',
+        padding: '12px 32px',
         background: 'var(--bg-card, #fff)',
         border: '1px solid var(--border-color, #e5e7eb)',
         borderRadius: '10px',
