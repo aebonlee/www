@@ -1,18 +1,38 @@
 import { useState, useEffect, useMemo } from 'react';
 import AdminDataTable from '../../components/admin/AdminDataTable';
-import { getAllOrders } from '../../utils/adminStorage';
+import { getAllOrdersAll } from '../../utils/adminStorage';
 import { updateOrderStatus } from '../../utils/supabase';
 import { useToast } from '../../contexts/ToastContext';
 import { formatDate, formatPrice } from '../../utils/format';
 
 const STATUS_LABELS = { paid: '결제완료', pending: '대기', failed: '실패', cancelled: '취소', refunded: '환불' };
+
+function downloadCSV(rows: Record<string, any>[], filename: string) {
+  if (!rows.length) return;
+  const keys = Object.keys(rows[0]);
+  const header = keys.join(',');
+  const body = rows.map(r => keys.map(k => `"${String(r[k] ?? '').replace(/"/g, '""')}"`).join(',')).join('\n');
+  const blob = new Blob(['\uFEFF' + header + '\n' + body], { type: 'text/csv;charset=utf-8;' });
+  const url = URL.createObjectURL(blob);
+  const a = document.createElement('a');
+  a.href = url; a.download = filename; a.click();
+  URL.revokeObjectURL(url);
+}
 const STATUS_COLORS = { paid: 'green', pending: 'yellow', failed: 'red', cancelled: 'gray', refunded: 'purple' };
 const METHOD_LABELS = { card: '카드결제', transfer: '계좌이체' };
+
+const SITE_LABELS: Record<string, string> = {
+  www: 'WWW', jobpath: 'JobPath', competency: 'Competency',
+  'edu-hub': 'Edu-Hub', allthat: 'AllThat', papers: 'Papers',
+  'cs-hub': 'CS-Hub', 'basic-hub': 'Basic-Hub', 'exam-hub': 'Exam-Hub',
+  'career-hub': 'Career-Hub', jobexam: 'JobExam',
+};
 
 const AdminOrders = () => {
   const [orders, setOrders] = useState([]);
   const [loading, setLoading] = useState(true);
   const [filter, setFilter] = useState('all');
+  const [siteFilter, setSiteFilter] = useState('all');
   const [detail, setDetail] = useState(null);
   const [cancelMemo, setCancelMemo] = useState('');
   const [updating, setUpdating] = useState(false);
@@ -20,17 +40,27 @@ const AdminOrders = () => {
 
   const load = async () => {
     setLoading(true);
-    const data = await getAllOrders();
+    const data = await getAllOrdersAll();
     setOrders(data);
     setLoading(false);
   };
 
   useEffect(() => { load(); }, []);
 
+  const getSiteTable = (site: string) => {
+    const tableMap: Record<string, string> = {
+      www: 'orders', jobpath: 'forjob_orders', competency: 'comp_orders',
+      'edu-hub': 'eh_orders', allthat: 'at_orders', papers: 'pp_orders',
+      'cs-hub': 'csh_orders', 'basic-hub': 'bsh_orders', 'exam-hub': 'exh_orders',
+      'career-hub': 'crh_orders', jobexam: 'jobexam_orders',
+    };
+    return tableMap[site] || 'orders';
+  };
+
   const handleStatusChange = async (orderId, newStatus, memo = '', site = 'www') => {
     setUpdating(true);
     try {
-      const table = site === 'jobpath' ? 'forjob_orders' : 'orders';
+      const table = getSiteTable(site);
       await updateOrderStatus(orderId, newStatus, null, memo, table);
       showToast('주문 상태가 변경되었습니다.', 'success');
       setDetail(null);
@@ -64,10 +94,17 @@ const AdminOrders = () => {
     return order.filter(s => unique.includes(s));
   }, [orders]);
 
+  const activeSites = useMemo(() => {
+    const sites = [...new Set(orders.map((o: any) => o.site).filter(Boolean))];
+    return sites.sort();
+  }, [orders]);
+
   const filtered = useMemo(() => {
-    if (filter === 'all') return orders;
-    return orders.filter((o) => (o.payment_status || 'pending') === filter);
-  }, [orders, filter]);
+    let list = orders;
+    if (siteFilter !== 'all') list = list.filter((o: any) => o.site === siteFilter);
+    if (filter !== 'all') list = list.filter((o: any) => (o.payment_status || 'pending') === filter);
+    return list;
+  }, [orders, filter, siteFilter]);
 
   // Summary stats
   const summary = useMemo(() => {
@@ -86,7 +123,10 @@ const AdminOrders = () => {
   }, [orders]);
 
   const columns = [
-    { key: 'site', label: '사이트', width: '80px', render: (val) => <span className={`td-badge ${val === 'jobpath' ? 'blue' : 'gray'}`}>{val === 'jobpath' ? 'JobPath' : 'WWW'}</span> },
+    { key: 'site', label: '사이트', width: '90px', render: (val) => {
+      const colors: Record<string, string> = { www: 'gray', jobpath: 'blue', competency: 'purple', 'edu-hub': 'purple', allthat: 'green', papers: 'purple', 'cs-hub': 'blue', 'basic-hub': 'blue', 'exam-hub': 'red', 'career-hub': 'green', jobexam: 'red' };
+      return <span className={`td-badge ${colors[val] || 'gray'}`}>{SITE_LABELS[val] || val || 'WWW'}</span>;
+    }},
     { key: 'order_number', label: '주문번호', className: 'td-title' },
     { key: 'user_name', label: '주문자', width: '100px', render: (val, row) => val || row.user_email?.split('@')[0] || '-' },
     {
@@ -218,13 +258,32 @@ const AdminOrders = () => {
     <>
       <div className="admin-page-header">
         <h2>주문 관리</h2>
-        <button className="admin-refresh-btn" onClick={load} disabled={loading}>
+        <div style={{ display: 'flex', gap: '8px', alignItems: 'center' }}>
+          <button
+            className="admin-row-btn"
+            onClick={() => {
+              const rows = filtered.map(o => ({
+                site: o.site || 'www',
+                order_number: o.order_number || '',
+                user_name: o.user_name || o.user_email?.split('@')[0] || '',
+                total_amount: o.total_amount || 0,
+                payment_status: o.payment_status || 'pending',
+                created_at: o.created_at || '',
+              }));
+              downloadCSV(rows, `orders_${new Date().toISOString().slice(0, 10)}.csv`);
+            }}
+            disabled={loading || filtered.length === 0}
+          >
+            CSV 내보내기
+          </button>
+          <button className="admin-refresh-btn" onClick={load} disabled={loading}>
           <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" strokeWidth="2">
             <polyline points="23 4 23 10 17 10" /><polyline points="1 20 1 14 7 14" />
             <path d="M3.51 9a9 9 0 0 1 14.85-3.36L23 10M1 14l4.64 4.36A9 9 0 0 0 20.49 15" />
           </svg>
           새로고침
         </button>
+        </div>
       </div>
 
       {/* Summary cards */}
@@ -247,13 +306,31 @@ const AdminOrders = () => {
         </div>
       </div>
 
-      {/* Filter tabs */}
+      {/* Site filter tabs */}
+      {activeSites.length > 1 && (
+        <div className="admin-filter-tabs" style={{ marginBottom: '8px' }}>
+          <button className={`admin-filter-tab ${siteFilter === 'all' ? 'active' : ''}`} onClick={() => setSiteFilter('all')}>
+            전체 사이트<span className="admin-filter-count">({orders.length})</span>
+          </button>
+          {activeSites.map((site: string) => {
+            const count = orders.filter((o: any) => o.site === site).length;
+            return (
+              <button key={site} className={`admin-filter-tab ${siteFilter === site ? 'active' : ''}`} onClick={() => setSiteFilter(site)}>
+                {SITE_LABELS[site] || site}<span className="admin-filter-count">({count})</span>
+              </button>
+            );
+          })}
+        </div>
+      )}
+
+      {/* Status filter tabs */}
       <div className="admin-filter-tabs">
         <button className={`admin-filter-tab ${filter === 'all' ? 'active' : ''}`} onClick={() => setFilter('all')}>
-          전체<span className="admin-filter-count">({orders.length})</span>
+          전체<span className="admin-filter-count">({siteFilter === 'all' ? orders.length : orders.filter((o: any) => o.site === siteFilter).length})</span>
         </button>
         {statusFilters.map((st) => {
-          const count = orders.filter((o) => (o.payment_status || 'pending') === st).length;
+          const count = (siteFilter === 'all' ? orders : orders.filter((o: any) => o.site === siteFilter))
+            .filter((o: any) => (o.payment_status || 'pending') === st).length;
           return (
             <button key={st} className={`admin-filter-tab ${filter === st ? 'active' : ''}`} onClick={() => setFilter(st)}>
               {STATUS_LABELS[st] || st}<span className="admin-filter-count">({count})</span>

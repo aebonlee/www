@@ -1,4 +1,5 @@
 import { useState, useEffect, useMemo, useCallback } from 'react';
+import { Link } from 'react-router-dom';
 import AdminDataTable from '../../components/admin/AdminDataTable';
 import {
   getAllUsers,
@@ -6,6 +7,7 @@ import {
   getCouponUserIds,
   updateUserRole,
   addVisitedSite,
+  removeVisitedSite,
   updateUserStatus,
   adminUpdateUserProfile,
   deleteUser,
@@ -13,6 +15,18 @@ import {
 import { ADMIN_EMAILS } from '../../config/admin';
 
 const PROVIDER_LABELS = { google: 'Google', kakao: 'Kakao', email: 'Email' };
+
+function downloadCSV(rows: Record<string, any>[], filename: string) {
+  if (!rows.length) return;
+  const keys = Object.keys(rows[0]);
+  const header = keys.join(',');
+  const body = rows.map(r => keys.map(k => `"${String(r[k] ?? '').replace(/"/g, '""')}"`).join(',')).join('\n');
+  const blob = new Blob(['\uFEFF' + header + '\n' + body], { type: 'text/csv;charset=utf-8;' });
+  const url = URL.createObjectURL(blob);
+  const a = document.createElement('a');
+  a.href = url; a.download = filename; a.click();
+  URL.revokeObjectURL(url);
+}
 
 const ROLE_OPTIONS = [
   { value: 'admin', label: '관리자', color: 'red' },
@@ -153,6 +167,56 @@ const AdminUsers = () => {
     return next;
   });
 
+  // Bulk selection
+  const [selectedIds, setSelectedIds] = useState<Set<string>>(new Set());
+  const [bulkRole, setBulkRole] = useState('user');
+  const [bulkLoading, setBulkLoading] = useState(false);
+
+  const toggleSelect = (id: string) => setSelectedIds(prev => {
+    const next = new Set(prev);
+    next.has(id) ? next.delete(id) : next.add(id);
+    return next;
+  });
+
+  const toggleSelectAll = () => {
+    const selectableIds = filtered.filter(u => !isProtectedAdmin(u)).map(u => u.id);
+    if (selectableIds.every(id => selectedIds.has(id))) {
+      setSelectedIds(new Set());
+    } else {
+      setSelectedIds(new Set(selectableIds));
+    }
+  };
+
+  const handleBulkRoleChange = async () => {
+    if (selectedIds.size === 0) return;
+    if (!window.confirm(`${selectedIds.size}명의 등급을 '${bulkRole}'로 변경하시겠습니까?`)) return;
+    setBulkLoading(true);
+    await Promise.allSettled([...selectedIds].map(id => updateUserRole(id, bulkRole)));
+    setUsers(prev => prev.map(u => selectedIds.has(u.id) ? { ...u, role: bulkRole } : u));
+    setSelectedIds(new Set());
+    setBulkLoading(false);
+  };
+
+  const handleBulkBan = async () => {
+    if (selectedIds.size === 0) return;
+    if (!window.confirm(`${selectedIds.size}명을 일괄 차단하시겠습니까?`)) return;
+    setBulkLoading(true);
+    await Promise.allSettled([...selectedIds].map(id => updateUserStatus(id, 'banned', '관리자 일괄 차단')));
+    setUsers(prev => prev.map(u => selectedIds.has(u.id) ? { ...u, status: 'banned' } : u));
+    setSelectedIds(new Set());
+    setBulkLoading(false);
+  };
+
+  const handleBulkDelete = async () => {
+    if (selectedIds.size === 0) return;
+    if (!window.confirm(`${selectedIds.size}명을 소프트 삭제(탈퇴 처리)하시겠습니까?`)) return;
+    setBulkLoading(true);
+    await Promise.allSettled([...selectedIds].map(id => updateUserStatus(id, 'deleted', '관리자 일괄 탈퇴 처리')));
+    setUsers(prev => prev.map(u => selectedIds.has(u.id) ? { ...u, status: 'deleted' } : u));
+    setSelectedIds(new Set());
+    setBulkLoading(false);
+  };
+
   // 액션 패널 상태
   const [actionTarget, setActionTarget] = useState(null); // { user, type }
   const [actionLoading, setActionLoading] = useState(false);
@@ -215,6 +279,28 @@ const AdminUsers = () => {
         prev.map((u) => {
           if (u.id !== userId) return u;
           return { ...u, visited_sites: (u.visited_sites || []).filter((d) => d !== domain) };
+        })
+      );
+    }
+  }, []);
+
+  const handleRemoveSite = useCallback(async (userId: string, domain: string) => {
+    // 즉시 UI 반영
+    setUsers((prev) =>
+      prev.map((u) => {
+        if (u.id !== userId) return u;
+        return { ...u, visited_sites: (u.visited_sites || []).filter((d: string) => d !== domain) };
+      })
+    );
+    const result = await removeVisitedSite(userId, domain);
+    if (result.error) {
+      alert('사이트 제거 실패: ' + result.error);
+      // 롤백 (다시 추가)
+      setUsers((prev) =>
+        prev.map((u) => {
+          if (u.id !== userId) return u;
+          const current = Array.isArray(u.visited_sites) ? u.visited_sites : [];
+          return { ...u, visited_sites: [...current, domain] };
         })
       );
     }
@@ -374,6 +460,29 @@ const AdminUsers = () => {
   const columns = [
     {
       key: 'id',
+      label: (
+        <input
+          type="checkbox"
+          style={{ cursor: 'pointer' }}
+          checked={filtered.filter(u => !isProtectedAdmin(u)).length > 0 &&
+            filtered.filter(u => !isProtectedAdmin(u)).every(u => selectedIds.has(u.id))}
+          onChange={toggleSelectAll}
+          title="전체 선택"
+        />
+      ),
+      width: '40px',
+      render: (val, row) => isProtectedAdmin(row) ? null : (
+        <input
+          type="checkbox"
+          checked={selectedIds.has(val)}
+          onChange={() => toggleSelect(val)}
+          onClick={e => e.stopPropagation()}
+          style={{ cursor: 'pointer' }}
+        />
+      ),
+    },
+    {
+      key: 'id',
       label: 'ID',
       width: '100px',
       render: (val) => (
@@ -495,9 +604,23 @@ const AdminUsers = () => {
                   key={domain}
                   className={`td-badge ${color}`}
                   title={isSignupSite ? '최초 가입 사이트' : domain}
-                  style={isSignupSite ? { fontWeight: 700, outline: '1px solid currentColor' } : undefined}
+                  style={{
+                    ...(isSignupSite ? { fontWeight: 700, outline: '1px solid currentColor' } : undefined),
+                    display: 'inline-flex', alignItems: 'center', gap: '2px',
+                  }}
                 >
                   {name}{isSignupSite ? '*' : ''}
+                  {!isSignupSite && (
+                    <button
+                      onClick={e => { e.stopPropagation(); handleRemoveSite(row.id, domain); }}
+                      title={`${name} 제거`}
+                      style={{
+                        background: 'none', border: 'none', cursor: 'pointer',
+                        padding: '0 1px', lineHeight: 1, color: 'inherit',
+                        fontSize: '11px', opacity: 0.7,
+                      }}
+                    >×</button>
+                  )}
                 </span>
               );
             })}
@@ -617,12 +740,20 @@ const AdminUsers = () => {
 
   // 액션 버튼 렌더러
   const renderActions = (row) => {
-    if (isProtectedAdmin(row)) return null;
     const status = row.status || 'active';
+
+    if (isProtectedAdmin(row)) {
+      return (
+        <div className="admin-row-actions" style={{ flexDirection: 'column', gap: '4px' }}>
+          <Link to={`/admin/users/${row.id}`} className="admin-row-btn" style={{ textDecoration: 'none', textAlign: 'center' }}>상세</Link>
+        </div>
+      );
+    }
 
     if (status === 'banned') {
       return (
         <div className="admin-row-actions" style={{ flexDirection: 'column', gap: '4px' }}>
+          <Link to={`/admin/users/${row.id}`} className="admin-row-btn" style={{ textDecoration: 'none', textAlign: 'center' }}>상세</Link>
           <button className="admin-row-btn" onClick={() => handleRestore(row)}>해제</button>
           <button className="admin-row-btn danger" onClick={() => handleDelete(row)}>삭제</button>
         </div>
@@ -632,6 +763,7 @@ const AdminUsers = () => {
     if (status === 'deleted') {
       return (
         <div className="admin-row-actions" style={{ flexDirection: 'column', gap: '4px' }}>
+          <Link to={`/admin/users/${row.id}`} className="admin-row-btn" style={{ textDecoration: 'none', textAlign: 'center' }}>상세</Link>
           <button className="admin-row-btn" onClick={() => handleRestore(row)}>복구</button>
           <button className="admin-row-btn danger" onClick={() => handleDelete(row)}>완전삭제</button>
         </div>
@@ -640,6 +772,7 @@ const AdminUsers = () => {
 
     return (
       <div className="admin-row-actions" style={{ flexDirection: 'column', gap: '4px' }}>
+        <Link to={`/admin/users/${row.id}`} className="admin-row-btn" style={{ textDecoration: 'none', textAlign: 'center' }}>상세</Link>
         <button className="admin-row-btn" onClick={() => openAction(row, 'edit')}>수정</button>
         <button className="admin-row-btn danger" onClick={() => openAction(row, 'ban')}>차단</button>
         <button className="admin-row-btn danger" onClick={() => handleDelete(row)}>삭제</button>
@@ -739,9 +872,30 @@ const AdminUsers = () => {
       {/* ── 헤더 ── */}
       <div className="admin-page-header">
         <h2>회원 관리</h2>
-        <button className="admin-row-btn" onClick={handleRefreshData} disabled={loading}>
-          {loading ? '로딩 중...' : '새로고침'}
-        </button>
+        <div style={{ display: 'flex', gap: '8px' }}>
+          <button
+            className="admin-row-btn"
+            onClick={() => {
+              const rows = filtered.map(u => ({
+                id: u.id,
+                display_name: u.display_name || u.name || '',
+                email: u.email || '',
+                phone: u.phone || '',
+                role: resolveRole(u),
+                status: u.status || 'active',
+                signup_domain: u.signup_domain || '',
+                created_at: u.created_at || '',
+              }));
+              downloadCSV(rows, `users_${new Date().toISOString().slice(0, 10)}.csv`);
+            }}
+            disabled={loading || filtered.length === 0}
+          >
+            CSV 내보내기
+          </button>
+          <button className="admin-row-btn" onClick={handleRefreshData} disabled={loading}>
+            {loading ? '로딩 중...' : '새로고침'}
+          </button>
+        </div>
       </div>
 
       {/* ── 통계 박스 ── */}
@@ -924,6 +1078,65 @@ const AdminUsers = () => {
 
       {/* 액션 패널 */}
       {renderActionPanel()}
+
+      {/* Bulk Actions 플로팅 바 */}
+      {selectedIds.size > 0 && (
+        <div style={{
+          position: 'sticky', bottom: '16px', zIndex: 100,
+          background: '#1e293b', color: '#fff',
+          borderRadius: '10px', padding: '12px 20px',
+          display: 'flex', alignItems: 'center', gap: '12px',
+          boxShadow: '0 4px 16px rgba(0,0,0,0.3)',
+          marginBottom: '8px',
+        }}>
+          <span style={{ fontWeight: 600, marginRight: '4px' }}>{selectedIds.size}명 선택됨</span>
+          <span style={{ width: '1px', height: '20px', background: 'rgba(255,255,255,0.2)' }} />
+          <select
+            value={bulkRole}
+            onChange={e => setBulkRole(e.target.value)}
+            style={{ padding: '4px 8px', borderRadius: '6px', fontSize: '13px', border: 'none', background: '#334155', color: '#fff' }}
+          >
+            {[
+              { value: 'user', label: '일반회원' },
+              { value: 'evaluator', label: '평가자' },
+              { value: 'admin', label: '관리자' },
+            ].map(opt => (
+              <option key={opt.value} value={opt.value}>{opt.label}</option>
+            ))}
+          </select>
+          <button
+            className="admin-row-btn"
+            style={{ background: '#3B82F6', color: '#fff', borderColor: '#3B82F6' }}
+            onClick={handleBulkRoleChange}
+            disabled={bulkLoading}
+          >
+            등급 변경
+          </button>
+          <button
+            className="admin-row-btn danger"
+            style={{ background: '#DC2626', color: '#fff', borderColor: '#DC2626' }}
+            onClick={handleBulkBan}
+            disabled={bulkLoading}
+          >
+            일괄차단
+          </button>
+          <button
+            className="admin-row-btn danger"
+            style={{ background: '#7F1D1D', color: '#fff', borderColor: '#7F1D1D' }}
+            onClick={handleBulkDelete}
+            disabled={bulkLoading}
+          >
+            일괄삭제
+          </button>
+          <button
+            className="admin-row-btn"
+            style={{ marginLeft: 'auto', background: 'transparent', color: '#94a3b8', borderColor: '#475569' }}
+            onClick={() => setSelectedIds(new Set())}
+          >
+            선택해제
+          </button>
+        </div>
+      )}
 
       <AdminDataTable
         columns={columns}

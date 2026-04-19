@@ -1,7 +1,14 @@
 import { useState, useEffect, useCallback } from 'react';
 import { Link } from 'react-router-dom';
+import {
+  LineChart, Line, BarChart, Bar, PieChart, Pie, Cell,
+  XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer, Legend
+} from 'recharts';
 import AdminStatCard from '../../components/admin/AdminStatCard';
-import { getDashboardCounts, getRecentOrders, getPaymentStats } from '../../utils/adminStorage';
+import {
+  getDashboardCounts, getRecentOrders, getPaymentStats,
+  getMonthlySignups, getMonthlyRevenue, getSiteDistribution
+} from '../../utils/adminStorage';
 import { getBlogPosts, getBoardPosts, getGalleryItems } from '../../utils/boardStorage';
 import { useAuth } from '../../contexts/AuthContext';
 import { formatDate, formatPrice } from '../../utils/format';
@@ -14,6 +21,10 @@ const AdminDashboard = () => {
   const [recentPosts, setRecentPosts] = useState([]);
   const [galleryCount, setGalleryCount] = useState(0);
   const [loading, setLoading] = useState(true);
+  const [monthlySignups, setMonthlySignups] = useState([]);
+  const [monthlyRevenue, setMonthlyRevenue] = useState([]);
+  const [siteDistribution, setSiteDistribution] = useState([]);
+  const [chartsLoading, setChartsLoading] = useState(true);
 
   const load = useCallback(async () => {
     setLoading(true);
@@ -35,6 +46,18 @@ const AdminDashboard = () => {
     ].sort((a, b) => (b.id || 0) - (a.id || 0)).slice(0, 5);
     setRecentPosts(allPosts);
     setLoading(false);
+
+    // 차트 데이터 (별도 로드 — 느릴 수 있음)
+    setChartsLoading(true);
+    const [signups, revenue, sites] = await Promise.all([
+      getMonthlySignups(),
+      getMonthlyRevenue(),
+      getSiteDistribution(),
+    ]);
+    setMonthlySignups(signups);
+    setMonthlyRevenue(revenue);
+    setSiteDistribution(sites);
+    setChartsLoading(false);
   }, []);
 
   useEffect(() => {
@@ -313,6 +336,82 @@ const AdminDashboard = () => {
                 </Link>
               ))}
             </div>
+          </div>
+        </div>
+      </div>
+
+      {/* ── ZONE 6: 트렌드 분석 ── */}
+      <div className="dash-panel" style={{ marginTop: '0' }}>
+        <div className="dash-panel-header">
+          <h3>트렌드 분석</h3>
+          {chartsLoading && <span style={{ fontSize: '12px', color: 'var(--text-light)' }}>로딩 중...</span>}
+        </div>
+        <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr 1fr', gap: '24px', padding: '16px 20px' }}>
+          {/* 월별 신규 가입자 */}
+          <div>
+            <div style={{ fontSize: '13px', fontWeight: 600, color: 'var(--text-secondary)', marginBottom: '12px' }}>
+              월별 신규 가입자 (최근 6개월)
+            </div>
+            <ResponsiveContainer width="100%" height={180}>
+              <LineChart data={monthlySignups}>
+                <CartesianGrid strokeDasharray="3 3" stroke="var(--border-color, #e5e7eb)" />
+                <XAxis dataKey="month" tick={{ fontSize: 11 }} />
+                <YAxis tick={{ fontSize: 11 }} allowDecimals={false} />
+                <Tooltip formatter={(v) => [`${v}명`, '신규 가입']} />
+                <Line type="monotone" dataKey="count" stroke="#3B82F6" strokeWidth={2} dot={{ r: 4 }} />
+              </LineChart>
+            </ResponsiveContainer>
+          </div>
+
+          {/* 월별 매출 */}
+          <div>
+            <div style={{ fontSize: '13px', fontWeight: 600, color: 'var(--text-secondary)', marginBottom: '12px' }}>
+              월별 매출 (최근 6개월)
+            </div>
+            <ResponsiveContainer width="100%" height={180}>
+              <BarChart data={monthlyRevenue}>
+                <CartesianGrid strokeDasharray="3 3" stroke="var(--border-color, #e5e7eb)" />
+                <XAxis dataKey="month" tick={{ fontSize: 11 }} />
+                <YAxis tick={{ fontSize: 11 }} tickFormatter={(v) => v >= 10000 ? `${(v/10000).toFixed(0)}만` : String(v)} />
+                <Tooltip formatter={(v) => [`${Number(v).toLocaleString()}원`, '매출']} />
+                <Bar dataKey="amount" fill="#10B981" radius={[4, 4, 0, 0]} />
+              </BarChart>
+            </ResponsiveContainer>
+          </div>
+
+          {/* 사이트별 회원 분포 */}
+          <div>
+            <div style={{ fontSize: '13px', fontWeight: 600, color: 'var(--text-secondary)', marginBottom: '12px' }}>
+              사이트별 회원 분포 (상위 10)
+            </div>
+            {siteDistribution.length > 0 ? (
+              <ResponsiveContainer width="100%" height={180}>
+                <PieChart>
+                  <Pie
+                    data={siteDistribution}
+                    dataKey="count"
+                    nameKey="site"
+                    cx="50%"
+                    cy="50%"
+                    outerRadius={70}
+                    label={({ site, percent }) => percent > 0.05 ? `${site} ${(percent * 100).toFixed(0)}%` : ''}
+                    labelLine={false}
+                  >
+                    {siteDistribution.map((_, idx) => (
+                      <Cell key={idx} fill={[
+                        '#3B82F6','#10B981','#8B5CF6','#F59E0B','#EF4444',
+                        '#06B6D4','#EC4899','#6366F1','#84CC16','#F97316'
+                      ][idx % 10]} />
+                    ))}
+                  </Pie>
+                  <Tooltip formatter={(v, name) => [`${v}명`, name]} />
+                </PieChart>
+              </ResponsiveContainer>
+            ) : (
+              <div style={{ height: '180px', display: 'flex', alignItems: 'center', justifyContent: 'center', color: 'var(--text-light)', fontSize: '13px' }}>
+                데이터 없음
+              </div>
+            )}
           </div>
         </div>
       </div>

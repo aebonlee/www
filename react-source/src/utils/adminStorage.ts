@@ -78,6 +78,42 @@ export async function getAllUsers() {
   return data || [];
 }
 
+/** 10개 결제 사이트 전체 주문 통합 (Promise.allSettled 병렬) */
+export async function getAllOrdersAll() {
+  const client = getSupabase();
+  if (!client) return [];
+
+  const sites: { site: string; table: string; select: string }[] = [
+    { site: 'www', table: 'orders', select: '*, order_items(*)' },
+    { site: 'jobpath', table: 'forjob_orders', select: '*' },
+    { site: 'competency', table: 'comp_orders', select: '*' },
+    { site: 'edu-hub', table: 'eh_orders', select: '*' },
+    { site: 'allthat', table: 'at_orders', select: '*' },
+    { site: 'papers', table: 'pp_orders', select: '*' },
+    { site: 'cs-hub', table: 'csh_orders', select: '*' },
+    { site: 'basic-hub', table: 'bsh_orders', select: '*' },
+    { site: 'exam-hub', table: 'exh_orders', select: '*' },
+    { site: 'career-hub', table: 'crh_orders', select: '*' },
+    { site: 'jobexam', table: 'jobexam_orders', select: '*' },
+  ];
+
+  const results = await Promise.allSettled(
+    sites.map(({ table, select }) =>
+      client.from(table).select(select).order('created_at', { ascending: false })
+    )
+  );
+
+  const allOrders: any[] = [];
+  results.forEach((result, i) => {
+    if (result.status === 'fulfilled' && !result.value.error) {
+      const rows = (result.value.data || []).map((o: any) => ({ ...o, site: sites[i].site }));
+      allOrders.push(...rows);
+    }
+  });
+
+  return allOrders.sort((a, b) => new Date(b.created_at).getTime() - new Date(a.created_at).getTime());
+}
+
 /** 전체 주문 목록 (www orders + jobpath forjob_orders 통합) */
 export async function getAllOrders() {
   const client = getSupabase();
@@ -160,6 +196,25 @@ export async function updateUserSignupDomain(userId: string, domain: string) {
   }
   if (data?.error) {
     console.error('updateUserSignupDomain denied:', data.error);
+    return { error: data.error };
+  }
+  return { success: true };
+}
+
+/** 관리자 수동 방문 사이트 제거 — rpc() 사용 */
+export async function removeVisitedSite(userId: string, domain: string) {
+  const client = getSupabase();
+  if (!client) return { error: 'Supabase client not available' };
+  const { data, error } = await client.rpc('admin_remove_visited_site', {
+    target_user_id: userId,
+    site_domain: domain,
+  });
+  if (error) {
+    console.error('removeVisitedSite error:', error);
+    return { error: error.message };
+  }
+  if (data?.error) {
+    console.error('removeVisitedSite denied:', data.error);
     return { error: data.error };
   }
   return { success: true };
@@ -271,6 +326,58 @@ export async function getCouponUserIds(): Promise<Set<string>> {
   const ids = new Set<string>();
   (data || []).forEach((r: any) => { if (r.user_id) ids.add(r.user_id); });
   return ids;
+}
+
+/** 최근 6개월 월별 신규 가입자 수 (JS 집계, getAllUsers 재사용) */
+export async function getMonthlySignups(): Promise<{ month: string; count: number }[]> {
+  const users = await getAllUsers();
+  const now = new Date();
+  const months: { month: string; count: number }[] = [];
+  for (let i = 5; i >= 0; i--) {
+    const d = new Date(now.getFullYear(), now.getMonth() - i, 1);
+    const key = `${d.getFullYear()}-${String(d.getMonth() + 1).padStart(2, '0')}`;
+    const label = `${d.getMonth() + 1}월`;
+    const count = users.filter((u: any) => (u.created_at || '').slice(0, 7) === key).length;
+    months.push({ month: label, count });
+  }
+  return months;
+}
+
+/** 최근 6개월 월별 매출 (www + jobpath, paid 주문 기준) */
+export async function getMonthlyRevenue(): Promise<{ month: string; amount: number }[]> {
+  const orders = await getAllOrders();
+  const paidOrders = orders.filter((o: any) => o.payment_status === 'paid');
+  const now = new Date();
+  const months: { month: string; amount: number }[] = [];
+  for (let i = 5; i >= 0; i--) {
+    const d = new Date(now.getFullYear(), now.getMonth() - i, 1);
+    const key = `${d.getFullYear()}-${String(d.getMonth() + 1).padStart(2, '0')}`;
+    const label = `${d.getMonth() + 1}월`;
+    const amount = paidOrders
+      .filter((o: any) => (o.created_at || '').slice(0, 7) === key)
+      .reduce((sum: number, o: any) => sum + (Number(o.total_amount) || 0), 0);
+    months.push({ month: label, amount });
+  }
+  return months;
+}
+
+/** 사이트별 회원 분포 (상위 10개, visited_sites 기반) */
+export async function getSiteDistribution(): Promise<{ site: string; count: number }[]> {
+  const users = await getAllUsers();
+  const siteMap: Record<string, number> = {};
+  users.forEach((u: any) => {
+    const sites = Array.isArray(u.visited_sites) && u.visited_sites.length > 0
+      ? u.visited_sites
+      : u.signup_domain ? [u.signup_domain] : [];
+    sites.forEach((domain: string) => {
+      const name = domain.replace('.dreamitbiz.com', '') || 'www';
+      siteMap[name] = (siteMap[name] || 0) + 1;
+    });
+  });
+  return Object.entries(siteMap)
+    .map(([site, count]) => ({ site, count }))
+    .sort((a, b) => b.count - a.count)
+    .slice(0, 10);
 }
 
 /** 최근 주문 N건 */
