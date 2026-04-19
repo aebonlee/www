@@ -49,10 +49,10 @@ const AdminOrders = () => {
 
   const getSiteTable = (site: string) => {
     const tableMap: Record<string, string> = {
-      www: 'orders', jobpath: 'forjob_orders', competency: 'comp_orders',
+      www: 'orders', jobpath: 'forjob_orders', ahp_basic: 'ah_orders',
       'edu-hub': 'eh_orders', allthat: 'at_orders', papers: 'pp_orders',
       'cs-hub': 'csh_orders', 'basic-hub': 'bsh_orders', 'exam-hub': 'exh_orders',
-      'career-hub': 'crh_orders', jobexam: 'jobexam_orders',
+      'career-hub': 'crh_orders', jobexam: 'jobexam_orders', 'biz-hub': 'biz_orders',
     };
     return tableMap[site] || 'orders';
   };

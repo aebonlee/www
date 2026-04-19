@@ -86,7 +86,7 @@ export async function getAllOrdersAll() {
   const sites: { site: string; table: string; select: string }[] = [
     { site: 'www', table: 'orders', select: '*, order_items(*)' },
     { site: 'jobpath', table: 'forjob_orders', select: '*' },
-    { site: 'competency', table: 'comp_orders', select: '*' },
+    { site: 'ahp_basic', table: 'ah_orders', select: '*' },
     { site: 'edu-hub', table: 'eh_orders', select: '*' },
     { site: 'allthat', table: 'at_orders', select: '*' },
     { site: 'papers', table: 'pp_orders', select: '*' },
@@ -95,6 +95,7 @@ export async function getAllOrdersAll() {
     { site: 'exam-hub', table: 'exh_orders', select: '*' },
     { site: 'career-hub', table: 'crh_orders', select: '*' },
     { site: 'jobexam', table: 'jobexam_orders', select: '*' },
+    { site: 'biz-hub', table: 'biz_orders', select: '*' },
   ];
 
   const results = await Promise.allSettled(
@@ -108,6 +109,10 @@ export async function getAllOrdersAll() {
     if (result.status === 'fulfilled' && !result.value.error) {
       const rows = (result.value.data || []).map((o: any) => ({ ...o, site: sites[i].site }));
       allOrders.push(...rows);
+    } else if (result.status === 'fulfilled' && result.value.error) {
+      console.warn(`getAllOrdersAll [${sites[i].site}] RLS/query error:`, result.value.error.message);
+    } else if (result.status === 'rejected') {
+      console.warn(`getAllOrdersAll [${sites[i].site}] rejected:`, (result as PromiseRejectedResult).reason);
     }
   });
 
