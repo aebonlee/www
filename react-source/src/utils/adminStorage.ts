@@ -400,3 +400,155 @@ export async function getRecentOrders(limit = 5) {
   }
   return data || [];
 }
+
+/** ─── 사이트별 방문 통계 (site_visit_log 기반) ─── */
+
+interface SiteVisitStat {
+  site_domain: string;
+  count: number;
+}
+
+/** 최근 N일간 사이트별 방문 횟수 집계 */
+export async function getSiteVisitStats(days = 30): Promise<SiteVisitStat[]> {
+  const client = getSupabase();
+  if (!client) return [];
+
+  const since = new Date();
+  since.setDate(since.getDate() - days);
+
+  const { data, error } = await client
+    .from('site_visit_log')
+    .select('site_domain, visited_at')
+    .gte('visited_at', since.toISOString());
+
+  if (error) {
+    console.warn('getSiteVisitStats error:', error.message);
+    return [];
+  }
+
+  const map: Record<string, number> = {};
+  (data || []).forEach((r: any) => {
+    map[r.site_domain] = (map[r.site_domain] || 0) + 1;
+  });
+
+  return Object.entries(map)
+    .map(([site_domain, count]) => ({ site_domain, count }))
+    .sort((a, b) => b.count - a.count);
+}
+
+/** 특정 사이트의 일별 방문 추이 (최근 N일) */
+export async function getDailySiteVisits(domain: string, days = 30): Promise<{ date: string; count: number }[]> {
+  const client = getSupabase();
+  if (!client) return [];
+
+  const since = new Date();
+  since.setDate(since.getDate() - days);
+
+  const { data, error } = await client
+    .from('site_visit_log')
+    .select('visited_at')
+    .eq('site_domain', domain)
+    .gte('visited_at', since.toISOString())
+    .order('visited_at', { ascending: true });
+
+  if (error) {
+    console.warn('getDailySiteVisits error:', error.message);
+    return [];
+  }
+
+  const map: Record<string, number> = {};
+  (data || []).forEach((r: any) => {
+    const day = (r.visited_at || '').slice(0, 10);
+    if (day) map[day] = (map[day] || 0) + 1;
+  });
+
+  // 모든 날짜 채우기
+  const result: { date: string; count: number }[] = [];
+  const cursor = new Date(since);
+  const today = new Date();
+  while (cursor <= today) {
+    const key = cursor.toISOString().slice(0, 10);
+    result.push({ date: key, count: map[key] || 0 });
+    cursor.setDate(cursor.getDate() + 1);
+  }
+  return result;
+}
+
+/** 사이트별 종합 요약 (visited_sites 기반 회원 수 + visit_log 기반 방문 수) */
+export async function getSiteVisitSummary(): Promise<{
+  domain: string;
+  totalMembers: number;
+  weekVisits: number;
+  monthVisits: number;
+  newSignupsMonth: number;
+  growth: number;
+}[]> {
+  const client = getSupabase();
+  if (!client) return [];
+
+  // 1) 회원 데이터 (visited_sites 기반)
+  const users = await getAllUsers();
+  const memberMap: Record<string, number> = {};
+  const monthAgo = new Date();
+  monthAgo.setDate(monthAgo.getDate() - 30);
+  const signupMap: Record<string, number> = {};
+
+  users.forEach((u: any) => {
+    const sites = Array.isArray(u.visited_sites) && u.visited_sites.length > 0
+      ? u.visited_sites
+      : u.signup_domain ? [u.signup_domain] : [];
+    sites.forEach((d: string) => {
+      memberMap[d] = (memberMap[d] || 0) + 1;
+      if (u.created_at && new Date(u.created_at) >= monthAgo) {
+        signupMap[d] = (signupMap[d] || 0) + 1;
+      }
+    });
+  });
+
+  // 2) 방문 로그 (최근 60일 — 이번달 + 저번달 비교용)
+  const since60 = new Date();
+  since60.setDate(since60.getDate() - 60);
+  const { data: logs } = await client
+    .from('site_visit_log')
+    .select('site_domain, visited_at')
+    .gte('visited_at', since60.toISOString());
+
+  const now = new Date();
+  const weekAgo = new Date();
+  weekAgo.setDate(weekAgo.getDate() - 7);
+  const monthStart = new Date(now.getFullYear(), now.getMonth(), 1);
+  const prevMonthStart = new Date(now.getFullYear(), now.getMonth() - 1, 1);
+
+  const weekMap: Record<string, number> = {};
+  const monthMap: Record<string, number> = {};
+  const prevMonthMap: Record<string, number> = {};
+
+  (logs || []).forEach((r: any) => {
+    const d = r.site_domain;
+    const t = new Date(r.visited_at);
+    if (t >= weekAgo) weekMap[d] = (weekMap[d] || 0) + 1;
+    if (t >= monthStart) monthMap[d] = (monthMap[d] || 0) + 1;
+    if (t >= prevMonthStart && t < monthStart) prevMonthMap[d] = (prevMonthMap[d] || 0) + 1;
+  });
+
+  // 3) 모든 도메인 합치기
+  const allDomains = new Set([
+    ...Object.keys(memberMap),
+    ...Object.keys(weekMap),
+    ...Object.keys(monthMap),
+  ]);
+
+  return Array.from(allDomains).map((domain) => {
+    const prev = prevMonthMap[domain] || 0;
+    const curr = monthMap[domain] || 0;
+    const growth = prev > 0 ? Math.round((curr - prev) / prev * 100) : (curr > 0 ? 100 : 0);
+    return {
+      domain,
+      totalMembers: memberMap[domain] || 0,
+      weekVisits: weekMap[domain] || 0,
+      monthVisits: curr,
+      newSignupsMonth: signupMap[domain] || 0,
+      growth,
+    };
+  }).sort((a, b) => b.totalMembers - a.totalMembers);
+}

@@ -98,6 +98,10 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
             .update({ last_sign_in_at: new Date().toISOString() })
             .eq('id', u.id)
             .then(() => {});
+          // 방문 로그 기록
+          client.from('site_visit_log')
+            .insert({ user_id: u.id, site_domain: window.location.hostname })
+            .then(() => {});
         }
       } else {
         setProfile(null);

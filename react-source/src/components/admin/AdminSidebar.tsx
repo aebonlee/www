@@ -94,6 +94,13 @@ const IconLink = () => (
     <path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71" />
   </svg>
 );
+const IconBarChart = () => (
+  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+    <line x1="18" y1="20" x2="18" y2="10" />
+    <line x1="12" y1="20" x2="12" y2="4" />
+    <line x1="6" y1="20" x2="6" y2="14" />
+  </svg>
+);
 const IconTrending = () => (
   <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
     <polyline points="23 6 13.5 15.5 8.5 10.5 1 18" />
@@ -153,6 +160,7 @@ const AdminSidebar = ({ collapsed, onToggle, mobileOpen, onMobileClose }: {
         { path: '/admin',         label: '대시보드',     icon: <IconDashboard /> },
         { path: '/admin/sites',   label: '사이트 현황',  icon: <IconGlobe /> },
         { path: '/admin/links',   label: '사이트 바로가기', icon: <IconLink /> },
+        { path: '/admin/site-visits', label: '사이트별 방문통계', icon: <IconBarChart /> },
         { path: '/admin/trends',  label: '트렌드 분석',  icon: <IconTrending /> },
       ],
     },
