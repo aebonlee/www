@@ -107,6 +107,12 @@ const IconTrending = () => (
     <polyline points="17 6 23 6 23 12" />
   </svg>
 );
+const IconTicket = () => (
+  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+    <path d="M2 9a3 3 0 0 1 0 6v2a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2v-2a3 3 0 0 1 0-6V7a2 2 0 0 0-2-2H4a2 2 0 0 0-2 2Z" />
+    <path d="M13 5v2" /><path d="M13 17v2" /><path d="M13 11v2" />
+  </svg>
+);
 const IconArrowLeft = () => (
   <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
     <line x1="19" y1="12" x2="5" y2="12" />
@@ -175,6 +181,7 @@ const AdminSidebar = ({ collapsed, onToggle, mobileOpen, onMobileClose }: {
       items: [
         { path: '/admin/products', label: '상품 관리', icon: <IconBox /> },
         { path: '/admin/orders',   label: '주문/결제', icon: <IconCard />, badge: stats.newOrders || null },
+        { path: '/admin/coupons',  label: '쿠폰 관리', icon: <IconTicket /> },
       ],
     },
     {

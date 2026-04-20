@@ -303,6 +303,58 @@ export async function deleteUser(userId: string) {
   return { success: true };
 }
 
+/** 전체 사이트 쿠폰 목록 조회 (현재 forjob만 존재) */
+export async function getAllCoupons() {
+  const client = getSupabase();
+  if (!client) return [];
+
+  const sites: { site: string; table: string }[] = [
+    { site: 'jobpath', table: 'forjob_coupons' },
+  ];
+
+  const results = await Promise.allSettled(
+    sites.map(({ table }) =>
+      client.from(table).select('*').order('created_at', { ascending: false })
+    )
+  );
+
+  const all: any[] = [];
+  results.forEach((result, i) => {
+    if (result.status === 'fulfilled' && !result.value.error) {
+      const rows = (result.value.data || []).map((c: any) => ({ ...c, site: sites[i].site }));
+      all.push(...rows);
+    }
+  });
+
+  return all.sort((a, b) => new Date(b.created_at).getTime() - new Date(a.created_at).getTime());
+}
+
+/** 전체 사이트 쿠폰 사용 내역 조회 */
+export async function getAllCouponRedemptions() {
+  const client = getSupabase();
+  if (!client) return [];
+
+  const sites: { site: string; table: string }[] = [
+    { site: 'jobpath', table: 'forjob_coupon_redemptions' },
+  ];
+
+  const results = await Promise.allSettled(
+    sites.map(({ table }) =>
+      client.from(table).select('*').order('created_at', { ascending: false })
+    )
+  );
+
+  const all: any[] = [];
+  results.forEach((result, i) => {
+    if (result.status === 'fulfilled' && !result.value.error) {
+      const rows = (result.value.data || []).map((r: any) => ({ ...r, site: sites[i].site }));
+      all.push(...rows);
+    }
+  });
+
+  return all.sort((a, b) => new Date(b.created_at).getTime() - new Date(a.created_at).getTime());
+}
+
 /** 실제 유료 결제 완료 회원 ID 목록 (www + jobpath, total_amount > 0) */
 export async function getPaidUserIds(): Promise<Set<string>> {
   const client = getSupabase();
