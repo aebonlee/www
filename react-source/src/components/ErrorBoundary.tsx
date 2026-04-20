@@ -33,6 +33,7 @@ class ErrorBoundary extends Component<Props, State> {
 
   render() {
     if (this.state.hasError) {
+      const err = this.state.error;
       return (
         <div style={{
           display: 'flex',
@@ -50,6 +51,20 @@ class ErrorBoundary extends Component<Props, State> {
           <p style={{ fontSize: '1rem', color: '#666', marginBottom: '2rem', maxWidth: '500px' }}>
             페이지를 불러오는 중 오류가 발생했습니다. 새로고침하거나 홈으로 이동해 주세요.
           </p>
+          {err && (
+            <details style={{ marginBottom: '1.5rem', maxWidth: '600px', textAlign: 'left', width: '100%' }}>
+              <summary style={{ cursor: 'pointer', color: '#999', fontSize: '0.85rem' }}>오류 상세</summary>
+              <pre style={{
+                marginTop: '0.5rem', padding: '0.75rem', background: '#f8f8f8',
+                borderRadius: '6px', fontSize: '0.75rem', color: '#c00',
+                whiteSpace: 'pre-wrap', wordBreak: 'break-all', maxHeight: '200px', overflow: 'auto'
+              }}>
+                {err.message}
+                {'\n\n'}
+                {err.stack}
+              </pre>
+            </details>
+          )}
           <div style={{ display: 'flex', gap: '1rem' }}>
             <button
               onClick={this.handleReload}
