@@ -2,6 +2,7 @@ import { createContext, useContext, useState, useEffect, useCallback, ReactNode 
 import getSupabase, { setSharedSession, getSharedSession, clearSharedSession } from '../utils/supabase';
 import { getProfile, updateProfile, signOut as authSignOut } from '../utils/auth';
 import { ADMIN_EMAILS } from '../config/admin';
+import ProfileCompleteModal from '../components/ProfileCompleteModal';
 
 interface AuthContextType {
   user: any;
@@ -164,6 +165,7 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
   ].filter(Boolean).map((e: string) => e.toLowerCase());
   const isAdmin = allEmails.some((e: string) => ADMIN_EMAILS.includes(e));
   const isLoggedIn = !!user;
+  const needsProfileCompletion = isLoggedIn && !!profile && !profile.name;
 
   return (
     <AuthContext.Provider value={{
@@ -178,6 +180,9 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
       clearAccountBlock: () => setAccountBlock(null),
     }}>
       {children}
+      {needsProfileCompletion && user && (
+        <ProfileCompleteModal user={user} onComplete={refreshProfile} />
+      )}
     </AuthContext.Provider>
   );
 };
