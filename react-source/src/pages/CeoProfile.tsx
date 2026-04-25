@@ -36,7 +36,7 @@ const CeoProfile = () => {
               </div>
               <div className="ceo-name-card">
                 <h2>{isEn ? 'Aebon Lee' : '이애본'}</h2>
-                <p className="ceo-role">{isEn ? 'CEO / Representative' : '대표이사'}</p>
+                <p className="ceo-role">{isEn ? 'CEO / Adjunct Professor' : '대표 / 한신대학교 AI·SW대학 겸임교수'}</p>
                 <p className="ceo-company">DreamIT Biz</p>
               </div>
             </div>

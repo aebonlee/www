@@ -7,7 +7,7 @@ const About = () => {
   useAOS();
   const stat1 = useCountUp(50, 2000);
   const stat2 = useCountUp(98, 2000);
-  const stat3 = useCountUp(22, 2000);
+  const stat3 = useCountUp(23, 2000);
 
   return (
     <>
@@ -27,7 +27,7 @@ const About = () => {
               <h2 className="section-title" style={{ textAlign: 'left' }}>회사 개요</h2>
               <p className="about-description">
                 드림아이티비즈(DreamIT Biz)는 2003년 드림아이티(DreamIT)로 창업한 이래,
-                20년 이상의 IT 정보통신 분야 경험을 보유한 전문 기업입니다.
+                23년의 IT 정보통신 분야 경험을 보유한 전문 기업입니다.
                 웹개발, 웹호스팅, 디자인, 기업컨설팅, 교육, 출판 등 다양한 IT 서비스를
                 제공하며, 고객의 비즈니스 성장을 돕고 있습니다.
               </p>

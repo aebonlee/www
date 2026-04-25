@@ -12,7 +12,7 @@ const Home = () => {
 
   const stat1 = useCountUp(50, 2000);
   const stat2 = useCountUp(98, 2000);
-  const stat3 = useCountUp(22, 2000);
+  const stat3 = useCountUp(23, 2000);
 
   return (
     <>
