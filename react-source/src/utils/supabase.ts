@@ -93,34 +93,35 @@ export const createOrder = async (orderData: OrderData) => {
     payment_method: orderData.payment_method,
     site_domain: typeof window !== 'undefined' ? window.location.hostname : null
   };
-  if (orderData.user_id) orderPayload.user_id = orderData.user_id;
-
-  const { data: order, error: orderError } = await client
+  const { error: orderError } = await client
     .from('orders')
-    .insert(orderPayload)
-    .select()
-    .single();
+    .insert(orderPayload);
 
   if (orderError) throw orderError;
 
-  // Insert order items
+  // Insert order items (별도 조회 후 삽입 — bare INSERT 후 id를 모르므로)
   if (orderData.items && orderData.items.length > 0) {
-    const { error: itemsError } = await client
-      .from('order_items')
-      .insert(
-        orderData.items.map(item => ({
-          order_id: order.id,
-          product_title: item.product_title,
-          quantity: item.quantity,
-          unit_price: item.unit_price,
-          subtotal: item.subtotal
-        }))
-      );
-
-    if (itemsError) throw itemsError;
+    try {
+      const { data: row } = await client
+        .from('orders')
+        .select('id')
+        .eq('order_number', orderData.order_number)
+        .maybeSingle();
+      if (row?.id) {
+        await client.from('order_items').insert(
+          orderData.items.map(item => ({
+            order_id: row.id,
+            product_title: item.product_title,
+            quantity: item.quantity,
+            unit_price: item.unit_price,
+            subtotal: item.subtotal
+          }))
+        );
+      }
+    } catch { /* order_items 실패해도 결제 진행 */ }
   }
 
-  return order;
+  return { id: orderData.order_number, order_number: orderData.order_number };
 };
 
 /**
@@ -192,19 +193,31 @@ export const updateOrderStatus = async (
   }
   if (paymentId) updatePayload.portone_payment_id = paymentId;
 
-  const { data: result, error } = await client
-    .from(tableName)
-    .update(updatePayload)
-    .eq('id', orderId)
-    .select();
+  const isUUID = /^[0-9a-f]{8}-[0-9a-f]{4}-/.test(orderId);
+  const filterCol = isUUID ? 'id' : 'order_number';
 
-  if (error) throw error;
+  try {
+    const { data: result, error } = await client
+      .from(tableName)
+      .update(updatePayload)
+      .eq(filterCol, orderId)
+      .select();
 
-  if (!result || result.length === 0) {
-    throw new Error('UPDATE_NO_ROWS: 주문 업데이트 권한이 없거나 해당 주문을 찾을 수 없습니다. Supabase orders 테이블의 UPDATE RLS 정책을 확인하세요.');
+    if (error) {
+      console.warn('updateOrderStatus error:', error.message);
+      return null;
+    }
+
+    if (!result || result.length === 0) {
+      console.warn('UPDATE_NO_ROWS: 주문 업데이트 권한이 없거나 해당 주문을 찾을 수 없습니다. Supabase orders 테이블의 UPDATE RLS 정책을 확인하세요.');
+      return null;
+    }
+
+    return result[0];
+  } catch (e) {
+    console.warn('updateOrderStatus exception:', e);
+    return null;
   }
-
-  return result[0];
 };
 
 /**
