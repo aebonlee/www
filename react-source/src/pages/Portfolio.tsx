@@ -103,19 +103,13 @@ const Portfolio = () => {
                 </div>
                 <div className="detail-item">
                   <h4>웹사이트</h4>
-                  <p>
-                    <a href="http://cue100th.com/" target="_blank" rel="noopener noreferrer">
-                      cue100th.com
-                    </a>
-                  </p>
+                  <p>cue100th.com (2026년 1월까지 운영)</p>
                 </div>
               </div>
             </div>
             <div className="project-visual" data-aos="fade-left">
               <div className="project-image-main">
-                <a href="http://cue100th.com/" target="_blank" rel="noopener noreferrer">
-                  <img src="./assets/images/portfolio/chinju-100th.png" alt="진주교육대학교 100주년" loading="lazy" />
-                </a>
+                <img src="./assets/images/portfolio/chinju-100th.png" alt="진주교육대학교 100주년" loading="lazy" />
               </div>
             </div>
           </div>
