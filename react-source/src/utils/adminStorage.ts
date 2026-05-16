@@ -526,6 +526,65 @@ export async function getDailySiteVisits(domain: string, days = 30): Promise<{ d
   return result;
 }
 
+// ─── 관리자 메모 CRUD (admin_memos 테이블) ───
+
+export interface AdminMemo {
+  id: string;
+  user_id: string;
+  admin_id: string;
+  text: string;
+  created_at: string;
+}
+
+/** 특정 ���원의 관리자 메모 목록 조회 */
+export async function getAdminMemos(userId: string): Promise<AdminMemo[]> {
+  const client = getSupabase();
+  if (!client) return [];
+  const { data, error } = await client
+    .from('admin_memos')
+    .select('*')
+    .eq('user_id', userId)
+    .order('created_at', { ascending: true });
+  if (error) {
+    console.error('getAdminMemos error:', error);
+    return [];
+  }
+  return data || [];
+}
+
+/** 관리자 메모 생성 */
+export async function createAdminMemo(userId: string, text: string): Promise<AdminMemo | null> {
+  const client = getSupabase();
+  if (!client) return null;
+  const { data: { user } } = await client.auth.getUser();
+  if (!user) return null;
+  const { data, error } = await client
+    .from('admin_memos')
+    .insert({ user_id: userId, admin_id: user.id, text })
+    .select()
+    .single();
+  if (error) {
+    console.error('createAdminMemo error:', error);
+    return null;
+  }
+  return data;
+}
+
+/** 관리자 메모 삭제 */
+export async function deleteAdminMemo(memoId: string): Promise<boolean> {
+  const client = getSupabase();
+  if (!client) return false;
+  const { error } = await client
+    .from('admin_memos')
+    .delete()
+    .eq('id', memoId);
+  if (error) {
+    console.error('deleteAdminMemo error:', error);
+    return false;
+  }
+  return true;
+}
+
 /** 사이트별 종합 요약 (visited_sites 기반 회원 수 + visit_log 기반 방문 수) */
 export async function getSiteVisitSummary(): Promise<{
   domain: string;

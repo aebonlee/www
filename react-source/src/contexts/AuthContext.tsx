@@ -3,16 +3,23 @@ import getSupabase, { setSharedSession, getSharedSession, clearSharedSession } f
 import { getProfile, updateProfile, signOut as authSignOut } from '../utils/auth';
 import { ADMIN_EMAILS } from '../config/admin';
 import ProfileCompleteModal from '../components/ProfileCompleteModal';
+import type { UserProfile } from '../types/index';
+
+interface AccountBlock {
+  status: string;
+  reason: string;
+  suspended_until: string | null;
+}
 
 interface AuthContextType {
   user: any;
-  profile: any;
+  profile: UserProfile | null;
   loading: boolean;
   isLoggedIn: boolean;
   isAdmin: boolean;
   signOut: () => Promise<void>;
   refreshProfile: () => Promise<void>;
-  accountBlock: { status: string; reason: string; suspended_until: string | null } | null;
+  accountBlock: AccountBlock | null;
   clearAccountBlock: () => void;
 }
 

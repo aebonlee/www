@@ -1,4 +1,6 @@
-const AdminStatCard = ({ icon, value, label, color }) => {
+import { AdminStatCardProps } from '../../types/admin';
+
+const AdminStatCard = ({ icon, value, label, color }: AdminStatCardProps) => {
   return (
     <div className="admin-stat-card">
       <div className="stat-icon" style={{ background: color }}>

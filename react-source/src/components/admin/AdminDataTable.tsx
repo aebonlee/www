@@ -1,4 +1,5 @@
-import { useState, useMemo } from 'react';
+import { useState, useMemo, ReactNode } from 'react';
+import { AdminColumn, AdminDataTableProps } from '../../types/admin';
 
 const AdminDataTable = ({
   columns,
@@ -10,10 +11,10 @@ const AdminDataTable = ({
   toolbarExtra,
   expandRow,
   showRowNumbers = false,
-}: any) => {
+}: AdminDataTableProps) => {
   const [search, setSearch] = useState('');
-  const [sortKey, setSortKey] = useState(null);
-  const [sortDir, setSortDir] = useState('asc');
+  const [sortKey, setSortKey] = useState<string | null>(null);
+  const [sortDir, setSortDir] = useState<'asc' | 'desc'>('asc');
   const [page, setPage] = useState(1);
 
   // Search filter
@@ -47,7 +48,7 @@ const AdminDataTable = ({
   const safePage = Math.min(page, totalPages);
   const paged = sorted.slice((safePage - 1) * pageSize, safePage * pageSize);
 
-  const handleSort = (key) => {
+  const handleSort = (key: string) => {
     if (sortKey === key) {
       setSortDir((d) => (d === 'asc' ? 'desc' : 'asc'));
     } else {
@@ -177,7 +178,15 @@ const AdminDataTable = ({
   );
 };
 
-function TableRow({ row, columns, actions, expandRow, rowNumber }: any) {
+interface TableRowProps {
+  row: any;
+  columns: AdminColumn[];
+  actions?: (row: any) => ReactNode;
+  expandRow?: (row: any) => ReactNode;
+  rowNumber: number | null;
+}
+
+function TableRow({ row, columns, actions, expandRow, rowNumber }: TableRowProps) {
   const [expanded, setExpanded] = useState(false);
 
   return (

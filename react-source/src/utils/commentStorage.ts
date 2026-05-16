@@ -4,21 +4,7 @@
  */
 
 import getSupabase from './supabase';
-
-function toCamelKey(key: string): string {
-  return key.replace(/_([a-z])/g, (_, c: string) => c.toUpperCase());
-}
-
-// eslint-disable-next-line @typescript-eslint/no-explicit-any
-function toCamel(row: Record<string, any> | null): Record<string, any> | null {
-  if (!row) return null;
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  const out: Record<string, any> = {};
-  for (const [k, v] of Object.entries(row)) {
-    out[toCamelKey(k)] = v;
-  }
-  return out;
-}
+import { toCamel } from './caseTransform';
 
 /**
  * 특정 게시글의 댓글 목록 조회

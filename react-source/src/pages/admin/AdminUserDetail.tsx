@@ -1,26 +1,18 @@
 import { useState, useEffect, useRef } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
-import { getAllUsers, getAllOrders } from '../../utils/adminStorage';
+import { getAllUsers, getAllOrders, getAdminMemos, createAdminMemo, deleteAdminMemo } from '../../utils/adminStorage';
 import { getCouponUserIds } from '../../utils/adminStorage';
+import type { AdminMemo } from '../../utils/adminStorage';
 import { formatDate, formatPrice } from '../../utils/format';
 import { ADMIN_EMAILS } from '../../config/admin';
+import { getSiteName } from '../../constants/sites';
+import { ORDER_STATUS_LABELS, ORDER_STATUS_COLORS } from '../../constants/adminConstants';
 
-type AdminMemo = { id: string; text: string; createdAt: string };
 const MEMO_KEY = (uid: string) => `admin_memo_${uid}`;
-
-const getSiteName = (domain: string) => {
-  if (!domain) return '-';
-  const d = domain.toLowerCase();
-  if (d.endsWith('.dreamitbiz.com')) return d.replace('.dreamitbiz.com', '') || 'www';
-  if (d === 'dreamitbiz.com' || d === 'www.dreamitbiz.com') return 'www';
-  return d;
-};
 
 const STATUS_LABELS: Record<string, string> = { active: '정상', banned: '차단', deleted: '탈퇴' };
 const STATUS_COLORS: Record<string, string> = { active: 'green', banned: 'red', deleted: 'gray' };
 const ROLE_LABELS: Record<string, string> = { admin: '관리자', superadmin: '최고관리자', evaluator: '평가자', user: '일반회원' };
-const ORDER_STATUS_LABELS: Record<string, string> = { paid: '결제완료', pending: '대기', failed: '실패', cancelled: '취소', refunded: '환불' };
-const ORDER_STATUS_COLORS: Record<string, string> = { paid: 'green', pending: 'yellow', failed: 'red', cancelled: 'gray', refunded: 'purple' };
 
 const AdminUserDetail = () => {
   const { id } = useParams<{ id: string }>();
@@ -45,30 +37,63 @@ const AdminUserDetail = () => {
       setCouponIds(coupons);
       setLoading(false);
     });
-    // 메모 로드 (localStorage)
-    try {
-      const raw = localStorage.getItem(MEMO_KEY(id));
-      setMemos(raw ? JSON.parse(raw) : []);
-    } catch { setMemos([]); }
+    // 메모 로드 (Supabase, localStorage 폴백)
+    getAdminMemos(id).then((dbMemos) => {
+      if (dbMemos.length > 0) {
+        setMemos(dbMemos);
+      } else {
+        // localStorage 마이그레이션: 기존 데이터가 있으면 Supabase로 이전
+        try {
+          const raw = localStorage.getItem(MEMO_KEY(id));
+          if (raw) {
+            const localMemos = JSON.parse(raw) as { id: string; text: string; createdAt: string }[];
+            if (localMemos.length > 0) {
+              // 기존 localStorage 메모를 표시 (마이그레이션은 저장 시 수행)
+              setMemos(localMemos.map(m => ({
+                id: m.id,
+                user_id: id,
+                admin_id: '',
+                text: m.text,
+                created_at: m.createdAt,
+              })));
+            }
+          }
+        } catch { /* ignore */ }
+      }
+    });
   }, [id]);
 
-  const saveMemo = () => {
+  const saveMemo = async () => {
     if (!memoText.trim() || !id) return;
-    const next: AdminMemo[] = [
-      ...memos,
-      { id: Date.now().toString(), text: memoText.trim(), createdAt: new Date().toISOString() },
-    ];
-    setMemos(next);
-    localStorage.setItem(MEMO_KEY(id), JSON.stringify(next));
+    const newMemo = await createAdminMemo(id, memoText.trim());
+    if (newMemo) {
+      setMemos(prev => [...prev, newMemo]);
+      // localStorage 정리 (마이그레이션 완료)
+      localStorage.removeItem(MEMO_KEY(id));
+    } else {
+      // Supabase 실패 시 localStorage 폴백
+      const fallback: AdminMemo = {
+        id: Date.now().toString(),
+        user_id: id,
+        admin_id: '',
+        text: memoText.trim(),
+        created_at: new Date().toISOString(),
+      };
+      setMemos(prev => [...prev, fallback]);
+    }
     setMemoText('');
     setTimeout(() => memoEndRef.current?.scrollIntoView({ behavior: 'smooth' }), 50);
   };
 
-  const deleteMemo = (memoId: string) => {
+  const deleteMemo = async (memoId: string) => {
     if (!id) return;
-    const next = memos.filter(m => m.id !== memoId);
-    setMemos(next);
-    localStorage.setItem(MEMO_KEY(id), JSON.stringify(next));
+    const success = await deleteAdminMemo(memoId);
+    if (success) {
+      setMemos(prev => prev.filter(m => m.id !== memoId));
+    } else {
+      // Supabase 실패 시 로컬에서만 제거
+      setMemos(prev => prev.filter(m => m.id !== memoId));
+    }
   };
 
   if (loading) {
@@ -287,7 +312,7 @@ const AdminUserDetail = () => {
                     {memo.text}
                   </div>
                   <div style={{ fontSize: '11px', color: 'var(--text-light)', marginTop: '6px' }}>
-                    {new Date(memo.createdAt).toLocaleString('ko-KR')}
+                    {new Date(memo.created_at).toLocaleString('ko-KR')}
                   </div>
                   <button
                     onClick={() => deleteMemo(memo.id)}

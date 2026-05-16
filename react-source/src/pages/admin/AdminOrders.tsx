@@ -4,21 +4,11 @@ import { getAllOrdersAll } from '../../utils/adminStorage';
 import { updateOrderStatus } from '../../utils/supabase';
 import { useToast } from '../../contexts/ToastContext';
 import { formatDate, formatPrice } from '../../utils/format';
+import { downloadCSV } from '../../utils/csv';
+import { ORDER_STATUS_LABELS, ORDER_STATUS_COLORS } from '../../constants/adminConstants';
 
-const STATUS_LABELS = { paid: '결제완료', pending: '대기', failed: '실패', cancelled: '취소', refunded: '환불' };
-
-function downloadCSV(rows: Record<string, any>[], filename: string) {
-  if (!rows.length) return;
-  const keys = Object.keys(rows[0]);
-  const header = keys.join(',');
-  const body = rows.map(r => keys.map(k => `"${String(r[k] ?? '').replace(/"/g, '""')}"`).join(',')).join('\n');
-  const blob = new Blob(['\uFEFF' + header + '\n' + body], { type: 'text/csv;charset=utf-8;' });
-  const url = URL.createObjectURL(blob);
-  const a = document.createElement('a');
-  a.href = url; a.download = filename; a.click();
-  URL.revokeObjectURL(url);
-}
-const STATUS_COLORS = { paid: 'green', pending: 'yellow', failed: 'red', cancelled: 'gray', refunded: 'purple' };
+const STATUS_LABELS = ORDER_STATUS_LABELS;
+const STATUS_COLORS = ORDER_STATUS_COLORS;
 const METHOD_LABELS = { card: '카드결제', transfer: '계좌이체' };
 
 const SITE_LABELS: Record<string, string> = {
