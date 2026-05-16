@@ -103,7 +103,7 @@ const Portfolio = () => {
                 </div>
                 <div className="detail-item">
                   <h4>웹사이트</h4>
-                  <p>cue100th.com (2026년 1월까지 운영)</p>
+                  <p>cue100th.com<br />(2026년 1월까지 운영)</p>
                 </div>
               </div>
             </div>
