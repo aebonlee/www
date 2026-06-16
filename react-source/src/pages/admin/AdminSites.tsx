@@ -229,6 +229,7 @@ const AdminSites = () => {
           <table style={{ width: '100%', borderCollapse: 'collapse', fontSize: '13px', minWidth: '860px' }}>
             <thead>
               <tr style={{ borderBottom: '2px solid var(--border-color,#e5e7eb)', textAlign: 'left', color: 'var(--text-light)' }}>
+                <th style={{ padding: '10px 12px', textAlign: 'right', width: '44px' }}>#</th>
                 <th style={{ padding: '10px 12px' }}>상태</th>
                 <th style={{ padding: '10px 12px' }}>사이트</th>
                 <th style={{ padding: '10px 12px', textAlign: 'right' }}>전체 회원</th>
@@ -240,8 +241,9 @@ const AdminSites = () => {
               </tr>
             </thead>
             <tbody>
-              {filtered.map((s) => (
+              {filtered.map((s, i) => (
                 <tr key={s.name} style={{ borderBottom: '1px solid var(--border-color,#f1f5f9)' }}>
+                  <td style={{ padding: '10px 12px', textAlign: 'right', color: 'var(--text-light)', fontVariantNumeric: 'tabular-nums' }}>{i + 1}</td>
                   <td style={{ padding: '10px 12px' }}>{statusDot(status[s.name] || 'unknown')}</td>
                   <td style={{ padding: '10px 12px' }}>
                     <div style={{ display: 'flex', alignItems: 'center', gap: '6px' }}>
