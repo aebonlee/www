@@ -1,7 +1,13 @@
 import { createClient, SupabaseClient } from '@supabase/supabase-js';
 
-const supabaseUrl = import.meta.env.VITE_SUPABASE_URL;
-const supabaseAnonKey = import.meta.env.VITE_SUPABASE_ANON_KEY;
+// .env(VITE_SUPABASE_URL / VITE_SUPABASE_ANON_KEY)로 덮어쓸 수 있음.
+// 미설정 시 공용 프로젝트 fallback — env 미주입 빌드에서도 로그인 동작 보장.
+// anon key는 브라우저 노출용 공개 키이며 RLS로 보호됨.
+const supabaseUrl =
+  import.meta.env.VITE_SUPABASE_URL || 'https://hcmgdztsgjvzcyxyayaj.supabase.co';
+const supabaseAnonKey =
+  import.meta.env.VITE_SUPABASE_ANON_KEY ||
+  'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImhjbWdkenRzZ2p2emN5eHlheWFqIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzE0MzU4ODcsImV4cCI6MjA4NzAxMTg4N30.gznaPzY1l8qDAPsEyYNR9KS7f7VqS3xaw-_2HTSwSZw';
 
 /* ── SSO 크로스도메인 쿠키 헬퍼 ── */
 const SSO_KEY = 'dreamit_sso';
