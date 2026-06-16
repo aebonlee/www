@@ -11,7 +11,7 @@ const SITE_CATEGORIES = [
       { name: 'cs-hub',      domain: 'cs-hub.dreamitbiz.com',      pay: true  },
       { name: 'basic-hub',   domain: 'basic-hub.dreamitbiz.com',   pay: true  },
       { name: 'exam-hub',    domain: 'exam-hub.dreamitbiz.com',    pay: true  },
-      { name: 'career-hub',  domain: 'carrer-hub.dreamitbiz.com',  pay: true  },
+      { name: 'career-hub',  domain: 'career-hub.dreamitbiz.com',  pay: true  },
       { name: 'thesis-hub',  domain: 'thesis-hub.dreamitbiz.com',  pay: false },
       { name: 'coding-hub',  domain: 'coding-hub.dreamitbiz.com',  pay: false },
     ],
@@ -60,7 +60,7 @@ const SITE_CATEGORIES = [
     label: 'AI 도구',
     color: '#f43f5e',
     sites: [
-      { name: 'aI-agents',   domain: 'aI-agents.dreamitbiz.com',   pay: false },
+      { name: 'ai-agents',   domain: 'ai-agents.dreamitbiz.com',   pay: false },
       { name: 'autowork',    domain: 'autowork.dreamitbiz.com',     pay: false },
       { name: 'fine-tuning', domain: 'fine-tuning.dreamitbiz.com',  pay: false },
       { name: 'vibe',        domain: 'vibe.dreamitbiz.com',         pay: false },

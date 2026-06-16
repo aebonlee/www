@@ -15,7 +15,7 @@ const siteGroups = [
       { name: 'cs-hub', url: 'https://cs-hub.dreamitbiz.com', emoji: '💻', ko: 'CS 허브 — 컴퓨터과학·알고리즘·자료구조 등 CS 교육 통합 포털', en: 'CS Hub — Computer science, algorithms, and data structures education portal' },
       { name: 'basic-hub', url: 'https://basic-hub.dreamitbiz.com', emoji: '📚', ko: '기초 허브 — IT 입문자를 위한 기초 교육 통합 포털', en: 'Basic Hub — Foundational IT education portal for beginners' },
       { name: 'exam-hub', url: 'https://exam-hub.dreamitbiz.com', emoji: '📝', ko: '시험 허브 — IT 자격증·시험 준비를 위한 통합 학습 포털', en: 'Exam Hub — Integrated study portal for IT certifications and exams' },
-      { name: 'career-hub', url: 'https://carrer-hub.dreamitbiz.com', emoji: '🚀', ko: '커리어 허브 — 취업·이직·경력 개발을 위한 통합 포털', en: 'Career Hub — Integrated portal for job search and career development' },
+      { name: 'career-hub', url: 'https://career-hub.dreamitbiz.com', emoji: '🚀', ko: '커리어 허브 — 취업·이직·경력 개발을 위한 통합 포털', en: 'Career Hub — Integrated portal for job search and career development' },
     ],
   },
   {
@@ -87,7 +87,7 @@ const siteGroups = [
     label: { ko: 'AI 도구', en: 'AI Tools' },
     desc: { ko: 'AI 에이전트 및 업무 자동화 도구', en: 'AI agents and workflow automation tools' },
     sites: [
-      { name: 'aI-agents', url: 'https://ai-agents.dreamitbiz.com', emoji: '🤖', ko: 'AI 에이전트 — AI 에이전트 구축, 자동화 워크플로우 설계와 운영 교육', en: 'AI Agents — Building AI agents, automation workflow design and operations' },
+      { name: 'ai-agents', url: 'https://ai-agents.dreamitbiz.com', emoji: '🤖', ko: 'AI 에이전트 — AI 에이전트 구축, 자동화 워크플로우 설계와 운영 교육', en: 'AI Agents — Building AI agents, automation workflow design and operations' },
       { name: 'autowork', url: 'https://autowork.dreamitbiz.com', emoji: '⚡', ko: '업무 자동화 — RPA, 노코드/로코드 도구를 활용한 업무 자동화 교육', en: 'AutoWork — RPA and no-code/low-code tools for workflow automation' },
       { name: 'fine-tuning', url: 'https://fine-tuning.dreamitbiz.com', emoji: '🔧', ko: '파인튜닝 — LLM 파인튜닝, 커스텀 모델 학습, AI 모델 최적화 교육', en: 'Fine-tuning — LLM fine-tuning, custom model training, AI optimization' },
     ],
