@@ -111,7 +111,7 @@ export const SITES: SiteEntry[] = [
   { name: 'komipo', domain: 'komipo.dreamitbiz.com', url: 'https://komipo.dreamitbiz.com', color: 'yellow', hasPayment: false },
   { name: 'manus', domain: 'manus.dreamitbiz.com', url: 'https://manus.dreamitbiz.com', color: 'blue', hasPayment: false },
   { name: 'notebooklm', domain: 'notebooklm.dreamitbiz.com', url: 'https://notebooklm.dreamitbiz.com', color: 'green', hasPayment: false },
-  { name: 'ppt-maker', domain: 'ppt-maker.dreamitbiz.com', url: 'https://ppt-maker.dreamitbiz.com', color: 'red', hasPayment: false },
+  { name: 'ppt-maker', domain: 'ppt-maker.dreamitbiz.com', url: 'https://ppt-maker.dreamitbiz.com', color: 'red', hasPayment: true },
   { name: 'ppt', domain: 'ppt.dreamitbiz.com', url: 'https://ppt.dreamitbiz.com', color: 'yellow', hasPayment: false },
   { name: 'project', domain: 'project.dreamitbiz.com', url: 'https://project.dreamitbiz.com', color: 'green', hasPayment: false },
   { name: 'research', domain: 'research.dreamitbiz.com', url: 'https://research.dreamitbiz.com', color: 'purple', hasPayment: false },
@@ -121,16 +121,16 @@ export const SITES: SiteEntry[] = [
   { name: 'rest03', domain: 'rest03.dreamitbiz.com', url: 'https://rest03.dreamitbiz.com', color: 'green', hasPayment: false },
   { name: 'rest04', domain: 'rest04.dreamitbiz.com', url: 'https://rest04.dreamitbiz.com', color: 'purple', hasPayment: false },
   { name: 'rest05', domain: 'rest05.dreamitbiz.com', url: 'https://rest05.dreamitbiz.com', color: 'red', hasPayment: false },
-  { name: 'rest06', domain: 'rest06.dreamitbiz.com', url: 'https://rest06.dreamitbiz.com', color: 'yellow', hasPayment: false },
+  { name: 'rest06', domain: 'rest06.dreamitbiz.com', url: 'https://rest06.dreamitbiz.com', color: 'yellow', hasPayment: true },
   { name: 'rest07', domain: 'rest07.dreamitbiz.com', url: 'https://rest07.dreamitbiz.com', color: 'blue', hasPayment: false },
   { name: 'sangmin', domain: 'sangmin.dreamitbiz.com', url: 'https://sangmin.dreamitbiz.com', color: 'purple', hasPayment: false },
-  { name: 'seminar', domain: 'seminar.dreamitbiz.com', url: 'https://seminar.dreamitbiz.com', color: 'red', hasPayment: false },
+  { name: 'seminar', domain: 'seminar.dreamitbiz.com', url: 'https://seminar.dreamitbiz.com', color: 'red', hasPayment: true },
   { name: 'seoultech', domain: 'seoultech.dreamitbiz.com', url: 'https://seoultech.dreamitbiz.com', color: 'yellow', hasPayment: false },
   { name: 'site', domain: 'site.dreamitbiz.com', url: 'https://site.dreamitbiz.com', color: 'blue', hasPayment: false },
   { name: 'skala', domain: 'skala.dreamitbiz.com', url: 'https://skala.dreamitbiz.com', color: 'green', hasPayment: false },
   { name: 'snu', domain: 'snu.dreamitbiz.com', url: 'https://snu.dreamitbiz.com', color: 'purple', hasPayment: false },
   { name: 'solar', domain: 'solar.dreamitbiz.com', url: 'https://solar.dreamitbiz.com', color: 'red', hasPayment: false },
-  { name: 'startup', domain: 'startup.dreamitbiz.com', url: 'https://startup.dreamitbiz.com', color: 'yellow', hasPayment: false },
+  { name: 'startup', domain: 'startup.dreamitbiz.com', url: 'https://startup.dreamitbiz.com', color: 'yellow', hasPayment: true },
   { name: 'syu', domain: 'syu.dreamitbiz.com', url: 'https://syu.dreamitbiz.com', color: 'red', hasPayment: false },
   { name: 'templete03', domain: 'templete03.dreamitbiz.com', url: 'https://templete03.dreamitbiz.com', color: 'yellow', hasPayment: false },
   { name: 'university', domain: 'university.dreamitbiz.com', url: 'https://university.dreamitbiz.com', color: 'green', hasPayment: false },
@@ -140,3 +140,34 @@ export const SITES: SiteEntry[] = [
 
 export const SITE_BY_NAME: Record<string, SiteEntry> = Object.fromEntries(SITES.map(s => [s.name, s]));
 export const SITE_BY_DOMAIN: Record<string, SiteEntry> = Object.fromEntries(SITES.map(s => [s.domain, s]));
+
+/** 이름 정규화 — ahp_basic ↔ ahp-basic 등 언더스코어/하이픈 표기 차이 흡수 */
+const normName = (name: string): string => name.replace(/_/g, '-');
+const SITE_BY_NORM_NAME: Record<string, SiteEntry> = Object.fromEntries(
+  SITES.map(s => [normName(s.name), s])
+);
+
+/**
+ * 사이트 이름으로 레지스트리 엔트리 조회(표기 차이 허용).
+ * 페이지가 domain·url·hasPayment 등 사실 데이터를 직접 하드코딩하지 않고
+ * 여기서 파생하도록 만들기 위한 단일 진입점.
+ */
+export function getSite(name: string): SiteEntry | undefined {
+  return SITE_BY_NAME[name] || SITE_BY_NORM_NAME[normName(name)];
+}
+
+/**
+ * 페이지가 참조하는 사이트 목록이 레지스트리(SSOT)와 일치하는지 개발 모드에서 검사.
+ * 새 사이트를 siteRegistry에만 추가하고 페이지 동기화를 빠뜨리면 콘솔 경고로 즉시 드러남.
+ */
+export function assertSiteCoverage(label: string, names: string[]): void {
+  if (!import.meta.env?.DEV) return;
+  const reg = new Set(SITES.map(s => normName(s.name)));
+  const page = new Set(names.map(normName));
+  const missing = [...reg].filter(n => !page.has(n));
+  const extra = [...page].filter(n => !reg.has(n));
+  if (missing.length)
+    console.warn(`[siteRegistry] ${label}: 레지스트리에 있으나 누락(${missing.length}) → ${missing.join(', ')}`);
+  if (extra.length)
+    console.warn(`[siteRegistry] ${label}: 레지스트리에 없는 항목(${extra.length}) → ${extra.join(', ')}`);
+}

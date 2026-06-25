@@ -16,6 +16,11 @@ tmp_result.txt
 tmp_auth.json
 tmp_auth2.json
 
+# Transient TS migration / build logs
+*-tsc-errors.txt
+tmp_*_errors.txt
+tmp_*.json
+
 # Dependencies
 node_modules/
 

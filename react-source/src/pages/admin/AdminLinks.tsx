@@ -1,242 +1,41 @@
 import { useState, useMemo } from 'react';
+import { getSite, assertSiteCoverage } from '../../constants/siteRegistry';
 
-const SITE_CATEGORIES = [
-  {
-    label: 'Hub 사이트',
-    color: '#6366f1',
-    sites: [
-      { name: 'edu-hub',     domain: 'edu-hub.dreamitbiz.com',     pay: true  },
-      { name: 'ai-hub',      domain: 'ai-hub.dreamitbiz.com',      pay: false },
-      { name: 'biz-hub',     domain: 'biz-hub.dreamitbiz.com',     pay: false },
-      { name: 'cs-hub',      domain: 'cs-hub.dreamitbiz.com',      pay: true  },
-      { name: 'basic-hub',   domain: 'basic-hub.dreamitbiz.com',   pay: true  },
-      { name: 'exam-hub',    domain: 'exam-hub.dreamitbiz.com',    pay: true  },
-      { name: 'career-hub',  domain: 'career-hub.dreamitbiz.com',  pay: true  },
-      { name: 'thesis-hub',  domain: 'thesis-hub.dreamitbiz.com',  pay: false },
-      { name: 'coding-hub',  domain: 'coding-hub.dreamitbiz.com',  pay: false },
-    ],
-  },
-  {
-    label: '프로그래밍 교육',
-    color: '#0ea5e9',
-    sites: [
-      { name: 'coding',       domain: 'coding.dreamitbiz.com',       pay: false },
-      { name: 'c-study',      domain: 'c-study.dreamitbiz.com',      pay: false },
-      { name: 'python-study', domain: 'python-study.dreamitbiz.com', pay: false },
-      { name: 'java-study',   domain: 'java-study.dreamitbiz.com',   pay: false },
-      { name: 'reactstudy',   domain: 'reactstudy.dreamitbiz.com',   pay: false },
-      { name: 'html',         domain: 'html.dreamitbiz.com',         pay: false },
-    ],
-  },
-  {
-    label: 'IT/CS 교육',
-    color: '#10b981',
-    sites: [
-      { name: 'algorithm',      domain: 'algorithm.dreamitbiz.com',      pay: false },
-      { name: 'data-structure', domain: 'data-structure.dreamitbiz.com', pay: false },
-      { name: 'linux-study',    domain: 'linux-study.dreamitbiz.com',    pay: false },
-      { name: 'db-study',       domain: 'db-study.dreamitbiz.com',       pay: false },
-      { name: 'software',       domain: 'software.dreamitbiz.com',       pay: false },
-      { name: 'webstudy',       domain: 'webstudy.dreamitbiz.com',       pay: false },
-      { name: 'koreatech',      domain: 'koreatech.dreamitbiz.com',      pay: false },
-      { name: 'aisw',           domain: 'aisw.dreamitbiz.com',           pay: false },
-    ],
-  },
-  {
-    label: 'AI 교육',
-    color: '#8b5cf6',
-    sites: [
-      { name: 'ai-prompt',  domain: 'ai-prompt.dreamitbiz.com',  pay: false },
-      { name: 'ai-data',    domain: 'ai-data.dreamitbiz.com',    pay: false },
-      { name: 'ai-media',   domain: 'ai-media.dreamitbiz.com',   pay: false },
-      { name: 'claude',     domain: 'claude.dreamitbiz.com',     pay: false },
-      { name: 'chatgpt',    domain: 'chatgpt.dreamitbiz.com',    pay: false },
-      { name: 'gemini',     domain: 'gemini.dreamitbiz.com',     pay: false },
-      { name: 'genspark',   domain: 'genspark.dreamitbiz.com',   pay: false },
-      { name: 'copilot',    domain: 'copilot.dreamitbiz.com',    pay: false },
-    ],
-  },
-  {
-    label: 'AI 도구',
-    color: '#f43f5e',
-    sites: [
-      { name: 'ai-agents',   domain: 'ai-agents.dreamitbiz.com',   pay: false },
-      { name: 'autowork',    domain: 'autowork.dreamitbiz.com',     pay: false },
-      { name: 'fine-tuning', domain: 'fine-tuning.dreamitbiz.com',  pay: false },
-      { name: 'vibe',        domain: 'vibe.dreamitbiz.com',         pay: false },
-    ],
-  },
-  {
-    label: '비즈니스/LMS',
-    color: '#f59e0b',
-    sites: [
-      { name: 'digitalbiz',    domain: 'digitalbiz.dreamitbiz.com',    pay: false },
-      { name: 'marketing',     domain: 'marketing.dreamitbiz.com',     pay: false },
-      { name: 'uxdesign',      domain: 'uxdesign.dreamitbiz.com',      pay: false },
-      { name: 'self-branding', domain: 'self-branding.dreamitbiz.com', pay: false },
-    ],
-  },
-  {
-    label: '어학',
-    color: '#06b6d4',
-    sites: [
-      { name: 'english',  domain: 'english.dreamitbiz.com',  pay: false },
-      { name: 'japanese', domain: 'japanese.dreamitbiz.com', pay: false },
-      { name: 'korean',   domain: 'korean.dreamitbiz.com',   pay: false },
-    ],
-  },
-  {
-    label: '자격증',
-    color: '#84cc16',
-    sites: [
-      { name: 'eip',  domain: 'eip.dreamitbiz.com',  pay: false },
-      { name: 'sqld', domain: 'sqld.dreamitbiz.com', pay: false },
-    ],
-  },
-  {
-    label: '핵심 플랫폼',
-    color: '#ec4899',
-    sites: [
-      { name: 'competency', domain: 'competency.dreamitbiz.com', pay: true  },
-      { name: 'career',     domain: 'career.dreamitbiz.com',     pay: true  },
-      { name: 'allthat',    domain: 'allthat.dreamitbiz.com',    pay: true  },
-      { name: 'papers',     domain: 'papers.dreamitbiz.com',     pay: true  },
-      { name: 'ahp-basic',  domain: 'ahp-basic.dreamitbiz.com',  pay: false },
-      { name: 'teaching',   domain: 'teaching.dreamitbiz.com',   pay: false },
-      { name: 'planning',   domain: 'planning.dreamitbiz.com',   pay: false },
-    ],
-  },
-  {
-    label: '출판/문서',
-    color: '#64748b',
-    sites: [
-      { name: 'books',        domain: 'books.dreamitbiz.com',        pay: false },
-      { name: 'docs',         domain: 'docs.dreamitbiz.com',         pay: false },
-      { name: 'reserve',      domain: 'reserve.dreamitbiz.com',      pay: false },
-      { name: 'openclaw',     domain: 'openclaw.dreamitbiz.com',     pay: false },
-      { name: 'presentation', domain: 'presentation.dreamitbiz.com', pay: false },
-    ],
-  },
-  {
-    label: '취업/경력',
-    color: '#f97316',
-    sites: [
-      { name: 'jobpath', domain: 'jobpath.dreamitbiz.com', pay: true  },
-      { name: 'jobexam', domain: 'jobexam.dreamitbiz.com', pay: true  },
-      { name: 'www',     domain: 'www.dreamitbiz.com',     pay: true  },
-    ],
-  },
-  {
-    label: '개인/포트폴리오',
-    color: '#a78bfa',
-    sites: [
-      { name: 'aebon',      domain: 'aebon.dreamitbiz.com',      pay: false },
-      { name: 'jdy',        domain: 'jdy.dreamitbiz.com',        pay: false },
-      { name: 'wonjunjang', domain: 'wonjunjang.dreamitbiz.com', pay: false },
-      { name: 'hohai',      domain: 'hohai.dreamitbiz.com',      pay: false },
-    ],
-  },
-  {
-    label: '로봇/IoT/BI',
-    color: '#2dd4bf',
-    sites: [
-      { name: 'pbirobot', domain: 'pbirobot.dreamitbiz.com', pay: false },
-      { name: 'pbi',      domain: 'pbi.dreamitbiz.com',      pay: false },
-      { name: 'koreait',  domain: 'koreait.dreamitbiz.com',  pay: false },
-    ],
-  },
-  {
-    label: '강사',
-    color: '#fb923c',
-    sites: [
-      { name: 'instructor', domain: 'instructor.dreamitbiz.com', pay: false },
-    ],
-  },
-  {
-    label: '연구/학술',
-    color: '#4ade80',
-    sites: [
-      { name: 'survey',     domain: 'survey.dreamitbiz.com',     pay: false },
-      { name: 'esg',        domain: 'esg.dreamitbiz.com',        pay: false },
-      { name: 'accounting', domain: 'accounting.dreamitbiz.com', pay: false },
-    ],
-  },
-  {
-    label: '클라우드/DevOps',
-    color: '#facc15',
-    sites: [
-      { name: 'aws', domain: 'aws.dreamitbiz.com', pay: false },
-    ],
-  },
-  {
-    label: '학습법/안전',
-    color: '#34d399',
-    sites: [
-      { name: 'study',      domain: 'study.dreamitbiz.com',      pay: false },
-      { name: 'safety',     domain: 'safety.dreamitbiz.com',     pay: false },
-      { name: 'statistics', domain: 'statistics.dreamitbiz.com', pay: false },
-    ],
-  },
-
-  {
-    label: '대학·기업 납품',
-    color: '#6366f1',
-    sites: [
-      { name: 'seoultech', domain: 'seoultech.dreamitbiz.com', pay: false },
-      { name: 'syu', domain: 'syu.dreamitbiz.com', pay: false },
-      { name: 'snu', domain: 'snu.dreamitbiz.com', pay: false },
-      { name: 'halla', domain: 'halla.dreamitbiz.com', pay: false },
-      { name: 'cnu', domain: 'cnu.dreamitbiz.com', pay: false },
-      { name: 'university', domain: 'university.dreamitbiz.com', pay: false },
-      { name: 'kdn2026', domain: 'kdn2026.dreamitbiz.com', pay: false },
-      { name: 'komipo', domain: 'komipo.dreamitbiz.com', pay: false },
-      { name: 'dasco', domain: 'dasco.dreamitbiz.com', pay: false },
-      { name: 'contents', domain: 'contents.dreamitbiz.com', pay: false },
-      { name: 'data', domain: 'data.dreamitbiz.com', pay: false },
-      { name: 'skala', domain: 'skala.dreamitbiz.com', pay: false },
-      { name: 'knc', domain: 'knc.dreamitbiz.com', pay: false },
-    ],
-  },
-  {
-    label: '2026 신규·회사·교보재',
-    color: '#f59e0b',
-    sites: [
-      { name: 'ai-free', domain: 'ai-free.dreamitbiz.com', pay: false },
-      { name: 'ai-literacy', domain: 'ai-literacy.dreamitbiz.com', pay: false },
-      { name: 'aice', domain: 'aice.dreamitbiz.com', pay: false },
-      { name: 'ax-study', domain: 'ax-study.dreamitbiz.com', pay: false },
-      { name: 'ax', domain: 'ax.dreamitbiz.com', pay: false },
-      { name: 'basic-ai', domain: 'basic-ai.dreamitbiz.com', pay: false },
-      { name: 'codex', domain: 'codex.dreamitbiz.com', pay: false },
-      { name: 'full-stack', domain: 'full-stack.dreamitbiz.com', pay: false },
-      { name: 'harness-study', domain: 'harness-study.dreamitbiz.com', pay: false },
-      { name: 'hrm', domain: 'hrm.dreamitbiz.com', pay: false },
-      { name: 'hwp', domain: 'hwp.dreamitbiz.com', pay: false },
-      { name: 'manus', domain: 'manus.dreamitbiz.com', pay: false },
-      { name: 'notebooklm', domain: 'notebooklm.dreamitbiz.com', pay: false },
-      { name: 'ppt-maker', domain: 'ppt-maker.dreamitbiz.com', pay: true  },
-      { name: 'ppt', domain: 'ppt.dreamitbiz.com', pay: false },
-      { name: 'project', domain: 'project.dreamitbiz.com', pay: false },
-      { name: 'research', domain: 'research.dreamitbiz.com', pay: false },
-      { name: 'rest', domain: 'rest.dreamitbiz.com', pay: false },
-      { name: 'rest01', domain: 'rest01.dreamitbiz.com', pay: false },
-      { name: 'rest02', domain: 'rest02.dreamitbiz.com', pay: false },
-      { name: 'rest03', domain: 'rest03.dreamitbiz.com', pay: false },
-      { name: 'rest04', domain: 'rest04.dreamitbiz.com', pay: false },
-      { name: 'rest05', domain: 'rest05.dreamitbiz.com', pay: false },
-      { name: 'rest06', domain: 'rest06.dreamitbiz.com', pay: true  },
-      { name: 'rest07', domain: 'rest07.dreamitbiz.com', pay: false },
-      { name: 'sangmin', domain: 'sangmin.dreamitbiz.com', pay: false },
-      { name: 'seminar', domain: 'seminar.dreamitbiz.com', pay: true  },
-      { name: 'site', domain: 'site.dreamitbiz.com', pay: false },
-      { name: 'solar', domain: 'solar.dreamitbiz.com', pay: false },
-      { name: 'startup', domain: 'startup.dreamitbiz.com', pay: true  },
-      { name: 'templete03', domain: 'templete03.dreamitbiz.com', pay: false },
-      { name: 'vibe-coding', domain: 'vibe-coding.dreamitbiz.com', pay: false },
-      { name: 'web', domain: 'web.dreamitbiz.com', pay: false },
-    ],
-  },
+/**
+ * 카테고리 구성(라벨·색상·분류)은 관리자 디렉터리 고유 표현이므로 여기서 관리하고,
+ * 각 사이트의 domain·결제 여부 같은 사실 데이터는 siteRegistry(SSOT)에서 파생한다.
+ * → 사이트 추가/결제여부 변경은 siteRegistry 한 곳만 수정하면 됨. (멤버십 누락은 아래 가드가 감지)
+ */
+const SITE_CATEGORIES: { label: string; color: string; sites: string[] }[] = [
+  { label: 'Hub 사이트', color: '#6366f1', sites: ['edu-hub', 'ai-hub', 'biz-hub', 'cs-hub', 'basic-hub', 'exam-hub', 'career-hub', 'thesis-hub', 'coding-hub'] },
+  { label: '프로그래밍 교육', color: '#0ea5e9', sites: ['coding', 'c-study', 'python-study', 'java-study', 'reactstudy', 'html'] },
+  { label: 'IT/CS 교육', color: '#10b981', sites: ['algorithm', 'data-structure', 'linux-study', 'db-study', 'software', 'webstudy', 'koreatech', 'aisw'] },
+  { label: 'AI 교육', color: '#8b5cf6', sites: ['ai-prompt', 'ai-data', 'ai-media', 'claude', 'chatgpt', 'gemini', 'genspark', 'copilot'] },
+  { label: 'AI 도구', color: '#f43f5e', sites: ['ai-agents', 'autowork', 'fine-tuning', 'vibe'] },
+  { label: '비즈니스/LMS', color: '#f59e0b', sites: ['digitalbiz', 'marketing', 'uxdesign', 'self-branding'] },
+  { label: '어학', color: '#06b6d4', sites: ['english', 'japanese', 'korean'] },
+  { label: '자격증', color: '#84cc16', sites: ['eip', 'sqld'] },
+  { label: '핵심 플랫폼', color: '#ec4899', sites: ['competency', 'career', 'allthat', 'papers', 'ahp-basic', 'teaching', 'planning'] },
+  { label: '출판/문서', color: '#64748b', sites: ['books', 'docs', 'reserve', 'openclaw', 'presentation'] },
+  { label: '취업/경력', color: '#f97316', sites: ['jobpath', 'jobexam', 'www'] },
+  { label: '개인/포트폴리오', color: '#a78bfa', sites: ['aebon', 'jdy', 'wonjunjang', 'hohai'] },
+  { label: '로봇/IoT/BI', color: '#2dd4bf', sites: ['pbirobot', 'pbi', 'koreait'] },
+  { label: '강사', color: '#fb923c', sites: ['instructor'] },
+  { label: '연구/학술', color: '#4ade80', sites: ['survey', 'esg', 'accounting'] },
+  { label: '클라우드/DevOps', color: '#facc15', sites: ['aws'] },
+  { label: '학습법/안전', color: '#34d399', sites: ['study', 'safety', 'statistics'] },
+  { label: '대학·기업 납품', color: '#6366f1', sites: ['seoultech', 'syu', 'snu', 'halla', 'cnu', 'university', 'kdn2026', 'komipo', 'dasco', 'contents', 'data', 'skala', 'knc'] },
+  { label: '2026 신규·회사·교보재', color: '#f59e0b', sites: ['ai-free', 'ai-literacy', 'aice', 'ax-study', 'ax', 'basic-ai', 'codex', 'full-stack', 'harness-study', 'hrm', 'hwp', 'manus', 'notebooklm', 'ppt-maker', 'ppt', 'project', 'research', 'rest', 'rest01', 'rest02', 'rest03', 'rest04', 'rest05', 'rest06', 'rest07', 'sangmin', 'seminar', 'site', 'solar', 'startup', 'templete03', 'vibe-coding', 'web'] },
 ];
+
+// 개발 모드: 카테고리 멤버십이 레지스트리(SSOT)와 어긋나면 콘솔 경고
+assertSiteCoverage('AdminLinks', SITE_CATEGORIES.flatMap((c) => c.sites));
+
+interface ResolvedSite {
+  name: string;
+  domain: string;
+  pay: boolean;
+}
 
 const TOTAL = SITE_CATEGORIES.reduce((s, c) => s + c.sites.length, 0);
 
@@ -248,12 +47,19 @@ const AdminLinks = () => {
     const q = search.toLowerCase();
     return SITE_CATEGORIES
       .filter((cat) => activeCategory === '전체' || cat.label === activeCategory)
-      .map((cat) => ({
-        ...cat,
-        sites: cat.sites.filter(
-          (s) => !q || s.name.includes(q) || s.domain.includes(q)
-        ),
-      }))
+      .map((cat) => {
+        const sites: ResolvedSite[] = cat.sites
+          .map((name) => {
+            const s = getSite(name);
+            return {
+              name,
+              domain: s?.domain ?? `${name}.dreamitbiz.com`,
+              pay: s?.hasPayment ?? false,
+            };
+          })
+          .filter((s) => !q || s.name.includes(q) || s.domain.includes(q));
+        return { ...cat, sites };
+      })
       .filter((cat) => cat.sites.length > 0);
   }, [search, activeCategory]);
 
