@@ -4,6 +4,7 @@
  */
 
 import getSupabase from './supabase';
+import { getSite, CATEGORY_COLOR } from '../constants/siteRegistry';
 
 interface DashboardCounts {
   users: number;
@@ -435,6 +436,29 @@ export async function getSiteDistribution(): Promise<{ site: string; count: numb
     .map(([site, count]) => ({ site, count }))
     .sort((a, b) => b.count - a.count)
     .slice(0, 10);
+}
+
+/**
+ * 가입경로 분석 — 회원의 가입 출처(signup_domain)를 siteRegistry 카테고리로 분류·집계.
+ * 분류 불가(레지스트리에 없는 도메인·localhost 등)는 '기타/미분류'로 합산.
+ */
+export async function getCategorySignups(): Promise<{ category: string; color: string; count: number }[]> {
+  const users = await getAllUsers();
+  const catMap: Record<string, number> = {};
+  let unknown = 0;
+  users.forEach((u: any) => {
+    const raw = u.signup_domain
+      || (Array.isArray(u.visited_sites) && u.visited_sites.length > 0 ? u.visited_sites[0] : '');
+    const name = String(raw || '').toLowerCase().replace('.dreamitbiz.com', '').trim() || 'www';
+    const cat = getSite(name)?.category;
+    if (cat) catMap[cat] = (catMap[cat] || 0) + 1;
+    else unknown++;
+  });
+  const out = Object.entries(catMap)
+    .map(([category, count]) => ({ category, color: CATEGORY_COLOR[category] || '#94a3b8', count }))
+    .sort((a, b) => b.count - a.count);
+  if (unknown > 0) out.push({ category: '기타/미분류', color: '#cbd5e1', count: unknown });
+  return out;
 }
 
 /** 최근 주문 N건 */

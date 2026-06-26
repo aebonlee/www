@@ -1,6 +1,7 @@
 import { Link, useLocation } from 'react-router-dom';
 import { useState, useEffect } from 'react';
 import getSupabase from '../../utils/supabase';
+import { SITES } from '../../constants/siteRegistry';
 
 function hexToRgb(hex: string) {
   const r = parseInt(hex.slice(1, 3), 16);
@@ -164,8 +165,8 @@ const AdminSidebar = ({ collapsed, onToggle, mobileOpen, onMobileClose }: {
       label: '개요',
       items: [
         { path: '/admin',         label: '대시보드',     icon: <IconDashboard /> },
-        { path: '/admin/sites',   label: '사이트 현황',  icon: <IconGlobe /> },
-        { path: '/admin/links',   label: '사이트 바로가기', icon: <IconLink /> },
+        { path: '/admin/sites',   label: '사이트 현황',  icon: <IconGlobe />, count: SITES.length },
+        { path: '/admin/links',   label: '사이트 바로가기', icon: <IconLink />, count: SITES.length },
         { path: '/admin/site-visits', label: '사이트별 방문통계', icon: <IconBarChart /> },
         { path: '/admin/trends',  label: '트렌드 분석',  icon: <IconTrending /> },
       ],
@@ -294,6 +295,17 @@ const AdminSidebar = ({ collapsed, onToggle, mobileOpen, onMobileClose }: {
                           flexShrink: 0,
                         }}>
                           +{item.badge}
+                        </span>
+                      )}
+                      {item.count != null && (
+                        <span style={{
+                          background: `rgba(${rgb},0.12)`, color,
+                          border: `1px solid rgba(${rgb},0.28)`,
+                          borderRadius: '20px', padding: '1px 7px',
+                          fontSize: '11px', fontWeight: 700,
+                          flexShrink: 0,
+                        }}>
+                          {item.count}
                         </span>
                       )}
                     </Link>

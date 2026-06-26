@@ -1,7 +1,7 @@
 import { useState, useEffect, useMemo, useCallback } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { getAllUsers, getSiteVisitStats, getAllOrdersAll } from '../../utils/adminStorage';
-import { SITES, type SiteEntry } from '../../constants/siteRegistry';
+import { SITES, SITE_CATEGORIES, CATEGORY_COLOR, type SiteEntry } from '../../constants/siteRegistry';
 
 type LiveStatus = 'unknown' | 'checking' | 'up' | 'down';
 
@@ -37,6 +37,7 @@ const AdminSites = () => {
   const [search, setSearch] = useState('');
   const [sortBy, setSortBy] = useState<'members' | 'visits' | 'revenue' | 'recent' | 'name'>('members');
   const [filterPayment, setFilterPayment] = useState<'all' | 'payment'>('all');
+  const [filterCategory, setFilterCategory] = useState<string>('all');
   const [status, setStatus] = useState<Record<string, LiveStatus>>({});
   const [checking, setChecking] = useState(false);
 
@@ -99,6 +100,7 @@ const AdminSites = () => {
       list = list.filter(s => s.name.toLowerCase().includes(q) || s.domain.toLowerCase().includes(q));
     }
     if (filterPayment === 'payment') list = list.filter(s => s.hasPayment);
+    if (filterCategory !== 'all') list = list.filter(s => s.category === filterCategory);
     const by: Record<string, (a: SiteRow, b: SiteRow) => number> = {
       members: (a, b) => b.totalMembers - a.totalMembers,
       visits: (a, b) => b.visits - a.visits,
@@ -107,7 +109,7 @@ const AdminSites = () => {
       name: (a, b) => a.name.localeCompare(b.name),
     };
     return [...list].sort(by[sortBy]);
-  }, [rows, search, sortBy, filterPayment]);
+  }, [rows, search, sortBy, filterPayment, filterCategory]);
 
   // 합계
   const totals = useMemo(() => ({
@@ -141,11 +143,11 @@ const AdminSites = () => {
   }, []);
 
   const exportCSV = useCallback(() => {
-    const header = ['사이트', '도메인', '결제', '상태', '전체회원', '최근7일', '방문(90일)', '주문', '매출'];
+    const header = ['사이트', '카테고리', '도메인', '결제', '상태', '전체회원', '최근7일', '방문(90일)', '주문', '매출'];
     const lines = [header.join(',')];
     filtered.forEach(s => {
       lines.push([
-        s.name, s.domain, s.hasPayment ? 'Y' : 'N', status[s.name] || '-',
+        s.name, s.category, s.domain, s.hasPayment ? 'Y' : 'N', status[s.name] || '-',
         s.totalMembers, s.recentMembers, s.visits, s.orderCount, s.revenue,
       ].join(','));
     });
@@ -210,6 +212,12 @@ const AdminSites = () => {
           <option value="all">전체 사이트</option>
           <option value="payment">결제 사이트만</option>
         </select>
+        <select value={filterCategory} onChange={e => setFilterCategory(e.target.value)} className="role-select" style={{ minWidth: '150px' }}>
+          <option value="all">전체 카테고리</option>
+          {SITE_CATEGORIES.map(c => (
+            <option key={c.label} value={c.label}>{c.label}</option>
+          ))}
+        </select>
         <button onClick={checkLive} disabled={checking} className="admin-btn"
           style={{ padding: '6px 14px', borderRadius: '6px', border: '1px solid #6366F1', background: checking ? '#e0e7ff' : '#6366F1', color: checking ? '#6366F1' : '#fff', fontSize: '13px', fontWeight: 600, cursor: checking ? 'default' : 'pointer' }}>
           {checking ? '점검 중…' : '🔄 라이브 점검'}
@@ -232,6 +240,7 @@ const AdminSites = () => {
                 <th style={{ padding: '10px 12px', textAlign: 'right', width: '44px' }}>#</th>
                 <th style={{ padding: '10px 12px' }}>상태</th>
                 <th style={{ padding: '10px 12px' }}>사이트</th>
+                <th style={{ padding: '10px 12px' }}>카테고리</th>
                 <th style={{ padding: '10px 12px', textAlign: 'right' }}>전체 회원</th>
                 <th style={{ padding: '10px 12px', textAlign: 'right' }}>최근 7일</th>
                 <th style={{ padding: '10px 12px', textAlign: 'right' }}>방문(90일)</th>
@@ -251,6 +260,13 @@ const AdminSites = () => {
                       {s.hasPayment && <span style={{ fontSize: '9px', fontWeight: 700, padding: '1px 5px', background: '#fef3c7', color: '#92400e', borderRadius: '4px', border: '1px solid #fbbf24' }}>결제</span>}
                     </div>
                     <div style={{ fontSize: '11px', color: 'var(--text-light)' }}>{s.domain}</div>
+                  </td>
+                  <td style={{ padding: '10px 12px' }}>
+                    <button onClick={() => setFilterCategory(s.category)} title={`${s.category} 필터`}
+                      style={{ display: 'inline-flex', alignItems: 'center', gap: '5px', fontSize: '11px', fontWeight: 600, padding: '2px 8px', borderRadius: '20px', cursor: 'pointer', whiteSpace: 'nowrap', color: CATEGORY_COLOR[s.category] || '#64748b', background: `${CATEGORY_COLOR[s.category] || '#64748b'}14`, border: `1px solid ${CATEGORY_COLOR[s.category] || '#64748b'}33` }}>
+                      <span style={{ width: 6, height: 6, borderRadius: '50%', background: CATEGORY_COLOR[s.category] || '#64748b' }} />
+                      {s.category}
+                    </button>
                   </td>
                   <td style={{ padding: '10px 12px', textAlign: 'right', fontWeight: 700, color: s.totalMembers > 0 ? '#3B82F6' : 'var(--text-light)' }}>{s.totalMembers.toLocaleString()}</td>
                   <td style={{ padding: '10px 12px', textAlign: 'right', color: s.recentMembers > 0 ? '#10B981' : 'var(--text-light)' }}>+{s.recentMembers}</td>

@@ -7,8 +7,9 @@ import {
 import AdminStatCard from '../../components/admin/AdminStatCard';
 import {
   getDashboardCounts, getRecentOrders, getPaymentStats,
-  getMonthlySignups, getMonthlyRevenue, getSiteDistribution
+  getMonthlySignups, getMonthlyRevenue, getSiteDistribution, getCategorySignups
 } from '../../utils/adminStorage';
+import { SITES, getCategoryCounts } from '../../constants/siteRegistry';
 import { getBlogPosts, getBoardPosts, getGalleryItems } from '../../utils/boardStorage';
 import { useAuth } from '../../contexts/AuthContext';
 import { formatDate, formatPrice } from '../../utils/format';
@@ -24,6 +25,7 @@ const AdminDashboard = () => {
   const [monthlySignups, setMonthlySignups] = useState([]);
   const [monthlyRevenue, setMonthlyRevenue] = useState([]);
   const [siteDistribution, setSiteDistribution] = useState([]);
+  const [categorySignups, setCategorySignups] = useState([]);
   const [chartsLoading, setChartsLoading] = useState(true);
 
   const load = useCallback(async () => {
@@ -49,14 +51,16 @@ const AdminDashboard = () => {
 
     // 차트 데이터 (별도 로드 — 느릴 수 있음)
     setChartsLoading(true);
-    const [signups, revenue, sites] = await Promise.all([
+    const [signups, revenue, sites, catSignups] = await Promise.all([
       getMonthlySignups(),
       getMonthlyRevenue(),
       getSiteDistribution(),
+      getCategorySignups(),
     ]);
     setMonthlySignups(signups);
     setMonthlyRevenue(revenue);
     setSiteDistribution(sites);
+    setCategorySignups(catSignups);
     setChartsLoading(false);
   }, []);
 
@@ -75,6 +79,13 @@ const AdminDashboard = () => {
   const totalTx = payment.paidCount + (payment.cancelledCount || 0);
   const successRate = totalTx > 0 ? ((payment.paidCount / totalTx) * 100).toFixed(1) : '0.0';
   const avgOrder = payment.paidCount > 0 ? Math.round(payment.totalAmount / payment.paidCount) : 0;
+
+  // 사이트 포트폴리오 (siteRegistry SSOT 파생)
+  const categoryCounts = getCategoryCounts();
+  const totalSites = SITES.length;
+  const paymentSiteCount = SITES.filter((s) => s.hasPayment).length;
+  const maxCatCount = categoryCounts.length > 0 ? Math.max(...categoryCounts.map((c) => c.count)) : 0;
+  const totalCategorySignups = categorySignups.reduce((s, c) => s + (c.count || 0), 0);
 
   const displayName = profile?.full_name || user?.user_metadata?.full_name || user?.email?.split('@')[0] || '관리자';
   const todayStr = new Date().toLocaleDateString('ko-KR', { year: 'numeric', month: 'long', day: 'numeric', weekday: 'long' });
@@ -101,7 +112,10 @@ const AdminDashboard = () => {
     paid: <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>,
     order: <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><rect x="1" y="4" width="22" height="16" rx="2"/><line x1="1" y1="10" x2="23" y2="10"/></svg>,
     cancel: <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><circle cx="12" cy="12" r="10"/><line x1="15" y1="9" x2="9" y2="15"/><line x1="9" y1="9" x2="15" y2="15"/></svg>,
-    refresh: <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" strokeWidth="2"><polyline points="23 4 23 10 17 10" /><polyline points="1 20 1 14 7 14" /><path d="M3.51 9a9 9 0 0 1 14.85-3.36L23 10M1 14l4.64 4.36A9 9 0 0 0 20.49 15" /></svg>
+    refresh: <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" strokeWidth="2"><polyline points="23 4 23 10 17 10" /><polyline points="1 20 1 14 7 14" /><path d="M3.51 9a9 9 0 0 1 14.85-3.36L23 10M1 14l4.64 4.36A9 9 0 0 0 20.49 15" /></svg>,
+    globe: <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg>,
+    layers: <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><polygon points="12 2 2 7 12 12 22 7 12 2"/><polyline points="2 17 12 22 22 17"/><polyline points="2 12 12 17 22 12"/></svg>,
+    route: <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><circle cx="6" cy="19" r="3"/><path d="M9 19h8.5a3.5 3.5 0 0 0 0-7h-11a3.5 3.5 0 0 1 0-7H15"/><circle cx="18" cy="5" r="3"/></svg>
   };
 
   const statusLabel = (s) => {
@@ -145,6 +159,72 @@ const AdminDashboard = () => {
             {icons.refresh}
             새로고침
           </button>
+        </div>
+      </div>
+
+      {/* ── ZONE 1.5: 사이트 포트폴리오 + 가입경로 ── */}
+      <div className="dash-split-row">
+        {/* 사이트 포트폴리오 (siteRegistry SSOT 파생) */}
+        <div className="dash-panel">
+          <div className="dash-panel-header">
+            <h3>사이트 포트폴리오</h3>
+            <Link to="/admin/sites">사이트 현황 →</Link>
+          </div>
+          <div className="dash-panel-body">
+            <div className="dash-compact-stats" style={{ marginBottom: '14px' }}>
+              <AdminStatCard icon={icons.globe} value={totalSites} label="전체 사이트" color="#6366F1" />
+              <AdminStatCard icon={icons.paid} value={paymentSiteCount} label="결제 사이트" color="#D97706" />
+              <AdminStatCard icon={icons.layers} value={categoryCounts.length} label="카테고리" color="#0EA5E9" />
+            </div>
+            <div style={{ fontSize: '12px', fontWeight: 600, color: 'var(--text-secondary)', marginBottom: '10px' }}>
+              카테고리별 사이트 분포
+            </div>
+            <div style={{ display: 'flex', flexDirection: 'column', gap: '7px' }}>
+              {categoryCounts.map((c) => (
+                <div key={c.label} style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
+                  <span style={{ width: '128px', fontSize: '12px', color: 'var(--text-secondary)', overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap', flexShrink: 0 }} title={c.label}>{c.label}</span>
+                  <div style={{ flex: 1, height: '14px', background: 'var(--bg-hover, #f1f5f9)', borderRadius: '4px', overflow: 'hidden' }}>
+                    <div style={{ width: `${maxCatCount > 0 ? (c.count / maxCatCount) * 100 : 0}%`, height: '100%', background: c.color, borderRadius: '4px', transition: 'width 0.4s ease' }} />
+                  </div>
+                  <span style={{ width: '28px', textAlign: 'right', fontSize: '12px', fontWeight: 700, color: c.color, flexShrink: 0, fontVariantNumeric: 'tabular-nums' }}>{c.count}</span>
+                </div>
+              ))}
+            </div>
+          </div>
+        </div>
+
+        {/* 가입경로 분석 (카테고리별 가입 출처) */}
+        <div className="dash-panel">
+          <div className="dash-panel-header">
+            <h3>가입경로 분석</h3>
+            <span className="dash-panel-sub">
+              {chartsLoading ? '로딩 중…' : `카테고리별 가입 · 총 ${totalCategorySignups.toLocaleString()}명`}
+            </span>
+          </div>
+          <div className="dash-panel-body">
+            {chartsLoading ? (
+              <div style={{ height: '180px', display: 'flex', alignItems: 'center', justifyContent: 'center', color: 'var(--text-light)', fontSize: '13px' }}>가입경로 집계 중…</div>
+            ) : categorySignups.length === 0 || totalCategorySignups === 0 ? (
+              <div className="admin-empty"><p>가입경로 데이터가 없습니다.</p></div>
+            ) : (
+              <div style={{ display: 'flex', flexDirection: 'column', gap: '9px' }}>
+                {categorySignups.map((c) => {
+                  const pct = totalCategorySignups > 0 ? (c.count / totalCategorySignups) * 100 : 0;
+                  return (
+                    <div key={c.category} style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
+                      <span style={{ width: '128px', fontSize: '12px', color: 'var(--text-secondary)', overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap', flexShrink: 0 }} title={c.category}>{c.category}</span>
+                      <div style={{ flex: 1, height: '16px', background: 'var(--bg-hover, #f1f5f9)', borderRadius: '4px', overflow: 'hidden', position: 'relative' }}>
+                        <div style={{ width: `${pct}%`, height: '100%', background: c.color, borderRadius: '4px', transition: 'width 0.4s ease' }} />
+                      </div>
+                      <span style={{ width: '74px', textAlign: 'right', fontSize: '12px', flexShrink: 0, color: 'var(--text-secondary)', fontVariantNumeric: 'tabular-nums' }}>
+                        <b style={{ color: c.color }}>{c.count.toLocaleString()}</b> · {pct.toFixed(0)}%
+                      </span>
+                    </div>
+                  );
+                })}
+              </div>
+            )}
+          </div>
         </div>
       </div>
 
