@@ -56,7 +56,17 @@ const Navbar = () => {
   };
 
   const menuItems = [
-    { path: '/', label: t('nav.home') },
+    {
+      label: t('nav.about'),
+      path: '/about',
+      activePath: '/about',
+      dropdown: [
+        { path: '/about', label: t('about.companyVision') },
+        { path: '/about/history', label: t('about.history') },
+        { path: '/about/ceo', label: t('about.ceoProfile') },
+        { path: '/contact', label: t('about.contact') }
+      ]
+    },
     {
       label: t('nav.itServices'),
       path: '/services',
@@ -110,17 +120,6 @@ const Navbar = () => {
         { path: '/community/blog', label: t('community.blog') },
         { path: '/community/board', label: t('community.board') },
         { path: '/community/gallery', label: t('community.gallery') }
-      ]
-    },
-    {
-      label: t('nav.about'),
-      path: '/about',
-      activePath: '/about',
-      dropdown: [
-        { path: '/about', label: t('about.companyVision') },
-        { path: '/about/history', label: t('about.history') },
-        { path: '/about/ceo', label: t('about.ceoProfile') },
-        { path: '/contact', label: t('about.contact') }
       ]
     }
   ];
