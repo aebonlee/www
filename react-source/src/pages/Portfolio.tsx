@@ -120,8 +120,8 @@ const Portfolio = () => {
       <section id="projects" style={{ padding: '80px 0' }}>
         <div className="container">
           <div className="section-header">
-            <h2 className="section-title">기타 프로젝트</h2>
-            <p className="section-subtitle">다양한 분야의 성공적인 프로젝트들</p>
+            <h2 className="section-title">드림아이티비즈(DreamIT Biz) 교육사이트</h2>
+            <p className="section-subtitle">드림아이티비즈가 직접 구축·운영한 교육 사이트</p>
           </div>
           <div className="portfolio-grid">
             {[
