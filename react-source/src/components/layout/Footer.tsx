@@ -35,7 +35,7 @@ const Footer = () => {
           <div className="footer-contact">
             <h4>{t('footer.contact')}</h4>
             <p className="footer-email">
-              <span className="footer-email-icon">✉️</span>
+              <span className="footer-email-icon"><i className="fa-solid fa-envelope" /></span>
               <a href="mailto:aebon@dreamitbiz.com">aebon@dreamitbiz.com</a>
             </p>
             <p>010-3700-0629</p>

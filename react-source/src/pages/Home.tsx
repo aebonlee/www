@@ -23,6 +23,8 @@ const Home = () => {
       {/* Hero Carousel */}
       <HeroCarousel />
 
+      <div className="kdn-home">
+
       {/* Services Section */}
       <section id="services" style={{ padding: '80px 0', background: 'var(--bg-white)' }}>
         <div className="container">
@@ -90,7 +92,7 @@ const Home = () => {
                 <div className="portfolio-tag">웹개발 · 디자인</div>
                 <h3>세종대학교 미래교육원</h3>
                 <p>cec.sejong.ac.kr - 미래교육원 공식 웹사이트 구축 프로젝트</p>
-                <span className="detail-link">자세히 보기 →</span>
+                <span className="detail-link">자세히 보기 <i className="fa-solid fa-arrow-right kdn-link-arrow" /></span>
               </div>
             </Link>
 
@@ -102,7 +104,7 @@ const Home = () => {
                 <div className="portfolio-tag">웹개발 · 디자인</div>
                 <h3>진주교육대학교 100주년</h3>
                 <p>cue100th.com - 100주년 기념 사이트 구축</p>
-                <span className="detail-link">자세히 보기 →</span>
+                <span className="detail-link">자세히 보기 <i className="fa-solid fa-arrow-right kdn-link-arrow" /></span>
               </div>
             </Link>
 
@@ -116,7 +118,7 @@ const Home = () => {
                 <div className="portfolio-tag">웹개발 · 호스팅</div>
                 <h3>더 많은 프로젝트</h3>
                 <p>드림아이티비즈의 다양한 프로젝트를 확인하세요</p>
-                <span className="detail-link">전체 보기 →</span>
+                <span className="detail-link">전체 보기 <i className="fa-solid fa-arrow-right kdn-link-arrow" /></span>
               </div>
             </Link>
           </div>
@@ -140,7 +142,9 @@ const Home = () => {
               { name: '강○원', company: 'GHI교육원', text: '맞춤형 IT 교육 프로그램이 직원들에게 큰 도움이 되었습니다. 실습 중심 교육이 효과적이었어요.' }
             ].map((review, i) => (
               <div key={i} className="review-card" data-aos="fade-up" data-aos-delay={i * 50}>
-                <div className="review-rating">{'★'.repeat(5)}</div>
+                <div className="review-rating">
+                  {[1, 2, 3, 4, 5].map((n) => <i key={n} className="fa-solid fa-star" />)}
+                </div>
                 <p className="review-text">"{review.text}"</p>
                 <div className="review-author">
                   <p className="author-name">{review.name}</p>
@@ -153,6 +157,7 @@ const Home = () => {
       </section>
 
       <CTA />
+      </div>
     </>
   );
 };

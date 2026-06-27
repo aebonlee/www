@@ -142,14 +142,14 @@ const HeroCarousel = () => {
         onClick={prev}
         aria-label="Previous slide"
       >
-        ‹
+        <i className="fa-solid fa-chevron-left" />
       </button>
       <button
         className="carousel-arrow carousel-arrow--next"
         onClick={next}
         aria-label="Next slide"
       >
-        ›
+        <i className="fa-solid fa-chevron-right" />
       </button>
 
       {/* Dots */}

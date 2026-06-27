@@ -135,6 +135,22 @@ const Navbar = () => {
 
   return (
     <nav className={`navbar ${isScrolled ? 'scrolled' : ''}`}>
+      <div className="kdn-topbar">
+        <div className="container">
+          <div className="kdn-topbar-inner">
+            <div className="kdn-topbar-left">
+              <span className="kdn-topbar-brand">드림아이티비즈</span>
+              <span className="kdn-topbar-dot">·</span>
+              <span className="kdn-topbar-en">DREAMIT BIZ</span>
+            </div>
+            <div className="kdn-topbar-right">
+              <a href="tel:010-3700-0629"><i className="fa-solid fa-phone" />010-3700-0629</a>
+              <a href="mailto:aebon@dreamitbiz.com"><i className="fa-solid fa-envelope" />aebon@dreamitbiz.com</a>
+              <span className="kdn-topbar-hours"><i className="fa-regular fa-clock" />평일 09:00 ~ 18:00</span>
+            </div>
+          </div>
+        </div>
+      </div>
       <div className="container">
         <div className="nav-wrapper">
           <div className="logo">
