@@ -125,15 +125,12 @@ const Portfolio = () => {
           </div>
           <div className="portfolio-grid">
             {[
-              { title: '다스코 생성형 AI 교육', tag: '생성형AI 교육', desc: '다스코(주) 임직원 대상 생성형 AI 업무 활용 교육 플랫폼', url: 'https://dasco.dreamitbiz.com' },
-              { title: '조선대학교 교원 교육', tag: '교원 교육', desc: '조선대학교 교원 대상 교육 과정 안내 및 교육신청 사이트', url: 'https://chosun.dreamitbiz.com' },
-              { title: '휴넷 AI 홍보 실무 워크숍', tag: 'AI 홍보 실무', desc: '「AI로 만드는 홍보 실무」 8시간 워크숍 · 도장깨기 미션과 갤러리 학습 사이트', url: 'https://contents.dreamitbiz.com' },
-              { title: '서울과학기술대학교 생성형 AI 강의', tag: '생성형AI 강의', desc: '서울과학기술대학교 교수 대상 생성형 AI 활용 강의 학습 사이트', url: 'https://seoultech.dreamitbiz.com' },
-              { title: 'IT 개발자 부트캠프', tag: '부트캠프 교육', desc: '실무 중심 개발 역량 강화를 위한 부트캠프 교육 과정 사이트', url: 'https://bootcamp.dreamitbiz.com' },
-              { title: 'KERIS 데이터 분석 실습', tag: '데이터 분석', desc: '엑셀 기반 데이터 분석·시각화 대시보드 실습 교육 사이트', url: 'https://data.dreamitbiz.com' },
-              { title: '중소기업 웹사이트 리뉴얼', tag: '웹개발', desc: '기존 웹사이트의 디자인과 기능을 전면 개편한 리뉴얼 프로젝트' },
-              { title: 'E-커머스 쇼핑몰 구축', tag: '웹개발 · 호스팅', desc: '상품 관리, 결제 시스템이 포함된 온라인 쇼핑몰 구축' },
-              { title: '기업 브랜딩 프로젝트', tag: '디자인', desc: 'CI/BI 디자인부터 브랜드 가이드라인까지 통합 브랜딩' },
+              { title: '다스코 생성형 AI 교육', tag: '생성형AI 교육', desc: '다스코(주) 임직원 대상 생성형 AI 업무 활용 교육 플랫폼', url: 'https://dasco.dreamitbiz.com', img: './assets/images/portfolio/dasco.png' },
+              { title: '조선대학교 교원 교육', tag: '교원 교육', desc: '조선대학교 교원 대상 교육 과정 안내 및 교육신청 사이트', url: 'https://chosun.dreamitbiz.com', img: './assets/images/portfolio/chosun.png' },
+              { title: '휴넷 AI 홍보 실무 워크숍', tag: 'AI 홍보 실무', desc: '「AI로 만드는 홍보 실무」 8시간 워크숍 · 도장깨기 미션과 갤러리 학습 사이트', url: 'https://contents.dreamitbiz.com', img: './assets/images/portfolio/contents.png' },
+              { title: '서울과학기술대학교 생성형 AI 강의', tag: '생성형AI 강의', desc: '서울과학기술대학교 교수 대상 생성형 AI 활용 강의 학습 사이트', url: 'https://seoultech.dreamitbiz.com', img: './assets/images/portfolio/seoultech.png' },
+              { title: 'DreamIT 부트캠프', tag: '부트캠프 교육', desc: '웹기초부터 React·AI 웹 서비스·배포까지, 28챕터 146강 풀코스 부트캠프', url: 'https://bootcamp.dreamitbiz.com', img: './assets/images/portfolio/bootcamp.png' },
+              { title: 'KERIS 데이터 분석 실습', tag: '데이터 분석', desc: '엑셀 기반 데이터 분석·시각화 대시보드 실습 교육 사이트', url: 'https://data.dreamitbiz.com', img: './assets/images/portfolio/data.png' },
               { title: 'IT 교육 프로그램 운영', tag: '교육', desc: '기업 직원 대상 웹 개발 및 데이터 분석 교육 프로그램 운영' },
               { title: 'IT 전략 컨설팅', tag: '컨설팅', desc: '디지털 전환을 위한 IT 인프라 분석 및 전략 수립' },
               { title: 'IT 전문 서적 출판', tag: '출판', desc: '프로그래밍 및 IT 활용 교육 서적 기획 및 출판' }
@@ -141,9 +138,13 @@ const Portfolio = () => {
               const inner = (
                 <>
                   <div className="portfolio-image">
-                    <div className="image-placeholder">
-                      <span className="placeholder-text">{project.tag.split(' ')[0]}</span>
-                    </div>
+                    {project.img ? (
+                      <img src={project.img} alt={project.title} loading="lazy" style={{ objectPosition: 'top' }} />
+                    ) : (
+                      <div className="image-placeholder">
+                        <span className="placeholder-text">{project.tag.split(' ')[0]}</span>
+                      </div>
+                    )}
                   </div>
                   <div className="portfolio-content">
                     <div className="portfolio-tag">{project.tag}</div>
