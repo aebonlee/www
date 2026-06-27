@@ -130,10 +130,7 @@ const Portfolio = () => {
               { title: '휴넷 AI 홍보 실무 워크숍', tag: 'AI 홍보 실무', desc: '「AI로 만드는 홍보 실무」 8시간 워크숍 · 도장깨기 미션과 갤러리 학습 사이트', url: 'https://contents.dreamitbiz.com', img: './assets/images/portfolio/contents.png' },
               { title: '서울과학기술대학교 생성형 AI 강의', tag: '생성형AI 강의', desc: '서울과학기술대학교 교수 대상 생성형 AI 활용 강의 학습 사이트', url: 'https://seoultech.dreamitbiz.com', img: './assets/images/portfolio/seoultech.png' },
               { title: 'DreamIT 부트캠프', tag: '부트캠프 교육', desc: '웹기초부터 React·AI 웹 서비스·배포까지, 28챕터 146강 풀코스 부트캠프', url: 'https://bootcamp.dreamitbiz.com', img: './assets/images/portfolio/bootcamp.png' },
-              { title: 'KERIS 데이터 분석 실습', tag: '데이터 분석', desc: '엑셀 기반 데이터 분석·시각화 대시보드 실습 교육 사이트', url: 'https://data.dreamitbiz.com', img: './assets/images/portfolio/data.png' },
-              { title: 'IT 교육 프로그램 운영', tag: '교육', desc: '기업 직원 대상 웹 개발 및 데이터 분석 교육 프로그램 운영' },
-              { title: 'IT 전략 컨설팅', tag: '컨설팅', desc: '디지털 전환을 위한 IT 인프라 분석 및 전략 수립' },
-              { title: 'IT 전문 서적 출판', tag: '출판', desc: '프로그래밍 및 IT 활용 교육 서적 기획 및 출판' }
+              { title: 'KERIS 데이터 분석 실습', tag: '데이터 분석', desc: '엑셀 기반 데이터 분석·시각화 대시보드 실습 교육 사이트', url: 'https://data.dreamitbiz.com', img: './assets/images/portfolio/data.png' }
             ].map((project, i) => {
               const inner = (
                 <>
