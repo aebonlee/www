@@ -130,7 +130,7 @@ const Portfolio = () => {
               { title: '휴넷 AI 홍보 실무 워크숍', tag: 'AI 홍보 실무', desc: '「AI로 만드는 홍보 실무」 8시간 워크숍 · 도장깨기 미션과 갤러리 학습 사이트', url: 'https://contents.dreamitbiz.com', img: './assets/images/portfolio/contents.png' },
               { title: '서울과학기술대학교 생성형 AI 강의', tag: '생성형AI 강의', desc: '서울과학기술대학교 교수 대상 생성형 AI 활용 강의 학습 사이트', url: 'https://seoultech.dreamitbiz.com', img: './assets/images/portfolio/seoultech.png' },
               { title: 'DreamIT 부트캠프', tag: '부트캠프 교육', desc: '웹기초부터 React·AI 웹 서비스·배포까지, 28챕터 146강 풀코스 부트캠프', url: 'https://bootcamp.dreamitbiz.com', img: './assets/images/portfolio/bootcamp.png' },
-              { title: 'KERIS 데이터 분석 실습', tag: '데이터 분석', desc: '엑셀 기반 데이터 분석·시각화 대시보드 실습 교육 사이트', url: 'https://data.dreamitbiz.com', img: './assets/images/portfolio/data.png' }
+              { title: 'DreamIT 디자인 샘플 갤러리', tag: '디자인 샘플', desc: '바로 가져다 쓰는 디자인 샘플 갤러리 · 45+ 샘플과 실전 프로젝트·학습 사이트 제공', url: 'https://sample.dreamitbiz.com/', img: './assets/images/portfolio/sample.png' }
             ].map((project, i) => {
               const inner = (
                 <>
