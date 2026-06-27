@@ -125,26 +125,46 @@ const Portfolio = () => {
           </div>
           <div className="portfolio-grid">
             {[
+              { title: '다스코 생성형 AI 교육', tag: '생성형AI 교육', desc: '다스코(주) 임직원 대상 생성형 AI 업무 활용 교육 플랫폼', url: 'https://dasco.dreamitbiz.com' },
+              { title: '조선대학교 교원 교육', tag: '교원 교육', desc: '조선대학교 교원 대상 교육 과정 안내 및 교육신청 사이트', url: 'https://chosun.dreamitbiz.com' },
+              { title: '휴넷 AI 홍보 실무 워크숍', tag: 'AI 홍보 실무', desc: '「AI로 만드는 홍보 실무」 8시간 워크숍 · 도장깨기 미션과 갤러리 학습 사이트', url: 'https://contents.dreamitbiz.com' },
               { title: '중소기업 웹사이트 리뉴얼', tag: '웹개발', desc: '기존 웹사이트의 디자인과 기능을 전면 개편한 리뉴얼 프로젝트' },
               { title: 'E-커머스 쇼핑몰 구축', tag: '웹개발 · 호스팅', desc: '상품 관리, 결제 시스템이 포함된 온라인 쇼핑몰 구축' },
               { title: '기업 브랜딩 프로젝트', tag: '디자인', desc: 'CI/BI 디자인부터 브랜드 가이드라인까지 통합 브랜딩' },
               { title: 'IT 교육 프로그램 운영', tag: '교육', desc: '기업 직원 대상 웹 개발 및 데이터 분석 교육 프로그램 운영' },
               { title: 'IT 전략 컨설팅', tag: '컨설팅', desc: '디지털 전환을 위한 IT 인프라 분석 및 전략 수립' },
               { title: 'IT 전문 서적 출판', tag: '출판', desc: '프로그래밍 및 IT 활용 교육 서적 기획 및 출판' }
-            ].map((project, i) => (
-              <div key={i} className="portfolio-card" data-aos="fade-up" data-aos-delay={i * 50}>
-                <div className="portfolio-image">
-                  <div className="image-placeholder">
-                    <span className="placeholder-text">{project.tag.split(' ')[0]}</span>
+            ].map((project, i) => {
+              const inner = (
+                <>
+                  <div className="portfolio-image">
+                    <div className="image-placeholder">
+                      <span className="placeholder-text">{project.tag.split(' ')[0]}</span>
+                    </div>
                   </div>
+                  <div className="portfolio-content">
+                    <div className="portfolio-tag">{project.tag}</div>
+                    <h3>{project.title}</h3>
+                    <p>{project.desc}</p>
+                    {project.url && (
+                      <span className="detail-link">
+                        {project.url.replace('https://', '')}
+                        <i className="fa-solid fa-arrow-up-right-from-square" style={{ fontSize: '11px', marginLeft: '6px' }} />
+                      </span>
+                    )}
+                  </div>
+                </>
+              );
+              return project.url ? (
+                <a key={i} href={project.url} target="_blank" rel="noopener noreferrer" className="portfolio-card" data-aos="fade-up" data-aos-delay={i * 50}>
+                  {inner}
+                </a>
+              ) : (
+                <div key={i} className="portfolio-card" data-aos="fade-up" data-aos-delay={i * 50}>
+                  {inner}
                 </div>
-                <div className="portfolio-content">
-                  <div className="portfolio-tag">{project.tag}</div>
-                  <h3>{project.title}</h3>
-                  <p>{project.desc}</p>
-                </div>
-              </div>
-            ))}
+              );
+            })}
           </div>
         </div>
       </section>

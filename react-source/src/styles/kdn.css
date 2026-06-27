@@ -319,19 +319,21 @@ body {
 [data-theme="dark"] .kdn-home .section-title { color: var(--text-primary); }
 [data-theme="dark"] .kdn-home .section-subtitle { color: var(--text-secondary); }
 
+/* Elevated card surface — clearly lighter than both section bands
+   (#111827 / #1F2937) so cards never blend into the section. */
 [data-theme="dark"] .kdn-home .service-card,
-[data-theme="dark"] .kdn-home .review-card {
-    background: var(--bg-light-gray);
-    border-color: var(--border-light);
-}
-
+[data-theme="dark"] .kdn-home .review-card,
 [data-theme="dark"] .kdn-home .portfolio-card {
-    border-color: var(--border-light);
+    background: #27314A;
+    border: 1px solid #3A4663;
+    box-shadow: 0 6px 18px rgba(0, 0, 0, 0.35);
 }
 
-[data-theme="dark"] .kdn-home .service-card:hover {
-    background: var(--bg-light-gray);
+[data-theme="dark"] .kdn-home .service-card:hover,
+[data-theme="dark"] .kdn-home .review-card:hover {
+    background: #2E3954;
     border-color: var(--primary-blue);
+    box-shadow: 0 10px 26px rgba(0, 0, 0, 0.45);
 }
 
 [data-theme="dark"] .kdn-home .service-card h3,
@@ -351,3 +353,15 @@ body {
     -webkit-text-fill-color: var(--primary-blue-light);
     color: var(--primary-blue-light);
 }
+
+[data-theme="dark"] .kdn-home .portfolio-tag {
+    background: rgba(75, 134, 255, 0.16);
+    color: var(--primary-blue-light);
+}
+
+[data-theme="dark"] .kdn-home .detail-link,
+[data-theme="dark"] .kdn-home .author-company {
+    color: var(--primary-blue-light);
+}
+
+[data-theme="dark"] .kdn-home .section-subtitle { color: var(--text-secondary); }
