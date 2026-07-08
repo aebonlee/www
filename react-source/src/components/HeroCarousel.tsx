@@ -1,7 +1,7 @@
 import { useState, useEffect, useCallback, useRef } from 'react';
 import { Link } from 'react-router-dom';
 import { useLanguage } from '../contexts/LanguageContext';
-import HeroBackground from './HeroBackground';
+import HeroBackground, { HERO_ILLUSTRATIONS } from './HeroBackground';
 import ScrollIndicator from './ScrollIndicator';
 
 const SLIDE_COUNT = 5;
@@ -95,8 +95,8 @@ const HeroCarousel = () => {
         </div>
       </div>
 
-      {/* Content */}
-      <div className="container">
+      {/* Content — 2단 그리드: 텍스트(좌) / 일러스트(우) */}
+      <div className="container hero-grid">
         <div className="hero-content">
           {slides[current] && (
             <>
@@ -133,6 +133,11 @@ const HeroCarousel = () => {
               </div>
             </>
           )}
+        </div>
+
+        {/* Right: 슬라이드별 통일 SVG 일러스트 */}
+        <div className="hero-visual" key={current}>
+          {HERO_ILLUSTRATIONS[current] ?? null}
         </div>
       </div>
 

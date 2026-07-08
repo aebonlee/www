@@ -193,7 +193,7 @@ export const translations = {
         line1: '전자출판 · 간행물 · 도서',
         line2: '지식을 담는',
         highlight: '출판',
-        line3: '의 새로운 지평',
+        line3: '의 경험을 제공합니다',
         description: 'IT 전문 서적부터 전자출판, 간행물까지\n지식 콘텐츠의 기획·제작·유통을 함께합니다',
         cta1: '출판 서비스',
         cta2: '스토어'
