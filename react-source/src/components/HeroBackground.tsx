@@ -1,7 +1,9 @@
 /**
- * HeroBackground — 슬라이드 우측 정보형 SVG 일러스트.
- * university 히어로 스타일(솔리드 흰 카드 + AI 코어 + 블롭·링·스파크·플로우)을
- * 파란 테마로 이식. 슬라이드마다 "입력 → AI → 결과" 스토리를 주제별로 표현.
+ * HeroBackground — 슬라이드 우측 정보형 SVG 일러스트(주제별 개별 씬).
+ * 공통 프레임(블롭·링·스파크)과 AI 코어는 통일 스타일로 재사용하되,
+ * 각 슬라이드는 주제에 맞는 서로 다른 장면으로 구성한다.
+ *   0 종합=서비스 허브 / 1 웹=브라우저+코드 / 2 컨설팅=성장 그래프
+ *   3 교육=모니터+학사모 / 4 출판=문서→책
  * HeroCarousel이 텍스트와 같은 2단 그리드에 배치하기 위해 export.
  */
 
@@ -16,159 +18,165 @@ const Frame = () => (
   </>
 );
 
-// 공통 스파크 + 떠다니는 미니 아이콘
+// 공통 스파크(작은 점 반짝임)
 const Accents = () => (
   <>
-    <circle className="hero-spark s1" cx="410" cy="120" r="4.5" />
-    <circle className="hero-spark s2" cx="120" cy="150" r="3.5" />
-    <circle className="hero-spark s3" cx="400" cy="330" r="3.5" />
-    <g className="hero-float f1">
-      <rect x="96" y="88" width="44" height="44" rx="12" />
-      <path className="mini-icon" d="M108 104 h20 M108 111 h15 M108 118 h20" />
-    </g>
-    <g className="hero-float f2">
-      <rect x="398" y="372" width="48" height="48" rx="13" />
-      <path className="mini-check" d="M410 396 l7 7 13-15" />
-    </g>
+    <circle className="hero-spark s1" cx="408" cy="118" r="4.5" />
+    <circle className="hero-spark s2" cx="126" cy="150" r="3.5" />
+    <circle className="hero-spark s3" cx="402" cy="332" r="3.5" />
   </>
 );
 
-// AI 처리 코어(중앙 상단)
-const AiCore = () => (
-  <g className="hero-ai">
-    <circle className="ai-orbit" cx="270" cy="128" r="42" />
-    <circle className="ai-core" cx="270" cy="128" r="28" />
-    <g className="ai-orbit-spin">
-      <circle className="ai-orbit-dot" cx="270" cy="86" r="5" />
-      <circle className="ai-orbit-dot" cx="270" cy="170" r="3.5" />
+// AI 코어(위치 자유) — 궤도 + 코어 + 궤도점 + 'AI' 라벨
+const AiCore = ({ cx, cy, r = 26 }: { cx: number; cy: number; r?: number }) => {
+  const x = +cx, y = +cy, rr = +r;   // 문자열 prop 방어(+ 연산 문자열 연결 방지)
+  return (
+    <g className="hero-ai">
+      <circle className="ai-orbit" cx={x} cy={y} r={rr + 13} />
+      <circle className="ai-core" cx={x} cy={y} r={rr} />
+      <circle className="ai-orbit-dot" cx={x} cy={y - (rr + 13)} r="4.5" />
+      <circle className="ai-orbit-dot s2" cx={x + (rr + 13)} cy={y} r="3.5" />
+      <text className="ai-label" x={x} y={y + rr * 0.28} textAnchor="middle" fontSize={rr * 0.66}>AI</text>
     </g>
-    <text className="ai-label" x="270" y="134" textAnchor="middle">AI</text>
-  </g>
-);
-
-// 좌측 입력 카드(공통 골격) — lines: 라인 개수
-const InputCard = () => (
-  <g className="hero-card hero-card-in">
-    <rect x="58" y="168" width="146" height="182" rx="14" />
-    <rect className="card-head" x="58" y="168" width="146" height="30" rx="14" />
-    <rect className="card-line" x="78" y="220" width="106" height="9" rx="4.5" />
-    <rect className="card-line" x="78" y="242" width="90" height="9" rx="4.5" />
-    <rect className="card-line" x="78" y="264" width="108" height="9" rx="4.5" />
-    <rect className="card-line" x="78" y="286" width="76" height="9" rx="4.5" />
-    <rect className="card-line" x="78" y="308" width="96" height="9" rx="4.5" />
-  </g>
-);
-
-// 입력 → 출력 흐름 화살표
-const Flow = () => (
-  <>
-    <path className="hero-flow" d="M212 258 H236" />
-    <path className="hero-flow-arrow" d="M230 251 L240 258 L230 265" />
-    <path className="hero-flow" d="M304 258 H328" />
-    <path className="hero-flow-arrow" d="M322 251 L332 258 L322 265" />
-  </>
-);
+  );
+};
 
 export const HERO_ILLUSTRATIONS = [
-  // 0 — 종합 IT 솔루션: 중앙 허브 + 4개 서비스 노드
+  // ── 0 종합 IT: 서비스 허브 (유지) ─────────────────────────────
   (
     <svg viewBox="0 0 540 470" className="hero-svg" key="0">
       <Frame />
       <g className="hero-link">
-        <line x1="270" y1="235" x2="145" y2="118" />
-        <line x1="270" y1="235" x2="395" y2="118" />
-        <line x1="270" y1="235" x2="145" y2="352" />
-        <line x1="270" y1="235" x2="395" y2="352" />
+        <line x1="270" y1="235" x2="121" y2="119" />
+        <line x1="270" y1="235" x2="423" y2="119" />
+        <line x1="270" y1="235" x2="121" y2="353" />
+        <line x1="270" y1="235" x2="423" y2="353" />
       </g>
-      <g className="hero-node n1"><rect x="82" y="96" width="126" height="46" rx="13" /><text className="node-label" x="145" y="124" textAnchor="middle">웹개발</text></g>
-      <g className="hero-node n2"><rect x="332" y="96" width="126" height="46" rx="13" /><text className="node-label" x="395" y="124" textAnchor="middle">컨설팅</text></g>
-      <g className="hero-node n3"><rect x="82" y="330" width="126" height="46" rx="13" /><text className="node-label" x="145" y="358" textAnchor="middle">교육</text></g>
-      <g className="hero-node n4"><rect x="332" y="330" width="126" height="46" rx="13" /><text className="node-label" x="395" y="358" textAnchor="middle">출판</text></g>
+      <g className="hero-node"><rect x="58" y="96" width="126" height="46" rx="13" /><text className="node-label" x="121" y="124" textAnchor="middle">웹개발</text></g>
+      <g className="hero-node"><rect x="360" y="96" width="126" height="46" rx="13" /><text className="node-label" x="423" y="124" textAnchor="middle">컨설팅</text></g>
+      <g className="hero-node"><rect x="58" y="330" width="126" height="46" rx="13" /><text className="node-label" x="121" y="358" textAnchor="middle">교육</text></g>
+      <g className="hero-node"><rect x="360" y="330" width="126" height="46" rx="13" /><text className="node-label" x="423" y="358" textAnchor="middle">출판</text></g>
       <g className="hero-hub hero-card-in"><rect x="200" y="205" width="140" height="56" rx="16" /><text className="hub-label" x="270" y="240" textAnchor="middle">DreamIT</text></g>
       <Accents />
     </svg>
   ),
 
-  // 1 — 웹개발·호스팅·디자인: 와이어프레임 → AI → 런칭된 사이트
+  // ── 1 웹개발: 브라우저 창 + 코드 </> + 반응형 목업 ─────────────
   (
     <svg viewBox="0 0 540 470" className="hero-svg" key="1">
       <Frame />
-      <InputCard />
-      <Flow />
-      <AiCore />
+      {/* 데스크톱 브라우저 창 */}
       <g className="hero-card hero-card-out">
-        <rect x="336" y="182" width="150" height="196" rx="14" />
-        <rect className="card-head-out" x="336" y="182" width="150" height="32" rx="14" />
-        <circle cx="352" cy="196" r="2.6" fill="#fff" /><circle cx="362" cy="196" r="2.6" fill="#fff" /><circle cx="372" cy="196" r="2.6" fill="#fff" />
-        <rect className="card-line-out" x="356" y="236" width="110" height="9" rx="4.5" />
-        <rect className="card-line-out" x="356" y="258" width="86" height="9" rx="4.5" />
-        <rect className="card-line-out dim" x="356" y="292" width="130" height="46" rx="8" />
+        <rect x="70" y="128" width="322" height="236" rx="18" />
+        <rect className="card-head-out" x="70" y="128" width="322" height="42" rx="18" />
+        <circle cx="94" cy="149" r="4.5" fill="#fff" /><circle cx="112" cy="149" r="4.5" fill="#fff" /><circle cx="130" cy="149" r="4.5" fill="#fff" />
+        <rect x="158" y="141" width="210" height="16" rx="8" fill="rgba(255,255,255,0.28)" />
+        {/* 코드 </> */}
+        <path d="M150 250 l-28 26 28 26" fill="none" stroke="#0046C8" strokeWidth="5.5" strokeLinecap="round" strokeLinejoin="round" />
+        <path d="M300 250 l28 26 -28 26" fill="none" stroke="#0046C8" strokeWidth="5.5" strokeLinecap="round" strokeLinejoin="round" />
+        <line x1="205" y1="308" x2="245" y2="244" stroke="#93C5FD" strokeWidth="5.5" strokeLinecap="round" />
+        <rect className="card-line-out" x="110" y="330" width="150" height="10" rx="5" />
+        <rect className="card-line-out dim" x="110" y="348" width="104" height="10" rx="5" />
       </g>
+      {/* 반응형 모바일 목업 */}
+      <g className="hero-card hero-card-in">
+        <rect x="352" y="238" width="92" height="152" rx="15" />
+        <rect className="card-head" x="352" y="238" width="92" height="24" rx="15" />
+        <rect className="card-line" x="368" y="292" width="60" height="8" rx="4" />
+        <rect className="card-line" x="368" y="310" width="46" height="8" rx="4" />
+        <rect className="card-line" x="368" y="328" width="60" height="8" rx="4" />
+      </g>
+      <AiCore cx="432" cy="104" r="24" />
       <Accents />
     </svg>
   ),
 
-  // 2 — 연구개발·컨설팅: 데이터 → AI → 성장 막대차트
+  // ── 2 컨설팅: 성장 그래프(막대 + 꺾은선) 강조 ──────────────────
   (
     <svg viewBox="0 0 540 470" className="hero-svg" key="2">
       <Frame />
-      <InputCard />
-      <Flow />
-      <AiCore />
       <g className="hero-card hero-card-out">
-        <rect x="336" y="182" width="150" height="196" rx="14" />
-        <rect className="card-head-out" x="336" y="182" width="150" height="32" rx="14" />
-        {/* 상승 막대차트 */}
-        <rect className="card-line-out" x="360" y="320" width="18" height="34" rx="3" />
-        <rect className="card-line-out" x="388" y="300" width="18" height="54" rx="3" />
-        <rect className="card-line-out" x="416" y="276" width="18" height="78" rx="3" />
-        <rect className="card-line-out" x="444" y="248" width="18" height="106" rx="3" />
-        <path className="hero-flow-arrow" d="M356 316 L400 292 L432 268 L470 240" style={{ strokeDasharray: 'none' }} />
-        <path className="hero-flow-arrow" d="M456 236 h16 v16" />
+        <rect x="78" y="120" width="326" height="250" rx="18" />
+        <rect className="card-head-out" x="78" y="120" width="326" height="40" rx="18" />
+        <rect x="100" y="134" width="80" height="12" rx="6" fill="rgba(255,255,255,0.4)" />
+        {/* 축 */}
+        <line x1="118" y1="188" x2="118" y2="336" stroke="#CBD5E1" strokeWidth="2" />
+        <line x1="118" y1="336" x2="378" y2="336" stroke="#CBD5E1" strokeWidth="2" />
+        {/* 상승 막대 (style로 fill — CSS의 .hero-card rect{fill:#fff} 우선 방지) */}
+        <rect x="142" y="296" width="30" height="40" rx="4" style={{ fill: '#BFDBFE' }} />
+        <rect x="190" y="268" width="30" height="68" rx="4" style={{ fill: '#93C5FD' }} />
+        <rect x="238" y="236" width="30" height="100" rx="4" style={{ fill: '#60A5FA' }} />
+        <rect x="286" y="204" width="30" height="132" rx="4" style={{ fill: '#3B82F6' }} />
+        <rect x="334" y="180" width="30" height="156" rx="4" style={{ fill: '#2563EB' }} />
+        {/* 꺾은선 오버레이 */}
+        <path d="M157 286 L205 258 L253 226 L301 194 L349 170" fill="none" stroke="#fff" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round" />
+        <circle cx="157" cy="286" r="4" fill="#fff" /><circle cx="253" cy="226" r="4" fill="#fff" /><circle cx="349" cy="170" r="4.5" fill="#fff" />
+        {/* 상승 화살표 */}
+        <path d="M342 162 h18 v18" fill="none" stroke="#fff" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round" />
       </g>
+      {/* +% 뱃지 */}
+      <g className="hero-hub hero-card-in"><rect x="392" y="196" width="86" height="42" rx="12" /><text className="hub-label" x="435" y="223" textAnchor="middle" style={{ fontSize: 17 }}>+58%</text></g>
+      <AiCore cx="432" cy="108" r="24" />
       <Accents />
     </svg>
   ),
 
-  // 3 — 교육: 교재 → AI → 수료증(체크)
+  // ── 3 교육: 모니터 + 학사모 ────────────────────────────────────
   (
     <svg viewBox="0 0 540 470" className="hero-svg" key="3">
       <Frame />
-      <InputCard />
-      <Flow />
-      <AiCore />
+      {/* 모니터 */}
       <g className="hero-card hero-card-out">
-        <rect x="336" y="182" width="150" height="196" rx="14" />
-        <rect className="card-head-out" x="336" y="182" width="150" height="32" rx="14" />
-        <g><circle cx="362" cy="244" r="9" fill="#93C5FD" /><path d="M358 244 l3 3 5 -6" fill="none" stroke="#0046C8" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round" /></g>
-        <rect className="card-line-out" x="380" y="239" width="90" height="9" rx="4.5" />
-        <g><circle cx="362" cy="278" r="9" fill="#93C5FD" /><path d="M358 278 l3 3 5 -6" fill="none" stroke="#0046C8" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round" /></g>
-        <rect className="card-line-out" x="380" y="273" width="76" height="9" rx="4.5" />
-        <g><circle cx="362" cy="312" r="9" fill="#93C5FD" /><path d="M358 312 l3 3 5 -6" fill="none" stroke="#0046C8" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round" /></g>
-        <rect className="card-line-out" x="380" y="307" width="88" height="9" rx="4.5" />
-        <rect className="card-line-out dim" x="362" y="340" width="106" height="8" rx="4" />
+        <rect x="112" y="168" width="300" height="196" rx="16" />
+        <rect className="card-head-out" x="112" y="168" width="300" height="16" rx="8" />
+        {/* 재생 버튼 */}
+        <circle cx="262" cy="268" r="38" fill="rgba(147,197,253,0.28)" stroke="#93C5FD" strokeWidth="2.5" />
+        <path d="M251 250 l26 18 -26 18 z" fill="#fff" />
+        <rect className="card-line-out" x="180" y="330" width="164" height="9" rx="4.5" />
       </g>
+      {/* 스탠드 */}
+      <rect x="250" y="364" width="24" height="22" rx="2" fill="#fff" />
+      <rect x="214" y="386" width="96" height="11" rx="5.5" fill="#fff" />
+      {/* 학사모(세련) */}
+      <g>
+        <path d="M262 84 l74 27 -74 27 -74 -27 z" fill="#0046C8" stroke="#93C5FD" strokeWidth="2" strokeLinejoin="round" />
+        <path d="M214 126 v26 c0 13 96 13 96 0 v-26" fill="#002E8A" stroke="#93C5FD" strokeWidth="1.5" />
+        <path d="M336 111 v40" fill="none" stroke="#93C5FD" strokeWidth="2.5" strokeLinecap="round" />
+        <circle cx="336" cy="156" r="6" fill="#93C5FD" />
+      </g>
+      <AiCore cx="438" cy="214" r="24" />
       <Accents />
     </svg>
   ),
 
-  // 4 — 출판: 원고 → AI → 책(전자출판)
+  // ── 4 출판: 문서 → 책(전자출판) ────────────────────────────────
   (
     <svg viewBox="0 0 540 470" className="hero-svg" key="4">
       <Frame />
-      <InputCard />
-      <Flow />
-      <AiCore />
-      <g className="hero-card hero-card-out">
-        <rect x="336" y="182" width="150" height="196" rx="14" />
-        <rect className="card-head-out" x="336" y="182" width="150" height="32" rx="14" />
-        {/* 책 표지 + 페이지 */}
-        <rect x="372" y="232" width="78" height="104" rx="6" fill="#93C5FD" />
-        <line x1="392" y1="232" x2="392" y2="336" stroke="#0046C8" strokeWidth="2" opacity="0.5" />
-        <rect className="card-line-out dim" x="404" y="250" width="34" height="7" rx="3.5" />
-        <rect className="card-line-out dim" x="404" y="266" width="28" height="7" rx="3.5" />
-        <rect className="card-line-out dim" x="404" y="282" width="34" height="7" rx="3.5" />
+      {/* 원고 문서(좌) */}
+      <g className="hero-card hero-card-in">
+        <rect x="66" y="176" width="140" height="176" rx="14" />
+        <rect className="card-head" x="66" y="176" width="140" height="28" rx="14" />
+        <rect className="card-line" x="84" y="228" width="102" height="9" rx="4.5" />
+        <rect className="card-line" x="84" y="250" width="86" height="9" rx="4.5" />
+        <rect className="card-line" x="84" y="272" width="104" height="9" rx="4.5" />
+        <rect className="card-line" x="84" y="294" width="74" height="9" rx="4.5" />
+        <rect className="card-line" x="84" y="316" width="94" height="9" rx="4.5" />
       </g>
+      {/* 흐름 */}
+      <path className="hero-flow" d="M214 264 H244" />
+      <path className="hero-flow-arrow" d="M238 257 L248 264 L238 271" />
+      {/* 책(우) */}
+      <g className="hero-card hero-card-out">
+        <rect x="330" y="182" width="150" height="196" rx="14" />
+        <rect className="card-head-out" x="330" y="182" width="150" height="32" rx="14" />
+        <rect x="360" y="238" width="90" height="112" rx="6" style={{ fill: '#93C5FD' }} />
+        <line x1="384" y1="238" x2="384" y2="350" stroke="#0046C8" strokeWidth="2.5" opacity="0.5" />
+        <rect className="card-line-out dim" x="396" y="258" width="40" height="8" rx="4" />
+        <rect className="card-line-out dim" x="396" y="276" width="32" height="8" rx="4" />
+        <rect className="card-line-out dim" x="396" y="294" width="40" height="8" rx="4" />
+      </g>
+      <AiCore cx="272" cy="120" r="24" />
       <Accents />
     </svg>
   ),

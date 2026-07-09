@@ -174,8 +174,7 @@ export const translations = {
         line1: '연구개발 & 컨설팅',
         line2: '데이터 기반',
         highlight: '혁신 컨설팅',
-        line3: '으로',
-        line4: '성장합니다',
+        line3: '으로 성장합니다',
         description: 'AI·빅데이터 연구개발과 맞춤형 IT 컨설팅으로\n기업·대학·교육기관의 디지털 전환을 선도합니다',
         cta1: '연구개발',
         cta2: '컨설팅'
@@ -191,9 +190,9 @@ export const translations = {
       },
       {
         line1: '전자출판 · 간행물 · 도서',
-        line2: '지식을 담는',
-        highlight: '출판',
-        line3: '의 경험을 제공합니다',
+        line2: '지식을',
+        highlight: '콘텐츠',
+        line3: '에 담아냅니다',
         description: 'IT 전문 서적부터 전자출판, 간행물까지\n지식 콘텐츠의 기획·제작·유통을 함께합니다',
         cta1: '출판 서비스',
         cta2: '스토어'
