@@ -163,3 +163,7 @@ create or replace view public.www_signup_stats as
 --    select id, email, created_at from auth.users
 --    on conflict (user_id) do nothing;
 -- ============================================================
+
+-- [실행 이력] 2026-07-18 SQL Editor에서 전체 실행 완료.
+-- www_admins 등록 완료 2건: aebon@kakao.com(카카오), aebon@kyonggi.ac.kr(구글)
+--   (이메일 기반 insert ... select 방식 사용, §3.3 대표 계정 2종 규칙 참조)
