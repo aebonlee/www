@@ -71,3 +71,6 @@ comment on function public.www_is_member() is
 --   on storage.objects for all
 --   using (bucket_id = '접두어-materials' and public.www_is_admin())
 --   with check (bucket_id = '접두어-materials' and public.www_is_admin());
+
+-- [실행 이력] 2026-07-18 SQL Editor에서 1번 www_is_member() 함수 실행 완료.
+--   2번(테이블 RLS)·3번(Storage 정책)은 템플릿 — 사이트별 적용 시 접두어_ 교체 후 실행.
