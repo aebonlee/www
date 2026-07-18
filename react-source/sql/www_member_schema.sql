@@ -152,7 +152,7 @@ create or replace view public.www_signup_stats as
 -- ============================================================
 
 -- ============================================================
--- [검토 권고 3건 — 2026-07-18 리뷰, 적용 여부 미확인 시 참고]
+-- [검토 권고 3건 — 2026-07-18 리뷰 → 같은 날 적용 완료, 하단 적용 이력 참조]
 -- ① www_handle_new_user 예외처리: 트리거 예외가 전 사이트 가입을 막지 않게
 --    insert를 begin…exception when others then raise warning…end로 감싸기
 --    (2026-06-19 전 사이트 가입 마비 사고 재발 방지 — 전역 CLAUDE.md 메모리 참조)
@@ -167,3 +167,9 @@ create or replace view public.www_signup_stats as
 -- [실행 이력] 2026-07-18 SQL Editor에서 전체 실행 완료.
 -- www_admins 등록 완료 2건: aebon@kakao.com(카카오), aebon@kyonggi.ac.kr(구글)
 --   (이메일 기반 insert ... select 방식 사용, §3.3 대표 계정 2종 규칙 참조)
+
+-- [적용 이력] 2026-07-18 SQL Editor에서 확인·적용 완료.
+--   ① 가입 트리거 예외처리 적용 (exception when others → warning + 가입 통과)
+--   ② www_signup_stats 뷰 security_invoker = on 적용
+--   ③ 백필: 확인 쿼리 결과 백필 대상 0건 — 누락 없음 확인으로 종결
+-- 참고: 이전 권고에 있던 "기존 회원 738명"은 이 DB와 무관한 수치로 실측 확인됨.
