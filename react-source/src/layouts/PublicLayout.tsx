@@ -1,6 +1,7 @@
 import { lazy, Suspense } from 'react';
 import { Routes, Route, Navigate } from 'react-router-dom';
 import AuthGuard from '../components/AuthGuard';
+import MemberGate from '../auth/MemberGate';
 import AdminGuard from '../components/AdminGuard';
 import Navbar from '../components/layout/Navbar';
 import Footer from '../components/layout/Footer';
@@ -73,7 +74,7 @@ const PublicLayout = () => {
             <Route path="/consulting/institution" element={<ConsultingInstitution />} />
             <Route path="/education" element={<Education />} />
             <Route path="/education/custom" element={<EducationCustom />} />
-            <Route path="/education/classroom" element={<Classroom />} />
+            <Route path="/education/classroom" element={<MemberGate><Classroom /></MemberGate>} />
             <Route path="/education/syllabus" element={<Syllabus />} />
             <Route path="/education/syllabus/write" element={<AdminGuard><SyllabusWrite /></AdminGuard>} />
             <Route path="/education/syllabus/edit/:id" element={<AdminGuard><SyllabusWrite /></AdminGuard>} />
@@ -93,8 +94,9 @@ const PublicLayout = () => {
             <Route path="/community/blog/write" element={<AdminGuard><BlogWrite /></AdminGuard>} />
             <Route path="/community/blog/edit/:id" element={<AdminGuard><BlogWrite /></AdminGuard>} />
             <Route path="/community/board" element={<Board />} />
-            <Route path="/community/board/write" element={<AuthGuard><BoardWrite /></AuthGuard>} />
-            <Route path="/community/board/edit/:id" element={<AuthGuard><BoardWrite /></AuthGuard>} />
+            {/* 글쓰기는 §3.3 회원 기준(로그인+is_complete) — 로그인만 요구하던 AuthGuard에서 격상 */}
+            <Route path="/community/board/write" element={<MemberGate><BoardWrite /></MemberGate>} />
+            <Route path="/community/board/edit/:id" element={<MemberGate><BoardWrite /></MemberGate>} />
             <Route path="/community/board/:postId" element={<BoardDetail />} />
             <Route path="/community/gallery" element={<Gallery />} />
             <Route path="/community/gallery/write" element={<AdminGuard><GalleryWrite /></AdminGuard>} />

@@ -8,6 +8,7 @@ import ErrorBoundary from './components/ErrorBoundary';
 import AdminGuard from './components/AdminGuard';
 import AdminLayout from './components/admin/AdminLayout';
 import PublicLayout from './layouts/PublicLayout';
+import MemberNotice from './auth/MemberNotice';
 import usePageTracking from './hooks/usePageTracking';
 import './index.css';
 
@@ -26,6 +27,8 @@ function App() {
           <CartProvider>
             <Router>
               <PageTracker />
+              {/* 전 사이트 공통 안내 팝업(§3.3) — 안내만 담당, 차단은 MemberGate·RLS */}
+              <MemberNotice />
               <div className="App">
                 <Routes>
                   <Route path="/admin/*" element={<AdminGuard><AdminLayout /></AdminGuard>} />
