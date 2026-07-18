@@ -175,6 +175,7 @@ const AdminSidebar = ({ collapsed, onToggle, mobileOpen, onMobileClose }: {
       label: '회원',
       items: [
         { path: '/admin/users', label: '회원 관리', icon: <IconUsers />, badge: stats.newUsers || null },
+        { path: '/admin/members', label: '회원 총괄', icon: <IconUsers /> },
       ],
     },
     {

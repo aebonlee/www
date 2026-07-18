@@ -5,6 +5,7 @@ import AdminHeader from './AdminHeader';
 
 const AdminDashboard = lazy(() => import('../../pages/admin/AdminDashboard'));
 const AdminUsers = lazy(() => import('../../pages/admin/AdminUsers'));
+const AdminMembers = lazy(() => import('../../pages/admin/AdminMembers'));
 const AdminBlog = lazy(() => import('../../pages/admin/AdminBlog'));
 const AdminGallery = lazy(() => import('../../pages/admin/AdminGallery'));
 const AdminBoard = lazy(() => import('../../pages/admin/AdminBoard'));
@@ -43,6 +44,7 @@ const AdminLayout = () => {
             <Routes>
               <Route index element={<AdminDashboard />} />
               <Route path="users" element={<AdminUsers />} />
+              <Route path="members" element={<AdminMembers />} />
               <Route path="users/:id" element={<AdminUserDetail />} />
               <Route path="blog" element={<AdminBlog />} />
               <Route path="gallery" element={<AdminGallery />} />
